@@ -1,11 +1,13 @@
-import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
-    const cookieStore = cookies()
-    const token = cookieStore.get('token')
-
-    return new Response('Hello, Next.js!', {
-        status: 200,
-        headers: { 'Set-Cookie': `token=${token.value}` },
+export async function GET() {
+    const res = await fetch('https://data.mongodb-api.com/...', {
+        headers: {
+            'Content-Type': 'application/json',
+            'API-Key': process.env.DATA_API_KEY,
+        },
     })
+    const data = await res.json()
+
+    return NextResponse.json({ data })
 }
