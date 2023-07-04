@@ -9,6 +9,13 @@
   --background: rgb(255,133,83);
   --pink: #f11066;  
   --white: #fff;
+  --dark-grey: #adb5bd;
+  --light-grey: #dee2e6;
+  --text-xs: 1rem;
+  --text-s: 1.2rem;
+  --text-m: 1.5rem;
+  --text-l: 2rem;
+  --text-xl: 3rem;
 }
 
 @media (prefers-color-scheme: dark) {

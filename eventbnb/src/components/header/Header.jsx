@@ -42,6 +42,7 @@ export default function Header() {
 
   return (
     <div className={style.container}>
+      <f3 className={`text-pink-500 ${style.logo}`}>festbnb</f3>
       <div className={style.container_searchBar}>
         <div className={style.searchBar}>
           <input
