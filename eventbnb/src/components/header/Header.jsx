@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import style from "./Header.module.css";
-import { FaTimes, FaSearch } from "react-icons/fa";
+import { FaTimes, FaSearch, FaUser } from "react-icons/fa";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -15,6 +15,7 @@ export default function Header() {
   const [lounges, setLounges] = useState(loungeData);
   const [searchLounge, setSearchLounge] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [showOptions, setShowOptions] = useState(false);
 
   const handleSearch = () => {
     if (searchLounge.trim() !== "") {
@@ -40,10 +41,14 @@ export default function Header() {
     setSearchResults([]);
   };
 
+  const handleToggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
   return (
     <div className={style.container}>
-      <f3 className={`text-pink-500 ${style.logo}`}>festbnb</f3>
       <div className={style.container_searchBar}>
+        <f3 className={`text-pink-500 ${style.logo}`}>festbnb</f3>
         <div className={style.searchBar}>
           <input
             type="text"
@@ -60,16 +65,28 @@ export default function Header() {
               onClick={handleClearSearch}
             />
           )}
+          <button
+            type="button"
+            id="searchButton"
+            onClick={handleSearch}
+            className={`bg-pink-500 border-2 border-pink-500 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
+          >
+            <FaSearch className={`text-white text-l ${style.faSearch}`} />
+          </button>
         </div>
-        <button
-          type="button"
-          id="searchButton"
-          onClick={handleSearch}
-          className={`bg-pink-500 border-2 border-pink-500 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
-        >
-          <FaSearch className={`text-white text-l ${style.faSearch}`} />
-        </button>
+
+        <a className={style.user} href="#" onClick={handleToggleOptions}>
+          <FaUser className={style.faUser} />
+        </a>
+
+        {showOptions && (
+          <div className={style.userButton}>
+            <button>Iniciar Sesión</button>
+            <button>Registrarse</button>
+          </div>
+        )}
       </div>
+
       <div className={style.searchList}>
         <ul id="results">
           {searchResults.map((lounge) => (
