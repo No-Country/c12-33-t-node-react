@@ -1,4 +1,4 @@
-.container {
+.search__container {
     display: flex;
     background-color: #fff;
     align-items: center;
@@ -49,22 +49,22 @@
     font-size: var(--text-m);
   }
   
-  .searchInput:focus{
+  .searchInput:focus, .userModal:focus{
     border-color: var(--dark-grey);
     background-color: var(--light-grey);
   }
   
-  .searchInput:hover {
+  .searchInput:hover, .userModal:hover {
     box-shadow: 0 0 5px var(--dark-grey);
   }
   
-  .searchInput::placeholder {
+  .searchInput::placeholder, .userModal::placeholder {
     color: var(--foreground-rgb);
     font-weight: 500;
     font-size: var(--text-m);
   }
   
-  .searchInput::placeholder:focus {
+  .searchInput::placeholder:focus, .userModal::placeholder:focus {
     color: var(--white);
     font-weight: 800;
   }
@@ -108,6 +108,14 @@
     align-items: center;
     margin-right: 20px;
     margin-top: 10px;
+    background-color: var(--white);
+    border: 2px solid var(--light-grey);
+    border-radius: 30px;
+    padding: 20px 20px;
+    width: 100px;
+    height: 60px;
+    margin-left: auto;
+    
   }
   
   .faUser {
@@ -117,6 +125,7 @@
     height: 30px;
     color: var(--white);
     cursor: pointer;
+    margin: 0 30px;
   }
   
   .userButton {
