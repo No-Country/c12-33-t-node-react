@@ -13,10 +13,39 @@
     font-weight: 700;
     font-size: var(--text-m);
   }
+  .footer__links{
+    display: flex;
+  }
   
   .footer__terms, .footer__links {
     color: var(--black);
     font-size: var(--text-m);
+    position: relative;
   }
   
+  /* .footer__terms {
+   
+  } */
+  .footer__terms:hover, .footer__links:hover {
+    color: var(--dark-grey);
+    font-weight: bold;
+    border-bottom: 2px solid var(--dark-grey);
+  }
+  .footer__terms::after, .footer__links::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--black);
+    transition: width 0.3s, left 0.3s;
+    transform: translateX(-50%);
+  }
+  
+  .footer__terms:hover::after, .footer__links:hover::after {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
+  }
    

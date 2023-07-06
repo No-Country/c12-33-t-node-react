@@ -1,0 +1,40 @@
+.terms {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: var(--text-m);
+    line-height: 1.5;
+    color: var(--white);
+  }
+  
+  .terms h1 {
+    font-size: var(--text-l);
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--pink);
+  }
+
+  .terms h2{
+    color: var(--pink);
+  }
+  
+  .terms p {
+    margin-bottom: 10px;
+  }
+  
+  .terms ul {
+    margin-bottom: 10px;
+    padding-left: 20px;
+  }
+  
+  .terms li {
+    margin-bottom: 5px;
+  }
+  
+  .terms strong {
+    font-weight: bold;
+  }
+  
+  .terms em {
+    font-style: italic;
+  }

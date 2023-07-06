@@ -4,6 +4,7 @@ import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
+import Link from "next/link";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -60,7 +61,9 @@ export default function Header() {
 
   return (
     <div className={style.container}>
-      <h3 className={`text-pink-500 ${style.logo}`}>festbnb</h3>
+      <Link href="/" className={`text-pink-500 ${style.logo}`}>
+        festbnb
+      </Link>
       <div className={style.searchBar}>
         <div className={style.searchBarAndList}>
           <input
