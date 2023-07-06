@@ -27,8 +27,7 @@
    
   } */
   .footer__terms:hover, .footer__links:hover {
-    color: var(--dark-grey);
-    font-weight: bold;
+    font-weight: 700;
     border-bottom: 2px solid var(--dark-grey);
   }
   .footer__terms::after, .footer__links::after {
@@ -38,7 +37,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: var(--black);
+    background-color: var(--pink);
     transition: width 0.3s, left 0.3s;
     transform: translateX(-50%);
   }
