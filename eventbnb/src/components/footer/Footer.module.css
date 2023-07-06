@@ -1,0 +1,22 @@
+
+.footerContainer {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--white);
+  }
+  
+  .footer__logo {
+    color: var(--pink);
+    font-weight: 700;
+    font-size: var(--text-m);
+  }
+  
+  .footer__terms, .footer__links {
+    color: var(--black);
+    font-size: var(--text-m);
+  }
+  
+   
