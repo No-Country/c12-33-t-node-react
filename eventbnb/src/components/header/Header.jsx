@@ -61,52 +61,54 @@ export default function Header() {
 
   return (
     <div className={style.container}>
-      <Link href="/" className={`text-pink-500 ${style.logo}`}>
-        festbnb
-      </Link>
-      <div className={style.searchBar}>
-        <div className={style.searchBarAndList}>
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Buscar Salón"
-            value={searchLounge}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            className={style.searchInput}
-          />
-          <div className={style.searchResult}>
-            {searchResults.length > 0 && (
-              <SearchResults
-                searchResults={searchResults}
-                searchLounge={searchLounge}
-                handleClearSearch={handleClearSearch}
-                showOptions={showOptions}
-              />
-            )}
+      <div className={style.search__container}>
+        <Link href="/" className={`text-pink-500 ${style.logo}`}>
+          festbnb
+        </Link>
+        <div className={style.searchBar}>
+          <div className={style.searchBarAndList}>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Buscar Salón"
+              value={searchLounge}
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+              className={style.searchInput}
+            />
+            <div className={style.searchResult}>
+              {searchResults.length > 0 && (
+                <SearchResults
+                  searchResults={searchResults}
+                  searchLounge={searchLounge}
+                  handleClearSearch={handleClearSearch}
+                  showOptions={showOptions}
+                />
+              )}
+            </div>
+          </div>
+          <div className={style.searchIcons}>
+            <div>
+              <button
+                type="button"
+                id="searchButton"
+                onClick={handleSearch}
+                className={`bg-pink-500 border-2 border-pink-500 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
+              >
+                <FaSearch className={`text-white text-l ${style.faSearch}`} />
+              </button>
+            </div>
           </div>
         </div>
-        <div className={style.searchIcons}>
-          <div>
-            <button
-              type="button"
-              id="searchButton"
-              onClick={handleSearch}
-              className={`bg-pink-500 border-2 border-pink-500 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
-            >
-              <FaSearch className={`text-white text-l ${style.faSearch}`} />
-            </button>
+        <div className={style.user}>
+          <div className={style.userModal}>
+            <a href="#" onClick={handleToggleOptions}>
+              <FaUser className={style.faUser} />
+            </a>
           </div>
-        </div>
-      </div>
-      <div className={style.user}>
-        <div className={style.userModal}>
-          <a href="#" onClick={handleToggleOptions}>
-            <FaUser className={style.faUser} />
-          </a>
-        </div>
-        <div className={style.userOptions}>
-          <UserButton showOptions={showOptions} />
+          <div className={style.userOptions}>
+            <UserButton showOptions={showOptions} />
+          </div>
         </div>
       </div>
     </div>

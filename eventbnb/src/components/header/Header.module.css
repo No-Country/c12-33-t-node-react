@@ -152,25 +152,27 @@
   /* RESPONSIVE */
   
   @media (max-width: 390px) {
-    .container_searchBar {
-      flex-direction: column;
-      align-items: flex-start;
+    .container{
+        display: block;
     }
-    .searchBar {
-      margin-right: 0;
+    .search__container{
+        padding: 20px 20px;
     }
-    .searchInput {
-      width: 100%;
+    .logo {
+      font-weight: 600;
+      font-size: var(--text-m);
+      margin-left: 40%; 
     }
-    .searchButton {
-      position: relative;
-      transform: none;
-      margin-top: 10px;
-      margin-left: auto;
-      right: auto;
+    .searchInput{
+        width: 100%;
+        margin-left: 5%;
     }
-    .userModal {
-      margin-top: 10px;
+    .searchButton{
+        margin-left: -90%;
+    }
+    .userModal{
+            margin-left: 50%;
+            margin-bottom: 20px;
     }
   }
 
