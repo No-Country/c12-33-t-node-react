@@ -48,4 +48,22 @@
     left: 0;
     transform: translateX(0);
   }
-   
+
+  /* RESPONSIVE */
+  
+  @media (max-width: 390px) {
+    .footerContainer {
+      flex-direction: column;
+      height: 200px;
+    }
+    .footer__logo {
+      display: none;
+    }
+    .footer__links {
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer__terms, .footer__links {
+      margin-bottom: 10px;
+    }
+  }
