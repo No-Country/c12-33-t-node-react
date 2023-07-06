@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import style from "./Header.module.css";
-import { FaTimes, FaSearch, FaUser } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa";
 import SearchResults from "./SearchResults";
+import UserButton from "./UserButton";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -18,6 +19,7 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showUserOptions, setShowUserOptions] = useState(false);
 
   const handleSearch = () => {
     if (searchLounge.trim() !== "") {
@@ -45,6 +47,7 @@ export default function Header() {
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions);
+    setShowUserOptions(!showUserOptions);
   };
 
   const handleOpenModal = () => {
@@ -73,20 +76,14 @@ export default function Header() {
             {searchResults.length > 0 && (
               <SearchResults
                 searchResults={searchResults}
+                searchLounge={searchLounge}
                 handleClearSearch={handleClearSearch}
+                showOptions={showOptions}
               />
             )}
           </div>
         </div>
         <div className={style.searchIcons}>
-          <div>
-            {searchLounge && (
-              <FaTimes
-                className={style.clearSearch}
-                onClick={handleClearSearch}
-              />
-            )}
-          </div>
           <div>
             <button
               type="button"
@@ -99,18 +96,15 @@ export default function Header() {
           </div>
         </div>
       </div>
-
-      <div>
-        <a className={style.user} href="#" onClick={handleToggleOptions}>
-          <FaUser className={style.faUser} />
-        </a>
-
-        {showOptions && (
-          <div className={style.userButton}>
-            <button>Iniciar Sesión</button>
-            <button>Registrarse</button>
-          </div>
-        )}
+      <div className={style.user}>
+        <div className={style.userModal}>
+          <a href="#" onClick={handleToggleOptions}>
+            <FaUser className={style.faUser} />
+          </a>
+        </div>
+        <div className={style.userOptions}>
+          <UserButton showOptions={showOptions} />
+        </div>
       </div>
     </div>
   );

@@ -15,27 +15,26 @@
   
   /* SEARCHBAR */
   .searchBar {
+    flex-grow: 1;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 20px;
-    margin-right: 30%;
+    margin: 20px;
     cursor: pointer;
   }
   
   .clearSearch {
     position: absolute;
     right: 5px;
-    top: 50%;
+    top: 15%;
     transform: translateY(-50%);
-   margin-right: 20%;
     cursor: pointer;
     color: red;
+    margin-right: 5%;
   }
   
-  .searchInput,
-  .user {
+  .searchInput {
     color: black;
     text-align: left;
     border: 2px solid var(--light-grey);
@@ -46,19 +45,16 @@
   }
   
   .searchInput {
-    width: 500px;
+    flex-grow: 1;
     font-size: var(--text-m);
-    padding: 20px 20px;
   }
   
-  .searchInput:focus,
-  .user:focus {
+  .searchInput:focus{
     border-color: var(--dark-grey);
     background-color: var(--light-grey);
   }
   
-  .searchInput:hover,
-  .user:hover {
+  .searchInput:hover {
     box-shadow: 0 0 5px var(--dark-grey);
   }
   
@@ -80,53 +76,15 @@
     height: 40px;
     color: var(--white);
     background-color: var(--pink-500);
-    margin-left: -130%;
+    margin-left: -120%;
     cursor: pointer;
+    
   }
   
-  /* ROOMS */
+  /* SEARCH ROOMS */
   .searchList {
     color: var(--black);
   }
-  
-  /* USUARIO */
-  .user {
-    width: 80px;
-    transform: translatey(-130%);
-    margin-right: 5%;
-    cursor: pointer;
-  }
-  
-  .faUser {
-    position: absolute;
-    border-radius: 50%;
-    background-color: var(--dark2-grey);
-    width: 30px;
-    height: 30px;
-    margin-right: 28%;
-  }
-  
-  .faUser,
-  .user {
-    color: var(--white);
-    right: 0;
-  }
-  
-  .userButton {
-    display: flex;
-    flex-direction: column;
-    color: var(--black);
-  }
-  
-  .userButton:hover {
-    color: var(--dark2-grey);
-  }
-  
-  .userButton:hover .user {
-    color: var(--dark2-grey);
-  }
-  
-  /* searchResults */
   .searchResult {
     position: absolute;
     top: 100%;
@@ -141,12 +99,57 @@
     font-size: var(--text-m);
     line-height: 3rem;
     font-weight: 700;
+    margin: auto;
+   
+  }
+  /* USUARIO */
+  .userModal {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-top: 10px;
   }
   
-.searchIcons{
+  .faUser {
+    border-radius: 50%;
+    background-color: var(--dark2-grey);
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+    cursor: pointer;
+  }
+  
+  .userButton {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .userButton:hover {
+    color: var(--dark2-grey);
+  }
+  .userOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    z-index: 999;
+    padding: 10px;
+    font-size: var(--text-m);
+    line-height: 3rem;
+    font-weight: 700;
+    margin-top: auto;
     
 }
-/* RESPONSIVE */
+ 
+  
+  /* RESPONSIVE */
   
   @media (max-width: 390px) {
     .container_searchBar {
@@ -166,15 +169,7 @@
       margin-left: auto;
       right: auto;
     }
-    .user {
-      position: static;
-      transform: none;
-      margin-top: 10px;
-    }
-    .userButton {
-      position: relative;
-      display: flex;
-      align-self: flex-end;
+    .userModal {
       margin-top: 10px;
     }
   }
