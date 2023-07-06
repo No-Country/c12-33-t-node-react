@@ -161,10 +161,9 @@
   /* RESPONSIVE */
   
   @media (max-width: 390px) {
-    .container{
-        display: block;
-    }
+ 
     .search__container{
+        display: block;
         padding: 20px 20px;
     }
     .logo {
@@ -174,13 +173,13 @@
     }
     .searchInput{
         width: 100%;
-        margin-left: 5%;
+        margin-left: 10%;
     }
     .searchButton{
-        margin-left: -90%;
+        margin-left: -60%;
     }
     .userModal{
-            margin-left: 50%;
+            margin-left: 40%;
             margin-bottom: 20px;
     }
   }
