@@ -1,4 +1,4 @@
-import Account from "../../../components/account/Account";
+import Account from "../../components/account/Account";
 const userTemplate = {
     _id: "649f8ccc12b6415694a8e746",
     nombre: "Exe",
