@@ -2,10 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --background: rgb(255,133,83);
+  --pink: #f11066;  
+  --white: #fff;
+  --black: #000;
+  --dark-grey: #adb5bd;
+  --dark2-grey: #606162;
+  --light-grey: #dee2e6;
+  --text-xs: 1rem;
+  --text-s: 1.2rem;
+  --text-m: 1.5rem;
+  --text-l: 2rem;
+  --text-xl: 3rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +36,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+<<<<<<< HEAD
+} */
+=======
 }
+
+>>>>>>> 23f4cd1a1949fe8882006ddedb2425baa4e2b8ee
