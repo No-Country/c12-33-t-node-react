@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
+import Link from "next/link";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
-import Link from "next/link";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
