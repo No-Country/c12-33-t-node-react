@@ -33,4 +33,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/.idea
+
+/microservicios/.env
+/microservicios/docker-compose.yml

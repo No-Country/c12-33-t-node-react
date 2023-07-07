@@ -3,7 +3,7 @@ import {useState} from "react";
 
 
 
-export default function pageAbout () {
+export default function pageAbout (){
 
     let [count, setCount] = useState(0);
 
