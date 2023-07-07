@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-
+.env
 # testing
 /coverage
 
@@ -32,4 +32,11 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+<<<<<<< HEAD
 next-env.d.ts
+=======
+next-env.d.ts
+
+/microservicios/.env
+/microservicios/docker-compose.yml
+>>>>>>> 40e786eac7364ea7082657e5c0ea2b5b128c9aae
