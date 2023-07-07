@@ -25,6 +25,10 @@
       "@/*": ["./src/*"]
     }
   },
+<<<<<<< HEAD
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/route.js", "src/app/layout.jsx", "src/app/page.jsx", "src/components/auth/FormAuth.jsx", "src/components/Provider.jsx"],
+=======
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/account-settings/[id_user]"],
+>>>>>>> 77b6a9c46e8f3f8382dc858b8fe10c918f3100f6
   "exclude": ["node_modules"]
 }
