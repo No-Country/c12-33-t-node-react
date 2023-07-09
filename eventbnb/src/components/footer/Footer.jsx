@@ -18,7 +18,7 @@ export default function Footer() {
           <li>
             <a href="#">Contacto:</a>
           </li>
-          {/* <li>
+          <li>
             <span className={style.footer__contactIcon}>
               <FaEnvelope />
             </span>
@@ -35,7 +35,7 @@ export default function Footer() {
               <FaLinkedin />
             </span>
             <a href="#"></a>
-          </li> */}
+          </li>
         </ul>
       </div>
     </div>
