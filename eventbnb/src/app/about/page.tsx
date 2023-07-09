@@ -1,8 +1,6 @@
 "use client"
 import {useState} from "react";
 
-
-
 export default function pageAbout (){
 
     let [count, setCount] = useState(0);
