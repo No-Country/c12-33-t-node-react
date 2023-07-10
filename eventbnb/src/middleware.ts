@@ -14,7 +14,7 @@ export function middleware(request: Request){
 }
 
 export const config = {
-    matcher: ['/about/:path*', '/login/:path*'],
+    matcher: ['/about/:path*', '/login/:path*', "/:path*"],
 }
 
 /*
