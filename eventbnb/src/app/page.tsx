@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Provider from "../components/Provider";
+import { list } from "@/components/card/CardData";
+import Cards from "@/components/card/Cards";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +20,7 @@ export default function RootLayout({ children }) {
         <Provider>
           <Header />
           {children}
+          <Cards list={list} />
           <Footer />
         </Provider>
       </body>
