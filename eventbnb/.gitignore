@@ -28,7 +28,7 @@ package-lock.json
 .idea
 
 # local env files
-.env*.local
+.env
 
 # vercel
 .vercel
