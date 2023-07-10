@@ -29,11 +29,7 @@ export default function Card({ card }) {
         >
           {card.imgSrc.map((src, i) => (
             <SwiperSlide key={i}>
-              <Image
-                src={src}
-                className="w-[300px] h-[285px] object-cover"
-                alt="Picture of the author"
-              />
+              <img src={src} className="w-[300px] h-[285px] object-cover" />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -42,7 +38,7 @@ export default function Card({ card }) {
           onClick={handleButtonClick}
         >
           <FaHeart
-            className={`text-xl ${
+            className={`text-xl  ${
               isFavorite ? "text-pink-600" : "text-black opacity-50"
             }`}
           />
@@ -53,6 +49,8 @@ export default function Card({ card }) {
             className="rounded-full w-10 h-10 object-cover absolute z-10 bottom-3 left-3"
             src={card.imgProfile}
             alt="Picture of the author"
+            width={40}
+            height={40}
           />
         ) : null}
       </div>
