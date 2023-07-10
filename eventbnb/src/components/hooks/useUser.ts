@@ -6,7 +6,7 @@ interface User {
   apellido: string;
   email: string;
   password: string;
-  telefono: string;
+  telefono: number;
   fechaNacimiento: Date;
   domicilio: string;
   localidad: string;
@@ -28,7 +28,7 @@ const useUser = (): {
         apellido: "Sol",
         email: "usuario1@usuario.com",
         password: "4321",
-        telefono: "11223344",
+        telefono: 11223344,
         fechaNacimiento: new Date(),
         domicilio: "calle 20 Nro 112",
         localidad: "General Pico",
@@ -55,7 +55,7 @@ const useUser = (): {
         apellido: updatedUserData.apellido || "",
         email: updatedUserData.email || "",
         password: updatedUserData.password || "",
-        telefono: updatedUserData.telefono || "",
+        telefono: updatedUserData.telefono || 0,
         fechaNacimiento: updatedUserData.fechaNacimiento || new Date(),
         domicilio: updatedUserData.domicilio || "",
         localidad: updatedUserData.localidad || "",

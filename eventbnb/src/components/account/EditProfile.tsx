@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y las operaciones CRUD en MongoDB
+import {countries} from "../utils/countries"
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -14,7 +15,7 @@ const schema = yup.object().shape({
     .email("El correo electrónico no es válido")
     .required("El correo electrónico es requerido"),
   password: yup.string().required("La contraseña es requerida"),
-  telefono: yup.string().required("El teléfono es requerido"),
+  telefono: yup.number().min(10,"El telefono debe tener al menos 10 números").positive("El telefono no es valido").required("El teléfono es requerido"),
   fechaNacimiento: yup.date().required("La fecha de nacimiento es requerida"),
   domicilio: yup.string().required("El domicilio es requerido"),
   localidad: yup.string().required("La localidad es requerida"),
@@ -27,7 +28,7 @@ const userTemplate = {
   apellido: "Gerez",
   email: "usuario5@usuario.com",
   password: "432154534",
-  telefono: "176565",
+  telefono: 176565,
   fechaNacimiento: new Date(),
   domicilio: "Bosques, jose Ingenieros",
   localidad: "Bs As",
@@ -56,7 +57,7 @@ const EditProfile: React.FC =  () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-5 py-8">
       <h1 className="text-2xl font-semibold mb-4 flex flex-col gap-6">Editar perfil</h1>
       <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 flex flex-col gap-6">
@@ -71,7 +72,7 @@ const EditProfile: React.FC =  () => {
             type="text"
             className={`border ${
               errors.nombre ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("nombre")}
           />
           {errors.nombre && (
@@ -90,7 +91,7 @@ const EditProfile: React.FC =  () => {
             type="text"
             className={`border ${
               errors.apellido ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("apellido")}
           />
           {errors.apellido && (
@@ -109,7 +110,7 @@ const EditProfile: React.FC =  () => {
             type="email"
             className={`border ${
               errors.email ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("email")}
           />
           {errors.email && (
@@ -128,7 +129,7 @@ const EditProfile: React.FC =  () => {
             type="password"
             className={`border ${
               errors.password ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("password")}
           />
           {errors.password && (
@@ -147,7 +148,7 @@ const EditProfile: React.FC =  () => {
             type="text"
             className={`border ${
               errors.telefono ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("telefono")}
           />
           {errors.telefono && (
@@ -166,7 +167,7 @@ const EditProfile: React.FC =  () => {
             type="date"
             className={`border ${
               errors.fechaNacimiento ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("fechaNacimiento")}
           />
           {errors.fechaNacimiento && (
@@ -187,7 +188,7 @@ const EditProfile: React.FC =  () => {
             type="text"
             className={`border ${
               errors.domicilio ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("domicilio")}
           />
           {errors.domicilio && (
@@ -206,7 +207,7 @@ const EditProfile: React.FC =  () => {
             type="text"
             className={`border ${
               errors.localidad ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
+            } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
             {...register("localidad")}
           />
           {errors.localidad && (
@@ -220,14 +221,18 @@ const EditProfile: React.FC =  () => {
           >
             País
           </label>
-          <input
+          <select
             id="pais"
-            type="text"
-            className={`border ${
-              errors.pais ? "border-red-500" : "border-gray-300"
-            } rounded px-3 py-2 w-full`}
             {...register("pais")}
-          />
+            className="block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          >
+            <option value="">Seleccione un país</option>
+            {countries.map((country) => (
+              <option key={country.code} value={country.code}>
+                {country.name}
+              </option>
+            ))}
+          </select>
           {errors.pais && (
             <p className="text-red-500 mt-1">{errors.pais.message}</p>
           )}

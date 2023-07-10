@@ -8,6 +8,10 @@ const nextConfig = {
         port: "",
         pathname: "/airbnb/**",
       },
+      {
+        protocol: 'https',
+        hostname: 'i.postimg.cc'
+      },
     ],
   },
 };
