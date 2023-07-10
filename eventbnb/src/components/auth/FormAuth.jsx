@@ -27,7 +27,7 @@ const SignIn = ({hidden, setHidden}) => {
 
     const logOut = async () => {
         const response = await axios(`http://34.125.90.13:5000/usuarios/?email=${getCookie('usuario')}`);
-        deleteCookie(response?.data?.data?.name);
+        deleteCookie('user');
         signOut();
     }
 
@@ -99,7 +99,7 @@ const SignIn = ({hidden, setHidden}) => {
                 email: session?.user?.email,
               });
               // Guardar info de la peticion en la cookie
-              setCookie(response?.data?.data?.name, response?.data?.data?.email, 2);
+              setCookie('user', response?.data?.data?.email, 2);
             } catch (error) {
               alert('al parecer hubo un error', error.message)
             }
