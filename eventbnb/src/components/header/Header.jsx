@@ -102,9 +102,9 @@ export default function Header() {
         </div>
         <div className={style.user}>
           <div className={style.userModal}>
-            <a href="#" onClick={handleToggleOptions}>
+            <button onClick={handleToggleOptions}>
               <FaUser className={style.faUser} />
-            </a>
+            </button>
           </div>
           <div className={style.userOptions}>
             <UserButton showOptions={showOptions} />
