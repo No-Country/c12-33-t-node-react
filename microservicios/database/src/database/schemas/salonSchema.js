@@ -6,7 +6,21 @@ const salonSchema = new Schema(
     localidad: String,
     ubicacion: String,
     release_date: Date,
+    capacidad_max:number,
+    espaciom2:number,
+    precio:number,
+    estacionamiento: Boolean,
+    catering: Boolean,
+    mesas_sillas: Boolean,
+    luces: Boolean,
+    sonido: Boolean,
+    fotografia: Boolean,
+    decoracion: Boolean,
+    pileta: Boolean,
+    descripcion: String,
+
     propietario: {type: String, ref: "User"},
+    reviews: [{type: String, ref: "review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
