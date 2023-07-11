@@ -1,9 +1,13 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-const url = process.env.NEXTAUTH_URL
+const url = process.env.MICROSERVICIOS
 // ORDENAMIENTO
 // // Precios
-export async function GET(){
+export async function POST(request: Request){
+    const { capacidad_max, espaciom2, precio, estacionamiento, catering, mesas_sillas, luces,
+        sonido, fotografia, decoracion, pileta } = await request.json()
+
+
     const response = await axios(`${url}/salones`)
 }
 // // De mayor m2 a menor y viceversa
