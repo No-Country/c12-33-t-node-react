@@ -5,7 +5,8 @@ const salonSchema = new Schema(
     domicilio: String,
     localidad: String,
     ubicacion: String,
-    release_date: Date,
+    imagenes: {Type: [String]},
+
     capacidad_max:number,
     espaciom2:number,
     precio:number,
@@ -20,7 +21,7 @@ const salonSchema = new Schema(
     descripcion: String,
 
     propietario: {type: String, ref: "User"},
-    reviews: [{type: String, ref: "review"}],
+    reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
@@ -33,6 +34,7 @@ const salonSchema = new Schema(
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
     .populate("propietario",["_id","nombre","apellido"])
     .populate("eventos",["_id","nombre_evento"])
+    .populate("reviews",["_id","comentario", "puntaje", "fecha", "cliente", "evento"])
   };
   salonSchema.statics.insert = async function (salon){
     return await this.create(salon);
