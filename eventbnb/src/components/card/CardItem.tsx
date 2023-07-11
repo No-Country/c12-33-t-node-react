@@ -4,7 +4,6 @@ import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import style from "./Cards.module.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -19,27 +18,8 @@ export default function Card({ card }) {
   };
   return (
     <div
-      className={`max-w-[300px] rounded-t-xl bg-white group transition-all duration-300 transform hover:scale-105 ${style.group}`}
+      className={`max-w-[300px] rounded-t-xl bg-white group transition-all duration-300 transform hover:scale-105`}
     >
-      <div className="flex items-center space-x-0">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <span
-            key={index}
-            className="px-1 flex items-center justify-center"
-            style={{
-              marginTop: "15px",
-              marginBottom: "15px",
-            }}
-          >
-            <FaStar
-              className={`text-black ${
-                index < Math.floor(card.rating) ? "" : "text-white border-black"
-              }`}
-            />
-          </span>
-        ))}
-      </div>
-
       <div className="relative">
         <Swiper
           modules={[Navigation, Pagination]}
@@ -76,17 +56,22 @@ export default function Card({ card }) {
           />
         ) : null}
       </div>
-      <div className="flex flex-row justify-between items-start mt-4 py-6 px-4">
+      <div className="flex flex-row justify-between items-start mt-4 pb-4 px-4">
         <div>
           <p className="text-base text-black font-bold">{card.name}</p>
           <p className="text-sm text-black font-bold">{`${card.city},${card.country}`}</p>
           <p className="text-sm text-slate-600">{card.location}</p>
           <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
           <p className="text-sm text-black mt-2">
-            {" "}
             <strong>{`S/${card.price}`}</strong> noche
           </p>
         </div>
+        {card.rating ? (
+          <div className="flex items-center justify-center space-x-1 text-black">
+            <FaStar />
+            <p className="text-sm">{card.rating}</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );

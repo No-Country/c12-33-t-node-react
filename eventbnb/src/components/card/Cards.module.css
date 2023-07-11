@@ -1,18 +1,6 @@
-.group {
-    transition: opacity 0.3s ease-in-out;
-    opacity: 1;
-  }
-  
-  .group:not(:hover) {
-    opacity: 9;
-  }
-  
-  .group:hover {
-    opacity: 9;
-  }
 
 
-@media (max-width: 390px) {
+  @media (max-width: 390px) {
  
     .card__container{
        display: flex;
