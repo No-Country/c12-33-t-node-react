@@ -102,19 +102,19 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <button onClick={handleToggleOptions} className={style.user}>
-          <div className={`flex items-center gap-x-4 ${style.userModal}`}>
+        <div className={style.user}>
+          <button onClick={handleToggleOptions} className={`flex items-center gap-x-4 ${style.userModal}`}>
             <div>
               <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
             </div>
             <div >
               <FaUser className={style.faUser} />
             </div>
-          </div>
+          </button>
           <div className={style.userOptions}>
             <UserButton showOptions={showOptions} />
           </div>
-        </button>
+        </div>
       </div>
     </div>
   );
