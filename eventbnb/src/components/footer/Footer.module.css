@@ -47,6 +47,10 @@
     left: 0;
     transform: translateX(0);
   }
+  .email, .instgram, .linkedin {
+    width: 2rem;
+  }
+
 
   /* RESPONSIVE */
   
@@ -65,4 +69,5 @@
     .footer__terms, .footer__links {
       margin-bottom: 10px;
     }
+
   }
