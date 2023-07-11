@@ -1,0 +1,6 @@
+@media (max-width: 390px) {
+ 
+    .card__container{
+       display: flex;
+    }
+}
