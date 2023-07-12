@@ -6,7 +6,6 @@ router.get("/:model", async (req,res) => {
     const {model} = req.params;
     const {email} = req.query;
     let response = {};
-    console.log(model, req.query);
     if(email) 
         response = await database[model].getByEmail(email)
     else 
@@ -32,7 +31,8 @@ router.post("/:model", async (req, res) =>{
 });
 router.delete("/:model/:id", async (req,res) => {
     const {model, id} = req.params;
-    const response = await database[model].remove(id);
+    console.log(model,id);
+    const response = await database[model].remover(id);
     res.status(200).json(response);
 });
 module.exports = router;
