@@ -111,21 +111,18 @@
     background-color: var(--white);
     border: 2px solid var(--light-grey);
     border-radius: 30px;
-    padding: 20px 20px;
+    padding: 10px 10px;
     width: 100px;
     height: 60px;
-    margin-left: auto;
-    
   }
   
   .faUser {
     border-radius: 50%;
     background-color: var(--dark2-grey);
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     color: var(--white);
     cursor: pointer;
-    margin: 0 30px;
   }
   
   .userButton {
@@ -137,21 +134,16 @@
     color: var(--dark2-grey);
   }
  .login{
-  position: absolute;
-      margin-left: 20px;
-      background-color: var(--white);
-      border: 2px solid var(--light-grey);
-      border-radius: 30px;
-      padding: 10px 10px;
-      margin-left: auto;
-      cursor: pointer;
+    position: absolute;
+    background-color: var(--white);
+    border: 2px solid var(--light-grey);
+    border-radius: 30px;
+    margin-left: auto;
+    cursor: pointer;
+    box-shadow: 0 0 5px 0px var(--dark-grey);
+ }
 
-     
- }
- .login:hover{
-    box-shadow: 0 0 5px var(--dark-grey);
- }
- .login__button1, .login__button2{
+.login__button1, .login__button2{
   font-weight: 500;
 }
 

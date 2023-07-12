@@ -23,7 +23,7 @@ export default function Footer() {
             <span
               className={`${style.footer__contactIcon} inline-block transform transition-transform hover:scale-125`}
             >
-              <Link href="mailto:admfestbnb@gmail.com">
+              <Link href="/form">
                 <FaEnvelope className={`text-xxl ${style.email}`} />
               </Link>
             </span>

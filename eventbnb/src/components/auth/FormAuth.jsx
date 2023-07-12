@@ -1,56 +1,43 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { signIn, useSession, signOut } from "next-auth/react";
-import axios from "axios";
-
-import { setCookie, deleteCookie, getCookie } from "../../utils/cookies";
-
-import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
-import { AiOutlineClose } from "react-icons/ai";
-import { CiWarning } from "react-icons/ci";
-
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { setCookie } from "../../utils/cookies";
+import axios from "axios";
+
+import { FcGoogle } from "react-icons/fc";
+import { AiOutlineClose } from "react-icons/ai";
+import { CiWarning } from "react-icons/ci";
 
 const SignIn = ({ hidden, setHidden }) => {
   const { data: session } = useSession();
   const router = useRouter();
-  // const [hidden, setHidden] = useState(true)
   const [localLogin, setLocalLogin] = useState({
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
 
-  const logOut = async () => {
-    const response = await axios(
-      `http://34.125.90.13:5000/usuarios/?email=${getCookie("usuario")}`
-    );
-    deleteCookie("user");
-    signOut();
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (!Object.entries(errors).length) {
         const response = await axios.post("http://34.125.90.13:5000/usuarios", {
-          nombre: "hola",
           email: localLogin.email,
           password: localLogin.password,
+          loginGoogle: false
         });
         setLocalLogin({
           email: "",
           password: "",
         });
-        router.push("/");
         // Guardar info de la peticion en la cookie
-        //   setCookie(response?.data?.data?.name, response?.data?.data?.email, 2);
+        //   setCookie('token-user', response?.data?.data?.email, 2);
+        router.push("/");
       }
     } catch (error) {
-      console.log(error);
       alert("Hubo un error", error);
     }
   };
@@ -101,12 +88,12 @@ const SignIn = ({ hidden, setHidden }) => {
           const response = await axios.post(
             "http://34.125.90.13:5000/usuarios",
             {
-              nombre: "hola",
               email: session?.user?.email,
+              loginGoogle: true
             }
           );
           // Guardar info de la peticion en la cookie
-          setCookie("user", response?.data?.data?.email, 2);
+          setCookie("token-user", response?.data?.data?.email, 2);
         } catch (error) {
           alert("al parecer hubo un error", error.message);
         }
@@ -207,39 +194,19 @@ const SignIn = ({ hidden, setHidden }) => {
             <div className="h-[1px] w-full bg-gray-800/20" />
             <span className="text-sm">o</span>
             <div className="h-[1px] w-full bg-gray-800/20" />
-          </div>
-          {!session ? (
-            <div className="flex flex-col gap-y-4 ">
-              {/* <button
-                                type='button'
-                                onClick={() => signIn('facebook')}
-                                className='border border-gray-800 w-full rounded-lg flex justify-between items-center px-4 py-[12px]'
-                                >
-                                    <AiFillFacebook
-                                    onClick={()=>setHidden(true)}
-                                    className='text-2xl text-blue-500'></AiFillFacebook>
-                                    <span className='self-center mx-auto'>Registrate con Facebook</span>
-                                </button>  */}
-              <button
-                type="button"
-                onClick={() => signIn("google")}
-                className="border border-gray-800 w-full rounded-lg flex justify-between items-center px-4 py-[12px]"
-              >
-                <FcGoogle className="text-xl"></FcGoogle>
-                <span className="self-center mx-auto">
-                  Registrate con Google
-                </span>
-              </button>
-            </div>
-          ) : (
+          </div> 
+          <div className="flex flex-col gap-y-4 ">
             <button
               type="button"
-              onClick={() => logOut()}
-              className="border-2 border-gray-500 px-4 py-2 text-2xl rounded-xl text-white"
+              onClick={() => signIn("google")}
+              className="border border-gray-800 w-full rounded-lg flex justify-between items-center px-4 py-[12px]"
             >
-              logOut
+              <FcGoogle className="text-xl"></FcGoogle>
+              <span className="self-center mx-auto">
+                Registrate con Google
+              </span>
             </button>
-          )}
+          </div>
         </div>
       </div>
     </div>
