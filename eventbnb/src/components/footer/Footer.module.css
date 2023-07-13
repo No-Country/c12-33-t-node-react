@@ -6,6 +6,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: #fff;
+    border-top: solid 1px var(--light-grey);
   }
   
   .footer__logo {
@@ -47,6 +48,10 @@
     left: 0;
     transform: translateX(0);
   }
+  .email, .instgram, .linkedin {
+    width: 2rem;
+  }
+
 
   /* RESPONSIVE */
   
@@ -65,4 +70,5 @@
     .footer__terms, .footer__links {
       margin-bottom: 10px;
     }
+
   }

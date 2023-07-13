@@ -1,3 +1,6 @@
+.container{
+  border-bottom: solid 1px var(--light-grey);
+}
 .search__container {
     display: flex;
     background-color: #fff;
@@ -11,6 +14,7 @@
     margin-left: 20px;
     font-weight: 600;
     font-size: var(--text-l);
+    color: var(--pink);
   }
   
   /* SEARCHBAR */
@@ -75,7 +79,6 @@
     width: 40px;
     height: 40px;
     color: var(--white);
-    background-color: var(--pink-500);
     margin-left: -120%;
     cursor: pointer;
     
@@ -111,21 +114,18 @@
     background-color: var(--white);
     border: 2px solid var(--light-grey);
     border-radius: 30px;
-    padding: 20px 20px;
+    padding: 10px 10px;
     width: 100px;
     height: 60px;
-    margin-left: auto;
-    
   }
   
   .faUser {
     border-radius: 50%;
     background-color: var(--dark2-grey);
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     color: var(--white);
     cursor: pointer;
-    margin: 0 30px;
   }
   
   .userButton {
@@ -136,27 +136,23 @@
   .userButton:hover {
     color: var(--dark2-grey);
   }
-  .userOptions{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    width: 200px;
-    height: 200px;
+ .login{
     position: absolute;
-    right: 0;
-    left: 0;
+    background-color: var(--white);
+    border: 2px solid var(--light-grey);
+    border-radius: 30px;
     margin-left: auto;
-    z-index: 999;
-    padding: 10px;
-    font-size: var(--text-m);
-    line-height: 3rem;
-    font-weight: 700;
-    margin-top: auto;
-    
+    cursor: pointer;
+    box-shadow: 0 0 5px 0px var(--dark-grey);
+ }
+
+.login__button1, .login__button2{
+  font-weight: 500;
 }
- 
+
+.login__button1:hover, .login__button2:hover{
+    font-weight: 800;
+}
   
   /* RESPONSIVE */
   
@@ -182,6 +178,24 @@
             margin-left: 40%;
             margin-bottom: 20px;
     }
+    .login {
+      display: flex;
+      height: 3rem;
+      border-radius: 0.5rem;
+      width: 100%;
+    }
+    
+    .login__btn1, .login__btn2 {
+      align-items: center;
+      height: 100%;
+      margin: 0;
+      color: #fff;
+      border-radius: 0.5rem;
+    } 
+    .login__btn1:hover, .login__btn2:hover {
+      font-weight: 600;
+      cursor: pointer;
+    } 
   }
 
   
