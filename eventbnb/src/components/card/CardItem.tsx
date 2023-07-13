@@ -44,16 +44,22 @@ export default function Card({ card }) {
 			</div>
 			<div className="flex flex-row justify-between items-start mt-4">
 				<div>
+					{card.name ? (
 					<p className="text-base text-black font-bold">{card.name}</p>
-					<p className="text-sm text-black font-bold">{`${card.city},${card.country}`}</p>
+					) : null}
+					<p className="text-sm text-black font-bold">
+						{card.city ? card.city : card.country ? card.country : null}
+						{card.city && card.country ? `, ${card.country}` : null}
+					</p>
+					{card.location ? (
 					<p className="text-sm text-slate-600">{card.location}</p>
+					) : null}
 					<p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
 					<p className="text-sm text-black mt-2"> <strong>{`S/${card.price}`}</strong> noche</p>
 				</div>
 				{card.rating ? (
 					<div className="flex items-center justify-center space-x-1 text-black">
-
-						<FaStar />
+						<FaStar className='text-base'/>
 						<p className="text-sm">{card.rating}</p>
 					</div>
 				) : null}
