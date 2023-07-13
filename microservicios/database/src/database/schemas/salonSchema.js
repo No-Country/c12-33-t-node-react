@@ -5,8 +5,33 @@ const salonSchema = new Schema(
     domicilio: String,
     localidad: String,
     ubicacion: String,
-    release_date: Date,
-    propietario: {type: String, ref: "User"},
+    imagenes: {type : Array},
+    telefono: Number,
+    precio:Number,
+    capacidad_max:Number,
+    superficie:Number,
+    aire_acondicionado:Number,
+    parrilla:Number,
+    pantalla:Number,
+    personal_seguridad:Number,
+    baño:Number,
+    baño_accesibilidad:Boolean,
+    accesibilidad:Boolean,
+    estacionamiento: Boolean,
+    catering: Boolean,
+    mesas_sillas: Boolean,
+    luces: Boolean,
+    sonido: Boolean,
+    fotografia: Boolean,
+    decoracion: Boolean,
+    pileta: Boolean,
+    wifi:Boolean,
+    cocina:Boolean,
+    escenario:Boolean,
+    descripcion: String,
+
+    propietario: {type: String, ref: "Usuario"},
+    reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
@@ -19,6 +44,7 @@ const salonSchema = new Schema(
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
     .populate("propietario",["_id","nombre","apellido"])
     .populate("eventos",["_id","nombre_evento"])
+    .populate("reviews",["_id","comentario", "puntaje", "fecha", "cliente", "evento"])
   };
   salonSchema.statics.insert = async function (salon){
     return await this.create(salon);
@@ -26,7 +52,7 @@ const salonSchema = new Schema(
   salonSchema.statics.change = async function (id, salon){
     return await this.findByIdAndUpdate(id, salon,{new:true});
   };
-  salonSchema.statics.remove = async function (id) {
+  salonSchema.statics.remover = async function (id) {
     return await this.findByIdAndRemove(id);
   };  
 module.exports = salonSchema;

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["images.unsplash.com", "cdn.pixabay.com"],
     remotePatterns: [
       {
         protocol: "https",
@@ -9,8 +10,8 @@ const nextConfig = {
         pathname: "/airbnb/**",
       },
       {
-        protocol: 'https',
-        hostname: 'i.postimg.cc'
+        protocol: "https",
+        hostname: "i.postimg.cc",
       },
     ],
   },
