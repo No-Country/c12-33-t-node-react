@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
+import { AiOutlineMenu } from "react-icons/ai";
+
+import Link from "next/link";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
-import Link from "next/link";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -101,11 +103,14 @@ export default function Header() {
           </div>
         </div>
         <div className={style.user}>
-          <div className={style.userModal}>
-            <button onClick={handleToggleOptions}>
+          <button onClick={handleToggleOptions} className={`flex items-center gap-x-4 ${style.userModal}`}>
+            <div>
+              <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
+            </div>
+            <div >
               <FaUser className={style.faUser} />
-            </button>
-          </div>
+            </div>
+          </button>
           <div className={style.userOptions}>
             <UserButton showOptions={showOptions} />
           </div>
