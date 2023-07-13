@@ -1,20 +1,33 @@
 'use client'
 
-import { useRouter } from 'next/router'
 import NavTeam from '@/components/team/NavTeam'
-import team from '../page'
+import Details from '@/components/team/Details'
+import {team, Integrant} from '../page'
+import { useEffect, useState } from 'react'
 
 const Page = () => {
-    // const router = useRouter()
-    // console.log(router);
-    
-    // const { param } = router.query
-    // const detailIntegrant = team.find()    
+
+    const [detailsIntegrant, setDetailsIntegrant] = useState({})
+
+    useEffect(() => {
+        const arr = window.location.pathname.split('/')
+        const integrantPath = arr[arr.length -1]
+        const detailIntegrant: Integrant | undefined = team.find((integrant) => integrant.href === integrantPath)    
+        setDetailsIntegrant(detailIntegrant)
+    }, [])
 
     return(
         <div>
-            {/* <div>{param}</div> */}
-            <NavTeam></NavTeam>
+            <Details name={detailsIntegrant.name} rol={detailsIntegrant.rol} description={detailsIntegrant.description} detailImage={detailsIntegrant.detailImage} socialMedia={detailsIntegrant.socialMedia}></Details>
+            <div className="sticky bottom-0 left-0  bg-pink-600 px-6 py-6 flex items-center justify-center gap-x-8">
+            {
+                team.map((integrant, index) => {
+                    return(
+                        <NavTeam index={index} href={integrant.href} image={integrant.image}></NavTeam>
+                    )
+                })
+            }
+            </div>
         </div>
     )
 }
