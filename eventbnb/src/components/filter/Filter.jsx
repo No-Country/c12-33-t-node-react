@@ -37,7 +37,9 @@ export default function Filter() {
   }
 
   return (
-    <div className=" flex justify-center items-center text-3xl text-gray-500">
+    <div
+      className={`flex justify-center items-center text-3xl text-gray-500 ${style.filterContainer}`}
+    >
       <Swiper
         slidesPerView={4}
         // navigation
@@ -63,7 +65,7 @@ export default function Filter() {
         }}
       >
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
-          <div className="swiper-button-prev" />
+          <div className={`swiper-button-prev ${style.btnPrev}`} />
         </div>
         <SwiperSlide>
           <div className="flex flex-col items-center">
@@ -114,7 +116,7 @@ export default function Filter() {
           </div>
         </SwiperSlide>
         <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
-          <div className="swiper-button-next" />
+          <div className={`swiper-button-next ${style.btnNext}`} />
         </div>
       </Swiper>
 
