@@ -5,6 +5,7 @@ import Footer from "../components/footer/Footer";
 import Filter from "../components/filter/Filter";
 import Provider from "../components/Provider";
 
+import { SalonsProvider } from "../context/SalonsProvider"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,9 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider>
-          <Header />
-          {children}
-          <Footer />
+          <SalonsProvider>
+            <Header />
+              {children}
+            <Footer />
+          </SalonsProvider>
         </Provider>
       </body>
     </html>
