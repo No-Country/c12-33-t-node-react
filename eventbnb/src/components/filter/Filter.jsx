@@ -121,7 +121,7 @@ export default function Filter() {
       </Swiper>
 
       <div className={`flex flex-col items-center ${style.filterButton}`}>
-        <button className="text-sm">Filtros</button>
+        <button className={`text-s ${style.filterButton1}`}>Filtros</button>
       </div>
     </div>
   );
