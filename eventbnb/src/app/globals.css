@@ -5,10 +5,10 @@
 :root {
   /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --background: rgb(255,133,83); */
-  --gradient: rgba(226,60,82,.2)
-  --pink: #f11066;  
+  --background-end-rgb: 255, 255, 255; */
+  --background: rgb(255,133,83);
+  --gradient: rgba(226,60,82,.2);
+  --pink: rgba(244, 0, 65, 0.891);  
   --white: #fff;
   --black: #000;
   --dark-grey: #adb5bd;
