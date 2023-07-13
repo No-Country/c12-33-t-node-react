@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
-
 import Link from "next/link";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
@@ -64,7 +63,7 @@ export default function Header() {
   return (
     <div className={style.container}>
       <div className={style.search__container}>
-        <Link href="/" className={`text-pink-500 ${style.logo}`}>
+        <Link href="/" className={`${style.logo}`}>
           festbnb
         </Link>
         <div className={style.searchBar}>
@@ -95,7 +94,7 @@ export default function Header() {
                 type="button"
                 id="searchButton"
                 onClick={handleSearch}
-                className={`bg-pink-500 border-2 border-pink-500 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
+                className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
               >
                 <FaSearch className={`text-white text-l ${style.faSearch}`} />
               </button>
@@ -103,11 +102,14 @@ export default function Header() {
           </div>
         </div>
         <div className={style.user}>
-          <button onClick={handleToggleOptions} className={`flex items-center gap-x-4 ${style.userModal}`}>
+          <button
+            onClick={handleToggleOptions}
+            className={`flex items-center gap-x-4 ${style.userModal}`}
+          >
             <div>
               <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
             </div>
-            <div >
+            <div>
               <FaUser className={style.faUser} />
             </div>
           </button>
