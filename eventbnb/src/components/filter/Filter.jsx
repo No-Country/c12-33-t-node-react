@@ -64,9 +64,9 @@ export default function Filter() {
           },
         }}
       >
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
+        {/* <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
           <div className={`swiper-button-prev ${style.btnPrev}`} />
-        </div>
+        </div> */}
         <SwiperSlide>
           <div className="flex flex-col items-center">
             <FaUserFriends className="mb-1" />
@@ -115,9 +115,9 @@ export default function Filter() {
             <p className="text-xs">Puntuación</p>
           </div>
         </SwiperSlide>
-        <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
+        {/* <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
           <div className={`swiper-button-next ${style.btnNext}`} />
-        </div>
+        </div> */}
       </Swiper>
 
       <div className="flex flex-col items-center">
