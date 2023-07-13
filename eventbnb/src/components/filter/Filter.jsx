@@ -120,7 +120,7 @@ export default function Filter() {
         </div> */}
       </Swiper>
 
-      <div className="flex flex-col items-center">
+      <div className={`flex flex-col items-center ${style.filterButton}`}>
         <button className="text-sm">Filtros</button>
       </div>
     </div>
