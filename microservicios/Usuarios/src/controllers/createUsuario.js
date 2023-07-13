@@ -1,14 +1,31 @@
 const Usuario = require('../data');
 const { response } = require('../utils');
-const sendMails = require('../utils/mails/index');
-const registerMsgBody = require('../utils/mails/registerMessageBody');
+const sendMails = require('../utils/mails/SendMails');
+// const { registerMessageBody } = require('../utils/mails/registerMessageBody');
+// const jwt = require('jsonwebtoken');
+// const {serialize}= require('cookie');
 
 module.exports = async (req, res) => {
-    const user = req.body;
-    console.log(user);
-    const newUser = await Usuario.create(user);
-    const registerMail = registerMsgBody();
-    const sendMail = sendMails();
+    console.log("creando usuario", req.body);
+    const { email } = req.body;
+    let user = {};
+    const usuarioEncontrado = await Usuario.getByEmail(email);
+    if (usuarioEncontrado) {
+        user = usuarioEncontrado;
+        console.log("USUARIO ENCONTRADO: ", user);
+    }
+    else {
+        user = await Usuario.create(req.body);
 
-    response(res, 201, newUser);
+        console.log("USUARIO CREADO: ", user);
+    }
+    // const token = jwt.sign({
+    //         exp: Math.floor(Date.now()/1000)+ (60 * 60 *24),
+    //         user
+    //     },'essecreto');
+    // const serialized = serialize('mytokenUsuario',token,{
+    //     httpOnly:true,
+    // });
+    // res.setHeader('Set-Cookie',serialized);
+    response(res, 201, user);
 }

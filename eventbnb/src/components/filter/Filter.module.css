@@ -1,0 +1,22 @@
+.filterSilder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    background-color: #fff;
+}
+.swiperContainer{
+    width: 70%;
+    justify-content: space-between;
+}
+
+
+
+
+
+/* 
+@media (max-width: 390px) {
+    .filterSilder {
+      flex-direction: column;
+    }
+} */
