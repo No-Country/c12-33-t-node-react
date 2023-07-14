@@ -1,0 +1,74 @@
+.filterSilder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.swiperContainer{
+    width: 75%;
+    justify-content: space-between;
+}
+.btnPrev, .btnNext {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border-color: var(--dark-grey);
+    position: relative;
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: auto;
+  }
+  .btnPrev::before,
+  .btnPrev::after, .btnNext::before, .btnNext::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: #000;
+    transition: background-color 0.3s;
+  }
+  .btnPrev::before, .btnNext::before {
+    transform: rotate(45deg);
+  }
+  .btnPrev::after, .btnNext::after{
+    transform: rotate(-45deg);
+  }
+  .btnPrev:hover, .btnNext:hover {
+    background-color: #f0f0f0;
+  }
+  .btnPrev:hover::before,
+  .btnPrev:hover::after, .btnNext:hover::before, .btnNext:hover::after {
+    background-color: #000;
+  }
+  .filterButton{
+    font-size: var(--text-l);
+  }
+  .filterButton1{
+    border: solid 2px var(--dark-grey);
+    padding: 15px 15px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .filterButton1:hover{
+    box-shadow: 0 0 5px var(--dark-grey);
+    font-weight: 800;
+  }
+
+  
+@media (max-width: 390px) {
+    .filterContainer{
+        display: block;
+    }
+    .swiperContainer{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 2rem;
+        display: contents;
+    }
+    .btnPrev, .btnNext {
+        display: block;
+        margin: auto;
+    }
+}

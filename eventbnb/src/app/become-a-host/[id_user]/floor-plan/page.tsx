@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import BackButton from "@/components/create-halls/BackButton";
+import ButtonHalls from "@/components/create-halls/ButtonHalls";
 
 const schema = yup.object().shape({
   precio: yup.number().required(),
@@ -27,6 +29,9 @@ export default function AirbnbSection() {
   const [baño, setBaño] = useState(5);
 
   const handleDecrement = (setState) => {
+    // if(aireAcondicionado<0 || parrilla<0||pantalla<0||personalSeguridad<0||baño<0){
+    //   document.querySelector("button")?.setAttribute("disabled")
+    // }
     setState((prevState) => prevState - 1);
   };
 
@@ -40,8 +45,9 @@ export default function AirbnbSection() {
 
   return (
     <section className="bg-gray-100 py-8">
-      <div className="container mx-auto">
-        <h2 className="text-4xl font-bold mb-6">Detalles del Alojamiento</h2>
+      
+      <h2 className="text-2xl font-bold mb-6 text-center">Detalles del salón de fiestas</h2>
+      <div className="container mx-auto flex items-center justify-center">
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-wrap mb-4">
@@ -50,7 +56,9 @@ export default function AirbnbSection() {
             </label>
             <input
               type="number"
-              className="rounded-md px-2 py-1 w-24 ml-2"
+              className={`border ${
+                errors.precio ? "border-red-500" : "border-gray-300"
+              } px-2 py-1 w-24 ml-2 block text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("precio")}
             />
             {errors.precio && (
@@ -64,7 +72,9 @@ export default function AirbnbSection() {
             </label>
             <input
               type="number"
-              className="rounded-md px-2 py-1 w-24 ml-2"
+              className={`border ${
+                errors.capacidad_max ? "border-red-500" : "border-gray-300"
+              } px-2 py-1 w-24 ml-2 block text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("capacidad_max")}
             />
             {errors.capacidad_max && (
@@ -78,7 +88,9 @@ export default function AirbnbSection() {
             </label>
             <input
               type="number"
-              className="rounded-md px-2 py-1 w-24 ml-2"
+              className={`border ${
+                errors.superficie ? "border-red-500" : "border-gray-300"
+              } px-2 py-1 w-24 ml-2 block text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("superficie")}
             />
             {errors.superficie && (
@@ -94,6 +106,7 @@ export default function AirbnbSection() {
               Aire Acondicionado:
             </label>
             <button
+              disabled = {aireAcondicionado <= 0? true : false}
               type="button"
               className="rounded-full px-3 py-1 bg-gray-300 text-gray-900 ml-2"
               onClick={() => handleDecrement(setAireAcondicionado)}
@@ -115,6 +128,7 @@ export default function AirbnbSection() {
               Parrilla:
             </label>
             <button
+              disabled = {parrilla <= 0? true : false}
               type="button"
               className="rounded-full px-3 py-1 bg-gray-300 text-gray-900 ml-2"
               onClick={() => handleDecrement(setParrilla)}
@@ -136,6 +150,7 @@ export default function AirbnbSection() {
               Pantalla:
             </label>
             <button
+            disabled = {pantalla <= 0? true : false}
               type="button"
               className="rounded-full px-3 py-1 bg-gray-300 text-gray-900 ml-2"
               onClick={() => handleDecrement(setPantalla)}
@@ -160,6 +175,7 @@ export default function AirbnbSection() {
               Personal de Seguridad:
             </label>
             <button
+            disabled = {personalSeguridad <= 0? true : false}
               type="button"
               className="rounded-full px-3 py-1 bg-gray-300 text-gray-900 ml-2"
               onClick={() => handleDecrement(setPersonalSeguridad)}
@@ -181,6 +197,7 @@ export default function AirbnbSection() {
               Baño:
             </label>
             <button
+            disabled = {baño <= 0? true : false}
               type="button"
               className="rounded-full px-3 py-1 bg-gray-300 text-gray-900 ml-2"
               onClick={() => handleDecrement(setBaño)}
@@ -199,12 +216,22 @@ export default function AirbnbSection() {
 
           <button
             type="submit"
-            className="bg-gray-900 text-white rounded-md px-4 py-2"
+            className=" flex w-full justify-center rounded-md bg-pink-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-pink-600"
           >
-            Enviar
+            Confirmar
           </button>
+          
         </form>
       </div>
+      <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
+            <BackButton href="./stand-out"></BackButton>
+            <ButtonHalls
+              
+              href="./finish-setup"
+              content="Siguiente"
+              backBtn={true}
+            />
+          </div>
     </section>
   );
 }

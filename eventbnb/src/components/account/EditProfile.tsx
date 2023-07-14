@@ -2,10 +2,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y las operaciones CRUD en MongoDB
+// import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y los servicios
 import { countries } from "../utils/countries";
-import Image from "next/image";
-import { getCookie } from "@/utils/cookies";
+// import { getCookie } from "@/utils/cookies";
+import {  FaUser } from "react-icons/fa";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -42,37 +42,38 @@ const userTemplate = {
 };
 
 const EditProfile: React.FC = async() => {
-  const { getUser, updateUser } = useUser(); // Aquí obtienes los datos del usuario actual y la función para actualizar el perfil
-  const jwt = getCookie("user")
-      console.log(jwt);
-  const userr = await getUser(jwt);
-  console.log(userr)
+  // const { getUser, updateUser } = useUser(); // Aquí obtienes los datos del usuario actual y la función para actualizar el perfil
+  // const jwt = getCookie("user")
+  //     console.log(jwt);
+  // const userr = await getUser(jwt);
+  // console.log(userr)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    defaultValues: userr ,
+    defaultValues: userTemplate ,
   });
 
   const onSubmit = async (data: FormData) => {
     // const id = "649f8ccc12b6415694a8e746";
-    await updateUser(jwt, data);
+    console.log(data)
+    // await updateUser(id, data);
     // redirigir al usuario a otra página después de actualizar el perfil
   };
 
   return (
     <section className="container mx-5 py-8">
-      <h1 className="text-2xl font-semibold mb-4 flex flex-col gap-6">
+      <h1 className="text-2xl font-semibold mb-4 text-center flex flex-col gap-6">
         Editar perfil
       </h1>
       <section className="flex items-start justify-evenly">
-        <div>
-          <div className="mt-2 rounded shadow-lg">
-            <Image width={50} height={50} src="/next.svg" alt="perfil" />
-            <h1>Exequiel</h1>
-            <span>viajero</span>
+        <div className="">
+          <div className="px-8 py-6 rounded-md shadow-xl">
+            <h1 className=""><FaUser className="bg-slate-500 w-24 h-24 rounded-full"/></h1>
+            <h1 className="text-center font-semibold">Exequiel</h1>
+            <span className="text-gray-600 font-semibold">Usuario</span>
           </div>
         </div>
         <form
