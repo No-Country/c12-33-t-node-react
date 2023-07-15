@@ -31,7 +31,7 @@ export default function UserButton({ showOptions }) {
                 Iniciar Sesión
               </button>
               <button
-                className={`w-full h-full text-start font-semibold h-full text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn2}`}
+                className={`w-full h-full text-start font-semibold text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn2}`}
                 onClick={() => setHidden(true)}
               >
                 Registrarse
@@ -42,7 +42,7 @@ export default function UserButton({ showOptions }) {
           {session && (
             <>
               <Link
-                href=""
+                href="/account-settings"
                 className={`w-full text-start font-semibold h-full text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn1}`}
               >
                 Ver Perfil

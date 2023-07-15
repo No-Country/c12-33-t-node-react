@@ -96,7 +96,7 @@ const services: Options[] = [
 ] 
 
 const Page = () => {
-    const {salon, setSalon} = useSalons()
+    const {salon, setSalon} = useSalons<Salon>()
     
     const handleClick = (stateName) => {
         setSalon((prevState) => ({
@@ -122,8 +122,8 @@ const Page = () => {
             
             </div>
             <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
-                <BackButton href="/about-your-place"></BackButton>
-                <ButtonHalls href="./step" content="Siguiente" backBtn={true}/>
+                <BackButton href="./about-your-place"></BackButton>
+                <ButtonHalls href="./stand-out" content="Siguiente" backBtn={true}/>
             </div>
         </div>
     )
