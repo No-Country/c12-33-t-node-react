@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
-import {CardInfo, PriceInfo, YourTrip} from "./PaymentElements";
+import { CardInfo, PriceInfo, YourTrip, } from "./PaymentElements";
+import PayForm from "./FormularioPago";
 
 export default function Payment() {
 	return (
@@ -21,6 +22,7 @@ export default function Payment() {
 					<div className="w-1/2">
 						<div>
 							<YourTrip />
+							<PayForm/>
 						</div>
 					</div>
 					<div className="w-1/2">
