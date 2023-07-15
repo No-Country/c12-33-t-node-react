@@ -1,7 +1,5 @@
-
-import Image from 'next/image'
+import Image from "next/image";
 import account from "../utils/account.json";
-import  "./Account.css";
 
 interface User {
   _id: string;
@@ -19,31 +17,35 @@ const Account: React.FC<{ userTemplate: User }> = ({ userTemplate }) => {
   console.log(userTemplate);
 
   return (
-    <>
-      <div>
+    <section className="mx-4">
+      <div className="mt-16 mb-14 ml-4 text-[#222222] text-3xl">
+        <h1>Cuenta</h1>
+        <div className="text-lg mt-2 mb-4">
         <span>Exequiel Gerez, </span>
         <span>exe2016gerez@gmail.com · </span>
-        <a
-          href={` /account-settings/${userTemplate._id}`}
-        >
-          Ir al perfil
-        </a>
+        <a href={` /account-settings/${userTemplate._id}`}>Ir al perfil</a>
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-between" >
-      {account.account.map((item) => (
-        
-          <div key={item.title} className="card mt-6 w-96 justify-self-auto">
-            <div style={{ marginBottom: "16px" }}>
-              <Image width={40} height={40} src={item.URLImage} alt={item.title} />
+      <div className="flex items-center justify-between flex-wrap px-2">
+        {account.account.map((item) => (
+          <div key={item.title} className="my-2 p-4 w-96 rounded-xl shadow-lg">
+            <div>
+              <Image
+                className="block mb-4"
+                width={32}
+                height={32}
+                src={item.URLImage}
+                alt={item.title}
+              />
             </div>
             <div>
-              <div className="card__title">{item.title}</div>
-              <div className="card__description">{item.description}</div>
+              <div className="text-[#222222] text-base mb-2">{item.title}</div>
+              <div className="text-[#717171] text-sm">{item.description}</div>
             </div>
           </div>
-      ))}
+        ))}
       </div>
-    </>
+    </section>
   );
 };
 

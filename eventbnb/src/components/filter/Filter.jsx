@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
@@ -32,9 +33,9 @@ export default function Filter() {
     loadSwiper();
   }, []);
 
-  if (typeof window === "undefined") {
-    return null;
-  }
+  // if (typeof window === "undefined") {
+  //   return null;
+  // }
 
   return (
     <div

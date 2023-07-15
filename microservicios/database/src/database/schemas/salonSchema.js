@@ -29,7 +29,6 @@ const salonSchema = new Schema(
     cocina:Boolean,
     escenario:Boolean,
     descripcion: String,
-
     propietario: {type: String, ref: "Usuario"},
     reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
