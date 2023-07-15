@@ -5,13 +5,6 @@ const salonSchema = new Schema(
     domicilio: String,
     localidad: String,
     ubicacion: String,
-<<<<<<< HEAD
-    imagenes: {Type: [String]},
-
-    capacidad_max: Number,
-    espaciom2: Number,
-    precio: Number,
-=======
     imagenes: {type : Array},
     telefono: Number,
     precio:Number,
@@ -24,7 +17,6 @@ const salonSchema = new Schema(
     baño:Number,
     baño_accesibilidad:Boolean,
     accesibilidad:Boolean,
->>>>>>> 2b4b0d7535f39a919a69a8dbf5a0580054cebd0d
     estacionamiento: Boolean,
     catering: Boolean,
     mesas_sillas: Boolean,
@@ -33,18 +25,11 @@ const salonSchema = new Schema(
     fotografia: Boolean,
     decoracion: Boolean,
     pileta: Boolean,
-<<<<<<< HEAD
-    descripcion: String,
-
-    propietario: {type: String, ref: "User"},
-=======
     wifi:Boolean,
     cocina:Boolean,
     escenario:Boolean,
     descripcion: String,
-
     propietario: {type: String, ref: "Usuario"},
->>>>>>> 2b4b0d7535f39a919a69a8dbf5a0580054cebd0d
     reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
