@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -23,6 +23,24 @@ export default function Header() {
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 0) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSearch = () => {
     if (searchLounge.trim() !== "") {
@@ -63,7 +81,7 @@ export default function Header() {
 
   return (
     <>
-      <div className={style.container}>
+      <div className={`${style.container} ${isFixed ? style.fixedHeader : ""}`}>
         <div className={style.search__container}>
           <Link href="/" className={`${style.logo}`}>
             festbnb

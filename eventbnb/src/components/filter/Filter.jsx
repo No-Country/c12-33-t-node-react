@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
@@ -20,6 +21,29 @@ SwiperCore.use([Navigation]);
 
 export default function Filter() {
   const swiperRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const headerHeight = document.getElementById("header")?.clientHeight || 0;
+
+      if (scrollTop >= headerHeight) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //ME COMENTARON ESTA PARTE DE FILTER (ABAJO LOS HANDLE), Y LO TENIA QUE DESCONENTAR PARA QUE FUNCIONARA
+  //SI LO HICIERON POR ALGO EN PARTICULAR QUE DE FALLA AVISEN PARA SOLUCIONAR DE OTRA FORMA - BY ADRIANA
 
   const handlePrev = () => {
     if (swiperRef.current) {
@@ -35,15 +59,19 @@ export default function Filter() {
 
   return (
     <div
-      className={`justify-center items-center text-3xl text-gray-500 ${style.filterContainer}`}
+      className={`m-0 justify-center items-center text-3xl text-gray-500 pb-10 ${
+        isFixed ? style.fixedContainer : ""
+      } ${
+        style.filterContainer
+      } hover:border-gray-200 hover:border-b-2 hover:border-solid`}
     >
       <Swiper
-        slidesPerView={4}
+        slidesPerView={5}
         navigation={{
           prevEl: `.${style.btnPrev}`,
           nextEl: `.${style.btnNext}`,
         }}
-        className={`w-96 ${style.swiperContainer}`}
+        className={`w-6/12 inset-x-12 ${style.swiperContainer}`}
         breakpoints={{
           390: {
             slidesPerView: 2,
@@ -59,8 +87,8 @@ export default function Filter() {
           },
           1024: {
             slidesPerView: 5,
-            spaceBetween: 40,
-            width: 500,
+            spaceBetween: 50,
+            width: 400,
           },
         }}
         ref={swiperRef}
