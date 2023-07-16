@@ -1,77 +1,65 @@
-
-.fixedContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-.filterContainer{
+/* .fixerContainer{
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   padding: 0 1rem;
-  max-width: 1200px;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-  margin-top: 3rem;
-  top: 0;
+  width: 100%;
+  margin-top: 1rem;
+} */
 
-} 
-.filterSilder{
-    align-items: center;
-    width: 100%;
-
+.filterContainer {
+  display: flex;
+  /* justify-content: space-between;
+  align-items: center; */
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  margin-top: 1rem;
 }
+
 .swiperContainer {
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 1rem;
-    max-width: 1200px;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
+  /* display: flex; */
+  /* justify-content: space-between;
+  align-items: center; */
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1200px;
   margin-top: 3rem;
-  top: 0;
-  z-index: 1;
+  
+}
+.swiper{
+  display: flex;
+
+}
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-  .filterButton{
-    display: flex;
-    font-size: var(--text-xl);
-  }
-  .filterButton1{
-    
-    border: solid 2px var(--dark-grey);
-    padding: 15px 15px;
-    border-radius: 20px;
-    font-size: 25px;
-  }
-  .filterButton1:hover{
-    box-shadow: 0 0 5px var(--dark-grey);
-    font-weight: 800;
+.filterButton1 {
+  border: solid 2px var(--dark-grey);
+  padding: 15px 25px;
+  border-radius: 20px;
+  font-size: 25px;
+}
+
+@media (max-width: 390px) {
+  .filterContainer {
+    display: block;
+    text-align: center;
   }
 
-  
-@media (max-width: 390px) {
-    .filterContainer{
-        display: block;
-    }
-    .swiperContainer{
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 2rem;
-        display: contents;
-    }
-    .btnPrev, .btnNext {
-        display: block;
-        margin: auto;
-    }
+  .swiperContainer {
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+
+  .filterButton {
+    margin-top: 1rem;
+  }
 }
 
 /* .btnPrev, .btnNext {

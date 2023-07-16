@@ -42,32 +42,35 @@ export default function Filter() {
 
   return (
     <div
-      className={`m-0 justify-center items-center text-3xl text-gray-500 pb-10 ${
+      className={`w-full text-3xl text-gray-500 pb-10  ${
         isFixed ? style.fixedContainer : ""
       } ${
         style.filterContainer
-      } hover:border-gray-200 hover:border-b-2 hover:border-solid`}
+      } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
     >
       <Swiper
         slidesPerView={5}
-        navigation={{
-          prevEl: `.${style.btnPrev}`,
-          nextEl: `.${style.btnNext}`,
-        }}
-        className={`w-6/12 inset-x-12 ${style.swiperContainer}`}
+        // // navigation={{
+        // //   prevEl: `.${style.btnPrev}`,
+        // //   nextEl: `.${style.btnNext}`,
+        // // }}
+        className={`w-4/5  ${style.swiperContainer}`}
         breakpoints={{
           390: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
+
           640: {
             slidesPerView: 3,
             spaceBetween: 20,
           },
+
           768: {
             slidesPerView: 4,
             spaceBetween: 30,
           },
+
           1024: {
             slidesPerView: 5,
             spaceBetween: 50,
@@ -76,39 +79,43 @@ export default function Filter() {
         }}
         ref={swiperRef}
       >
-        <SwiperSlide>
-          <div className="flex flex-col items-center">
-            <FaDollarSign className="mb-1" /> {/* Icono de precio */}
-            <p className="text-xs">Precio</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col items-center">
-            <FaParking className="mb-1" /> {/* Icono de estacionamiento */}
-            <p className="text-xs">Estacionamiento</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col items-center">
-            <FaDog className="mb-1" /> {/* Icono de mascotas */}
-            <p className="text-xs">Mascotas</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col items-center">
-            <FaCalendarAlt className="mb-1" /> {/* Icono de disponibilidad */}
-            <p className="text-xs">Disponibilidad</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col items-center">
-            <FaStar className="mb-1" /> {/* Icono de puntuación */}
-            <p className="text-xs">Puntuación</p>
-          </div>
-        </SwiperSlide>
+        <div className={`flex ${style.swiper}`}>
+          <SwiperSlide>
+            <div className="flex flex-col  ">
+              <FaDollarSign className="mb-1" /> {/* Icono de precio */}
+              <p className="text-xs">Precio</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col items-center">
+              <FaParking className="mb-1" /> {/* Icono de estacionamiento */}
+              <p className="text-xs">Estacionamiento</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col items-center">
+              <FaDog className="mb-1" /> {/* Icono de mascotas */}
+              <p className="text-xs">Mascotas</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col items-center">
+              <FaCalendarAlt className="mb-1" /> {/* Icono de disponibilidad */}
+              <p className="text-xs">Disponibilidad</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col items-center">
+              <FaStar className="mb-1" /> {/* Icono de puntuación */}
+              <p className="text-xs">Puntuación</p>
+            </div>
+          </SwiperSlide>
+        </div>
       </Swiper>
 
-      <FilterButton />
+      <div className={style.filterButton}>
+        <FilterButton />
+      </div>
     </div>
   );
 }
