@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import { FaMedal, FaStar } from "react-icons/fa6";
+import { PiWarningCircleFill } from "react-icons/pi";
 
 export function CardInfo() {
 	return (
-		<div className="w-[415px] flex items-center justify-center pb-6 border-b">
+		<div className="w-full flex items-center justify-center pb-6 border-b">
 			<Image width={128} height={112} className="w-32 h-28 rounded-lg" src="https://a0.muscache.com/im/pictures/c1ea60ef-ec71-4158-a336-8f0aaf77af96.jpg?aki_policy=large" alt="" />
 
 			<div className="pl-3 h-28 grid content-between">
@@ -16,13 +17,13 @@ export function CardInfo() {
 				</div>
 				<div className="inline-flex items-center space-x-2">
 					<p className="inline-flex items-center text-xs space-x-1">
-						<FaStar/>
+						<FaStar />
 						<span>5.00</span>
 						<span>(1 <span>Reseña</span>)</span>
 					</p>
 					<span className="text-lg font-semibold">.</span>
 					<p className="inline-flex items-center text-xs space-x-1">
-						<FaMedal/>
+						<FaMedal />
 						<span>Superanfitrion</span>
 					</p>
 				</div>
@@ -63,7 +64,7 @@ export function PriceInfo() {
 					<span className="font-semibold text-lg">S/8,979.92</span>
 				</div>
 			</div>
-			
+
 		</div>
 	);
 }
@@ -74,7 +75,7 @@ export function YourTrip() {
 			<h2 className="text-2xl font-semibold pb-6">Tu Viaje</h2>
 			<div className="pb-6">
 				<div className="flex items-center justify-between">
-				 	<p className="text-lg font-semibold">Fechas</p>
+					<p className="text-lg font-semibold">Fechas</p>
 					<button className="text-lg font-semibold underline">Edita</button>
 				</div>
 				<span className="mt-2">21 - 26 de Jul</span>
@@ -90,6 +91,90 @@ export function YourTrip() {
 	);
 }
 
+export function RequirementTrip() {
+	return (
+		<div>
+			<h2 className="text-xl font-semibold pt-8 pb-6 border-t">Requerido para tu viaje</h2>
+			<div className="flex items-start justify-between pb-6">
+				<div>
+					<h3 className="text-xl font-semibold">Mensaje al anfitrion</h3>
+					<p className="text-sm mt-1">Cuéntale al anfitrión por qué viajas y cuándo llegas.</p>
+				</div>
+				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
+			</div>
+			<div className="flex items-start justify-between pb-6">
+				<div>
+					<h3 className="text-xl font-semibold">Foto de perfil</h3>
+					<p className="text-sm mt-1">Los anfitriones quieren saber quién se aloja en el alojamiento.</p>
+				</div>
+				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
+			</div>
+			<div className="flex items-start justify-between">
+				<div>
+					<h3 className="text-xl font-semibold">Número de teléfono</h3>
+					<p className="text-sm mt-1">Agrega y confirma tu número de teléfono para recibir actualizaciones del viaje.</p>
+				</div>
+				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
+			</div>
+			<div className="text-red-600 flex items-center mt-2  pb-6 space-x-1">
+				<PiWarningCircleFill />
+				<span>Esto es obligatorio</span>
+			</div>
+		</div>
+	);
+}
+
+
+
+export function CancellationPolicy() {
+	return (
+		<div className="pt-8 pb-6 border-t space-y-6">
+			<h2 className="text-xl font-semibold">Política de cancelación</h2>
+			<p className="text-base">Esta reservación no es reembolsable.
+				<a href="" className="ml-1 font-semibold underline">Más información</a>
+			</p>
+		</div>
+	);
+}
+
+export function FundamentalRules() {
+	return (
+		<div className="pt-8 pb-6 border-t">
+			<h2 className="text-xl mb-6 font-semibold">Reglas fundamentales</h2>
+			<p className="text-base">Pedimos a todos los huéspedes que recuerden algunas cosas sencillas sobre lo que hace que un huésped sea excelente.
+			</p>
+			<ul className="mt-4">
+				<li>Sigue las reglas de la casa</li>
+				<li>Trata el alojamiento del anfitrión como si fuera tuyo</li>
+			</ul>
+		</div>
+	);
+}
+
+export function IconNote() {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="#E31C5F"
+			stroke="currentcolor"
+			display="block"
+			viewBox="0 0 48 48"
+			style={{ height: 32, width: 32 }}
+		>
+			<g stroke="none">
+				<path
+					fillOpacity="0.2"
+					d="M43 8v21.295L32.295 40l-10.359.001A11.971 11.971 0 0026 31c0-6.627-5.373-12-12-12a12.02 12.02 0 00-3.001.378L11 8h32z"
+				></path>
+				<path d="M32 42v-8a5 5 0 014.783-4.995L37 29h8V6H34v2h-2V6H22v2h-2V6H9v14.5H7V6a2 2 0 011.85-1.995L9 4h11V2h2v2h10V2h2v2h11a2 2 0 011.995 1.85L47 6v24.953L33.953 44H15v-2h17zm12.123-11H37a3 3 0 00-2.995 2.824L34 34v7.122L44.123 31z"></path>
+			</g>
+			<g fill="none" strokeWidth="2">
+				<path d="M14 43c.328 0 .653-.013.974-.039C21.146 42.465 26 37.299 26 31c0-6.627-5.373-12-12-12A11.995 11.995 0 002 31c0 6.627 5.373 12 12 12z"></path>
+				<path d="M23 31h-9v-9"></path>
+			</g>
+		</svg>
+	);
+}
 
 // Payment Logos
 export function Visa() {
@@ -139,18 +224,18 @@ export function MasterCard() {
 	);
 }
 
-export function Gpay() {
+export function Gpay({color}) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 12">
 			<g fill="none" fillRule="evenodd">
 				<path
-					fill="#3C4043"
+					fill={color}
 					fillRule="nonzero"
 					d="M13.624 5.865v3.522h-1.1V.694h2.918a2.594 2.594 0 011.886.755A2.535 2.535 0 0117.451 5l-.123.124c-.513.493-1.141.742-1.886.742h-1.818zm0-4.104v3.037h1.845a1.43 1.43 0 001.087-.451 1.546 1.546 0 00-.034-2.156 1.493 1.493 0 00-1.053-.43h-1.845zm7.032 1.483c.813 0 1.456.222 1.927.659.472.436.704 1.046.704 1.816v3.667h-1.052V8.56h-.048c-.458.68-1.059 1.019-1.818 1.019-.642 0-1.189-.194-1.619-.582a1.852 1.852 0 01-.65-1.456c0-.617.233-1.102.691-1.47.457-.367 1.072-.547 1.838-.547.656 0 1.189.125 1.613.36V5.63a1.31 1.31 0 00-.451-.991 1.588 1.588 0 00-1.06-.41c-.615 0-1.1.264-1.455.79l-.971-.616c.52-.77 1.306-1.158 2.351-1.158zm-1.421 4.319c0 .29.136.561.362.728.246.194.547.298.854.29a1.73 1.73 0 001.237-.52c.362-.346.547-.755.547-1.226-.342-.277-.82-.416-1.435-.41-.444 0-.82.112-1.121.327-.294.215-.444.485-.444.81z"
 					transform="translate(.403)"
 				></path>
 				<path
-					fill="#3C4043"
+					fill={color}
 					d="M29.328 3.439L25.651 12h-1.134l1.366-2.995-2.412-5.566h1.196l1.743 4.27h.02l1.702-4.27z"
 					transform="translate(.403)"
 				></path>
