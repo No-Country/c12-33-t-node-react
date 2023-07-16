@@ -45,6 +45,33 @@
   font-size: 25px;
 }
 
+/*Modal - Filter - Button*/
+.modal {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--dark-grey);
+  border-radius: 20px;
+  width: 50rem;
+  height: 50rem;
+  margin-top: 5%;
+  margin-right: 80%;
+  cursor: pointer;
+  z-index: 2; /* Ajusta el valor del z-index según sea necesario */
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+.showModal {
+  z-index: 1; /* Ajusta el valor del z-index según sea necesario */
+}
+
 @media (max-width: 390px) {
   .filterContainer {
     display: block;

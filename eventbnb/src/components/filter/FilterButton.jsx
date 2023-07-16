@@ -10,25 +10,30 @@ export default function FilterButton() {
 
   return (
     <div className={`flex flex-col items-center ${style.filterButton}`}>
-      <button
-        style={{
-          marginTop: "40px",
-          marginRight: "140px",
-          width: "100px",
-          fontSize: "20px",
-        }}
-        className={`text-sm ${style.filterButton1} `}
-        onClick={toggleModal}
-      >
-        Filtros
-      </button>
-
-      {showModal && (
-        <div className={style.modal}>
-          <h2>Este es el contenido del modal</h2>
-          <button onClick={toggleModal}>Cerrar</button>
-        </div>
-      )}
+      <div>
+        <button
+          style={{
+            marginTop: "40px",
+            marginRight: "140px",
+            width: "100px",
+            fontSize: "20px",
+          }}
+          className={`text-sm ${style.filterButton1} `}
+          onClick={toggleModal}
+        >
+          Filtros
+        </button>
+      </div>
+      <div className={`flex flex-col items-center ${style.showModal}`}>
+        {showModal && (
+          <div className={style.modal}>
+            <div className={style.modalContent}>
+              <h2>Este es el contenido del modal</h2>
+              <button onClick={toggleModal}>Cerrar</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
