@@ -4,7 +4,7 @@
     padding: 20px;
     font-size: var(--text-m);
     line-height: 1.5;
-    color: var(--white);
+    color: var(--black); /*la lestras deben ir en black ya que la pagina esta en blanco si se te ve negra revisa tu máquina nada tiene que ver el global css, igual lo puede ocultar pero las letras van en black no white- by Adriana*/
   }
   
   .terms h1 {
