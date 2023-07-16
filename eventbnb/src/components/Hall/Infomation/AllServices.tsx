@@ -5,7 +5,7 @@ const AllServices = () => {
   return (
     <div className="py-7">
       <h6 className="font-medium text-xl pb-5">Lo que este lugar ofrece</h6>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="flex gap-3 items-center">
           <GiAtSea size={25} />
           <p>Vista al Mar</p>
