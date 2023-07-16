@@ -1,24 +1,51 @@
+
+.filterContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1200px;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  margin-top: 3rem;
+  top: 0;
+
+} 
 .filterSilder{
-    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+.swiperContainer {
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-}
-.swiperContainer{
-    width: 75%;
-    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 1200px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  margin-top: 3rem;
+  top: 0;
+  z-index: 1;
 }
 .btnPrev, .btnNext {
-    width: 32px;
+  align-items: center;
+    justify-content: center;
+    display: flex;
+  border: 2px solid var(--dark-grey);
+    width: 35px;
     height: 32px;
     border-radius: 50%;
     border-color: var(--dark-grey);
     position: relative;
-    display: block;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: auto;
   }
+  
   .btnPrev::before,
   .btnPrev::after, .btnNext::before, .btnNext::after {
     content: "";
@@ -42,9 +69,11 @@
     background-color: #000;
   }
   .filterButton{
+    display: flex;
     font-size: var(--text-l);
   }
   .filterButton1{
+    
     border: solid 2px var(--dark-grey);
     padding: 15px 15px;
     border-radius: 20px;
