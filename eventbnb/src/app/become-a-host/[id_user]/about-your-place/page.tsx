@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
+import BackButton from "@/components/create-halls/BackButton";
+import ButtonHalls from "@/components/create-halls/ButtonHalls";
 
 export default function Page() {
   return (
@@ -31,6 +33,15 @@ export default function Page() {
           alt="step-2"
         />
       </section>
+      <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
+            <BackButton href="./overview"></BackButton>
+            <ButtonHalls
+              
+              href="./structure"
+              content="Siguiente"
+              backBtn={true}
+            />
+          </div>
     </>
   );
 }
