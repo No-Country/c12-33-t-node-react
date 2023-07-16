@@ -70,14 +70,14 @@
   }
   .filterButton{
     display: flex;
-    font-size: var(--text-l);
+    font-size: var(--text-xl);
   }
   .filterButton1{
     
     border: solid 2px var(--dark-grey);
     padding: 15px 15px;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 25px;
   }
   .filterButton1:hover{
     box-shadow: 0 0 5px var(--dark-grey);
