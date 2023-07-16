@@ -48,25 +48,28 @@
 /*Modal - Filter - Button*/
 .modal {
   position: absolute;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid var(--dark-grey);
   border-radius: 20px;
   width: 50rem;
-  height: 50rem;
+  height: 65rem;
   margin-top: 5%;
-  margin-right: 80%;
+ margin-right: 75%;
   cursor: pointer;
-  z-index: 2; /* Ajusta el valor del z-index según sea necesario */
+  z-index: 2;  
+  /* Ajusta el valor del z-index según sea necesario */
 }
 
 .modalContent {
-  display: flex;
+  margin: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   padding: 1rem;
+  display: grid;
+  gap: 1em;
 }
 .showModal {
   z-index: 1; /* Ajusta el valor del z-index según sea necesario */
