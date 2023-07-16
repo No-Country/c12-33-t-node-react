@@ -8,8 +8,8 @@ const Header = () => {
   return (
     <section>
       <h1 className="text-2xl font-medium">Salón de Fiesta Las Princesas</h1>
-      <div className="flex justify-between">
-        <div className="flex gap-1.5 items-center">
+      <div className="flex justify-between flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 items-center">
           <span className="flex items-center">
             <FaStar size={15} />{" "}
             <span className="inline-block ml-1 text-sm">4.83</span>

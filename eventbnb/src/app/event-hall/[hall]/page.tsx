@@ -14,13 +14,13 @@ function Page({ params }: { params: { hall: string } }) {
         <div className="pt-5">
           <Images />
         </div>
-        <div className="flex flex-row">
-          <div className="basis-8/12">
-            <div className="pr-16">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 md:flex-row">
+          <div className="md:basis-8/12">
+            <div className="md:pr-16">
               <Information />
             </div>
           </div>
-          <div className="basis-4/12">
+          <div className="md:basis-4/12 w-full pb-10 sm:px-5 md:px-0">
             <ReservationForm />
           </div>
         </div>
