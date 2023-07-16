@@ -188,6 +188,7 @@
     .login__btn1, .login__btn2 {
       align-items: center;
       height: 100%;
+
       margin: 0;
       color: #fff;
       border-radius: 0.5rem;
