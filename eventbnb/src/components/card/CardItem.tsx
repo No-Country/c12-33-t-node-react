@@ -29,7 +29,7 @@ export default function Card({ card }) {
           pagination={{ clickable: true }}
           className="absolute z-0 rounded-xl w-[300px] h-[285px]  hidden"
         >
-          {card.imgSrc.map((src, i) => (
+          {card.imagenes.map((src, i) => (
             <SwiperSlide key={i}>
               <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} />
             </SwiperSlide>
@@ -57,19 +57,19 @@ export default function Card({ card }) {
       </div>
       <div className="flex flex-row justify-between items-start mt-4 pb-4 px-4">
         <div>
-          {card.name ? (
-            <p className="text-base text-black font-bold">{card.name}</p>
+          {card.nombre ? (
+            <p className="text-base text-black font-bold">{card.nombre}</p>
           ) : null}
           <p className="text-sm text-black font-bold">
-            {card.city ? card.city : card.country ? card.country : null}
-            {card.city && card.country ? `, ${card.country}` : null}
+            {card.domicilio ? card.domicilio : card.localidad ? card.localidad : null}
+            {card.domicilio && card.localidad ? `, ${card.localidad}` : null}
           </p>
-          {card.location ? (
-            <p className="text-sm text-slate-600">{card.location}</p>
+          {card.localidad ? (
+            <p className="text-sm text-slate-600">{card.localidad}</p>
           ) : null}
-          <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
+          {/* <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p> */}
           <p className="text-sm text-black mt-2">
-            <strong>{`S/${card.price}`}</strong> noche
+            <strong>{`S/${card.precio}`}</strong> noche
           </p>
         </div>
         {card.rating ? (

@@ -1,5 +1,12 @@
+.fixedHeader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100; /* Asegura que el header fijo se muestre por encima del contenido */
+}
 .container{
   border-bottom: solid 1px var(--light-grey);
+  
 }
 .search__container {
     display: flex;
@@ -107,18 +114,22 @@
   }
   /* USUARIO */
   .userModal {
+    position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
+    border: 2px solid var(--dark-grey);
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--white);
+    padding: 10px 10px;
     margin-right: 20px;
     margin-top: 10px;
-    background-color: var(--white);
-    border: 2px solid var(--light-grey);
-    border-radius: 30px;
-    padding: 10px 10px;
-    width: 100px;
-    height: 60px;
+    transform: translate(-50%, 40%);
+    z-index: 9999; /* Asegúrate de que el botón de usuario esté por encima del filtro */
   }
-  
   .faUser {
     border-radius: 50%;
     background-color: var(--dark2-grey);
@@ -131,6 +142,10 @@
   .userButton {
     display: flex;
     flex-direction: column;
+     position: fixed; 
+  top: 20px;
+  right: 20px;
+  z-index: 999;
   }
   
   .userButton:hover {
