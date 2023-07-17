@@ -1,27 +1,127 @@
-.filterSilder{
-    display: flex;
-    justify-content: space-between;
+.container {
+  border-bottom: solid 1px var(--light-grey);
+  
+}
+
+
+.filterContainer {
+  display: flex;
+  /* 
+  align-items: center; */
+  margin: 0 auto;
+  padding: 0 10rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: var(--white);
+}
+.filterContainer:hover {
+  /* Estilos para el hover */
+  border-color: var(--gray-200);
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+.fixedFilter {
+  /* Estilos para el fixed */
+  
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  position: fixed;
+  top: 80px;
+  z-index: 99;
+  background-color: var(--white);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+.swiperContainer {
+  /* display: flex; */
+  /* justify-content: space-between;
+  align-items: center; */
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1200px;
+  margin-top: 3rem;
+  
+}
+.swiper{
+  display: flex;
+
+}
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterButton1 {
+  border: solid 2px var(--dark-grey);
+  padding: 15px 25px;
+  border-radius: 20px;
+  font-size: 25px;
+}
+
+/*Modal - Filter - Button*/
+.filterModal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--dark-grey);
+  border-radius: 20px;
+  width: 40rem;
+  height: 60vh; /* Ajusta el valor según sea necesario */
+  cursor: pointer;
+  background-color: var(--white);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  z-index: 9999;
+}
+.modalContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.modalTitle{
+  margin-top: 10px;
+  border-bottom: 2px solid var(--dark-grey);
+  width: 100%;
+}
+
+@media (max-width: 390px) {
+  .filterContainer {
+    display: block;
+    text-align: center;
+  }
+
+  .swiperContainer {
+    justify-content: center;
     align-items: center;
-   
-    background-color: #fff;
+    font-size: 2rem;
+  }
+
+  .filterButton {
+    margin-top: 1rem;
+  }
 }
-.swiperContainer{
-    width: 75%;
-    justify-content: space-between;
-}
 
-
-
-.btnPrev, .btnNext {
-    width: 32px;
+/* .btnPrev, .btnNext {
+  align-items: center;
+    justify-content: center;
+    display: flex;
+  border: 2px solid var(--dark-grey);
+    width: 35px;
     height: 32px;
     border-radius: 50%;
     border-color: var(--dark-grey);
     position: relative;
-    display: block;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: auto;
   }
   
   .btnPrev::before,
@@ -33,39 +133,16 @@
     background-color: #000;
     transition: background-color 0.3s;
   }
-  
   .btnPrev::before, .btnNext::before {
     transform: rotate(45deg);
   }
-  
   .btnPrev::after, .btnNext::after{
     transform: rotate(-45deg);
   }
-  
   .btnPrev:hover, .btnNext:hover {
     background-color: #f0f0f0;
   }
-  
   .btnPrev:hover::before,
   .btnPrev:hover::after, .btnNext:hover::before, .btnNext:hover::after {
     background-color: #000;
-  }
-
-@media (max-width: 390px) {
- 
-    .filterContainer{
-        display: block;
-    }
-    .swiperContainer{
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 2rem;
-        display: contents;
-        
-    }
-    .btnPrev, .btnNext {
-        display: block;
-        margin: auto;
-    }
-}
+  } */

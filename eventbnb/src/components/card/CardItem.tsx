@@ -29,9 +29,9 @@ export default function Card({ card }) {
           pagination={{ clickable: true }}
           className="absolute z-0 rounded-xl w-[300px] h-[285px]  hidden"
         >
-          {card.imgSrc.map((src, i) => (
+          {card.imagenes.map((src, i) => (
             <SwiperSlide key={i}>
-              <img src={src} className="w-[300px] h-[285px] object-cover" />
+              <img src={'https://img.freepik.com/foto-gratis/elegante-sala-estar-escandinava-muebles-sofa-menta-diseno-que-burlan-plantas-mapa-cartel-eleg_1258-152143.jpg?w=1800&t=st=1689529429~exp=1689530029~hmac=5f578ef931ad91f46988dd7b0bf5963bcb7a69fb4fa754dbb2bc9dd13cbb34c8'} className="w-[300px] h-[285px] object-cover" />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -40,9 +40,8 @@ export default function Card({ card }) {
           onClick={handleButtonClick}
         >
           <FaHeart
-            className={`text-xl  ${
-              isFavorite ? "text-pink-600" : "text-black opacity-50"
-            }`}
+            className={`text-xl  ${isFavorite ? "text-pink-600" : "text-black opacity-50"
+              }`}
           />
           <FaRegHeart className="text-2xl text-white absolute" />
         </button>
@@ -58,12 +57,19 @@ export default function Card({ card }) {
       </div>
       <div className="flex flex-row justify-between items-start mt-4 pb-4 px-4">
         <div>
-          <p className="text-base text-black font-bold">{card.name}</p>
-          <p className="text-sm text-black font-bold">{`${card.city},${card.country}`}</p>
-          <p className="text-sm text-slate-600">{card.location}</p>
-          <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
+          {card.nombre ? (
+            <p className="text-base text-black font-bold">{card.nombre}</p>
+          ) : null}
+          <p className="text-sm text-black font-bold">
+            {card.domicilio ? card.domicilio : card.localidad ? card.localidad : null}
+            {card.domicilio && card.localidad ? `, ${card.localidad}` : null}
+          </p>
+          {card.localidad ? (
+            <p className="text-sm text-slate-600">{card.localidad}</p>
+          ) : null}
+          {/* <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p> */}
           <p className="text-sm text-black mt-2">
-            <strong>{`S/${card.price}`}</strong> noche
+            <strong>{`S/${card.precio}`}</strong> noche
           </p>
         </div>
         {card.rating ? (
