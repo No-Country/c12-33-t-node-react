@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
+import Filter from "../filter/Filter";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -22,6 +23,24 @@ export default function Header() {
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 0) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSearch = () => {
     if (searchLounge.trim() !== "") {
@@ -61,63 +80,70 @@ export default function Header() {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.search__container}>
-        <Link href="/" className={`${style.logo}`}>
-          festbnb
-        </Link>
-        <div className={style.searchBar}>
-          <div className={style.searchBarAndList}>
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Buscar Salón"
-              value={searchLounge}
-              onChange={handleChange}
-              onKeyPress={handleKeyPress}
-              className={style.searchInput}
-            />
-            <div className={style.searchResult}>
-              {searchResults.length > 0 && (
-                <SearchResults
-                  searchResults={searchResults}
-                  searchLounge={searchLounge}
-                  handleClearSearch={handleClearSearch}
-                  showOptions={showOptions}
-                />
-              )}
+    <>
+      <div
+        id="header"
+        className={`${style.container} ${isFixed ? style.fixedHeader : ""}`}
+      >
+        <div className={style.search__container}>
+          <Link href="/" className={`${style.logo}`}>
+            festbnb
+          </Link>
+          <div className={style.searchBar}>
+            <div className={style.searchBarAndList}>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Buscar Salón"
+                value={searchLounge}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                className={style.searchInput}
+              />
+              <div className={style.searchResult}>
+                {searchResults.length > 0 && (
+                  <SearchResults
+                    searchResults={searchResults}
+                    searchLounge={searchLounge}
+                    handleClearSearch={handleClearSearch}
+                    showOptions={showOptions}
+                  />
+                )}
+              </div>
+            </div>
+            <div className={style.searchIcons}>
+              <div>
+                <button
+                  type="button"
+                  id="searchButton"
+                  onClick={handleSearch}
+                  className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
+                >
+                  <FaSearch className={`text-white text-l ${style.faSearch}`} />
+                </button>
+              </div>
             </div>
           </div>
-          <div className={style.searchIcons}>
-            <div>
-              <button
-                type="button"
-                id="searchButton"
-                onClick={handleSearch}
-                className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
-              >
-                <FaSearch className={`text-white text-l ${style.faSearch}`} />
-              </button>
+          <div className={style.user}>
+            <button
+              onClick={handleToggleOptions}
+              className={`flex items-center gap-x-4 ${style.userModal}`}
+            >
+              <div>
+                <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
+              </div>
+              <div>
+                <FaUser className={style.faUser} />
+              </div>
+            </button>
+            <div className={` ${style.userOptions}`}>
+              <UserButton showOptions={showOptions} />
             </div>
-          </div>
-        </div>
-        <div className={style.user}>
-          <button
-            onClick={handleToggleOptions}
-            className={`flex items-center gap-x-4 ${style.userModal}`}
-          >
-            <div>
-              <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
-            </div>
-            <div>
-              <FaUser className={style.faUser} />
-            </div>
-          </button>
-          <div className={style.userOptions}>
-            <UserButton showOptions={showOptions} />
           </div>
         </div>
       </div>
-    </div>
+
+      <Filter />
+    </>
   );
 }
