@@ -17,7 +17,9 @@ export default function Card({ card }) {
     setIsFavorite(!isFavorite);
   };
   return (
-    <div className="max-w-[300px] rounded-t-xl bg-white">
+    <div
+      className={`max-w-[300px] rounded-t-xl bg-white group transition-all duration-300 transform hover:scale-105`}
+    >
       <div className="relative">
         <Swiper
           modules={[Navigation, Pagination]}
@@ -54,14 +56,13 @@ export default function Card({ card }) {
           />
         ) : null}
       </div>
-      <div className="flex flex-row justify-between items-start mt-4">
+      <div className="flex flex-row justify-between items-start mt-4 pb-4 px-4">
         <div>
           <p className="text-base text-black font-bold">{card.name}</p>
           <p className="text-sm text-black font-bold">{`${card.city},${card.country}`}</p>
           <p className="text-sm text-slate-600">{card.location}</p>
           <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
           <p className="text-sm text-black mt-2">
-            {" "}
             <strong>{`S/${card.price}`}</strong> noche
           </p>
         </div>
