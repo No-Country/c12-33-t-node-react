@@ -1,6 +1,6 @@
 'use client'
 
-export function getCookie(name: string) {
+export function getCookie(name: string | null ) {
   const nameEQ = name + "=";
   const ca = document.cookie.split(';');
   for(let i=0;i < ca.length;i++) {
