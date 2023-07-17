@@ -1,3 +1,4 @@
+'use client'
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Header from "../components/header/Header";
@@ -6,6 +7,8 @@ import Footer from "../components/footer/Footer";
 import Provider from "../components/Provider";
 
 import { SalonsProvider } from "../context/SalonsProvider"
+import { useEffect, useState } from "react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,14 +23,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  const [hideHeaderFooter, setHideHeaderFooter] = useState(true)
+
+  useEffect(() => {
+    const arr = window.location.pathname.split('/')
+    const isHideHeaderFooter = arr.find(path => path === 'become-a-host')
+    setHideHeaderFooter(isHideHeaderFooter || false)
+  }, [])
+
   return (
     <html lang="en">
       <body>
         <Provider>
           <SalonsProvider>
-            <Header />
+            {!hideHeaderFooter && <Header />}
               {children}
-            <Footer />
+            {!hideHeaderFooter && <Footer />}
           </SalonsProvider>
         </Provider>
       </body>

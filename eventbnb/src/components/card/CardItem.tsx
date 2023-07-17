@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function Card({ card }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
   const handleButtonClick = () => {
     setIsFavorite(!isFavorite);
@@ -31,7 +31,7 @@ export default function Card({ card }) {
         >
           {card.imagenes.map((src, i) => (
             <SwiperSlide key={i}>
-              <img src={'https://img.freepik.com/foto-gratis/elegante-sala-estar-escandinava-muebles-sofa-menta-diseno-que-burlan-plantas-mapa-cartel-eleg_1258-152143.jpg?w=1800&t=st=1689529429~exp=1689530029~hmac=5f578ef931ad91f46988dd7b0bf5963bcb7a69fb4fa754dbb2bc9dd13cbb34c8'} className="w-[300px] h-[285px] object-cover" />
+              <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -49,7 +49,7 @@ export default function Card({ card }) {
           <Image
             className="rounded-full w-10 h-10 object-cover absolute z-10 bottom-3 left-3"
             src={card.imgProfile}
-            alt="Picture of the author"
+            alt={card.name}
             width={40}
             height={40}
           />
