@@ -5,15 +5,8 @@ import ButtonHalls from "@/components/create-halls/ButtonHalls";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-// interface SalonFormData {
-//   nombre: string;
-//   domicilio: string;
-//   localidad: string;
-//   ubicacion: string;
-//   telefono: string;
-//   imagenes: string[];
-// }
+import useSalons from "@/hooks/useSalons";
+import { useRouter } from "next/navigation";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -26,6 +19,8 @@ const schema = yup.object().shape({
 });
 
 const PassedFinal: React.FC = () => {
+  const {salon, setSalon} = useSalons<Salon>()
+  const router = useRouter()
   const {
     handleSubmit,
     register,
@@ -34,14 +29,25 @@ const PassedFinal: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
+  function onSubmit(data: FormData) {
     console.log(data);
-  };
+    setSalon((prevState) => ({
+      ...prevState,
+      [data.nombre]: prevState[data.nombre],
+      [data.domicilio]: prevState[data.domicilio],
+      [data.localidad]: prevState[data.localidad],
+      [data.ubicacion]: prevState[data.ubicacion],
+      [data.telefono]: prevState[data.telefono],
+    }));
+    router.push("./photos");
+    // window.location.href = "./photos";
+  }
+
   return (
-    <>
-      <div className="container mx-auto py-8">
-        <h1 className="text-2xl font-semibold mb-4 text-center">Datos del salón</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <section className="bg-gray-100 py-8">
+      <h2 className="text-2xl font-bold mb-6 text-center">Datos del salón</h2>
+      <div className="container mx-auto py-8 flex items-center justify-center">
+        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label
               htmlFor="nombre"
@@ -58,7 +64,7 @@ const PassedFinal: React.FC = () => {
               {...register("nombre")}
             />
             {errors.nombre && (
-              <p className="text-red-500 mt-1">{errors.nombre.message}</p>
+              <span className="text-red-500 mt-1">{errors.nombre.message}</span>
             )}
           </div>
           <div className="mb-4">
@@ -77,7 +83,7 @@ const PassedFinal: React.FC = () => {
               {...register("domicilio")}
             />
             {errors.domicilio && (
-              <p className="text-red-500 mt-1">{errors.domicilio.message}</p>
+              <span className="text-red-500 mt-1">{errors.domicilio.message}</span>
             )}
           </div>
           <div className="mb-4">
@@ -96,7 +102,7 @@ const PassedFinal: React.FC = () => {
               {...register("localidad")}
             />
             {errors.localidad && (
-              <p className="text-red-500 mt-1">{errors.localidad.message}</p>
+              <span className="text-red-500 mt-1">{errors.localidad.message}</span>
             )}
           </div>
           <div className="mb-4">
@@ -115,7 +121,7 @@ const PassedFinal: React.FC = () => {
               {...register("ubicacion")}
             />
             {errors.ubicacion && (
-              <p className="text-red-500 mt-1">{errors.ubicacion.message}</p>
+              <span className="text-red-500 mt-1">{errors.ubicacion.message}</span>
             )}
           </div>
           <div className="mb-4">
@@ -134,25 +140,34 @@ const PassedFinal: React.FC = () => {
               {...register("telefono")}
             />
             {errors.telefono && (
-              <p className="text-red-500 mt-1">{errors.telefono.message}</p>
+              <span className="text-red-500 mt-1">{errors.telefono.message}</span>
             )}
           </div>
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-pink-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-pink-600"
             >
               Confirmar
             </button>
+          </div> */}
+          <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
+            <BackButton href="./finish-setup"></BackButton>
+            <button
+              className={`bg-black/90 hover:bg-black px-6 py-3 rounded-md text-white font-semibold`}
+              type="submit"
+            >
+              Siguiente
+            </button>
           </div>
         </form>
       </div>
-      <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
+      {/* <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
         <BackButton href="./finish-setup"></BackButton>
-        <ButtonHalls href="/" content="Siguiente" backBtn={true} />
-      </div>
-    </>
+        <ButtonHalls href="./photos" content="Siguiente" backBtn={true} />
+      </div> */}
+    </section>
   );
 };
 
