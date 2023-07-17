@@ -14,7 +14,7 @@ export default function PagePassed2() {
             <BackButton href="./floor-plan"></BackButton>
             <ButtonHalls
               
-              href="./title"
+              href="./photos"
               content="Siguiente"
               backBtn={true}
             />

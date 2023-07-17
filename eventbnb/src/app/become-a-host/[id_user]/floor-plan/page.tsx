@@ -45,14 +45,14 @@ export default function AirbnbSection() {
     console.log(data);
     setSalon((prevState) => ({
       ...prevState,
-      [data.precio]: prevState[data.precio],
-      [data.capacidad_max]: prevState[data.capacidad_max],
-      [data.superficie]: prevState[data.superficie],
-      [aire_acondicionado]: prevState[aire_acondicionado],
-      [parrilla]: prevState[parrilla],
-      [pantalla]: prevState[pantalla],
-      [personal_seguridad]: prevState[personal_seguridad],
-      [baño]: prevState[baño],
+      precio: data.precio,
+      capacidad_max: data.capacidad_max,
+      superficie: data.superficie,
+      aire_acondicionado: aire_acondicionado,
+      parrilla: parrilla,
+      pantalla: pantalla,
+      personal_seguridad: personal_seguridad,
+      baño: baño,
     }));
     router.push("./finish-setup");
     // window.location.href = "./finish-setup";

@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useSalons from "@/hooks/useSalons";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -19,12 +20,13 @@ const schema = yup.object().shape({
 });
 
 const PassedFinal: React.FC = () => {
-  const {salon, setSalon} = useSalons<Salon>()
-  const router = useRouter()
+  const { salon, setSalon } = useSalons<Salon>();
+  const router = useRouter();
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    
+    formState: { errors ,  },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
@@ -33,16 +35,30 @@ const PassedFinal: React.FC = () => {
     console.log(data);
     setSalon((prevState) => ({
       ...prevState,
-      [data.nombre]: prevState[data.nombre],
-      [data.domicilio]: prevState[data.domicilio],
-      [data.localidad]: prevState[data.localidad],
-      [data.ubicacion]: prevState[data.ubicacion],
-      [data.telefono]: prevState[data.telefono],
+      nombre: data.nombre,
+      domicilio: data.domicilio,
+      localidad: data.localidad,
+      ubicacion: data.ubicacion,
+      telefono: data.telefono,
     }));
-    router.push("./photos");
-    // window.location.href = "./photos";
-  }
 
+    try {
+      const createHalls = async () => {
+        const url = process.env.MICROSERVICIOS;
+        console.log(salon)
+        const { data } = await axios.post(`${url}/salones`, salon);
+        const list = data;
+        console.log(list.data);
+        return list.data;
+      };
+      createHalls();
+    } catch (error) {
+      console.log(error);
+    }
+
+    // router.push("#");
+  }
+  console.log(salon)
   return (
     <section className="bg-gray-100 py-8">
       <h2 className="text-2xl font-bold mb-6 text-center">Datos del salón</h2>
@@ -83,7 +99,9 @@ const PassedFinal: React.FC = () => {
               {...register("domicilio")}
             />
             {errors.domicilio && (
-              <span className="text-red-500 mt-1">{errors.domicilio.message}</span>
+              <span className="text-red-500 mt-1">
+                {errors.domicilio.message}
+              </span>
             )}
           </div>
           <div className="mb-4">
@@ -102,7 +120,9 @@ const PassedFinal: React.FC = () => {
               {...register("localidad")}
             />
             {errors.localidad && (
-              <span className="text-red-500 mt-1">{errors.localidad.message}</span>
+              <span className="text-red-500 mt-1">
+                {errors.localidad.message}
+              </span>
             )}
           </div>
           <div className="mb-4">
@@ -121,7 +141,9 @@ const PassedFinal: React.FC = () => {
               {...register("ubicacion")}
             />
             {errors.ubicacion && (
-              <span className="text-red-500 mt-1">{errors.ubicacion.message}</span>
+              <span className="text-red-500 mt-1">
+                {errors.ubicacion.message}
+              </span>
             )}
           </div>
           <div className="mb-4">
@@ -140,7 +162,9 @@ const PassedFinal: React.FC = () => {
               {...register("telefono")}
             />
             {errors.telefono && (
-              <span className="text-red-500 mt-1">{errors.telefono.message}</span>
+              <span className="text-red-500 mt-1">
+                {errors.telefono.message}
+              </span>
             )}
           </div>
 
@@ -153,7 +177,7 @@ const PassedFinal: React.FC = () => {
             </button>
           </div> */}
           <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
-            <BackButton href="./finish-setup"></BackButton>
+            <BackButton href="./photos"></BackButton>
             <button
               className={`bg-black/90 hover:bg-black px-6 py-3 rounded-md text-white font-semibold`}
               type="submit"

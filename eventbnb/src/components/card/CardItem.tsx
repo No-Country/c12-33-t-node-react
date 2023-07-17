@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function Card({ card }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
   const handleButtonClick = () => {
     setIsFavorite(!isFavorite);
@@ -29,9 +29,9 @@ export default function Card({ card }) {
           pagination={{ clickable: true }}
           className="absolute z-0 rounded-xl w-[300px] h-[285px]  hidden"
         >
-          {card.imgSrc.map((src, i) => (
+          {card.imagenes.map((src, i) => (
             <SwiperSlide key={i}>
-              <img src={src} className="w-[300px] h-[285px] object-cover" />
+              {/* <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} /> */}
             </SwiperSlide>
           ))}
         </Swiper>
@@ -49,7 +49,7 @@ export default function Card({ card }) {
           <Image
             className="rounded-full w-10 h-10 object-cover absolute z-10 bottom-3 left-3"
             src={card.imgProfile}
-            alt="Picture of the author"
+            alt={card.name}
             width={40}
             height={40}
           />
@@ -57,19 +57,19 @@ export default function Card({ card }) {
       </div>
       <div className="flex flex-row justify-between items-start mt-4 pb-4 px-4">
         <div>
-          {card.name ? (
-            <p className="text-base text-black font-bold">{card.name}</p>
+          {card.nombre ? (
+            <p className="text-base text-black font-bold">{card.nombre}</p>
           ) : null}
           <p className="text-sm text-black font-bold">
-            {card.city ? card.city : card.country ? card.country : null}
-            {card.city && card.country ? `, ${card.country}` : null}
+            {card.domicilio ? card.domicilio : card.localidad ? card.localidad : null}
+            {card.domicilio && card.localidad ? `, ${card.localidad}` : null}
           </p>
-          {card.location ? (
-            <p className="text-sm text-slate-600">{card.location}</p>
+          {card.localidad ? (
+            <p className="text-sm text-slate-600">{card.localidad}</p>
           ) : null}
-          <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p>
+          {/* <p className="text-sm text-slate-600">{`${card.startDate} - ${card.endDate} de ${card.month}`}</p> */}
           <p className="text-sm text-black mt-2">
-            <strong>{`S/${card.price}`}</strong> noche
+            <strong>{`S/${card.precio}`}</strong> noche
           </p>
         </div>
         {card.rating ? (
