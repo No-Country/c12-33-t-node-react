@@ -92,7 +92,7 @@ const pageAbout: React.FC = () => {
                 <h2 className="text-4xl font-semibold">Nuestro equipo</h2>
                 <div className='w-3/4 h-2 bg-pink-600'></div>
             </div>
-            <div className="flex flex-wrap w-3/4 text-center self-center gap-4">
+            <div className="mx-auto flex flex-wrap w-3/4 self-center items-center justify-center gap-4">
                 {
                     team.map((integrant) => {
                         return(
