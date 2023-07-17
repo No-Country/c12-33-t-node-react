@@ -121,16 +121,18 @@
     border: 2px solid var(--dark-grey);
     border-radius: 20px;
     width: 100px;
-    height: 40px; /* Ajusta el valor según sea necesario */
+    height: 40px;
     cursor: pointer;
     background-color: var(--white);
     padding: 10px 10px;
     margin-right: 20px;
     margin-top: 10px;
     transform: translate(-50%, 40%);
-    z-index: 9999;
+    z-index: 9999; /* Asegúrate de que el botón de usuario esté por encima del filtro */
   }
   
+
+
   .faUser {
     border-radius: 50%;
     background-color: var(--dark2-grey);
