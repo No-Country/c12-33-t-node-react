@@ -43,9 +43,7 @@ export default function Filter() {
 
   return (
     <div
-      className={`w-full text-3xl text-gray-500 pb-10  ${
-        isFixed ? style.fixedFilter : ""
-      } ${
+      className={`w-full text-3xl pb-10  ${isFixed ? style.fixedFilter : ""} ${
         style.filterContainer
       } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
     >
@@ -80,10 +78,10 @@ export default function Filter() {
         }}
         ref={swiperRef}
       >
-        <div className={`flex ${style.swiper}`}>
+        <div className={`flex  ${style.swiper}`}>
           <SwiperSlide>
-            <div className="flex flex-col  ">
-              <FaDollarSign className="mb-1" /> {/* Icono de precio */}
+            <div className=" color-white flex flex-col  ">
+              <FaDollarSign className=" mb-1" /> {/* Icono de precio */}
               <p className="text-xs">Precio</p>
             </div>
           </SwiperSlide>
