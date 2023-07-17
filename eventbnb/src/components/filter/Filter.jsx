@@ -10,6 +10,7 @@ import style from "./Filter.module.css";
 import {
   FaDollarSign,
   FaParking,
+  FaWater,
   FaDog,
   FaCalendarAlt,
   FaStar,
@@ -43,7 +44,7 @@ export default function Filter() {
   return (
     <div
       className={`w-full text-3xl text-gray-500 pb-10  ${
-        isFixed ? style.fixedContainer : ""
+        isFixed ? style.fixedFilter : ""
       } ${
         style.filterContainer
       } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
@@ -94,8 +95,8 @@ export default function Filter() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col items-center">
-              <FaDog className="mb-1" /> {/* Icono de mascotas */}
-              <p className="text-xs">Mascotas</p>
+              <FaWater className="mb-1" /> {/* Icono de piscina */}
+              <p className="text-xs">Pileta</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -108,6 +109,12 @@ export default function Filter() {
             <div className="flex flex-col items-center">
               <FaStar className="mb-1" /> {/* Icono de puntuación */}
               <p className="text-xs">Puntuación</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col items-center">
+              <FaDog className="mb-1" /> {/* Icono de mascotas */}
+              <p className="text-xs">Mascotas</p>
             </div>
           </SwiperSlide>
         </div>

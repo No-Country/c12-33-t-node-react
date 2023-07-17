@@ -1,23 +1,41 @@
-/* .fixerContainer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 1rem;
-  width: 100%;
-  margin-top: 1rem;
-} */
+.container {
+  border-bottom: solid 1px var(--light-grey);
+  
+}
+
 
 .filterContainer {
   display: flex;
-  /* justify-content: space-between;
+  /* 
   align-items: center; */
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 10rem;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: var(--white);
+}
+.filterContainer:hover {
+  /* Estilos para el hover */
+  border-color: var(--gray-200);
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+.fixedFilter {
+  /* Estilos para el fixed */
+  
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  position: fixed;
+  top: 80px;
+  z-index: 99;
+  background-color: var(--white);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
   margin-top: 1rem;
 }
-
 .swiperContainer {
   /* display: flex; */
   /* justify-content: space-between;
@@ -53,13 +71,14 @@
   align-items: center;
   border: 2px solid var(--dark-grey);
   border-radius: 20px;
-  width: 60rem;
-  height: 65rem;
-  margin-top: 5%;
+  width: 40rem;
+  height: 60vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
-  align-self: flex-end;
   background-color: var(--white);
-  /* Ajusta el valor del z-index según sea necesario */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  z-index: 9999;
 }
 
 .modalContent {
@@ -70,9 +89,13 @@
   padding: 1rem;
   gap: 1em;
 }
-.showModal {
-  z-index: auto; /* Ajusta el valor del z-index según sea necesario */
-}
+/* .showModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+} */
 
 @media (max-width: 390px) {
   .filterContainer {

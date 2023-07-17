@@ -25,10 +25,10 @@ export default function FilterButton() {
         </button>
       </div>
       <div
-        className={` relative top-1/2 transform  z-50 flex flex-col ${style.showModal}`}
+        className={` absolute z-50 flex flex-col items-center right-full ${style.showModal}`}
       >
         {showModal && (
-          <div className={` absolute top-16 ${style.modal}`}>
+          <div className={`top-16 ${style.modal}`}>
             <div className={`${style.modalContent}`}>
               <h2>Este es el contenido del modal</h2>
               <button onClick={toggleModal}>Cerrar</button>

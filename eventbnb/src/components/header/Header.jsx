@@ -81,7 +81,10 @@ export default function Header() {
 
   return (
     <>
-      <div className={`${style.container} ${isFixed ? style.fixedHeader : ""}`}>
+      <div
+        id="header"
+        className={`${style.container} ${isFixed ? style.fixedHeader : ""}`}
+      >
         <div className={style.search__container}>
           <Link href="/" className={`${style.logo}`}>
             festbnb
@@ -133,7 +136,7 @@ export default function Header() {
                 <FaUser className={style.faUser} />
               </div>
             </button>
-            <div className={style.userOptions}>
+            <div className={` ${style.userOptions}`}>
               <UserButton showOptions={showOptions} />
             </div>
           </div>
