@@ -24,14 +24,25 @@ export default function FilterButton() {
           Filtros
         </button>
       </div>
+
       <div
         className={` absolute z-50 flex flex-col items-center right-full ${style.showModal}`}
       >
         {showModal && (
-          <div className={`top-16 ${style.modal}`}>
+          <div className={`top-16 ${style.filterModal}`}>
             <div className={`${style.modalContent}`}>
-              <h2>Este es el contenido del modal</h2>
-              <button onClick={toggleModal}>Cerrar</button>
+              <div className="bg-white">
+                <h2 className={`text-2xl ${style.modalTitle}`}>Filtros</h2>
+              </div>
+              <div className="flex-grow"></div>
+              <div className="bg-white">
+                <button
+                  onClick={toggleModal}
+                  className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         )}

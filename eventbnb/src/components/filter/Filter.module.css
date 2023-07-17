@@ -64,7 +64,7 @@
 }
 
 /*Modal - Filter - Button*/
-.modal {
+.filterModal {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -80,22 +80,18 @@
   transform: translate(-50%, 40%);
   z-index: 9999;
 }
-
-.modalContent {
-  margin: auto;
+.modalContent{
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  gap: 1em;
+  width: 100%;
 }
-/* .showModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-} */
+.modalTitle{
+  margin-top: 10px;
+  border-bottom: 2px solid var(--dark-grey);
+  width: 100%;
+}
 
 @media (max-width: 390px) {
   .filterContainer {

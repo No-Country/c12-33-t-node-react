@@ -130,9 +130,6 @@
     transform: translate(-50%, 40%);
     z-index: 9999; /* Asegúrate de que el botón de usuario esté por encima del filtro */
   }
-  
-
-
   .faUser {
     border-radius: 50%;
     background-color: var(--dark2-grey);
