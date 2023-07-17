@@ -1,7 +1,8 @@
-import { createTransport } from 'nodemailer';
-import { NODEMAILER_CONFIG } from './config';
+const { createTransport } = require('nodemailer');
+const { NODEMAILER_CONFIG } = require('./config');
 
-export default class SendMails {
+
+class SendMails {
     #nodemailer_client;
     constructor() {
         this.#nodemailer_client = createTransport(NODEMAILER_CONFIG);
@@ -14,4 +15,6 @@ export default class SendMails {
             console.error(e);
         }
     }
-} 
+}
+
+module.exports = SendMails;

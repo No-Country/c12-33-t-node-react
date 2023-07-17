@@ -1,7 +1,7 @@
 const Usuario = require('../data');
 const { response } = require('../utils');
 const sendMails = require('../utils/mails/SendMails');
-// const { registerMessageBody } = require('../utils/mails/registerMessageBody');
+const { registerMessageBody } = require('../utils/mails/registerMessageBody');
 // const jwt = require('jsonwebtoken');
 // const {serialize}= require('cookie');
 
@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
     }
     else {
         user = await Usuario.create(req.body);
+        const registerMsg = registerMessageBody(email);
+        sendMails.send(registerMsg);
 
         console.log("USUARIO CREADO: ", user);
     }
