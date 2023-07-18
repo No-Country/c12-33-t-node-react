@@ -10,15 +10,16 @@ import BackButton from "@/components/create-halls/BackButton";
 
 import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
-import { useRouter } from 'next/navigation';
 
+import { useRouter } from "next/navigation";
 const Dropzone = ({ className }) => {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
   const [disabled, setDisabled] = useState(false)
-  const {setSalon} = useSalons()
-  // const {router} = useRouter()
+  const {salon, setSalon} = useSalons()
+
+  const router = useRouter()
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -90,14 +91,15 @@ const Dropzone = ({ className }) => {
               imagenes: [...prevState.imagenes, respData.secure_url]
           }))
       }
-
-      // router.push('./structure')
-      window.location.href = "./structure";
+      
+      
+       router.push('./title')
+      // window.location.href = "/";
     } catch (error) {
       alert(error.message);
     }
   }
-
+  console.log(salon)
   return (
     <div className='bg-white text-black'>
         <div  className='py-12 w-1/2 flex flex-col gap-y-8 mx-auto'>
@@ -202,7 +204,7 @@ const Dropzone = ({ className }) => {
           </div> */}
         </div>
         <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
-          <BackButton href="./about-your-place"></BackButton>
+          <BackButton href="./finish-setup"></BackButton>
           <button
             className={`bg-black/90 hover:bg-black px-6 py-3 rounded-md text-white font-semibold` }
             onClick={action}

@@ -1,14 +1,16 @@
 const Usuario = require('../data');
+const SECRETO = 'ix8dG8xXk27WTZ-/E?-ZxGgpMyoBRwftdjV6413SsH2zwvuR=1BlEUKPG?IOFtWS33gEjXw9G?Kfs8E99UHFlQqpy!aCNrR4fkx74!qiSmCB97gE5P4k8vZU?9-Qvyffx2sn4qPR0T2=Klz3hOtV0uU68jxJo2VB3avaxENlv0B3yLQv543W?9PF3V035l1hvy5TVrTkWNtFmG3!oJdt7kmr3dMdEK3UBQ9VCABX!4A!DcqZGs5YKu0d6LA=2sJY';
+const HASH = 13;
 const { response } = require('../utils');
-const sendMails = require('../utils/mails/SendMails');
-const { registerMessageBody } = require('../utils/mails/registerMessageBody');
-// const jwt = require('jsonwebtoken');
-// const {serialize}= require('cookie');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
 
 module.exports = async (req, res) => {
     console.log("creando usuario", req.body);
     const { email } = req.body;
     let user = {};
+    let hashPassword = "";
     const usuarioEncontrado = await Usuario.getByEmail(email);
     if (usuarioEncontrado) {
         user = usuarioEncontrado;
@@ -16,9 +18,6 @@ module.exports = async (req, res) => {
     }
     else {
         user = await Usuario.create(req.body);
-        const registerMsg = registerMessageBody(email);
-        sendMails.send(registerMsg);
-
         console.log("USUARIO CREADO: ", user);
     }
     // const token = jwt.sign({
