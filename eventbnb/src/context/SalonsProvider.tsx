@@ -30,14 +30,14 @@ interface Salon {
     cocina:boolean;
     escenario:boolean;
     descripcion: string;
-    propietario:"id_user"
+    propietario: string;
 }
 
-const SalonsContext = createContext()
+const SalonsContext = createContext({});
 
 export const SalonsProvider = ({children}) => {
 
-    const [salon, setSalon] = useState({
+    const [salon, setSalon] = useState<Salon>({
         nombre: "",
         domicilio: "",
         localidad: "",
@@ -69,7 +69,7 @@ export const SalonsProvider = ({children}) => {
         propietario:"id_user"
     })
 
-    const createSalon = (obj) => {
+    const createSalon = (obj:Salon) => {
 
     }
 
