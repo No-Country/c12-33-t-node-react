@@ -23,11 +23,11 @@ export default function RootLayout({
 }) {
   const [hideHeaderFooter, setHideHeaderFooter] = useState(true);
 
-  useEffect(() => {
-    const arr = window.location.pathname.split("/");
-    const isHideHeaderFooter = arr.find((path) => path === "become-a-host");
-    setHideHeaderFooter(isHideHeaderFooter || false);
-  }, []);
+  // useEffect(() => {
+  //   const arr = window.location.pathname.split("/");
+  //   const isHideHeaderFooter = arr.find((path) => path === "become-a-host");
+  //   setHideHeaderFooter(isHideHeaderFooter || false);
+  // }, []);
 
   return (
     <html lang="en">
