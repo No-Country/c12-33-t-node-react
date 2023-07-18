@@ -18,8 +18,8 @@
 }
 .filterContainer:hover {
   /* Estilos para el hover */
-  border-color: var(--gray-200);
-  border-bottom-width: 2px;
+  border-color: var(--light-grey);
+  border-bottom-width: 1px;
   border-bottom-style: solid;
 }
 .fixedFilter {
@@ -34,7 +34,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
-  margin-top: 1rem;
 }
 .swiperContainer {
   /* display: flex; */
@@ -43,11 +42,12 @@
   margin: 0 auto;
   padding: 0 1rem;
   max-width: 1200px;
-  margin-top: 3rem;
+  margin-top: .5rem;
   
 }
 .swiper{
   display: flex;
+
   
 }
 .filterButton {
@@ -75,7 +75,7 @@
   height: 60vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
   background-color: var(--white);
-  top: 50%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, 40%);
   z-index: 9999;

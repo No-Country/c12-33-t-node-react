@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
+// import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import FilterButton from "./FilterButton";
@@ -19,6 +20,8 @@ import {
 SwiperCore.use([Navigation]);
 
 export default function Filter() {
+  // const router = useRouter();
+  // const isHomePage = router.pathname === "/";
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
 
@@ -41,6 +44,9 @@ export default function Filter() {
     };
   }, []);
 
+  // if (!isHomePage) {
+  //   return null; // Si no estás en la página de inicio, no se renderiza nada
+  // }
   return (
     <div
       className={`w-full text-3xl pb-10  ${isFixed ? style.fixedFilter : ""} ${

@@ -29,7 +29,7 @@ export default function FilterButton() {
         className={` absolute z-50 flex flex-col items-center right-full ${style.showModal}`}
       >
         {showModal && (
-          <div className={`top-16 ${style.filterModal}`}>
+          <div className={`top-10 ${style.filterModal}`}>
             <div className={`${style.modalContent}`}>
               <div className="bg-white">
                 <h2 className={`text-2xl ${style.modalTitle}`}>Filtros</h2>
