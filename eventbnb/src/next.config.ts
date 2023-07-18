@@ -1,16 +1,20 @@
-import { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  experimental: {
-    appDir: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ["images.unsplash.com", "cdn.pixabay.com","a0.muscache.com","res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "a0.muscache.com/im/pictures",
+        port: "",
+        pathname: "/airbnb/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+      },
+    ],
   },
-  env: {
-    // DB_URI:
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET as string,
+};
 
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
-    GOOGLE_SECRET: process.env.GOOGLE_CLIENT_SECRET as string
-  }
-}
-
-export default nextConfig;
+module.exports = nextConfig;

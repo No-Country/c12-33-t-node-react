@@ -6,7 +6,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import SearchResults from "./SearchResults";
 import UserButton from "./UserButton";
-//
+import Filter from "../filter/Filter";
 
 const loungeData = [
   { name: "Cumpleaños", price: 100 },
@@ -143,7 +143,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* <Filter /> */}
+      <div>
+        <Filter />
+      </div>
     </>
   );
 }

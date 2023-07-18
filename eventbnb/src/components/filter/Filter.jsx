@@ -3,10 +3,10 @@ import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 // import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
+import SwiperCore from "swiper";
 import FilterButton from "./FilterButton";
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 import style from "./Filter.module.css";
 import {
   FaDollarSign,
@@ -17,7 +17,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 
-SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation]);
 
 export default function Filter() {
   // const router = useRouter();
