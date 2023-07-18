@@ -25,158 +25,150 @@ const PassedFinal: React.FC = () => {
   const {
     handleSubmit,
     register,
-    
-    formState: { errors ,  },
+    formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  function onSubmit(data: FormData) {
-    console.log(data);
-    setSalon((prevState) => ({
+  const handleInputChange = event => {
+    setSalon(prevState => ({
       ...prevState,
-      nombre: data.nombre,
-      domicilio: data.domicilio,
-      localidad: data.localidad,
-      ubicacion: data.ubicacion,
-      telefono: data.telefono,
+      [event.target.name]: event.target.value
     }));
+  };
 
+  async function onSubmit(data: FormData) {
+    const url = process.env.MICROSERVICIOS;
+    
     try {
-      const createHalls = async () => {
-        const url = process.env.MICROSERVICIOS;
-        console.log(salon)
-        const { data } = await axios.post(`${url}/salones`, salon);
-        const list = data;
-        console.log(list.data);
-        return list.data;
-      };
-      createHalls();
-    } catch (error) {
-      console.log(error);
+      const { data } = await axios.post(`http://104.154.93.179:5000/salones`, salon);
+      const list = data;
+      console.log(list.data);
+      return list.data;
+      
+    } catch (error) { 
+      alert(error.message);
     }
 
     // router.push("#");
   }
   console.log(salon)
   return (
-    <section className="bg-gray-100 py-8">
+    <section className="bg-gray-100 pt-12">
       <h2 className="text-2xl font-bold mb-6 text-center">Datos del salón</h2>
-      <div className="container mx-auto py-8 flex items-center justify-center">
-        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label
-              htmlFor="nombre"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Nombre
-            </label>
-            <input
-              type="text"
-              id="nombre"
-              className={`border ${
-                errors.nombre ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("nombre")}
-            />
-            {errors.nombre && (
-              <span className="text-red-500 mt-1">{errors.nombre.message}</span>
-            )}
+      {/* <div className="container mx-auto py-8 flex items-center justify-center"> */}
+        <form className="w-full mx-auto py-8 flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-1/2">
+            <div className="mb-4">
+              <label
+                htmlFor="nombre"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="nombre"
+                {...register("nombre")}
+                onChange={handleInputChange}
+                className={`border ${
+                  errors.nombre ? "border-red-500" : "border-gray-300"
+                } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              />
+              {errors.nombre && (
+                <span className="text-red-500 mt-1">{errors.nombre.message}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="domicilio"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Domicilio
+              </label>
+              <input
+                type="text"
+                id="domicilio"
+                {...register("domicilio")}
+                onChange={handleInputChange}
+                className={`border ${
+                  errors.domicilio ? "border-red-500" : "border-gray-300"
+                } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              />
+              {errors.domicilio && (
+                <span className="text-red-500 mt-1">
+                  {errors.domicilio.message}
+                </span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="localidad"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Localidad
+              </label>
+              <input
+                type="text"
+                id="localidad"
+                {...register("localidad")}
+                onChange={handleInputChange}
+                className={`border ${
+                  errors.localidad ? "border-red-500" : "border-gray-300"
+                } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              />
+              {errors.localidad && (
+                <span className="text-red-500 mt-1">
+                  {errors.localidad.message}
+                </span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="ubicacion"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Ubicación
+              </label>
+              <input
+                type="text"
+                {...register("ubicacion")}
+                onChange={handleInputChange}
+                id="ubicacion"
+                className={`border ${
+                  errors.ubicacion ? "border-red-500" : "border-gray-300"
+                } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              />
+              {errors.ubicacion && (
+                <span className="text-red-500 mt-1">
+                  {errors.ubicacion.message}
+                </span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="telefono"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Teléfono
+              </label>
+              <input
+                type="text"
+                id="telefono"
+                {...register("telefono")}
+                onChange={handleInputChange}
+                className={`border ${
+                  errors.telefono ? "border-red-500" : "border-gray-300"
+                } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              />
+              {errors.telefono && (
+                <span className="text-red-500 mt-1">
+                  {errors.telefono.message}
+                </span>
+              )}
+            </div>
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="domicilio"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Domicilio
-            </label>
-            <input
-              type="text"
-              id="domicilio"
-              className={`border ${
-                errors.domicilio ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("domicilio")}
-            />
-            {errors.domicilio && (
-              <span className="text-red-500 mt-1">
-                {errors.domicilio.message}
-              </span>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="localidad"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Localidad
-            </label>
-            <input
-              type="text"
-              id="localidad"
-              className={`border ${
-                errors.localidad ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("localidad")}
-            />
-            {errors.localidad && (
-              <span className="text-red-500 mt-1">
-                {errors.localidad.message}
-              </span>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="ubicacion"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Ubicación
-            </label>
-            <input
-              type="text"
-              id="ubicacion"
-              className={`border ${
-                errors.ubicacion ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("ubicacion")}
-            />
-            {errors.ubicacion && (
-              <span className="text-red-500 mt-1">
-                {errors.ubicacion.message}
-              </span>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="telefono"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Teléfono
-            </label>
-            <input
-              type="text"
-              id="telefono"
-              className={`border ${
-                errors.telefono ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("telefono")}
-            />
-            {errors.telefono && (
-              <span className="text-red-500 mt-1">
-                {errors.telefono.message}
-              </span>
-            )}
-          </div>
-
-          {/* <div className="mt-4">
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-pink-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-pink-600"
-            >
-              Confirmar
-            </button>
-          </div> */}
-          <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
+          <div className="sticky bottom-0 left-0 border-t-2 border-black/20 py-6 flex items-center justify-between w-full bg-slate-100">
             <BackButton href="./photos"></BackButton>
             <button
               className={`bg-black/90 hover:bg-black px-6 py-3 rounded-md text-white font-semibold`}
@@ -186,11 +178,7 @@ const PassedFinal: React.FC = () => {
             </button>
           </div>
         </form>
-      </div>
-      {/* <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
-        <BackButton href="./finish-setup"></BackButton>
-        <ButtonHalls href="./photos" content="Siguiente" backBtn={true} />
-      </div> */}
+      {/* </div> */}
     </section>
   );
 };
