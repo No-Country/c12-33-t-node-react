@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const overview = () => {
     return(
-        <section className='bg-white text-black px-6 xl:px-20'>
-            <div className='flex flex-col xl:flex-row items-center gap-x-16'>
+        <section className='bg-white text-black '>
+            <div className='flex flex-col xl:flex-row items-center gap-x-16 gap-y-6 py-6 xl:py-20 px-6 xl:px-20'>
                 <h3 className='text-4xl xl:text-6xl font-semibold w-full xl:w-1/2'>Comenzar a usar eventbnb es fácil</h3>
                 <div className='w-full xl:w-1/2 flex flex-col gap-y-6'>
                     <div className='flex items-center w-full border-b'>
@@ -30,12 +30,11 @@ const overview = () => {
                     </div>  
                 </div>  
             </div>
-            <div className='sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-2 flex items-center justify-end'>
-                <Link className='bg-pink-600 px-4 py-2 text-white text-center rounded-lg font-semibold w-full xl:w-fit' href='./about-your-place'>Comenzar</Link>    
-            </div>  
+            <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-end w-full bg-slate-100">
+                <Link className='bg-pink-600 px-4 py-2 text-white self-end text-end rounded-lg font-semibold w-full xl:w-fit' href='./about-your-place'>Comenzar</Link>    
+            </div>
         </section>
     )
 }
-
 
 export default overview;

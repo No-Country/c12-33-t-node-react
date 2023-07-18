@@ -34,7 +34,7 @@ const SignIn = ({ hidden, setHidden }) => {
           password: "",
         });
         // Guardar info de la peticion en la cookie
-        //   setCookie('token-user', response?.data?.data?.email, 2);
+           setCookie('userToken', response?.data?.data, 2);
         router.push("/");
       }
     } catch (error) {
@@ -93,7 +93,7 @@ const SignIn = ({ hidden, setHidden }) => {
             }
           );
           // Guardar info de la peticion en la cookie
-          setCookie("token-user", response?.data?.data?.email, 2);
+          setCookie("userToken", response?.data?.data, 2);
         } catch (error) {
           alert("al parecer hubo un error", error.message);
         }

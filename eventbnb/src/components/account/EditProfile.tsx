@@ -2,10 +2,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y los servicios
+import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y los servicios
 import { countries } from "../utils/countries";
-// import { getCookie } from "@/utils/cookies";
-import {  FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { getCookie } from "@/utils/cookies";
+import { useSession } from "next-auth/react";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -28,37 +30,57 @@ const schema = yup.object().shape({
   pais: yup.string().required("El país es requerido"),
 });
 
-const userTemplate = {
-  _id: "649f8ccc12b6415694a8e746",
-  nombre: "Exe",
-  apellido: "Gerez",
-  email: "usuario5@usuario.com",
-  password: "432154534",
-  telefono: 176565,
-  fechaNacimiento: new Date(),
-  domicilio: "Bosques, jose Ingenieros",
-  localidad: "Bs As",
-  pais: "Arg",
-};
+// if (!session && !token) {
+//   window.location.href = "/";
+// }
 
-const EditProfile: React.FC = async() => {
-  // const { getUser, updateUser } = useUser(); // Aquí obtienes los datos del usuario actual y la función para actualizar el perfil
-  // const jwt = getCookie("user")
-  //     console.log(jwt);
-  // const userr = await getUser(jwt);
-  // console.log(userr)
+async function getData() {
+  let token = getCookie("userToken");
+  const res = await fetch("http://34.125.90.13:5000/usuarios/protected", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Algo salio mal");
+  }
+
+  return res.json();
+}
+
+const EditProfile: React.FC = async () => {
+  // const { getUser, updateUser } = useUser(); // Aquí obtiene los datos del usuario actual y la función para actualizar el perfil
+  // const [user, setUser] = useState<FormData>();
+  // const userr = await getUser();
+
+  // useEffect(() => {
+  // const getDataUser = async () =>{
+  //   try {
+  //     setUser(userr)
+  //     console.log(user);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // getDataUser();
+
+  // }, []);
+  const data = await getData();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    defaultValues: userTemplate ,
+    defaultValues: data,
   });
 
   const onSubmit = async (data: FormData) => {
     // const id = "649f8ccc12b6415694a8e746";
-    console.log(data)
+    console.log(data);
     // await updateUser(id, data);
     // redirigir al usuario a otra página después de actualizar el perfil
   };
@@ -71,8 +93,10 @@ const EditProfile: React.FC = async() => {
       <section className="flex items-start justify-evenly">
         <div className="">
           <div className="px-8 py-6 rounded-md shadow-xl">
-            <h1 className=""><FaUser className="bg-slate-500 w-24 h-24 rounded-full"/></h1>
-            <h1 className="text-center font-semibold">Exequiel</h1>
+            <h1 className="">
+              <FaUser className="bg-slate-500 w-24 h-24 rounded-full" />
+            </h1>
+            <h1 className="text-center font-semibold">{data?.nombre}</h1>
             <span className="text-gray-600 font-semibold">Usuario</span>
           </div>
         </div>
