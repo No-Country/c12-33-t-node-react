@@ -18,9 +18,9 @@ export default function SecurityFilter({
         {securityOptions.map((option) => (
           <div
             key={option}
-            className={`${selectedSecurity === option ? "bg-blue-500" : ""} ${
-              style.securityOption
-            }`}
+            className={`${
+              selectedSecurity === option ? "bg-black text-white" : ""
+            } ${style.securityOption}`}
             onClick={() => handleSecuritySelection(option)}
           >
             <div className="border border-gray-300 rounded-md p-2">

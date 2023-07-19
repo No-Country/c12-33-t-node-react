@@ -165,10 +165,10 @@ export default function Filter({ list }) {
             </div>
           </SwiperSlide>
         </div>
+        <div className={style.filterButton}>
+          <FilterButton />
+        </div>
       </Swiper>
-      <div className={style.filterButton}>
-        <FilterButton />
-      </div>
     </div>
   );
 }

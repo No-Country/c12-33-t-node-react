@@ -13,9 +13,9 @@ export default function BathFilter({ selectedBath, handleBathSelection }) {
         {bathOptions.map((option) => (
           <div
             key={option}
-            className={`${selectedBath === option ? "bg-blue-500" : ""} ${
-              style.BathOption
-            }`}
+            className={`${
+              selectedBath === option ? "bg-black text-white" : ""
+            } ${style.BathOption}`}
             onClick={() => handleBathSelection(option)}
           >
             <div className="border border-gray-300 rounded-md p-2">
