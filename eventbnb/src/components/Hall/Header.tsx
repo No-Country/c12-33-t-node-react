@@ -6,8 +6,10 @@ import { BsHeart, BsFillHeartFill } from "react-icons/bs";
 
 const Header = () => {
   return (
-    <section>
-      <h1 className="text-2xl font-medium">Salón de Fiesta Las Princesas</h1>
+    <section className="py-7 md:py-0 border-b md:border-b-0">
+      <h1 className="text-2xl font-medium pb-2 md:pb-0">
+        Salón de Fiesta Las Princesas
+      </h1>
       <div className="flex justify-between flex-wrap gap-2">
         <div className="flex flex-wrap gap-1.5 items-center">
           <span className="flex items-center">

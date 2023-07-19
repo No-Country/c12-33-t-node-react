@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="pt-10 pb-5 flex justify-between border-b">
+    <div className="py-7 md:pt-10 md:pb-5 flex justify-between border-b">
       <div>
         <h3 className="text-xl font-medium">
           Apartamento con servicios incluidos entero - Anfitrión: Rossy

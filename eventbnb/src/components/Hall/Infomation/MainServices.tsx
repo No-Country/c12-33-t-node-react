@@ -7,7 +7,9 @@ const MainServices = () => {
   return (
     <div className=" flex flex-col py-7 border-b gap-4">
       <div className="flex gap-3 items-center">
-        <HiWifi size={25} />
+        <div style={{ maxWidth: "25px" }}>
+          <HiWifi size={25} />
+        </div>
         <div>
           <h6 className="font-medium pb-1">Wifi rápido</h6>
           <p className="text-sm text-gray-500">
@@ -17,7 +19,9 @@ const MainServices = () => {
         </div>
       </div>
       <div className="flex gap-3 items-center">
+        <div style={{ maxWidth: "25px" }}>
         <BsDoorClosed size={25} />
+        </div>
         <div>
           <h6 className="font-medium pb-1">Llegada autónoma</h6>
           <p className="text-sm text-gray-500">
@@ -27,7 +31,9 @@ const MainServices = () => {
         </div>
       </div>
       <div className="flex gap-3 items-center">
+        <div style={{ maxWidth: "25px" }}>
         <BsCalendar3 size={25} />
+        </div>
         <div>
           <h6 className="font-medium pb-1">
             Cancelación gratuita por 48 horas.
