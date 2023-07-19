@@ -2,7 +2,9 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
+// import SwiperCore, { Navigation } from "swiper";
+import SwiperCore from "swiper";
+import { Navigation } from "swiper/modules";
 import FilterButton from "./FilterButton";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -51,10 +53,10 @@ export default function Filter() {
     >
       <Swiper
         slidesPerView={5}
-        // // navigation={{
-        // //   prevEl: `.${style.btnPrev}`,
-        // //   nextEl: `.${style.btnNext}`,
-        // // }}
+        // navigation={{
+        //   prevEl: `.${style.btnPrev}`,
+        //   nextEl: `.${style.btnNext}`,
+        // }}
         className={`w-4/5  ${style.swiperContainer}`}
         breakpoints={{
           390: {

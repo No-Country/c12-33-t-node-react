@@ -87,7 +87,7 @@ export default function Header() {
       >
         <div className={style.search__container}>
           <Link href="/" className={`${style.logo}`}>
-            festbnb
+            festbnb 
           </Link>
           <div className={style.searchBar}>
             <div className={style.searchBarAndList}>
@@ -143,7 +143,7 @@ export default function Header() {
         </div>
       </div>
 
-      <Filter />
+      <Filter /> 
     </>
   );
 }
