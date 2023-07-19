@@ -73,7 +73,7 @@
   height: 60vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
   background-color: var(--white);
-  top: 10%;
+  top: 0;
   left: 50%;
   transform: translate(-50%, 40%);
   z-index: 9999;
@@ -119,4 +119,12 @@
 }
 .securityOption, .bathOption{
  margin-left: 10px;
+}
+.filterBottom{
+  position: fixed;
+  bottom: 0;
+justify-content: space-between;
+  margin-top: 30px;
+  border-top: 2px solid var(--light-grey);
+  width: 100%;
 }
