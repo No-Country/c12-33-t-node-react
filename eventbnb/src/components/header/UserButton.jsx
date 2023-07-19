@@ -13,7 +13,7 @@ export default function UserButton({ showOptions }) {
   const { data: session } = useSession();
 
   const logOut = async () => {
-    deleteCookie("token-user");
+    deleteCookie("userToken");
     signOut();
   };
 

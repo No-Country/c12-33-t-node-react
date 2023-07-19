@@ -24,7 +24,7 @@ const SignIn = ({ hidden, setHidden }) => {
     e.preventDefault();
     try {
       if (!Object.entries(errors).length) {
-        const response = await axios.post("http://34.125.90.13:5000/usuarios", {
+        const response = await axios.post("http://104.154.93.179:5000/usuarios", {
           email: localLogin.email,
           password: localLogin.password,
           loginGoogle: false
@@ -86,7 +86,7 @@ const SignIn = ({ hidden, setHidden }) => {
         try {
           // Realizar la petición POST después de que la sesión se haya actualizado
           const response = await axios.post(
-            "http://34.125.90.13:5000/usuarios",
+            "http://104.154.93.179:5000/usuarios",
             {
               email: session?.user?.email,
               loginGoogle: true
