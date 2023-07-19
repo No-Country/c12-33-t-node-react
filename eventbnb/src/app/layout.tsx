@@ -7,6 +7,7 @@ import Footer from "../components/footer/Footer";
 import Provider from "../components/Provider";
 
 import { SalonsProvider } from "../context/SalonsProvider"
+import { UsersProvider } from "../context/UserProvider"
 import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -36,11 +37,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider>
-          <SalonsProvider>
-            {!hideHeaderFooter && <Header />}
-              {children}
-            {!hideHeaderFooter && <Footer />}
-          </SalonsProvider>
+          <UsersProvider>
+            <SalonsProvider>
+              {!hideHeaderFooter && <Header />}
+                {children}
+              {!hideHeaderFooter && <Footer />}
+            </SalonsProvider>
+          </UsersProvider>
         </Provider>
       </body>
     </html>

@@ -1,25 +1,58 @@
+'use client'
 import Link from "next/link"
-import { Suspense } from "react"
-import Loading from "./loading"
-import axios from "axios"
-
-async function getData(){
-    // Obtener el JWT desde cookies
-    // const cookie = getCookie('usuario')
-    // const response = await axios.post('URL', {jwt: cookie})
-    // return response.data
-}
-
+import { useEffect, useState } from "react"
+import useUsers from '@/hooks/useUsers';
+// import Loading from "./loading"
+// import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
+// import { getCookie } from "@/utils/cookies";
+import AlertError from "@/components/alert/AlertError";
 
 const Hosting = async ({reservations}) => {
+    const {getUserData, validateSession} = useUsers()
+    const [data, setData] = useState()
+    // const { data: session } = useSession();
+    // const [jsonWebToken, setJsonWebToken] = useState('')
+    const router = useRouter()
+    const [isHidden, setIsHidden] = useState(true)
+    
+    const handleClick = (route) => {
+        setIsHidden(true)
+        router.push(route)
+    }
+    
+    useEffect(() => {
+        const validate = async () => {
+            try { 
+                // const jwt = getCookie("userToken")
+                // setJsonWebToken(jwt)
+                const isValidate = validateSession()
+                setIsHidden(isValidate)
+                const dataUser = await getUserData()
+                setData(dataUser)
+            } catch (error) {
+                setIsHidden(false)
+            }
+        }
+        validate()
+    }, [])
 
-    const data = await getData()
+    // useEffect(() => {    
+    //     if(!session && !jsonWebToken){
+    //         console.log(jsonWebToken);
+    //     }
+    // }, [jsonWebToken])
 
+// console.log(jsonWebToken);
+    // if(!session && !jsonWebToken){
+    //     console.log(jsonWebToken);
+    //     return
+    // }
     return(
         <section className="text-black bg-white w-full px-6 md:px-24 flex flex-col gap-y-6 md:gap-y-16">
             <div className="flex flex-col md:flex-row items-center justify-center md:justify-between mt-8 gap-y-4">
-                <h3 className="text-xl md:text-3xl font-semibold text-center">¡Te damos la bienvenida, {'${nombre}'}!</h3>
-                <Link href='/become-a-host/1/overview' className="text-sm md:text-lg border border-black rounded-lg px-2 md:px-4 py-1 font-medium hover:bg-slate-100">Completá tu anuncio</Link>
+                <h3 className="text-xl md:text-3xl font-semibold text-center">¡Te damos la bienvenida, {data?.nombre}!</h3>
+                <Link href={`/become-a-host/${data?._id}/overview`} className="text-sm md:text-lg border border-black rounded-lg px-2 md:px-4 py-1 font-medium hover:bg-slate-100">Completá tu anuncio</Link>
             </div>
             <div className="flex flex-col gap-y-6">
                 <div className="flex flex-col md:flex-row items-center justify-between">
@@ -35,18 +68,16 @@ const Hosting = async ({reservations}) => {
                 </div>
             </div>
             <div className="rounded-lg bg-slate-100 py-12">
-                <Suspense fallback= {<Loading />}>
-                    {
-                        reservations ?
-                        'RESERVAS' :
-                        <div className="flex flex-col items-center justify-center gap-y-8">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="block h-8 w-8"><path d="M24 1a5 5 0 0 1 5 4.78v5.31h-2V6a3 3 0 0 0-2.82-3H8a3 3 0 0 0-3 2.82V26a3 3 0 0 0 2.82 3h5v2H8a5 5 0 0 1-5-4.78V6a5 5 0 0 1 4.78-5H8zm-2 12a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm0 2a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm3.02 3.17 1.36 1.46-6.01 5.64-3.35-3.14 1.36-1.46 1.99 1.86z"></path></svg>
-                            <span>
-                                {'${mensajePersonalizadoParaCadaFiltro}'}
-                            </span>
-                        </div> 
-                    }
-                </Suspense>
+                {
+                    reservations ?
+                    'RESERVAS' :
+                    <div className="flex flex-col items-center justify-center gap-y-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="block h-8 w-8"><path d="M24 1a5 5 0 0 1 5 4.78v5.31h-2V6a3 3 0 0 0-2.82-3H8a3 3 0 0 0-3 2.82V26a3 3 0 0 0 2.82 3h5v2H8a5 5 0 0 1-5-4.78V6a5 5 0 0 1 4.78-5H8zm-2 12a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm0 2a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm3.02 3.17 1.36 1.46-6.01 5.64-3.35-3.14 1.36-1.46 1.99 1.86z"></path></svg>
+                        <span>
+                            {'${mensajePersonalizadoParaCadaFiltro}'}
+                        </span>
+                    </div> 
+                }
             </div>
             <div className="flex flex-col gap-y-8">
                 <h3 className="text-3xl font-semibold">Estamos acá para ayudarte</h3>
@@ -67,6 +98,7 @@ const Hosting = async ({reservations}) => {
                     </div>
                 </div>
             </div>
+            <AlertError method={handleClick} param={'/'} isHidden={isHidden} setIsHidden={setIsHidden} href={'/'}></AlertError>
         </section>
     )
 }
