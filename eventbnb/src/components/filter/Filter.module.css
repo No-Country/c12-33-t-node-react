@@ -120,11 +120,23 @@
 .securityOption, .bathOption{
  margin-left: 10px;
 }
-.filterBottom{
+.filterBottom, .filterTitleTop{
   position: fixed;
+  width: 100%;
+  
+}
+.filterTitleTop{
+top: 0;
+margin-bottom: 20px;
+border-bottom: 2px solid var(--light-grey);
+}
+.filterTitle{
+  margin-inline: auto;
+}
+.filterBottom{
+ 
   bottom: 0;
-justify-content: space-between;
+  justify-content: space-between;
   margin-top: 30px;
   border-top: 2px solid var(--light-grey);
-  width: 100%;
 }

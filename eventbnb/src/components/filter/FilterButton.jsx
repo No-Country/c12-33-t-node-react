@@ -53,21 +53,39 @@ export default function FilterButton() {
         {showModal && (
           <div className={`top-10 ${style.filterModal}`}>
             <div className={`${style.modalContent}`}>
-              <div className="bg-white">
-                <h2 className={`text-2xl  ${style.modalTitle}`}>Filtros</h2>
+              <div
+                className={`flex flex-grow my-4 bg-white ${style.filterTitleTop}`}
+              >
+                <h2 className={`${style.filterTitle}`}>Filtros</h2>
               </div>
-
-              <Price />
-              <Capacity />
-              <Security
-                selectedSecurity={selectedSecurity}
-                handleSecuritySelection={handleSecuritySelection}
-              />
-              <Bath
-                selectedBath={selectedBath}
-                handleBathSelection={handleBathSelection}
-              />
-              {/* <Accessibility /> */}
+              <div
+                className={style.scroll}
+                style={{ maxHeight: "400px", overflow: "auto" }}
+              >
+                <Price />
+                <Capacity />
+                <Security
+                  selectedSecurity={selectedSecurity}
+                  handleSecuritySelection={handleSecuritySelection}
+                />
+                <Bath
+                  selectedBath={selectedBath}
+                  handleBathSelection={handleBathSelection}
+                />
+                <Bath
+                  selectedBath={selectedBath}
+                  handleBathSelection={handleBathSelection}
+                />
+                <Bath
+                  selectedBath={selectedBath}
+                  handleBathSelection={handleBathSelection}
+                />
+                <Bath
+                  selectedBath={selectedBath}
+                  handleBathSelection={handleBathSelection}
+                />
+                {/* <Accessibility /> */}
+              </div>
 
               <div
                 className={`flex flex-grow my-4 bg-white ${style.filterBottom}`}
