@@ -1,16 +1,17 @@
 import React from "react";
 import style from "./Header.module.css";
 import { FaTimes } from "react-icons/fa";
+import { FilterContext, FilterProvider } from "@/context/FilterContext";
 
-export default function SearchResults({
-  searchResults,
+export default function SearchBar({
+  searchBar,
   searchLounge,
   handleClearSearch,
 }) {
   return (
     <div className={style.searchList}>
       <ul id="results">
-        {searchResults.map((lounge) => (
+        {searchBar?.map((lounge) => (
           <li key={lounge.name}>{lounge.name}</li>
         ))}
       </ul>

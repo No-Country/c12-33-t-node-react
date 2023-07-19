@@ -4,28 +4,31 @@ import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
-import SearchResults from "./SearchResults";
+import SearchBar from "./SearchBar";
 import UserButton from "./UserButton";
 import Filter from "../filter/Filter";
+import { FilterProvider } from "@/context/FilterContext";
 
-const loungeData = [
-  { name: "Cumpleaños", price: 100 },
-  { name: "Bautizo", price: 200 },
-  { name: "Boda", price: 300 },
-  { name: "Temática", price: 400 },
-  { name: "Quinciañera", price: 500 },
-];
-
-export default function Header() {
-  const [lounges, setLounges] = useState(loungeData);
+export default function Header({ cards }) {
+  // const [lounges, setLounges] = useState(loungeData);
   const [searchLounge, setSearchLounge] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchBar, setSearchBar] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const [setCards] = useState([]);
 
   useEffect(() => {
+    const getSalones = async () => {
+      try {
+        const data = await getSalones();
+        setCards(data);
+      } catch (error) {
+        console.error("Error fetching salones:", error);
+      }
+    };
+
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
@@ -36,21 +39,32 @@ export default function Header() {
       }
     };
 
+    getSalones();
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const handleSearch = () => {
-    if (searchLounge.trim() !== "") {
-      const filteredResults = lounges.filter((lounge) =>
-        lounge.name.toLowerCase().includes(searchLounge.toLowerCase())
-      );
-      setSearchResults(filteredResults);
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value?.toLowerCase();
+    if (e && e.target) {
+      const searchTerm = e.target.value?.toLowerCase();
+      if (cards && Array.isArray(cards)) {
+        // Filtrar las cards por el término de búsqueda en la localidad o el domicilio
+        const filtered = cards.filter(
+          (card) =>
+            card.nombre.toLowerCase().includes(searchTerm) ||
+            card.domicilio.toLowerCase().includes(searchTerm) ||
+            card.localidad.toLowerCase().includes(searchTerm)
+        );
+
+        // Actualizar los resultados filtrados en el estado
+        setFilteredCards(filtered);
+      }
     }
   };
-
   const handleChange = (e) => {
     setSearchLounge(e.target.value);
   };
@@ -63,7 +77,7 @@ export default function Header() {
 
   const handleClearSearch = () => {
     setSearchLounge("");
-    setSearchResults([]);
+    setSearchBar([]);
   };
 
   const handleToggleOptions = () => {
@@ -71,13 +85,13 @@ export default function Header() {
     setShowUserOptions(!showUserOptions);
   };
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
+  // const handleOpenModal = () => {
+  //   setShowModal(true);
+  // };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
 
   return (
     <>
@@ -101,9 +115,9 @@ export default function Header() {
                 className={style.searchInput}
               />
               <div className={style.searchResult}>
-                {searchResults.length > 0 && (
-                  <SearchResults
-                    searchResults={searchResults}
+                {searchBar.length > 0 && (
+                  <SearchBar
+                    searchBar={searchBar}
                     searchLounge={searchLounge}
                     handleClearSearch={handleClearSearch}
                     showOptions={showOptions}
@@ -144,7 +158,9 @@ export default function Header() {
       </div>
 
       <div>
-        <Filter />
+        <FilterProvider>
+          <Filter />
+        </FilterProvider>
       </div>
     </>
   );

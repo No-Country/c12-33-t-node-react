@@ -1,8 +1,6 @@
 .container {
   border-bottom: solid 1px var(--light-grey);
-  
 }
-
 
 .filterContainer {
   display: flex;

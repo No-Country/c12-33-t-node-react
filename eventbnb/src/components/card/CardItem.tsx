@@ -34,6 +34,7 @@ export default function Card({ card }) {
             <SwiperSlide key={i}>
               {/* <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} /> */}
               <Image
+                src={""}
                 width={300}
                 height={285}
                 className="w-[300px] h-[285px] object-cover"

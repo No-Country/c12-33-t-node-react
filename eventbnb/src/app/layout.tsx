@@ -5,6 +5,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Filter from "../components/filter/Filter";
 import Provider from "../components/Provider";
+import cards from "../components/card/Cards";
 
 import { SalonsProvider } from "../context/SalonsProvider";
 import { useEffect, useState } from "react";
@@ -34,7 +35,7 @@ export default function RootLayout({
       <body>
         <Provider>
           <SalonsProvider>
-            <Header />
+            <Header cards={cards} />
             {children}
             <Footer />
 
