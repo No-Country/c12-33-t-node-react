@@ -35,7 +35,7 @@ export default function RootLayout({
       <body>
         <Provider>
           <SalonsProvider>
-            <Header cards={cards} />
+            <Header />
             {children}
             <Footer />
 

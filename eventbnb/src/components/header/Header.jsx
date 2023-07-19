@@ -1,15 +1,23 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
 import style from "./Header.module.css";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import UserButton from "./UserButton";
-import Filter from "../filter/Filter";
-import { FilterProvider } from "@/context/FilterContext";
 
-export default function Header({ cards }) {
+import {
+  handleSearch,
+  handleChange,
+  handleKeyPress,
+  handleClearSearch,
+} from "../filter/handlers";
+
+export default function Header({}) {
+  const [cards, setCards] = useState("");
   // const [lounges, setLounges] = useState(loungeData);
   const [searchLounge, setSearchLounge] = useState("");
   const [searchBar, setSearchBar] = useState([]);
@@ -17,17 +25,19 @@ export default function Header({ cards }) {
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [setCards] = useState([]);
+
+  const url = process.env.MICROSERVICIOS;
 
   useEffect(() => {
-    const getSalones = async () => {
-      try {
-        const data = await getSalones();
-        setCards(data);
-      } catch (error) {
-        console.error("Error fetching salones:", error);
-      }
-    };
+    // const fetchCards = async () => {
+    //   try {
+    //     const { data } = await axios(`${url}/salones`);
+    //     const salonesList = data.data;
+    //     setList(salonesList);
+    //   } catch (error) {
+    //     console.error("Error al obtener la lista de salones:", error);
+    //   }
+    // };
 
     const handleScroll = () => {
       const scrollTop =
@@ -39,46 +49,13 @@ export default function Header({ cards }) {
       }
     };
 
-    getSalones();
+    // fetchCards();
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleSearch = (e) => {
-    const searchTerm = e.target.value?.toLowerCase();
-    if (e && e.target) {
-      const searchTerm = e.target.value?.toLowerCase();
-      if (cards && Array.isArray(cards)) {
-        // Filtrar las cards por el término de búsqueda en la localidad o el domicilio
-        const filtered = cards.filter(
-          (card) =>
-            card.nombre.toLowerCase().includes(searchTerm) ||
-            card.domicilio.toLowerCase().includes(searchTerm) ||
-            card.localidad.toLowerCase().includes(searchTerm)
-        );
-
-        // Actualizar los resultados filtrados en el estado
-        setFilteredCards(filtered);
-      }
-    }
-  };
-  const handleChange = (e) => {
-    setSearchLounge(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  const handleClearSearch = () => {
-    setSearchLounge("");
-    setSearchBar([]);
-  };
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions);
@@ -130,7 +107,7 @@ export default function Header({ cards }) {
                 <button
                   type="button"
                   id="searchButton"
-                  onClick={handleSearch}
+                  onClick={(e) => handleSearch(e)}
                   className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
                 >
                   <FaSearch className={`text-white text-l ${style.faSearch}`} />
@@ -155,12 +132,6 @@ export default function Header({ cards }) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <FilterProvider>
-          <Filter />
-        </FilterProvider>
       </div>
     </>
   );

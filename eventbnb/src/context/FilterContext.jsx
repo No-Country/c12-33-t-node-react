@@ -3,17 +3,21 @@ import saveInLocalStorage from "./assets/saveInLocalStorage";
 import removeFromLocalStorage from "./assets/removeFromLocalStorage";
 import { newPetition } from "./assets/customFetch";
 
-const FilterContext = createContext();
-
+export const FilterContext = createContext({
+  filteredCards: [],
+  setFilteredCards: () => {},
+  filter: "",
+  setFilter: () => {},
+});
 function FilterProvider({ children }) {
   const [filteredCards, setFilteredCards] = useState([]);
+  const [filter, setFilter] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [cards, setCards] = useState([]);
   const [title, setTitle] = useState("");
   const [selectedType, setSelectedType] = useState("");
-  const [filter, setFilter] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [range, setRange] = useState(0);
 
@@ -56,6 +60,8 @@ function FilterProvider({ children }) {
       value={{
         filteredCards,
         setFilteredCards,
+        filter,
+        setFilter,
         selected,
         setSelected,
         price,
@@ -69,8 +75,6 @@ function FilterProvider({ children }) {
         setSortBy,
         name,
         setName,
-        filter,
-        setFilter,
         isLoading,
         setIsLoading,
         range,
@@ -82,4 +86,4 @@ function FilterProvider({ children }) {
   );
 }
 
-export { FilterContext, FilterProvider };
+export { FilterProvider };
