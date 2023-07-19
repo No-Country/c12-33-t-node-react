@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="pt-10 pb-5 flex justify-between border-b">
+    <div className="py-7 md:pt-10 md:pb-5 flex justify-between border-b">
       <div>
         <h3 className="text-xl font-medium">
           Apartamento con servicios incluidos entero - Anfitrión: Rossy
@@ -15,6 +15,7 @@ const Header = () => {
       <div>
         <img
           className="object-cover rounded-full w-12 h-12"
+          style={{ minWidth: "48px", minHeight: "48px" }}
           src="https://a0.muscache.com/im/pictures/user/72135e97-1583-4ca4-a8ba-8cdd81827fde.jpg?im_w=240"
           alt="img"
         />
