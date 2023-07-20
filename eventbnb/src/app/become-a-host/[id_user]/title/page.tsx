@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useSalons from "@/hooks/useSalons";
-import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -21,7 +22,7 @@ const schema = yup.object().shape({
 
 const PassedFinal: React.FC = () => {
   const { salon, setSalon } = useSalons<Salon>();
-  const router = useRouter();
+  const router = useRouter()
   const {
     handleSubmit,
     register,
@@ -37,15 +38,55 @@ const PassedFinal: React.FC = () => {
     }));
   };
 
+  useEffect(() => {
+    const url = window.location;
+    const pathname = url.pathname;
+    const parts = pathname.split('/');
+    const id_user = parts[2];
+
+    setSalon(prevState => ({
+      ...prevState,
+      propietario: id_user
+    }));
+  }, [])
+
   async function onSubmit(data: FormData) {
     const url = process.env.MICROSERVICIOS;
     
     try {
-      const { data } = await axios.post(`http://104.154.93.179:5000/salones`, salon);
-      const list = data;
-      console.log(list.data);
-      return list.data;
-      
+      await axios.post(`http://104.154.93.179:5000/salones`, salon);
+      setSalon({
+        nombre: "",
+        domicilio: "",
+        localidad: "",
+        ubicacion: "",
+        imagenes: [],
+        telefono: "",
+        precio: 0, 
+        capacidad_max: 0,
+        superficie: 0, 
+        aire_acondicionado: 0,
+        parrilla: 0,
+        pantalla: 0,
+        personal_seguridad: 0,
+        baño: 0,
+        baño_accesibilidad: false,
+        accesibilidad: false,
+        estacionamiento: false,
+        catering: false, 
+        mesas_sillas:false,
+        luces:false,
+        sonido:false,
+        fotografia: false,
+        decoracion: false,
+        pileta:false,
+        wifi:false,
+        cocina:false,
+        escenario:false,
+        descripcion:"",
+        propietario:"id_user"
+      })
+      router.push('/')
     } catch (error) { 
       alert(error.message);
     }

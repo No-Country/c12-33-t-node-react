@@ -3,24 +3,28 @@
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone';
+import { useRouter } from "next/navigation";
 
 import useSalons from '@/hooks/useSalons';
-import ButtonHalls from "@/components/create-halls/ButtonHalls";
 import BackButton from "@/components/create-halls/BackButton";
 
 import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
+import AlertSalons from '@/components/alert/AlertSalons';
 
-import { useRouter } from "next/navigation";
+
 const Dropzone = ({ className }) => {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
   const [disabled, setDisabled] = useState(false)
+
   const {salon, setSalon} = useSalons()
+  const [isHidden, setIsHidden] = useState(true)
+  const [param, setParam] = useState('')
 
   const router = useRouter()
-
+  
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles(previousFiles => [
@@ -55,6 +59,12 @@ const Dropzone = ({ className }) => {
 
   const removeFile = name => {
     setFiles(files => files.filter(file => file.name !== name))
+    setIsHidden(true)
+  }
+
+  const auxHandleClick = name => {
+    setParam(name)
+    setIsHidden(false)
   }
 
   const removeAll = () => {
@@ -96,10 +106,10 @@ const Dropzone = ({ className }) => {
        router.push('./title')
       // window.location.href = "/";
     } catch (error) {
-      alert(error.message);
+      setIsHidden(!isHidden)
     }
   }
-  console.log(salon)
+
   return (
     <div className='bg-white text-black'>
         <div  className='py-12 w-1/2 flex flex-col gap-y-8 mx-auto'>
@@ -150,7 +160,7 @@ const Dropzone = ({ className }) => {
                   <button
                       type='button'
                       className='absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border shadow-xl bg-white transition-colors hover:bg-slate-100'
-                      onClick={() => removeFile(file.name)}
+                      onClick={() => auxHandleClick(file.name)}
                   >
                       <AiOutlineClose className='h-5 w-5 fill-black transition-colors ' />
                   </button>
@@ -187,21 +197,6 @@ const Dropzone = ({ className }) => {
               </ul>
 
           </section>
-          {/* <div className='w-fit flex gap-x-2'>
-              <button
-              type='submit'
-              className={`${disabled ? 'hover:cursor-not-allowed text-slate-500 bg-gray-200 border border-slate-500' : 'bg-green-700 text-white hover:bg-green-600'} ml-auto mt-1 rounded-md border px-6 py-2 text-lg font-semibold uppercase transition-colors`}
-              >
-              Aceptar
-              </button>
-              <button
-              type='button'
-              onClick={removeAll}
-              className='px-6 py-2 mt-1 rounded-md border bg-red-700 text-lg font-semibold uppercase  text-white transition-colors hover:bg-red-600'
-              >
-              Remover
-              </button>   
-          </div> */}
         </div>
         <div className="sticky bottom-0 left-0 border-t-2 border-black/20 px-6 py-6 flex items-center justify-between w-full bg-slate-100">
           <BackButton href="./finish-setup"></BackButton>
@@ -212,6 +207,7 @@ const Dropzone = ({ className }) => {
             Siguiente
           </button>
         </div>
+        <AlertSalons isHidden={isHidden} setIsHidden={setIsHidden} method={removeFile} param = {param}></AlertSalons>
     </div>
   )
 }
