@@ -58,6 +58,7 @@
     padding: 20px 20px;
     outline: none;
     height: 60px;
+    width: 25rem;
   }
   
   .searchInput {
@@ -77,7 +78,7 @@
   .searchInput::placeholder, .userModal::placeholder {
     color: var(--foreground-rgb);
     font-weight: 500;
-    font-size: var(--text-m);
+    font-size: var(--text-s);
   }
   
   .searchInput::placeholder:focus, .userModal::placeholder:focus {
