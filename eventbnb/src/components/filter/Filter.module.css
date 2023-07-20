@@ -1,26 +1,24 @@
 .container {
   border-bottom: solid 1px var(--light-grey);
-  
 }
-
 
 .filterContainer {
   display: flex;
-  /* 
-  align-items: center; */
-  margin: 0 auto;
-  padding: 0 10rem;
+ justify-content: space-between;
+align-items: center;
+flex-direction: column;
   width: 100%;
-  position: sticky;
-  top: 0;
   z-index: 99;
-  background-color: var(--white);
+  
+  margin: calc((100% - 105%) / 2) auto;
 }
 .filterContainer:hover {
   /* Estilos para el hover */
-  border-color: var(--gray-200);
-  border-bottom-width: 2px;
+  border-color: var(--light-grey);
+  border-bottom-width: 1px;
   border-bottom-style: solid;
+  width: 100%;
+  background-color: var(--white);
 }
 .fixedFilter {
   /* Estilos para el fixed */
@@ -28,39 +26,33 @@
   border-bottom-width: 2px;
   border-bottom-style: solid;
   position: fixed;
-  top: 80px;
+  top: 100px;
   z-index: 99;
   background-color: var(--white);
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
-  margin-top: 1rem;
 }
-.swiperContainer {
-  /* display: flex; */
-  /* justify-content: space-between;
-  align-items: center; */
-  margin: 0 auto;
-  padding: 0 1rem;
-  max-width: 1200px;
-  margin-top: 3rem;
-  
-}
-.swiper{
-  display: flex;
 
-}
-.filterButton {
-  display: flex;
+.swiperContainer {
+  justify-content: space-evenly;
   align-items: center;
-  gap: 0.5rem;
+  font-size: 2rem;
+  width: 100%;
+  margin-top: 0;
+  display: grid;
+  top: 0;
 }
 
 .filterButton1 {
+  
   border: solid 2px var(--dark-grey);
   padding: 15px 25px;
   border-radius: 20px;
   font-size: 25px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 /*Modal - Filter - Button*/
@@ -72,10 +64,10 @@
   border: 2px solid var(--dark-grey);
   border-radius: 20px;
   width: 40rem;
-  height: 60vh; /* Ajusta el valor según sea necesario */
+  height: 70vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
   background-color: var(--white);
-  top: 50%;
+  top: 0;
   left: 50%;
   transform: translate(-50%, 40%);
   z-index: 9999;
@@ -88,7 +80,7 @@
   width: 100%;
 }
 .modalTitle{
-  margin-top: 10px;
+  margin-top: 20px;
   border-bottom: 2px solid var(--dark-grey);
   width: 100%;
 }
@@ -110,39 +102,36 @@
   }
 }
 
-/* .btnPrev, .btnNext {
-  align-items: center;
-    justify-content: center;
-    display: flex;
-  border: 2px solid var(--dark-grey);
-    width: 35px;
-    height: 32px;
-    border-radius: 50%;
-    border-color: var(--dark-grey);
-    position: relative;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+/* --------- FILTER BUTTON ---------*/
+.textPrice, .textSecurity, .textCapacity, .textBath{
+  align-self: flex-start;
+  margin-left: 20px;
+}
+.priceLabel, .priceInput {
+  font-size: 1.5rem;
+  margin-left: 20px;
+}
+.securityOption, .bathOption{
+ margin-left: 10px;
+}
+.filterBottom, .filterTitleTop{
+  position: fixed;
+  width: 100%;
   
-  .btnPrev::before,
-  .btnPrev::after, .btnNext::before, .btnNext::after {
-    content: "";
-    position: absolute;
-    width: 12px;
-    height: 2px;
-    background-color: #000;
-    transition: background-color 0.3s;
-  }
-  .btnPrev::before, .btnNext::before {
-    transform: rotate(45deg);
-  }
-  .btnPrev::after, .btnNext::after{
-    transform: rotate(-45deg);
-  }
-  .btnPrev:hover, .btnNext:hover {
-    background-color: #f0f0f0;
-  }
-  .btnPrev:hover::before,
-  .btnPrev:hover::after, .btnNext:hover::before, .btnNext:hover::after {
-    background-color: #000;
-  } */
+}
+.filterTitleTop{
+margin-top: 0;
+top:0;
+padding: 10px 0;
+border-bottom: 2px solid var(--light-grey);
+}
+.filterTitle{
+  margin-inline: auto;
+}
+.filterBottom{
+  margin-bottom: 0;
+  bottom: 0;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 2px solid var(--light-grey);
+}

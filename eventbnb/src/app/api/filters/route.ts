@@ -12,6 +12,7 @@ interface Salon {
     precio:Number
     capacidad_max:Number
     superficie:Number
+    calefaccion:Number
     aire_acondicionado:Number
     parrilla:Number
     pantalla:Number
@@ -32,11 +33,11 @@ interface Salon {
     escenario:Boolean
     descripcion: String
     propietario:String
-    reviews: String
+    puntuacion: String
     eventos: String 
   }
-export async function POST(request: Request){
-    const { precio, capacidad_max, superficie, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
+export default async function POST(request: Request){
+    const { precio, capacidad_max, superficie, calefaccion, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
         baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
         sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
    
@@ -50,6 +51,8 @@ export async function POST(request: Request){
     capacidad_max ? salones = salones.filter( (salon: Salon ) => salon.capacidad_max >= capacidad_max ) : null
     
     superficie ? salones = salones.filter( (salon: Salon ) => salon.superficie >= superficie ) : null
+
+    calefaccion ? salones = salones.filter( (salon: Salon) => salon.calefaccion >= calefaccion ) : null
 
     aire_acondicionado ? salones = salones.filter( (salon: Salon ) => salon.aire_acondicionado >= aire_acondicionado ) : null
 
@@ -86,7 +89,7 @@ export async function POST(request: Request){
     cocina ? salones = salones.filter( (salon: Salon ) => salon.cocina = cocina ) : null
 
     escenario ? salones = salones.filter( (salon: Salon ) => salon.escenario = escenario ) : null
-    
+
     ascendente ? salones = salones.sort((a, b) => a.precio - b.precio) : salones = salones.sort((a, b) => b.precio - a.precio)
 
     console.log(salones);
