@@ -35,13 +35,9 @@ export default function RootLayout({
       <body>
         <Provider>
           <SalonsProvider>
-            <Header />
+            {!hideHeaderFooter && <Header />}
             {children}
-            <Footer />
-
-            {/* {!hideHeaderFooter && <Header />}
-            {children}
-            {!hideHeaderFooter && <Footer />} */}
+            {!hideHeaderFooter && <Footer />}
           </SalonsProvider>
         </Provider>
       </body>
