@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import React, { useRef, useContext } from "react";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +9,7 @@ import FilterButton from "./FilterButton";
 import "swiper/css";
 import style from "./Filter.module.css";
 import handlers from "./handlers";
-import { handlePriceIconClick, handleParkingIconClick } from "./handlers";
+import { handleParkingIconClick } from "./handlers";
 
 import {
   FaDollarSign,
@@ -31,6 +32,7 @@ export default function Filter({ list }) {
   const [sortDirection, setSortDirection] = useState("asc");
   const [selectedPriceIcon, setSelectedPriceIcon] = useState("asc");
   const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
+  const [isParkingFiltered, setIsParkingFiltered] = useState(false);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -65,21 +67,24 @@ export default function Filter({ list }) {
     };
   }, []);
 
-  const handlePriceIconClickHandler = () => {
-    handlePriceIconClick(
-      sortDirection,
-      setSortDirection,
-      selectedPriceIcon,
-      setSelectedPriceIcon,
-      filteredCards,
-      setFilteredCards,
-      list // Pasar la lista completa de cards aquí
-    );
+  const fetchFilteredSalones = async (selectedParkingIcon) => {
+    try {
+      const response = await axios.post("/api/filters", {
+        estacionamiento: selectedParkingIcon,
+      });
+      const { results } = response.data;
+      setFilteredCards(results);
+    } catch (error) {
+      console.error("Error al obtener los salones filtrados:", error);
+    }
   };
 
   const handleParkingIconClickHandler = () => {
-    setSelectedParkingIcon(!selectedParkingIcon);
-    handleParkingIconClick(filteredCards, setFilteredCards);
+    // Cambiar el estado de filtrado de estacionamiento
+    setIsParkingFiltered(!isParkingFiltered);
+
+    // Filtrar los salones según el estado actual de isParkingFiltered
+    handleParkingIconClick(isParkingFiltered, setFilteredCards, list);
   };
 
   return (
@@ -132,7 +137,7 @@ export default function Filter({ list }) {
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                selectedParkingIcon ? "text-blue-500" : ""
+                isParkingFiltered ? "text-blue-500" : ""
               }`}
               onClick={handleParkingIconClickHandler}
             >

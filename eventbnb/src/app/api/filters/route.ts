@@ -46,6 +46,12 @@ export default async function POST(request: Request){
     let salones = data.data
    console.log(precio);
 
+   // Filtrar salones según el valor de estacionamiento recibido
+  if (estacionamiento) {
+    salones = salones.filter((salon: Salon) => salon.estacionamiento === true);
+  }
+
+   // Filtrar salones según los demás criterios
     precio ? salones = salones.filter( (salon: Salon ) => salon.precio <= precio ) : null
 
     capacidad_max ? salones = salones.filter( (salon: Salon ) => salon.capacidad_max >= capacidad_max ) : null

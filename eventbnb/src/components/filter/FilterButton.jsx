@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
+import axios from "axios";
 import Capacity from "./selection/CapacityFilter";
 import Security from "./selection/SecurityFilter";
 import Bath from "./selection/BathFilter";
 import PriceFilter from "./selection/PriceFilter";
+import { handlePriceRange } from "./selection/PriceFilter";
 
 import style from "./Filter.module.css";
 
@@ -12,21 +14,31 @@ export default function FilterButton() {
   const [selectedSecurity, setSelectedSecurity] = useState("");
   const [selectedBath, setSelectedBath] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [selected, setSelected] = useState("");
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  const handleSecuritySelection = (value) => {
+  const handleSecurity = (value) => {
     setSelectedSecurity(value);
   };
 
-  const handleBathSelection = (value) => {
+  const handleBath = (value) => {
     setSelectedBath(value);
   };
 
-  const handlePriceRange = (value) => {
-    setSelectedPrice(value);
+  const handlePrice = async (priceRange) => {
+    console.log("SI FILTRA PRECIO");
+    try {
+      const response = await axios.post("/api/filters", {
+        precio: priceRange,
+      });
+      const { results } = response.data;
+      console.log(results); // Puedes hacer algo con los resultados aquí
+    } catch (error) {
+      console.error("Error en la llamada a la API:", error);
+    }
   };
 
   return (
@@ -61,28 +73,19 @@ export default function FilterButton() {
                 className={style.scroll}
                 style={{ maxHeight: "400px", overflow: "auto" }}
               >
-                <PriceFilter />
+                <PriceFilter
+                  selectedPrice={selectedPrice}
+                  handlePrice={handlePrice}
+                />
                 <Capacity />
                 <Security
                   selectedSecurity={selectedSecurity}
-                  handleSecuritySelection={handleSecuritySelection}
+                  handleSecurity={handleSecurity}
                 />
-                <Bath
-                  selectedBath={selectedBath}
-                  handleBathSelection={handleBathSelection}
-                />
-                <Bath
-                  selectedBath={selectedBath}
-                  handleBathSelection={handleBathSelection}
-                />
-                <Bath
-                  selectedBath={selectedBath}
-                  handleBathSelection={handleBathSelection}
-                />
-                <Bath
-                  selectedBath={selectedBath}
-                  handleBathSelection={handleBathSelection}
-                />
+                <Bath selectedBath={selectedBath} handleBath={handleBath} />
+                <Bath selectedBath={selectedBath} handleBath={handleBath} />
+                <Bath selectedBath={selectedBath} handleBath={handleBath} />
+                <Bath selectedBath={selectedBath} handleBath={handleBath} />
                 {/* <Accessibility /> */}
               </div>
 

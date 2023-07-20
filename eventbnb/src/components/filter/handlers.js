@@ -66,11 +66,22 @@ export const handlePriceIconClick = (
 //--------------------------------------------------
 
 //------------ Filtro Estacionamiento ------------
-export const handleParkingIconClick = (filteredCards, setFilteredCards) => {
-  const filtered = filteredCards.filter((card) => card.estacionamiento);
-  setFilteredCards(filtered);
-};
+export const handleParkingIconClick = (
+  isParkingFiltered,
+  setFilteredCards,
+  salonesList
+) => {
+  // Filtrar los salones según el estado de isParkingFiltered
+  const filteredSalones = isParkingFiltered
+    ? salonesList.filter((salon) => salon.estacionamiento)
+    : salonesList;
 
+  // Mostrar los resultados en la consola
+  console.log("Salones filtrados por estacionamiento:", filteredSalones);
+
+  // Actualizar el estado con los salones filtrados
+  setFilteredCards(filteredSalones);
+};
 //------------ Filtro Seguridad -------------
 const handleSecuritySelection = (value) => {
   setSelectedSecurity(value);
