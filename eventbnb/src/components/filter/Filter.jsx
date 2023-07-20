@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import React, { useRef, useContext } from "react";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +10,11 @@ import FilterButton from "./FilterButton";
 import "swiper/css";
 import style from "./Filter.module.css";
 import handlers from "./handlers";
+import pool from "../../../public/images/icons/pileta.png";
+import parking from "../../../public/images/icons/parking.png";
+import available from "../../../public/images/icons/available.png";
+import review from "../../../public/images/icons/review.png";
+import pet from "../../../public/images/icons/pet.png";
 import {
   handleParkingIconClick,
   handlePoolIconClick,
@@ -158,55 +164,85 @@ export default function Filter({ list }) {
               onClick={handlePriceIconClickHandler}
             >
               <FaDollarSign className="mb-1" />
-              <p className="text-xs">Precio</p>
+              <p className="text-sm">Precio</p>
             </div>
           </SwiperSlide> */}
           {/* Filtro de estacionamiento */}
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isParkingFiltered ? "text-black" : "text-blue-500"
+                isParkingFiltered ? "text-blue-500" : "text-black"
               }`}
               onClick={handleParkingIconClickHandler}
             >
-              <FaParking className="mb-1" />
-              <p className="text-xs">Estacionamiento</p>
+              <Image
+                src={parking}
+                alt="estacionamiento"
+                width={50}
+                height={50}
+                className={`mb-1 bg-white border-neutral-600 ${style.iconWrapper}`}
+              />
+              <p className="text-sm">Estacionamiento</p>
             </div>
           </SwiperSlide>
           {/* Filtro de pileta */}
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isPoolFiltered ? "text-black" : "text-blue-500"
+                isPoolFiltered ? "text-black" : "text-black"
               }`}
               onClick={handlePoolIconClickHandler}
             >
-              <FaWater className="mb-1" />
-              <p className="text-xs">Pileta</p>
+              <Image
+                src={pool}
+                alt="pileta"
+                width={50}
+                height={50}
+                className={`mb-1 bg-white border-neutral-600 ${style.iconWrapper}`}
+              />
+              <p className="text-sm">Pileta</p>
             </div>
           </SwiperSlide>
           {/* Filtro por disponibilidad */}
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isAvailableFiltered ? "text-black" : "text-blue-500"
+                isAvailableFiltered ? "text-blue-500" : "text-black"
               }`}
               onClick={handleAvailableIconClickHandler}
             >
-              <FaCalendarAlt className="mb-1" />
-              <p className="text-xs">Disponibilidad</p>
+              <Image
+                src={available}
+                alt="disponibilidad"
+                width={50}
+                height={50}
+                className={`mb-1 ${style.iconWrapper}`}
+              />
+              <p className="text-sm">Disponibilidad</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col items-center">
-              <FaStar className="mb-1" />
-              <p className="text-xs">Puntuación</p>
+              <Image
+                src={review}
+                alt="reseña"
+                width={50}
+                height={50}
+                className={`mb-1 ${style.iconWrapper}`}
+              />
+              <p className="text-sm">Reseña</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col items-center">
-              <FaDog className="mb-1" />
-              <p className="text-xs">Mascotas</p>
+              <Image
+                src={pet}
+                alt="mascotas"
+                width={50}
+                height={50}
+                className={`mb-1  ${style.iconWrapper}`}
+              />
+              <p className="text-sm">Mascotas</p>
             </div>
           </SwiperSlide>
         </div>
