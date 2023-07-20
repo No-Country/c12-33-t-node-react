@@ -8,18 +8,18 @@ export default function PriceFilter() {
     max: 1000,
   });
 
-  const handlePriceRange = async () => {
-    console.log("Price range filter", priceRange);
-    setPriceRange({ ...priceRange, [e.target.name]: e.target.value });
-    try {
-      const response = await axios.post("/api/filters", {
-        price,
-      });
-      const { results } = response.data;
-    } catch (error) {
-      return error;
-    }
-  };
+  // const handlePriceRange = async () => {
+  //   // setPriceRange({ ...priceRange, [e.target.name]: e.target.value });
+  //   try {
+  //     const response = await axios.post("/api/filters", {
+  //       price,
+  //     });
+  //     const { results } = response.data;
+  //     console.log("Price range filter", priceRange);
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
 
   return (
     <section
@@ -29,7 +29,7 @@ export default function PriceFilter() {
         Rango de Precios
       </h2>
       <div className={`flex flex-row ${style.priceRange}`}>
-        <span className={` ${style.priceLabel}`}>
+        {/* <span className={` ${style.priceLabel}`}>
           Precio mínimo:
           <input
             type="text"
@@ -48,12 +48,8 @@ export default function PriceFilter() {
             type="text"
             className={` ${style.priceInput}`}
             placeholder="$1000"
-            value={priceRange.max}
-            onChange={(e) =>
-              setPriceRange({ ...priceRange, max: e.target.value })
-            }
           />
-        </span>
+        </span> */}
       </div>
     </section>
   );

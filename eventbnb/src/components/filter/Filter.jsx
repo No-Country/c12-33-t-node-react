@@ -117,7 +117,7 @@ export default function Filter({ list }) {
             <CardItem card={card} />
           </SwiperSlide>
         ))}
-        <div className={`flex ${style.swiper}`}>
+        <div className={`flex  ${style.swiper}`}>
           {/* <SwiperSlide>
             <div
               className={`flex flex-col items-center ${

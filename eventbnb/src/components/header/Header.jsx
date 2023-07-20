@@ -16,7 +16,6 @@ export default function Header({}) {
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [filteredCards, setFilteredCards] = useState([]);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -73,7 +72,9 @@ export default function Header({}) {
             festbnb
           </Link>
         </div>
-        <SearchBar setFilteredCards={setFilteredCards} />
+        <div className={style.search__container}>
+          <SearchBar />
+        </div>
         <div className={style.user}>
           <button
             onClick={handleToggleOptions}

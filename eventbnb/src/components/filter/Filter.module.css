@@ -1,8 +1,5 @@
 .container {
   border-bottom: solid 1px var(--light-grey);
-
-
-
 }
 
 .filterContainer {
@@ -11,18 +8,17 @@
 align-items: center;
 flex-direction: column;
   width: 100%;
- 
-
   z-index: 99;
-  background-color: var(--white);
   
-
+  margin: calc((100% - 105%) / 2) auto;
 }
 .filterContainer:hover {
   /* Estilos para el hover */
   border-color: var(--light-grey);
   border-bottom-width: 1px;
   border-bottom-style: solid;
+  width: 100%;
+  background-color: var(--white);
 }
 .fixedFilter {
   /* Estilos para el fixed */
@@ -30,7 +26,7 @@ flex-direction: column;
   border-bottom-width: 2px;
   border-bottom-style: solid;
   position: fixed;
-  top: 80px;
+  top: 100px;
   z-index: 99;
   background-color: var(--white);
   width: 100%;
@@ -44,7 +40,8 @@ flex-direction: column;
   font-size: 2rem;
   width: 100%;
   margin-top: 0;
-  display: inline-flex;
+  display: grid;
+  top: 0;
 }
 
 .filterButton1 {
@@ -54,6 +51,8 @@ flex-direction: column;
   border-radius: 20px;
   font-size: 25px;
   margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 /*Modal - Filter - Button*/

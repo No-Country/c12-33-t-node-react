@@ -94,15 +94,6 @@ export default async function POST(request: Request){
 
     console.log(salones);
    
-    // salones = salones.filter((salon: Salon) => {
-    //     const matchName = salon.nombre.toLowerCase().includes(name.toLowerCase());
-    //     const matchAddress = salon.domicilio.toLowerCase().includes(address.toLowerCase());
-    //     const matchCity = salon.localidad.toLowerCase().includes(city.toLowerCase());
-    //     const matchLocation = salon.ubicacion.toLowerCase().includes(location.toLowerCase());
-    //     const matchPrice = salon.precio <= price;
-    
-    //     return matchName && matchAddress && matchCity && matchLocation && matchPrice;
-    //   });
    
     
     return NextResponse.json({ message: "Ruta lista", results: salones })

@@ -3,9 +3,9 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import Filter from "../components/filter/Filter";
+// import Filter from "../components/filter/Filter";
 import Provider from "../components/Provider";
-import cards from "../components/card/Cards";
+// import cards from "../components/card/Cards";
 
 import { SalonsProvider } from "../context/SalonsProvider";
 import { useEffect, useState } from "react";
@@ -35,12 +35,16 @@ export default function RootLayout({
       <body>
         <Provider>
           <SalonsProvider>
-            {!hideHeaderFooter && <Header />}
+            <Header />
             {children}
-            {!hideHeaderFooter && <Footer />}
+            <Footer />
           </SalonsProvider>
         </Provider>
       </body>
     </html>
   );
 }
+
+// {!hideHeaderFooter && <Header />}
+// {children}
+// {!hideHeaderFooter && <Footer />}
