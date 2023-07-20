@@ -85,27 +85,16 @@ flex-direction: column;
   width: 100%;
 }
 
-@media (max-width: 390px) {
-  .filterContainer {
-    display: block;
-    text-align: center;
-  }
 
-  .swiperContainer {
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-  }
-
-  .filterButton {
-    margin-top: 1rem;
-  }
-}
 
 /* --------- FILTER BUTTON ---------*/
+.textPrice{
+  margin-top: 20px;
+}
 .textPrice, .textSecurity, .textCapacity, .textBath{
   align-self: flex-start;
   margin-left: 20px;
+  font-size: 1.5rem;
 }
 .priceLabel, .priceInput {
   font-size: 1.5rem;
@@ -134,4 +123,21 @@ border-bottom: 2px solid var(--light-grey);
   justify-content: space-between;
   padding: 10px 0;
   border-top: 2px solid var(--light-grey);
+}
+
+@media (max-width: 390px) {
+  .filterContainer {
+    display: block;
+    text-align: center;
+  }
+
+  .swiperContainer {
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+
+  .filterButton {
+    margin-top: 1rem;
+  }
 }
