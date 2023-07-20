@@ -2,8 +2,11 @@ import React from "react";
 import Card from "./CardItem";
 import styles from "./Cards.module.css";
 import Filter from "../filter/Filter";
+// import { FilterContext } from "../../context/FilterContext"; //Adri
 
 export default function Cards({ list }) {
+  /*Filtros by Adriana */
+  // const { filteredCards } = React.useContext(FilterContext); // Obtener los salones filtrados del contexto
   return (
     <div>
       <div

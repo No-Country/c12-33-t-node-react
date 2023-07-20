@@ -9,7 +9,11 @@ import FilterButton from "./FilterButton";
 import "swiper/css";
 import style from "./Filter.module.css";
 import handlers from "./handlers";
-import { handleParkingIconClick } from "./handlers";
+import {
+  handleParkingIconClick,
+  handlePoolIconClick,
+  handleAvailableIconClick,
+} from "./handlers";
 
 import {
   FaDollarSign,
@@ -32,7 +36,10 @@ export default function Filter({ list }) {
   const [sortDirection, setSortDirection] = useState("asc");
   const [selectedPriceIcon, setSelectedPriceIcon] = useState("asc");
   const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
+  const [selectedPoolIcon, setSelectedPoolIcon] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
+  const [isPoolFiltered, setIsPoolFiltered] = useState(false);
+  const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -71,6 +78,8 @@ export default function Filter({ list }) {
     try {
       const response = await axios.post("/api/filters", {
         estacionamiento: selectedParkingIcon,
+        pileta: selectedPoolIcon,
+        disponibilidad: isAvailableFiltered,
       });
       const { results } = response.data;
       setFilteredCards(results);
@@ -78,13 +87,31 @@ export default function Filter({ list }) {
       console.error("Error al obtener los salones filtrados:", error);
     }
   };
-
+  //Estacionamiento
   const handleParkingIconClickHandler = () => {
     // Cambiar el estado de filtrado de estacionamiento
     setIsParkingFiltered(!isParkingFiltered);
 
     // Filtrar los salones según el estado actual de isParkingFiltered
     handleParkingIconClick(isParkingFiltered, setFilteredCards, list);
+  };
+
+  //Pileta
+  const handlePoolIconClickHandler = () => {
+    // Cambiar el estado de filtrado de estacionamiento
+    setIsPoolFiltered(!isPoolFiltered);
+
+    // Filtrar los salones según el estado actual de isParkingFiltered
+    handlePoolIconClick(isPoolFiltered, setIsPoolFiltered, list);
+  };
+
+  //Disponibilidad
+  const handleAvailableIconClickHandler = () => {
+    // Cambiar el estado de filtrado de disponibilidad
+    setIsAvailableFiltered(!isAvailableFiltered);
+
+    // Filtrar los salones según el estado actual de isAvailableFiltered
+    handleAvailableIconClick(isAvailableFiltered, setIsAvailableFiltered, list);
   };
 
   return (
@@ -134,10 +161,11 @@ export default function Filter({ list }) {
               <p className="text-xs">Precio</p>
             </div>
           </SwiperSlide> */}
+          {/* Filtro de estacionamiento */}
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isParkingFiltered ? "text-blue-500" : ""
+                isParkingFiltered ? "text-black" : "text-blue-500"
               }`}
               onClick={handleParkingIconClickHandler}
             >
@@ -145,14 +173,26 @@ export default function Filter({ list }) {
               <p className="text-xs">Estacionamiento</p>
             </div>
           </SwiperSlide>
+          {/* Filtro de pileta */}
           <SwiperSlide>
-            <div className="flex flex-col items-center">
+            <div
+              className={`flex flex-col items-center ${
+                isPoolFiltered ? "text-black" : "text-blue-500"
+              }`}
+              onClick={handlePoolIconClickHandler}
+            >
               <FaWater className="mb-1" />
               <p className="text-xs">Pileta</p>
             </div>
           </SwiperSlide>
+          {/* Filtro por disponibilidad */}
           <SwiperSlide>
-            <div className="flex flex-col items-center">
+            <div
+              className={`flex flex-col items-center ${
+                isAvailableFiltered ? "text-black" : "text-blue-500"
+              }`}
+              onClick={handleAvailableIconClickHandler}
+            >
               <FaCalendarAlt className="mb-1" />
               <p className="text-xs">Disponibilidad</p>
             </div>
