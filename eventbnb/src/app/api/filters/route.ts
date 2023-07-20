@@ -12,6 +12,8 @@ interface Salon {
     precio:Number
     capacidad_max:Number
     superficie:Number
+    disponibilidad: Boolean
+    calefaccion:Number
     aire_acondicionado:Number
     parrilla:Number
     pantalla:Number
@@ -32,11 +34,11 @@ interface Salon {
     escenario:Boolean
     descripcion: String
     propietario:String
-    reviews: String
+    puntuacion: String
     eventos: String 
   }
-export async function POST(request: Request){
-    const { precio, capacidad_max, superficie, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
+export default async function POST(request: Request){
+    const { precio, capacidad_max, superficie, disponibilidad, calefaccion, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
         baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
         sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
    
@@ -46,11 +48,29 @@ export async function POST(request: Request){
     let salones = data.data
    console.log(precio);
 
+   // Filtrar salones según el valor de estacionamiento recibido
+  if (estacionamiento) {
+    salones = salones.filter((salon: Salon) => salon.estacionamiento === true);
+  }
+  // Filtrar salones según el valor de pileta recibido
+  if (pileta) {
+    salones = salones.filter((salon: Salon) => salon.pileta === true);
+  }
+  // Filtrar salones según el valor de disponibilidad recibido
+  if (disponibilidad) {
+    salones = salones.filter((salon: Salon) => salon.disponibilidad === true);
+  }
+
+   // Filtrar salones según los demás criterios
     precio ? salones = salones.filter( (salon: Salon ) => salon.precio <= precio ) : null
 
     capacidad_max ? salones = salones.filter( (salon: Salon ) => salon.capacidad_max >= capacidad_max ) : null
     
     superficie ? salones = salones.filter( (salon: Salon ) => salon.superficie >= superficie ) : null
+
+    disponibilidad ? salones = salones.filter( (salon: Salon) => salon.disponibilidad >= disponibilidad ) : null
+
+    calefaccion ? salones = salones.filter( (salon: Salon) => salon.calefaccion >= calefaccion ) : null
 
     aire_acondicionado ? salones = salones.filter( (salon: Salon ) => salon.aire_acondicionado >= aire_acondicionado ) : null
 
@@ -87,7 +107,7 @@ export async function POST(request: Request){
     cocina ? salones = salones.filter( (salon: Salon ) => salon.cocina = cocina ) : null
 
     escenario ? salones = salones.filter( (salon: Salon ) => salon.escenario = escenario ) : null
-    
+
     ascendente ? salones = salones.sort((a, b) => a.precio - b.precio) : salones = salones.sort((a, b) => b.precio - a.precio)
 
     console.log(salones);

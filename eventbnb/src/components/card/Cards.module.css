@@ -2,6 +2,7 @@
 .card__container {
   position: relative;
   z-index: auto;
+  
 }
   @media (max-width: 390px) {
  
