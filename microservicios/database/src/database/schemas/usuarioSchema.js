@@ -32,6 +32,8 @@ const usuarioSchema = new Schema(
     localidad: String,
     imagen: String,
     pais: String,
+    borrado: {type: Boolean, default: false},
+    fechaCreacion: { type: Date, default: Date.now },
     salones: [{type: String, ref: "Salon"}],
     // reviews: [{type: String, ref: "Review"}]
   });
