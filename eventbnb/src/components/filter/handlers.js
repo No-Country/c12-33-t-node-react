@@ -64,6 +64,10 @@ export const handlePriceIconClick = (
   setFilteredCards(sortedCards);
 };
 //--------------------------------------------------
+//------------ Filtro Seguridad -------------
+const handleSecuritySelection = (value) => {
+  setSelectedSecurity(value);
+};
 
 //------------ Filtro Estacionamiento ------------
 export const handleParkingIconClick = (
@@ -82,7 +86,37 @@ export const handleParkingIconClick = (
   // Actualizar el estado con los salones filtrados
   setFilteredCards(filteredSalones);
 };
-//------------ Filtro Seguridad -------------
-const handleSecuritySelection = (value) => {
-  setSelectedSecurity(value);
+//------------ Filtro Pileta ------------
+export const handlePoolIconClick = (
+  isPoolFiltered,
+  setFilteredCards,
+  salonesList
+) => {
+  // Filtrar los salones según el estado de isPoolFiltered
+  const filteredSalones = isPoolFiltered
+    ? salonesList.filter((salon) => salon.estacionamiento)
+    : salonesList;
+
+  // Mostrar los resultados en la consola
+  console.log("Salones filtrados por pileta:", filteredSalones);
+
+  // Actualizar el estado con los salones filtrados
+  setFilteredCards(filteredSalones);
+};
+//------------ Filtro Disponibilidad ------------
+export const handleAvailableIconClick = (
+  isAvailableFiltered,
+  setFilteredCards,
+  salonesList
+) => {
+  // Filtrar los salones según el estado de isAvailableFiltered
+  const filteredSalones = isAvailableFiltered
+    ? salonesList.filter((salon) => salon.disponibilidad)
+    : salonesList;
+
+  // Mostrar los resultados en la consola
+  console.log("Salones filtrados por disponibiliidad:", filteredSalones);
+
+  // Actualizar el estado con los salones filtrados
+  setFilteredCards(filteredSalones);
 };
