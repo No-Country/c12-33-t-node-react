@@ -6,6 +6,7 @@ import Security from "./selection/SecurityFilter";
 import Bath from "./selection/BathFilter";
 // import Accessibility from "./selection/AccessibilityFilter";
 import style from "./Filter.module.css";
+import PriceFilter from "./selection/PriceFilter";
 
 // import { FilterContext } from "@/context/FilterContext";
 // import { FaTimes } from "react-icons/fa";
@@ -17,6 +18,7 @@ export default function FilterButton() {
   const [showModal, setShowModal] = useState(false);
   const [selectedSecurity, setSelectedSecurity] = useState("");
   const [selectedBath, setSelectedBath] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -28,6 +30,10 @@ export default function FilterButton() {
 
   const handleBathSelection = (value) => {
     setSelectedBath(value);
+  };
+
+  const handlePriceRange = (value) => {
+    setSelectedPrice(value);
   };
 
   return (
@@ -62,7 +68,10 @@ export default function FilterButton() {
                 className={style.scroll}
                 style={{ maxHeight: "400px", overflow: "auto" }}
               >
-                <Price />
+                <PriceFilter
+                // selectedPrice={selectedPrice}
+                // handlePriceRange={handlePriceRange}
+                />
                 <Capacity />
                 <Security
                   selectedSecurity={selectedSecurity}

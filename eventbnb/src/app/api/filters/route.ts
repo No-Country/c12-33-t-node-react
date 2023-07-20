@@ -36,7 +36,7 @@ interface Salon {
     puntuacion: String
     eventos: String 
   }
-export async function POST(request: Request){
+export default async function POST(request: Request){
     const { precio, capacidad_max, superficie, calefaccion, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
         baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
         sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
@@ -94,6 +94,15 @@ export async function POST(request: Request){
 
     console.log(salones);
    
+    // salones = salones.filter((salon: Salon) => {
+    //     const matchName = salon.nombre.toLowerCase().includes(name.toLowerCase());
+    //     const matchAddress = salon.domicilio.toLowerCase().includes(address.toLowerCase());
+    //     const matchCity = salon.localidad.toLowerCase().includes(city.toLowerCase());
+    //     const matchLocation = salon.ubicacion.toLowerCase().includes(location.toLowerCase());
+    //     const matchPrice = salon.precio <= price;
+    
+    //     return matchName && matchAddress && matchCity && matchLocation && matchPrice;
+    //   });
    
     
     return NextResponse.json({ message: "Ruta lista", results: salones })

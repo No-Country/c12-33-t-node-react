@@ -1,7 +1,26 @@
 import React, { useState } from "react";
 import style from "../Filter.module.css";
+import axios from "axios";
 
 export default function PriceFilter() {
+  const [priceRange, setPriceRange] = useState({
+    min: 0,
+    max: 1000,
+  });
+
+  const handlePriceRange = async () => {
+    console.log("Price range filter", priceRange);
+    setPriceRange({ ...priceRange, [e.target.name]: e.target.value });
+    try {
+      const response = await axios.post("/api/filters", {
+        price,
+      });
+      const { results } = response.data;
+    } catch (error) {
+      return error;
+    }
+  };
+
   return (
     <section
       className={`flex flex-col items-center ${style.scrollableSection}`}
@@ -14,8 +33,12 @@ export default function PriceFilter() {
           Precio mínimo:
           <input
             type="text"
-            className={` ${style.priceInput}`}
             placeholder="$0"
+            value={priceRange.min}
+            onChange={(e) =>
+              setPriceRange({ ...priceRange, min: e.target.value })
+            }
+            className={` ${style.priceInput}`}
           />
         </span>
 
@@ -25,6 +48,10 @@ export default function PriceFilter() {
             type="text"
             className={` ${style.priceInput}`}
             placeholder="$1000"
+            value={priceRange.max}
+            onChange={(e) =>
+              setPriceRange({ ...priceRange, max: e.target.value })
+            }
           />
         </span>
       </div>

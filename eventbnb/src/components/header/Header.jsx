@@ -1,20 +1,11 @@
 "use client";
-
-import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import style from "./Header.module.css";
-import { FaSearch, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import UserButton from "./UserButton";
-
-import {
-  handleSearch,
-  handleChange,
-  handleKeyPress,
-  handleClearSearch,
-} from "../filter/handlers";
 
 export default function Header({}) {
   const [cards, setCards] = useState("");
@@ -25,6 +16,7 @@ export default function Header({}) {
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const [filteredCards, setFilteredCards] = useState([]);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -80,56 +72,22 @@ export default function Header({}) {
           <Link href="/" className={`${style.logo}`}>
             festbnb
           </Link>
-          <div className={style.searchBar}>
-            <div className={style.searchBarAndList}>
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Buscar Salón"
-                value={searchLounge}
-                onChange={handleChange}
-                onKeyPress={handleKeyPress}
-                className={style.searchInput}
-              />
-              <div className={style.searchResult}>
-                {searchBar.length > 0 && (
-                  <SearchBar
-                    searchBar={searchBar}
-                    searchLounge={searchLounge}
-                    handleClearSearch={handleClearSearch}
-                    showOptions={showOptions}
-                  />
-                )}
-              </div>
+        </div>
+        <SearchBar setFilteredCards={setFilteredCards} />
+        <div className={style.user}>
+          <button
+            onClick={handleToggleOptions}
+            className={`flex items-center gap-x-4 ${style.userModal}`}
+          >
+            <div>
+              <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
             </div>
-            <div className={style.searchIcons}>
-              <div>
-                <button
-                  type="button"
-                  id="searchButton"
-                  onClick={(e) => handleSearch(e)}
-                  className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
-                >
-                  <FaSearch className={`text-white text-l ${style.faSearch}`} />
-                </button>
-              </div>
+            <div>
+              <FaUser className={style.faUser} />
             </div>
-          </div>
-          <div className={style.user}>
-            <button
-              onClick={handleToggleOptions}
-              className={`flex items-center gap-x-4 ${style.userModal}`}
-            >
-              <div>
-                <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
-              </div>
-              <div>
-                <FaUser className={style.faUser} />
-              </div>
-            </button>
-            <div className={` ${style.userOptions}`}>
-              <UserButton showOptions={showOptions} />
-            </div>
+          </button>
+          <div className={` ${style.userOptions}`}>
+            <UserButton showOptions={showOptions} />
           </div>
         </div>
       </div>

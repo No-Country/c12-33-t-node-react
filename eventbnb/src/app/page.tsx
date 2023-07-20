@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
 import { list } from "@/components/card/CardData";
 import { filteredCards, setFilteredCards } from "../components/filter/Filter";
 import Cards from "@/components/card/Cards";
 import Filter from "../components/filter/Filter";
+import SearchBar from "../components/header/SearchBar";
 
 export default function Home() {
   return (
