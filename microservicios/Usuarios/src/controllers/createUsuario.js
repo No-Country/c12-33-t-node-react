@@ -4,7 +4,7 @@ const HASH = 13;
 const { response } = require('../utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
+const sendMails = require('../utils/mails/SendMails');
 
 module.exports = async (req, res) => {
     console.log("creando usuario", req.body);
@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
     }
     else {
         user = await Usuario.create(req.body);
+        sendMails.send(user);
         console.log("USUARIO CREADO: ", user);
     }
     // const token = jwt.sign({

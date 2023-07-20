@@ -8,9 +8,9 @@ class SendMails {
         this.#nodemailer_client = createTransport(NODEMAILER_CONFIG);
     }
 
-    async send(mailOptions) {
+    async send(userData) {
         try {
-            return await this.#nodemailer_client.sendMail(mailOptions);
+            return await this.#nodemailer_client.sendMail(userData);
         } catch (e) {
             console.error(e);
         }

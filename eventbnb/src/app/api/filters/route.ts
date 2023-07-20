@@ -40,8 +40,9 @@ export async function POST(request: Request){
         baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
         sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
    
-
-    const { data } = await axios(`${url}/salones`)
+        
+    const { data } = await axios.get(`${url}/salones`)
+    
     let salones = data.data
    console.log(precio);
 

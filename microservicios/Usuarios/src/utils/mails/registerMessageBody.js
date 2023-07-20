@@ -1,6 +1,6 @@
 const { ADMIN_EMAIL } = require('./config');
 
-module.exports = function registerMessageBody(email) {
+module.exports = function registerMessageBody({ email }) {
     return {
         from: `"Nuevo registro" <${ADMIN_EMAIL}>`,
         to: `${email}`,
