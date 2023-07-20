@@ -1,7 +1,14 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
+
+import { IModalProvider, ModalContext } from "@/context/ModalProvider";
+
 import { FaStar } from "react-icons/fa";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const Reviews = () => {
+  const { open } = useContext(ModalContext) as IModalProvider;
+
   return (
     <section>
       {/* cabecera */}
@@ -27,10 +34,10 @@ const Reviews = () => {
         ))}
       </div>
       {/* reseñas */}
-      <div className="flex snap-x w-full sm:grid lg:grid-cols-2 gap-4 overflow-x-auto pb-6">
+      <div className="flex snap-x w-full sm:grid lg:grid-cols-2 gap-4 overflow-x-auto py-5 lg:py-0">
         {[1, 2, 3].map((item) => (
           <div
-            className="scroll-ml-6 snap-start overflow-x-auto shrink-0 lg:pr-28 w-4/5 sm:w-full border-2 sm:border-0 rounded-lg p-4 sm:pl-0 sm:py-0"
+            className="scroll-ml-6 snap-start overflow-x-auto shrink-0 lg:pr-24 w-4/5 sm:w-full border-2 sm:border-0 rounded-lg p-4 sm:pl-0 sm:pt-0 sm:pb-6"
             key={item}
           >
             <div className="flex gap-4 items-center mb-3">
@@ -56,6 +63,12 @@ const Reviews = () => {
               lo cuidan muy bien. Realmente disfrutamos de descansar y estar en
               la naturaleza. Muchas gracias!!
             </p>
+            <button className="mt-2" onClick={open}>
+              <span className="flex items-center underline gap-1">
+                <span className="font-medium">Mostrar más</span>
+                <MdArrowForwardIos size={13} />
+              </span>
+            </button>
           </div>
         ))}
       </div>
