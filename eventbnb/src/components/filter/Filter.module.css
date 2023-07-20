@@ -9,7 +9,6 @@ align-items: center;
 flex-direction: column;
   width: 100%;
   z-index: 99;
-  
   margin: calc((100% - 105%) / 2) auto;
 }
 .filterContainer:hover {
