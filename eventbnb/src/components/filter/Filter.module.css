@@ -43,9 +43,14 @@ flex-direction: column;
   display: grid;
   top: 0;
 }
+.iconWrapper {
+ font-size: 2rem;
+}
 
+
+
+/*Modal - Filter - Button*/
 .filterButton1 {
-  
   border: solid 2px var(--dark-grey);
   padding: 15px 25px;
   border-radius: 20px;
@@ -54,8 +59,6 @@ flex-direction: column;
   margin-bottom: 5px;
   margin-top: 10px;
 }
-
-/*Modal - Filter - Button*/
 .filterModal {
   position: fixed;
   display: flex;
