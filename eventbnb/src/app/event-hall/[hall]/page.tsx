@@ -14,7 +14,7 @@ import {
 } from "@/components/Hall";
 
 function Page({ params }: { params: { hall: string } }) {
-  console.log(params);
+  // console.log(params);
 
   return (
     <EventHallProvider>
@@ -30,7 +30,7 @@ function Page({ params }: { params: { hall: string } }) {
             <Header />
             {/* images web */}
             <Images />
-            <div className="flex flex-wrap md:flex-nowrap gap-2 md:flex-row">
+            <div className="flex flex-wrap md:flex-nowrap gap-2 md:flex-row relative">
               <div className="md:basis-8/12">
                 <div className="md:pr-16">
                   <Information />

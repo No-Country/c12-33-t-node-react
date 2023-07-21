@@ -22,7 +22,7 @@ const ModalBody: React.FC<ModalProps> = ({
             opacity: 0,
             transition: { duration: 0.05, delay: 0.1, ease: "easeInOut" },
           }}
-          className="fixed z-[200] w-screen h-screen top-0 flex flex-wrap justify-center content-center py-6 px-2 backdrop-blur-sm bg-slate-400/20"
+          className="fixed z-[200] w-screen h-screen top-0 flex flex-wrap justify-center content-center pt-20 sm:py-10 sm:px-8 backdrop-blur-sm bg-slate-400/20"
           onClick={handleCloseModal}
         >
           <motion.div
@@ -32,12 +32,12 @@ const ModalBody: React.FC<ModalProps> = ({
               scale: 0.6,
               transition: { duration: 0.1, ease: "easeInOut" },
             }}
-            className="relative max-w-md max-h-full py-5 px-5 bg-white rounded-xl"
+            className="relative max-w-5xl max-h-full py-5 px-5 bg-white rounded-xl"
             style={{ minHeight: "400px" }}
             onClick={handleModalContainerClick}
           >
             <button
-              className="absolute top-0 right-0 bg-red-500 rounded-full p-2 m-2"
+              className="absolute top-0 right-0 bg-rose-500 rounded-full p-2 m-2"
               onClick={handleCloseModal}
             ></button>
             <div className="h-full overflow-y-auto">{children}</div>
