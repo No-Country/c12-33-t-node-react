@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
@@ -5,6 +6,7 @@ import { CancellationPolicy, CardInfo, FundamentalRules, Gpay, IconNote, PriceIn
 import PayForm from "./FormularioPago";
 
 export default function Payment() {
+	const [selectedItem, setSelectedItem] = React.useState('Tarjeta de crédito o débito');
 	return (
 		<div className="flex items-center justify-center mx-auto p-2 px-20 container">
 			<div className="flex flex-col items-center w-full">
@@ -22,7 +24,7 @@ export default function Payment() {
 					<div className="w-1/2">
 						<div>
 							<YourTrip />
-							<PayForm />
+							<PayForm selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
 							<RequirementTrip />
 							<CancellationPolicy />
 							<FundamentalRules />
@@ -45,14 +47,17 @@ export default function Payment() {
 								</p>
 							</div>
 							<div className="py-6 flex items-center">
-								<button className="text-lg font-semibold py-3.5 px-9 rounded-lg text-white outline-none bg-gradient-to-r from-red-600 to-pink-600">
-									Solicita reservar
-								</button>
-								<button className="text-lg font-semibold py-3 px-16 rounded-lg outline-none bg-black ">
-									<div className="w-16">
-										<Gpay color={'#ffffff'}/>
-									</div>
-								</button>
+								{selectedItem === 'Tarjeta de crédito o débito' ? (
+									<button className="text-lg font-semibold py-3.5 px-9 rounded-lg text-white outline-none bg-gradient-to-r from-red-600 to-pink-600">
+										Solicita reservar
+									</button>
+								): (
+										<button className="text-lg font-semibold py-3 px-16 rounded-lg outline-none bg-black ">
+											<div className="w-16">
+												<Gpay color={'#ffffff'} />
+											</div>
+										</button>
+								)}
 							</div>
 						</div>
 					</div>
