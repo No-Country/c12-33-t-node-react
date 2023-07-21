@@ -107,8 +107,8 @@ export default function Filter({ list }) {
     // Cambiar el estado de filtrado de estacionamiento
     setIsPoolFiltered(!isPoolFiltered);
 
-    // Filtrar los salones según el estado actual de isParkingFiltered
-    handlePoolIconClick(isPoolFiltered, setIsPoolFiltered, list);
+    // Filtrar los salones según el estado actual de isPoolFiltered
+    handlePoolIconClick(isPoolFiltered, setFilteredCards, list);
   };
 
   //Disponibilidad
@@ -117,44 +117,67 @@ export default function Filter({ list }) {
     setIsAvailableFiltered(!isAvailableFiltered);
 
     // Filtrar los salones según el estado actual de isAvailableFiltered
-    handleAvailableIconClick(isAvailableFiltered, setIsAvailableFiltered, list);
+    handleAvailableIconClick(isAvailableFiltered, setFilteredCards, list);
   };
 
   return (
     <div
-      className={`w-full text-3xl pb-10 ${isFixed ? style.fixedFilter : ""} ${
+      className={` relative w-full text-3xl pb-10 ${
+        isFixed ? style.fixedFilter : ""
+      } ${
         style.filterContainer
       } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
     >
+      {/* <span
+        className="absolute top-0 left-0 cursor-pointer"
+        onClick={() => {
+          // Función para retroceder un slide en el Swiper
+          swiperRef.current.swiper.slidePrev();
+        }}
+      >
+        &lt;
+      </span>
+      <span
+        className="absolute top-0 right-0 cursor-pointer"
+        onClick={() => {
+          // Función para avanzar un slide en el Swiper
+          swiperRef.current.swiper.slideNext();
+        }}
+      >
+        &gt;
+      </span> */}
       <Swiper
-        slidesPerView={5}
+        slidesPerView={1}
         className={`w-4/5 ${style.swiperContainer}`}
         breakpoints={{
           390: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            width: 200,
           },
           640: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+            slidesPerView: 2,
+            spaceBetween: 30,
+            width: 400,
           },
           768: {
-            slidesPerView: 4,
-            spaceBetween: 30,
+            slidesPerView: 3,
+            spaceBetween: 40,
+            width: 600,
           },
           1024: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-            width: 400,
+            slidesPerView: 4,
+            spaceBetween: 60,
+            width: 800,
           },
         }}
         ref={swiperRef}
       >
-        {filteredCards.map((card) => (
+        {/* {filteredCards.map((card) => (
           <SwiperSlide key={card.id}>
             <CardItem card={card} />
           </SwiperSlide>
-        ))}
+        ))} */}
         <div className={`flex  ${style.swiper}`}>
           {/* <SwiperSlide>
             <div
@@ -168,10 +191,11 @@ export default function Filter({ list }) {
             </div>
           </SwiperSlide> */}
           {/* Filtro de estacionamiento */}
+
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isParkingFiltered ? "text-blue-500" : "text-black"
+                isParkingFiltered ? "text-dark font-semibold" : ""
               }`}
               onClick={handleParkingIconClickHandler}
             >
@@ -180,7 +204,7 @@ export default function Filter({ list }) {
                 alt="estacionamiento"
                 width={50}
                 height={50}
-                className={`mb-1 bg-white border-neutral-600 ${style.iconWrapper}`}
+                className={`mb-1  ${style.iconWrapper}`}
               />
               <p className="text-sm">Estacionamiento</p>
             </div>
@@ -189,7 +213,7 @@ export default function Filter({ list }) {
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isPoolFiltered ? "text-black" : "text-black"
+                isPoolFiltered ? "text-dark font-semibold" : ""
               }`}
               onClick={handlePoolIconClickHandler}
             >
@@ -198,7 +222,7 @@ export default function Filter({ list }) {
                 alt="pileta"
                 width={50}
                 height={50}
-                className={`mb-1 bg-white border-neutral-600 ${style.iconWrapper}`}
+                className={`mb-1  ${style.iconWrapper}`}
               />
               <p className="text-sm">Pileta</p>
             </div>
@@ -207,7 +231,7 @@ export default function Filter({ list }) {
           <SwiperSlide>
             <div
               className={`flex flex-col items-center ${
-                isAvailableFiltered ? "text-blue-500" : "text-black"
+                isAvailableFiltered ? "text-dark font-semibold" : ""
               }`}
               onClick={handleAvailableIconClickHandler}
             >
@@ -246,10 +270,21 @@ export default function Filter({ list }) {
             </div>
           </SwiperSlide>
         </div>
-        <div className={style.filterButton}>
-          <FilterButton />
-        </div>
       </Swiper>
+
+      {/* <span
+        className={`absolute cursor-pointer ${style.arrowRight}`}
+        onClick={() => {
+          // Función para avanzar un slide en el Swiper
+          swiperRef.current.swiper.slideNext();
+        }}
+      >
+        &gt;
+      </span> */}
+
+      <div className={`align-center ${style.filterButton}`}>
+        <FilterButton />
+      </div>
     </div>
   );
 }
