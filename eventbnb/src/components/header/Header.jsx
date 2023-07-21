@@ -1,31 +1,35 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import style from "./Header.module.css";
-import { FaSearch, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
-import SearchResults from "./SearchResults";
+import SearchBar from "./SearchBar";
 import UserButton from "./UserButton";
-import Filter from "../filter/Filter";
 
-const loungeData = [
-  { name: "Cumpleaños", price: 100 },
-  { name: "Bautizo", price: 200 },
-  { name: "Boda", price: 300 },
-  { name: "Temática", price: 400 },
-  { name: "Quinciañera", price: 500 },
-];
-
-export default function Header() {
-  const [lounges, setLounges] = useState(loungeData);
+export default function Header({}) {
+  const [cards, setCards] = useState("");
+  // const [lounges, setLounges] = useState(loungeData);
   const [searchLounge, setSearchLounge] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchBar, setSearchBar] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
 
+  const url = process.env.MICROSERVICIOS;
+
   useEffect(() => {
+    // const fetchCards = async () => {
+    //   try {
+    //     const { data } = await axios(`${url}/salones`);
+    //     const salonesList = data.data;
+    //     setList(salonesList);
+    //   } catch (error) {
+    //     console.error("Error al obtener la lista de salones:", error);
+    //   }
+    // };
+
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
@@ -36,48 +40,26 @@ export default function Header() {
       }
     };
 
+    // fetchCards();
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleSearch = () => {
-    if (searchLounge.trim() !== "") {
-      const filteredResults = lounges.filter((lounge) =>
-        lounge.name.toLowerCase().includes(searchLounge.toLowerCase())
-      );
-      setSearchResults(filteredResults);
-    }
-  };
-
-  const handleChange = (e) => {
-    setSearchLounge(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  const handleClearSearch = () => {
-    setSearchLounge("");
-    setSearchResults([]);
-  };
 
   const handleToggleOptions = () => {
     setShowOptions(!showOptions);
     setShowUserOptions(!showUserOptions);
   };
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
+  // const handleOpenModal = () => {
+  //   setShowModal(true);
+  // };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
 
   return (
     <>
@@ -89,61 +71,27 @@ export default function Header() {
           <Link href="/" className={`${style.logo}`}>
             festbnb
           </Link>
-          <div className={style.searchBar}>
-            <div className={style.searchBarAndList}>
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Buscar Salón"
-                value={searchLounge}
-                onChange={handleChange}
-                onKeyPress={handleKeyPress}
-                className={style.searchInput}
-              />
-              <div className={style.searchResult}>
-                {searchResults.length > 0 && (
-                  <SearchResults
-                    searchResults={searchResults}
-                    searchLounge={searchLounge}
-                    handleClearSearch={handleClearSearch}
-                    showOptions={showOptions}
-                  />
-                )}
-              </div>
+        </div>
+        <div className={style.search__container}>
+          <SearchBar />
+        </div>
+        <div className={style.user}>
+          <button
+            onClick={handleToggleOptions}
+            className={`flex items-center gap-x-4 ${style.userModal}`}
+          >
+            <div>
+              <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
             </div>
-            <div className={style.searchIcons}>
-              <div>
-                <button
-                  type="button"
-                  id="searchButton"
-                  onClick={handleSearch}
-                  className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
-                >
-                  <FaSearch className={`text-white text-l ${style.faSearch}`} />
-                </button>
-              </div>
+            <div>
+              <FaUser className={style.faUser} />
             </div>
-          </div>
-          <div className={style.user}>
-            <button
-              onClick={handleToggleOptions}
-              className={`flex items-center gap-x-4 ${style.userModal}`}
-            >
-              <div>
-                <AiOutlineMenu className="text-xl text-black w-6"></AiOutlineMenu>
-              </div>
-              <div>
-                <FaUser className={style.faUser} />
-              </div>
-            </button>
-            <div className={` ${style.userOptions}`}>
-              <UserButton showOptions={showOptions} />
-            </div>
+          </button>
+          <div className={` ${style.userOptions}`}>
+            <UserButton showOptions={showOptions} />
           </div>
         </div>
       </div>
-
-      <Filter />
     </>
   );
 }
