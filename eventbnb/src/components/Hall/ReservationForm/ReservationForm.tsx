@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 
 const ReservationForm = () => {
   return (
-    <div className="p-6 mt-10 border rounded-xl shadow-xl">
+    <div className="p-6 mt-10 border rounded-xl shadow-xl sticky top-56">
       <div className="flex justify-between pb-5">
         <div>
           <span className="text-xl font-medium">$867</span> <span>noche</span>
