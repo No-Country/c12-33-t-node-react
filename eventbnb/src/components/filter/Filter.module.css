@@ -55,7 +55,7 @@ align-items: center;
 
 /*Modal - Filter - Button*/
 .filterButton1 {
-  position: fixed;
+  /* position: fixed; */
   border: solid 2px var(--dark-grey);
   padding: 15px 25px;
   border-radius: 20px;
