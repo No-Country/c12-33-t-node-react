@@ -3,10 +3,9 @@
 }
 
 .filterContainer {
-  display: flex;
+  display: inline-flex;
  justify-content: space-between;
 align-items: center;
-flex-direction: column;
   width: 100%;
   z-index: 99;
   margin: calc((100% - 105%) / 2) auto;
@@ -33,30 +32,39 @@ flex-direction: column;
   padding: 0 1rem;
 }
 
-.swiperContainer {
+.swiperContainerFilter {
+  /* position: relative; */
   justify-content: space-evenly;
   align-items: center;
   font-size: 2rem;
   width: 100%;
   margin-top: 0;
-  display: grid;
+  display: flex;
   top: 0;
+  margin-left: 30%;
 }
 .iconWrapper {
  font-size: 2rem;
 }
 
-
+/*FLECHAS DE SLIDER DERECHA E IZQUIERDA*/
+.swiperContainerFilter .swiper-button-next,
+.swiperContainerFilter .swiper-button-prev {
+  display: none !important;
+}
 
 /*Modal - Filter - Button*/
 .filterButton1 {
+  position: fixed;
   border: solid 2px var(--dark-grey);
   padding: 15px 25px;
   border-radius: 20px;
   font-size: 25px;
-  margin-left: 50px;
-  margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: 15%;
+  margin-bottom: 20%;
+ align-items: center;
+     top: 15%;
+     margin-left: 50px;
 }
 .filterModal {
   position: fixed;
@@ -120,9 +128,9 @@ border-bottom: 2px solid var(--light-grey);
   margin-inline: auto;
 }
 .filterBottom{
+  
   margin-bottom: 0;
   bottom: 0;
-  justify-content: space-between;
   padding: 10px 0;
   border-top: 2px solid var(--light-grey);
 }
@@ -133,7 +141,7 @@ border-bottom: 2px solid var(--light-grey);
     text-align: center;
   }
 
-  .swiperContainer {
+  .swiperContainerFilter {
     justify-content: center;
     align-items: center;
     font-size: 2rem;
