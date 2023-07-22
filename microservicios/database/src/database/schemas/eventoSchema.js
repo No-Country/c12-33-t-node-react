@@ -5,21 +5,21 @@ const eventoSchema = new Schema(
     tipo_evento: String,
     Fecha_inicio: String,
     Fecha_fin: String,
-    clientes: [{type: String, ref: "User"}],
+    cliente: {type: String, ref: "Usuario"},
     salon: {type: String, ref: "Salon"},
-    // review: {type: String, ref: "Review"}
+    review: {type: String, ref: "Review", default:null}
   });
   eventoSchema.statics.list = async function (){
     return await this.find()
-      .populate("clientes",["_id","nombre","apellido"])
-      .populate("salon", ["_id","nombre"])
-      // .populate("review",["_id","comentario"])
+    .populate("cliente",["_id","nombre","apellido"])
+    .populate("salon", ["_id","nombre"])
+    .populate("review")
   };
   eventoSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
-    .populate("clientes",["_id","nombre","apellido"])
+    .populate("cliente",["_id","nombre","apellido"])
     .populate("salon", ["_id","nombre"])
-    // .populate("review",["_id","comentario"])
+    .populate("review")
   };
   eventoSchema.statics.insert = async function (evento){
     return await this.create(evento);
