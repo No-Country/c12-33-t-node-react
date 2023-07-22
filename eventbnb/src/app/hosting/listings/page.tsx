@@ -2,7 +2,7 @@ import MySalons from "@/components/hosting/MySalons";
 
 const page = () => {
     return(
-        <div className="w-3/4 py-20 mx-auto">
+        <div className="py-20 mx-auto relative ">
             <MySalons></MySalons>
         </div>
     )
