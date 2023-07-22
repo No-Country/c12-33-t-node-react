@@ -1,17 +1,17 @@
 'use client'
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import useUsers from '@/hooks/useUsers';
 import { useRouter } from "next/navigation"
 import AlertError from "@/components/alert/AlertError";
 import Image from "next/image";
 import axios from "axios";
-import AlertEdit from "../alert/AlertEdit";
 import {GiSandsOfTime} from 'react-icons/gi'
 import {AiOutlineCheck, AiOutlinePlus} from 'react-icons/ai'
 import Link from "next/link";
 import { services, columns, convertDate } from "./utils";
+import EditSalon from "./EditSalon";
 
 const MySalons = () => {
     
@@ -25,15 +25,17 @@ const MySalons = () => {
     const [activeServices, setActiveServices] = useState(services)
 
     const [isHidden, setIsHidden] = useState(true)
-    const [alertEdit, setAlertEdit] = useState(true)
+    const [formHidden, setFormHidden] = useState(true)
     const [userData, setUserData] = useState({})
-    
+    const [salonData, setSalonData] = useState({})
+
     useEffect(() => {
         const validate = async () => {
             try { 
                 const isValidate = validateSession()
                 setIsHidden(isValidate)
                 const dataUser = await getUserData()
+                console.log(dataUser)
                 setUserData(dataUser)
                 const { data } = await axios(`http://104.154.93.179:5000/usuarios/${dataUser._id}`)
                 
@@ -137,10 +139,16 @@ const MySalons = () => {
         return setAuxData(data)
     }
 
+    const handleFormEdit = async (hidden, id) => {
+        setFormHidden(hidden)
+        const dataSalon = data.filter(salon => salon._id === id)
+        setSalonData(dataSalon[0])
+    } 
+    
     return(
-        <div className="relative overflow-x-auto flex flex-col gap-y-6 py-12">
+        <div className="w-3/4 mx-auto overflow-x-auto flex flex-col gap-y-6">
             <h3 className="text-2xl font-semibold">{auxData.length} ANUNCIOS</h3>
-            <div className="flex items-center mb-6 justify-between pb-4 gap-x-4">
+            <div className="flex items-center mb-4 justify-between pb-4 gap-x-4">
                 <div className="flex items-center gap-x-3">
                     <label className="sr-only">Search</label>
                     <div className="relative hover:cursor-pointer">
@@ -221,14 +229,13 @@ const MySalons = () => {
                     </tr>
                 </thead>
                 <tbody className="overflow-x-auto">
-                    <Suspense fallback= {<tr>Loading...</tr>}>
                     {
                         auxData?.map((salon) => {
-                            return <tr className="bg-white border-b">
+                            return <tr key={salon?._id} className="bg-white border-b">
                                 <td className="w-4 p-4">
                                     <div className="flex items-center">
                                         <input 
-                                        onClick={() => setAlertEdit(false)} 
+                                        onClick={() => handleFormEdit(false, salon?._id)} 
                                         id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"/>
                                         <label className="sr-only">checkbox</label>
                                     </div>
@@ -264,11 +271,10 @@ const MySalons = () => {
                             </tr>
                         })  
                     }
-                    </Suspense>
                 </tbody>
             </table>
             <AlertError method={handleClick} param={'/'} isHidden={isHidden} setIsHidden={setIsHidden} href={'/'}></AlertError>
-            <AlertEdit setIsHidden={setAlertEdit} isHidden={alertEdit} href={'/'}></AlertEdit>
+            <EditSalon salonData={salonData} setSalonData={setSalonData}  setFormHidden={setFormHidden} formHidden={formHidden}></EditSalon>
         </div>
     )
 }
