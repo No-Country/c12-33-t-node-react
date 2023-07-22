@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import style from "../Filter.module.css";
 import axios from "axios";
 
+const url = process.env.MICROSERVICIOS;
+
 export default function PriceFilter({ selectedPrice, handlePrice }) {
   const [priceRange, setPriceRange] = useState({
-    min: 0,
+    min: 100,
     max: 1000,
   });
 
   const handlePriceRange = (e) => {
-    setPriceRange({ ...priceRange, [e.target.name]: e.target.value });
+    setPriceRange({ ...priceRange, [e.target?.name]: e.target?.value });
   };
 
   return (

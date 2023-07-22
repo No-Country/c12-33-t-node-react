@@ -6,30 +6,33 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import CardItem from "../card/CardItem";
-import FilterButton from "./FilterButton";
+import FilterButton from "./FilterModal";
 import "swiper/css";
 import style from "./Filter.module.css";
-import handlers from "./handlers";
 import pool from "../../../public/images/icons/pileta.png";
 import parking from "../../../public/images/icons/parking.png";
 import available from "../../../public/images/icons/available.png";
 import review from "../../../public/images/icons/review.png";
 import pet from "../../../public/images/icons/pet.png";
+import price from "../../../public/images/icons/price.png";
 import {
   handleParkingIconClick,
   handlePoolIconClick,
   handleAvailableIconClick,
+  handlePetIconClick,
+  handleSortByPrice,
+  selectedPriceIcon,
 } from "./handlers";
 
-import {
-  FaDollarSign,
-  FaParking,
-  FaWater,
-  FaDog,
-  FaCalendarAlt,
-  FaStar,
-} from "react-icons/fa";
-import { FilterContext } from "@/context/FilterContext";
+// import {
+//   FaDollarSign,
+//   FaParking,
+//   FaWater,
+//   FaDog,
+//   FaCalendarAlt,
+//   FaStar,
+// } from "react-icons/fa";
+import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 
 SwiperCore.use([]);
 export let filteredCards = []; // Variable exportada
@@ -39,13 +42,17 @@ export default function Filter({ list }) {
   const { filteredCards, setFilteredCards } = useContext(FilterContext);
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
-  const [sortDirection, setSortDirection] = useState("asc");
-  const [selectedPriceIcon, setSelectedPriceIcon] = useState("asc");
+  // const [sortDirection, setSortDirection] = useState("asc");
+  // const [selectedPriceIcon, setSelectedPriceIcon] = useState("asc");
   const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
   const [selectedPoolIcon, setSelectedPoolIcon] = useState(false);
+  const [selectedAvailableIcon, setSelectedAvailableIcon] = useState(false);
+  const [selectedPetIcon, setSelectedPetIcon] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
   const [isPoolFiltered, setIsPoolFiltered] = useState(false);
   const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
+  const [isPetFiltered, setIsPetFiltered] = useState(false);
+  const [isPriceFiltered, setIsPriceFiltered] = useState(false);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -85,7 +92,9 @@ export default function Filter({ list }) {
       const response = await axios.post("/api/filters", {
         estacionamiento: selectedParkingIcon,
         pileta: selectedPoolIcon,
-        disponibilidad: isAvailableFiltered,
+        disponibilidad: selectedAvailableIcon,
+        mascotas: selectedPetIcon,
+        precio: selectedPriceIcon,
       });
       const { results } = response.data;
       setFilteredCards(results);
@@ -120,15 +129,31 @@ export default function Filter({ list }) {
     handleAvailableIconClick(isAvailableFiltered, setFilteredCards, list);
   };
 
+  //Mascotas
+  const handlePetIconClickHandler = () => {
+    // Cambiar el estado de filtrado de disponibilidad
+    setIsPetFiltered(!isPetFiltered);
+
+    // Filtrar los salones según el estado actual de isPetFiltered
+    handlePetIconClick(isPetFiltered, setFilteredCards, list);
+  };
+
+  //Precio
+  const handlePriceIconClickHandler = () => {
+    const newSortDirection = selectedPriceIcon === "asc" ? "desc" : "asc"; // Cambiar la dirección del ordenamiento
+    handleSortByPrice(newSortDirection); // Llamar a la función de filtrado por precio en el componente Filter
+  };
+
   return (
-    <div
-      className={` relative w-full text-3xl pb-10 ${
-        isFixed ? style.fixedFilter : ""
-      } ${
-        style.filterContainer
-      } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
-    >
-      {/* <span
+    <FilterProvider>
+      <div
+        className={` relative w-full text-3xl pb-10 ${
+          isFixed ? style.fixedFilter : ""
+        } ${
+          style.filterContainer
+        } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
+      >
+        {/* <span
         className="absolute top-0 left-0 cursor-pointer"
         onClick={() => {
           // Función para retroceder un slide en el Swiper
@@ -146,133 +171,146 @@ export default function Filter({ list }) {
       >
         &gt;
       </span> */}
-      <Swiper
-        slidesPerView={1}
-        className={`w-4/5 ${style.swiperContainer}`}
-        breakpoints={{
-          390: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            width: 200,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-            width: 400,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-            width: 600,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 60,
-            width: 800,
-          },
-        }}
-        ref={swiperRef}
-      >
-        {/* {filteredCards.map((card) => (
+        <Swiper
+          slidesPerView={1}
+          className={`w-4/5 ${style.swiperContainer}`}
+          breakpoints={{
+            390: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+              width: 200,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+              width: 400,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+              width: 600,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 60,
+              width: 800,
+            },
+          }}
+          ref={swiperRef}
+        >
+          {/* {filteredCards.map((card) => (
           <SwiperSlide key={card.id}>
             <CardItem card={card} />
           </SwiperSlide>
         ))} */}
-        <div className={`flex  ${style.swiper}`}>
-          {/* <SwiperSlide>
-            <div
-              className={`flex flex-col items-center ${
-                selectedPriceIcon === "asc" ? "text-blue-500" : ""
-              }`}
-              onClick={handlePriceIconClickHandler}
-            >
-              <FaDollarSign className="mb-1" />
-              <p className="text-sm">Precio</p>
-            </div>
-          </SwiperSlide> */}
-          {/* Filtro de estacionamiento */}
+          <div className={`flex  ${style.swiper}`}>
+            {/* Filtro de price */}
+            <SwiperSlide>
+              <div
+                className={`flex flex-col items-center ${
+                  isPriceFiltered ? "text-dark font-semibold" : ""
+                }`}
+                onClick={handlePriceIconClickHandler}
+              >
+                <Image
+                  src={price}
+                  alt="precio"
+                  width={50}
+                  height={50}
+                  className={`mb-1  ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Precio</p>
+              </div>
+            </SwiperSlide>
+            {/* Filtro de estacionamiento */}
+            <SwiperSlide>
+              <div
+                className={`flex flex-col items-center ${
+                  isParkingFiltered ? "text-dark font-semibold" : ""
+                }`}
+                onClick={handleParkingIconClickHandler}
+              >
+                <Image
+                  src={parking}
+                  alt="estacionamiento"
+                  width={50}
+                  height={50}
+                  className={`mb-1  ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Estacionamiento</p>
+              </div>
+            </SwiperSlide>
+            {/* Filtro de pileta */}
+            <SwiperSlide>
+              <div
+                className={`flex flex-col items-center ${
+                  isPoolFiltered ? "text-dark font-semibold" : ""
+                }`}
+                onClick={handlePoolIconClickHandler}
+              >
+                <Image
+                  src={pool}
+                  alt="pileta"
+                  width={50}
+                  height={50}
+                  className={`mb-1  ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Pileta</p>
+              </div>
+            </SwiperSlide>
+            {/* Filtro por disponibilidad */}
+            <SwiperSlide>
+              <div
+                className={`flex flex-col items-center ${
+                  isAvailableFiltered ? "text-dark font-semibold" : ""
+                }`}
+                onClick={handleAvailableIconClickHandler}
+              >
+                <Image
+                  src={available}
+                  alt="disponibilidad"
+                  width={50}
+                  height={50}
+                  className={`mb-1 ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Disponibilidad</p>
+              </div>
+            </SwiperSlide>
+            {/* Filtro por reseñas */}
+            <SwiperSlide>
+              <div className="flex flex-col items-center">
+                <Image
+                  src={review}
+                  alt="reseña"
+                  width={50}
+                  height={50}
+                  className={`mb-1 ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Reseña</p>
+              </div>
+            </SwiperSlide>
+            {/* Filtro de mascotas */}
+            <SwiperSlide>
+              <div
+                className={`flex flex-col items-center ${
+                  isPetFiltered ? "text-dark font-semibold" : ""
+                }`}
+                onClick={handlePetIconClickHandler}
+              >
+                <Image
+                  src={pet}
+                  alt="mascotas"
+                  width={50}
+                  height={50}
+                  className={`mb-1  ${style.iconWrapper}`}
+                />
+                <p className="text-sm">Mascotas</p>
+              </div>
+            </SwiperSlide>
+          </div>
+        </Swiper>
 
-          <SwiperSlide>
-            <div
-              className={`flex flex-col items-center ${
-                isParkingFiltered ? "text-dark font-semibold" : ""
-              }`}
-              onClick={handleParkingIconClickHandler}
-            >
-              <Image
-                src={parking}
-                alt="estacionamiento"
-                width={50}
-                height={50}
-                className={`mb-1  ${style.iconWrapper}`}
-              />
-              <p className="text-sm">Estacionamiento</p>
-            </div>
-          </SwiperSlide>
-          {/* Filtro de pileta */}
-          <SwiperSlide>
-            <div
-              className={`flex flex-col items-center ${
-                isPoolFiltered ? "text-dark font-semibold" : ""
-              }`}
-              onClick={handlePoolIconClickHandler}
-            >
-              <Image
-                src={pool}
-                alt="pileta"
-                width={50}
-                height={50}
-                className={`mb-1  ${style.iconWrapper}`}
-              />
-              <p className="text-sm">Pileta</p>
-            </div>
-          </SwiperSlide>
-          {/* Filtro por disponibilidad */}
-          <SwiperSlide>
-            <div
-              className={`flex flex-col items-center ${
-                isAvailableFiltered ? "text-dark font-semibold" : ""
-              }`}
-              onClick={handleAvailableIconClickHandler}
-            >
-              <Image
-                src={available}
-                alt="disponibilidad"
-                width={50}
-                height={50}
-                className={`mb-1 ${style.iconWrapper}`}
-              />
-              <p className="text-sm">Disponibilidad</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="flex flex-col items-center">
-              <Image
-                src={review}
-                alt="reseña"
-                width={50}
-                height={50}
-                className={`mb-1 ${style.iconWrapper}`}
-              />
-              <p className="text-sm">Reseña</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="flex flex-col items-center">
-              <Image
-                src={pet}
-                alt="mascotas"
-                width={50}
-                height={50}
-                className={`mb-1  ${style.iconWrapper}`}
-              />
-              <p className="text-sm">Mascotas</p>
-            </div>
-          </SwiperSlide>
-        </div>
-      </Swiper>
-
-      {/* <span
+        {/* <span
         className={`absolute cursor-pointer ${style.arrowRight}`}
         onClick={() => {
           // Función para avanzar un slide en el Swiper
@@ -282,9 +320,10 @@ export default function Filter({ list }) {
         &gt;
       </span> */}
 
-      <div className={`align-center ${style.filterButton}`}>
-        <FilterButton />
+        <div className={`align-center ${style.filterButton}`}>
+          <FilterButton />
+        </div>
       </div>
-    </div>
+    </FilterProvider>
   );
 }

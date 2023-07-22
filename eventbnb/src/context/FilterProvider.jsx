@@ -20,6 +20,10 @@ function FilterProvider({ children }) {
   const [selectedType, setSelectedType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [range, setRange] = useState(0);
+  const [isParkingFiltered, setIsParkingFiltered] = useState(false);
+  const [isPoolFiltered, setIsPoolFiltered] = useState(false);
+  const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
+  const [isPetFiltered, setIsPetFiltered] = useState(false);
 
   // Filtros de cards en back
   const [selected, setSelected] = useState({
@@ -79,6 +83,14 @@ function FilterProvider({ children }) {
         setIsLoading,
         range,
         setRange,
+        isParkingFiltered,
+        setIsParkingFiltered,
+        isPoolFiltered,
+        setIsPoolFiltered,
+        isAvailableFiltered,
+        setIsAvailableFiltered,
+        isPetFiltered,
+        setIsPetFiltered,
       }}
     >
       {children}

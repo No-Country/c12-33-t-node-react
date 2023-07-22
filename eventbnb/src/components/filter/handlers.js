@@ -34,26 +34,13 @@ export const handleClearSearch = () => {
 };
 
 //------------ Filtro para el precio ------------
-export const handlePriceIconClick = (
-  sortDirection,
-  setSortDirection,
-  selectedPriceIcon,
-  setSelectedPriceIcon,
-  filteredCards,
-  setFilteredCards,
-  cards // Agregar la lista completa de cards
-) => {
-  // Cambiar la dirección del ordenamiento
-  const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
-  setSortDirection(newSortDirection);
+const handleSortByPrice = (sortDirection) => {
+  setIsPriceFiltered(true); // Indicar que el precio está filtrado
+  setSelectedPriceIcon(sortDirection); // Establecer el ícono seleccionado según la dirección de filtrado
 
-  // Actualizar el ícono de precio seleccionado
-  const newSelectedPriceIcon = selectedPriceIcon === "asc" ? "desc" : "asc";
-  setSelectedPriceIcon(newSelectedPriceIcon);
-
-  // Ordenar los cards según la dirección del ordenamiento y el ícono de precio seleccionado
-  const sortedCards = [...cards].sort((a, b) => {
-    if (newSelectedPriceIcon === "asc") {
+  // Filtrar los salones según la dirección del ordenamiento y el ícono de precio seleccionado
+  const sortedCards = [...list].sort((a, b) => {
+    if (sortDirection === "asc") {
       return a.precio - b.precio;
     } else {
       return b.precio - a.precio;
@@ -64,6 +51,7 @@ export const handlePriceIconClick = (
   setFilteredCards(sortedCards);
 };
 //--------------------------------------------------
+
 //------------ Filtro Seguridad -------------
 const handleSecuritySelection = (value) => {
   setSelectedSecurity(value);
@@ -120,3 +108,25 @@ export const handleAvailableIconClick = (
   // Actualizar el estado con los salones filtrados
   setFilteredCards(filteredSalones);
 };
+
+//------------ Filtro Mascotas ------------
+export const handlePetIconClick = (
+  isPetFiltered,
+  setFilteredCards,
+  salonesList
+) => {
+  // Filtrar los salones según el estado de isPoolFiltered
+  const filteredSalones = isPetFiltered
+    ? salonesList.filter((salon) => salon.mascotas)
+    : salonesList;
+
+  // Mostrar los resultados en la consola
+  console.log("Salones filtrados por mascotas:", filteredSalones);
+
+  // Actualizar el estado con los salones filtrados
+  setFilteredCards(filteredSalones);
+};
+
+//--------------------------------------------------
+//---------------- Filtros del MODAL ---------------
+//PRECIO

@@ -13,14 +13,14 @@ interface Salon {
     capacidad_max:Number
     superficie:Number
     disponibilidad: Boolean
-    calefaccion:Number
+    calefaccion:Number //Adri
     aire_acondicionado:Number
     parrilla:Number
     pantalla:Number
     personal_seguridad:Number
     baño:Number
     baño_accesibilidad:Boolean
-    accesibilidad:Boolean
+    accesibilidad:Boolean //Adri
     estacionamiento: Boolean
     catering: Boolean
     mesas_sillas: Boolean
@@ -36,17 +36,26 @@ interface Salon {
     propietario:String
     puntuacion: String
     eventos: String 
+    mascotas: Boolean //Adri
   }
 export default async function POST(request: Request){
     const { precio, capacidad_max, superficie, disponibilidad, calefaccion, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
         baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
-        sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
+        sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente, mascotas } = await request.json()
    
 
     const { data } = await axios(`${url}/salones`)
     let salones = data.data
    console.log(precio);
 
+   /* ---------- Agregado por Adriana ----------*/
+   // Filtrar salones según el valor de precio recibido
+   if (precio && precio.min !== undefined && precio.max !== undefined) {
+    salones = salones.filter((salon: Salon) => {
+      const salonPrecio = salon.precio;
+      return salonPrecio >= precio.min && salonPrecio <= precio.max;
+    });
+  }
    // Filtrar salones según el valor de estacionamiento recibido
   if (estacionamiento) {
     salones = salones.filter((salon: Salon) => salon.estacionamiento === true);
@@ -59,6 +68,11 @@ export default async function POST(request: Request){
   if (disponibilidad) {
     salones = salones.filter((salon: Salon) => salon.disponibilidad === true);
   }
+// Filtrar salones según el valor de mascotas recibido
+  if (mascotas) {
+    salones = salones.filter((salon: Salon) => salon.mascotas === true);
+  }
+  /* ---------- Fin de agregado por Adriana ----------*/
 
    // Filtrar salones según los demás criterios
     precio ? salones = salones.filter( (salon: Salon ) => salon.precio <= precio ) : null
@@ -108,6 +122,8 @@ export default async function POST(request: Request){
     escenario ? salones = salones.filter( (salon: Salon ) => salon.escenario = escenario ) : null
 
     ascendente ? salones = salones.sort((a, b) => a.precio - b.precio) : salones = salones.sort((a, b) => b.precio - a.precio)
+
+    mascotas ? salones = salones.filter( (salon: Salon ) => salon.mascotas = mascotas ) : null
 
     console.log(salones);
    
