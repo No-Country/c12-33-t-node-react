@@ -95,6 +95,7 @@ export default function Filter({ list }) {
   };
   //Estacionamiento
   const handleParkingIconClickHandler = () => {
+    console.log("handleParkingIconClickHandler");
     // Cambiar el estado de filtrado de estacionamiento
     setIsParkingFiltered(!isParkingFiltered);
 
@@ -113,6 +114,7 @@ export default function Filter({ list }) {
 
   //Disponibilidad
   const handleAvailableIconClickHandler = () => {
+    console.log("handleAvailableIconClickHandler");
     // Cambiar el estado de filtrado de disponibilidad
     setIsAvailableFiltered(!isAvailableFiltered);
 
@@ -326,7 +328,7 @@ export default function Filter({ list }) {
       </span> */}
 
         <div className={`align-center ${style.filterButton}`}>
-          <FilterButton />
+          <FilterButton list={list}/>
         </div>
         {/* Rendering filtered cards */}
         <div>

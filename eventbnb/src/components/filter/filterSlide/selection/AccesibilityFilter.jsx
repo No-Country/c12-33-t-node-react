@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 import style from "../../Filter.module.css";
+import { handleCheckboxChangeClick } from "../../filterModal/handlersModalFilters";
 
-export default function AccessibilityFilter({
-  selectedAccessibility,
-  handleAccessibility,
-}) {
+import { FilterContext, FilterProvider } from "@/context/FilterProvider";
+
+export default function AccessibilityFilter({selectedAccessibility2, handleAccessibility,list}) {
+
   // State array to store selected checkbox options
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedAccessibility, setSelectedAccessibility] = useState(false);
+  const { filteredCards, setFilteredCards } = useContext(FilterContext);
+
 
   // Function to handle checkbox selection
   const handleCheckboxChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
+    console.log("handleCheckboxChange");
+    setSelectedAccessibility(!selectedAccessibility);
+    handleCheckboxChangeClick(selectedAccessibility,setFilteredCards,option,list);
+    
   };
 
   const filterSalonesByOption = async (option) => {

@@ -10,6 +10,8 @@ import Accessibility from "../filterSlide/selection/AccesibilityFilter";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 import { handleAccesibility } from "./handlersModalFilters";
+import { handlePriceIconClick } from "../filterSlide/handlersSliderFilter";
+
 
 // SwiperCore.use([]);
 // export let filteredCards = []; // Variable exportada
@@ -17,6 +19,7 @@ import { handleAccesibility } from "./handlersModalFilters";
 
 export default function FilterModal({ list }) {
   const { filteredCards, setFilteredCards } = useContext(FilterContext);
+  const [isPriceFiltered, setIsPriceFiltered] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedSecurity, setSelectedSecurity] = useState("");
   const [selectedBath, setSelectedBath] = useState("");
@@ -69,26 +72,11 @@ export default function FilterModal({ list }) {
 
   const fetchFilteredSalones = async () => {
     console.log("SI FILTRA PRECIO");
-    try {
-      console.log("Before Axios request");
-      const response = await axios.post("/api/filters", {
-        precio: selectedPrice,
-        accesibilidad: selectedAccessibility,
-        baño_accesibilidad: isBathAccessibility,
-        pasillo_accesibilidad: isHallAccessibility,
-        entrada_accesibilidad: isEntranceAccessibility,
-        estacionamiento_accesibilidad: isParkingAccessibility,
-      });
-      console.log("After Axios request");
-      const { results } = response.data;
-      setFilteredCards(results);
-      console.log(results);
-    } catch (error) {
-      console.error("Error al obtener los salones filtrados:", error);
-    }
+    handlePriceIconClick(isPriceFiltered, setFilteredCards, list);
   };
 
   const handlePrice = () => {
+    console.log("EN EL handlePrice");
     setSelectedPrice(!selectedPrice);
     fetchFilteredSalones();
   };
@@ -143,7 +131,7 @@ export default function FilterModal({ list }) {
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />
                   <Accessibility
                     selectedAccessibility={selectedAccessibility}
-                    handleAccessibility={handleAccessibility}
+                    handleAccessibility={handleAccessibility} list={list}
                   />
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />

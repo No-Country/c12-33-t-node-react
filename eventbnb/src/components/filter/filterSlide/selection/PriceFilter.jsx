@@ -49,7 +49,7 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
             />
           </span>
         </div>
-        <button onClick={() => handlePrice(priceRange)}>Aplicar Filtro</button>
+        <button onClick={() => handlePrice()}>Aplicar Filtro</button>
       </section>
     </FilterProvider>
   );
