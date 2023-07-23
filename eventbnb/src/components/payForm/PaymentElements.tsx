@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import { FaMedal, FaStar } from "react-icons/fa6";
+import { FaMedal, FaStar, FaFacebookF, FaAngleDown } from "react-icons/fa6";
 import { PiWarningCircleFill } from "react-icons/pi";
+import { BiSolidCloudUpload } from "react-icons/bi"
 
 export function CardInfo() {
 	return (
@@ -47,20 +48,20 @@ export function PriceInfo() {
 					<span className="text-green-600">-S/2,901.36</span>
 				</div>
 				<div className="flex items-center justify-between">
-					<p className="underline">Tarifa de limpieza</p>
+					<p className="underline cursor-pointer">Tarifa de limpieza</p>
 					<span>S/327.21</span>
 				</div>
 				<div className="flex items-center justify-between">
-					<p className="underline">Tarifa por servicio de Festbnb</p>
+					<p className="underline cursor-pointer">Tarifa por servicio de Festbnb</p>
 					<span>S/1,021.41</span>
 				</div>
 				<div className="flex items-center justify-between">
-					<p className="underline">Impuestos</p>
+					<p className="underline cursor-pointer">Impuestos</p>
 					<span>S/723.50</span>
 				</div>
 				<hr className="border-gray-200" />
 				<div className="flex items-center justify-between">
-					<p className="font-semibold text-lg">Total (PEN)</p>
+					<p className="font-semibold text-lg">Total (<span className="underline cursor-pointer">PEN</span>)</p>
 					<span className="font-semibold text-lg">S/8,979.92</span>
 				</div>
 			</div>
@@ -92,35 +93,69 @@ export function YourTrip() {
 }
 
 export function RequirementTrip() {
+	const [messageModal, setMessageModal] = React.useState(false)
+	const [profileModal, setProfileModal] = React.useState(false)
+	const [numberPhoneModal, setNumberPhoneModal] = React.useState(false)
+
+	function openMessageModal() {
+		setMessageModal(true)
+	}
+	function closeMessageModal() {
+		setMessageModal(false)
+	}
+	function openProfileModal() {
+		setProfileModal(true)
+	}
+	function closeProfileModal() {
+		setProfileModal(false)
+	}
+	function openNumberPhoneModal() {
+		setNumberPhoneModal(true)
+	}
+	function closeNumberPhoneModal() {
+		setNumberPhoneModal(false)
+	}
 	return (
-		<div>
-			<h2 className="text-xl font-semibold pt-8 pb-6 border-t">Requerido para tu viaje</h2>
-			<div className="flex items-start justify-between pb-6">
-				<div>
-					<h3 className="text-xl font-semibold">Mensaje al anfitrion</h3>
-					<p className="text-sm mt-1">Cuéntale al anfitrión por qué viajas y cuándo llegas.</p>
+		<>
+			<div>
+				<h2 className="text-xl font-semibold pt-8 pb-6 border-t">Requerido para tu viaje</h2>
+				<div className="flex items-start justify-between pb-6">
+					<div>
+						<h3 className="text-xl font-semibold">Mensaje al anfitrion</h3>
+						<p className="text-sm mt-1">Cuéntale al anfitrión por qué viajas y cuándo llegas.</p>
+					</div>
+					<button onClick={openMessageModal} className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
 				</div>
-				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
-			</div>
-			<div className="flex items-start justify-between pb-6">
-				<div>
-					<h3 className="text-xl font-semibold">Foto de perfil</h3>
-					<p className="text-sm mt-1">Los anfitriones quieren saber quién se aloja en el alojamiento.</p>
+				<div className="flex items-start justify-between pb-6">
+					<div>
+						<h3 className="text-xl font-semibold">Foto de perfil</h3>
+						<p className="text-sm mt-1">Los anfitriones quieren saber quién se aloja en el alojamiento.</p>
+					</div>
+					<button onClick={openProfileModal} className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
 				</div>
-				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
-			</div>
-			<div className="flex items-start justify-between">
-				<div>
-					<h3 className="text-xl font-semibold">Número de teléfono</h3>
-					<p className="text-sm mt-1">Agrega y confirma tu número de teléfono para recibir actualizaciones del viaje.</p>
+				<div className="flex items-start justify-between">
+					<div>
+						<h3 className="text-xl font-semibold">Número de teléfono</h3>
+						<p className="text-sm mt-1">Agrega y confirma tu número de teléfono para recibir actualizaciones del viaje.</p>
+					</div>
+					<button onClick={openNumberPhoneModal} className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
 				</div>
-				<button className="px-4 py-1.5 border border-black rounded-lg hover:bg-gray-100">Agrega</button>
+				<div className="text-red-600 flex items-center mt-2  pb-6 space-x-1">
+					<PiWarningCircleFill />
+					<span>Esto es obligatorio</span>
+				</div>
 			</div>
-			<div className="text-red-600 flex items-center mt-2  pb-6 space-x-1">
-				<PiWarningCircleFill />
-				<span>Esto es obligatorio</span>
-			</div>
-		</div>
+
+			{messageModal && (
+				<ModalHostMessage onclick={closeMessageModal} />
+			)}
+			{profileModal && (
+				<ModalProfileImage onclick={closeProfileModal} />
+			)}
+			{numberPhoneModal && (
+				<ModalNumberPhone onclick={closeNumberPhoneModal} />
+			)}
+		</>
 	);
 }
 
@@ -150,6 +185,224 @@ export function FundamentalRules() {
 		</div>
 	);
 }
+
+// Modals
+
+export function ModalHostMessage({ onclick }) {
+	const [emptyText, setEmptyText] = React.useState('')
+
+	function handleEmptyChange(event) {
+		setEmptyText(event.target.value)
+	}
+	return (
+		<>
+			<div className="fixed top-0 left-0 flex items-center justify-center z-50 w-full h-full p-4">
+				<div className="relative w-full max-w-xl max-h-full">
+
+					<div className="relative bg-white rounded-lg shadow">
+
+						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
+
+							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
+								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+								</svg>
+								<span className="sr-only">Cerrar modal</span>
+							</button>
+
+							<h3 className="w-full text-lg text-center font-semibold">
+								Mensaje al anfitrión
+							</h3>
+						</div>
+
+						<div className="p-6">
+							<div>
+								<h3 className="pt-4 text-xl font-semibold">Mensaje al anfitrión</h3>
+								<p className="mt-1 text-sm">Cuéntale al anfitrión por qué viajas y cuándo llegas.</p>
+							</div>
+							<div className="flex items-center mt-4 pt-4 pb-8">
+								<Image
+									className="rounded-full w-11 h-11 object-cover"
+									src="https://a0.muscache.com/im/pictures/user/8170b473-10f6-46dd-bfd6-cf4ffaadbd3f.jpg?aki_policy=profile_x_medium"
+									alt=""
+									width={44}
+									height={44}
+								/>
+								<div className="pl-4">
+									<p className="text-lg font-semibold">Mathilde</p>
+									<p className="text-sm">Se unió a Airbnb en el 2014</p>
+								</div>
+							</div>
+							<div>
+								<textarea name="" id="" cols={30} rows={5}
+									value={emptyText}
+									onChange={handleEmptyChange}
+									className="w-full p-2 border rounded-lg text-base leading-5"></textarea>
+							</div>
+						</div>
+						<div className="flex items-center py-4 px-6 border-t border-neutral-200 rounded-b">
+							<button
+								type="button"
+								className={`w-full bg-zinc-950 text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300 ${emptyText.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''
+									}`}
+								disabled={emptyText.trim() === ''}
+							>
+								Guardar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="w-full h-full fixed top-0 left-0 z-40 bg-black opacity-50"></div>
+		</>
+	);
+}
+
+export function ModalProfileImage({ onclick }) {
+	const [emptyProfile, setEmptyProfile] = React.useState('')
+
+	function handleEmptyChange(event) {
+		setEmptyProfile(event.target.value)
+	}
+	return (
+		<>
+			<div className="fixed top-0 left-0 flex items-center justify-center z-50 w-full h-full p-4">
+				<div className="relative w-full max-w-xl max-h-full">
+
+					<div className="relative bg-white rounded-lg shadow">
+
+						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
+
+							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
+								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+								</svg>
+								<span className="sr-only">Cerrar modal</span>
+							</button>
+
+							<h3 className="w-full text-lg text-center font-semibold">
+								Agrega tu foto de perfil
+							</h3>
+						</div>
+
+						<div className="p-6">
+							<div className="flex items-center justify-center">
+								<Image
+									className="rounded-full w-32 h-32 object-cover"
+									src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/account-activation-shared/images/dls19_user_pic.73f51bce14da5e9d49c22a8bc31a7d13.png"
+									alt=""
+									width={128}
+									height={128}
+								/>
+							</div>
+							<div className="my-8">
+								<p>Elige una imagen en la que se te vea la cara. Los huéspedes podrán ver tu foto de perfil solo cuando la reservación esté confirmada.</p>
+							</div>
+							<div className="mb-4 space-y-3">
+								<button
+									type="button"
+									className={`w-full bg-[#3b5998] text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300 ${emptyProfile.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''
+										}`}
+									disabled={emptyProfile.trim() === ''}
+								>
+									<span className="flex items-center justify-center space-x-1">
+										<FaFacebookF />
+										Usa la Foto de Facebook
+									</span>
+								</button>
+								<button
+									type="button"
+									className="w-full bg-white text-zinc-950 text-base font-semibold rounded-lg border border-zinc-950 py-3 px-6 hover:bg-slate-200 active:scale-95 ease-in-out duration-300"
+								>
+									<span className="flex items-center justify-center space-x-1">
+										<BiSolidCloudUpload />
+										Subir una foto
+									</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="w-full h-full fixed top-0 left-0 z-40 bg-black opacity-50"></div>
+		</>
+	);
+}
+
+export function ModalNumberPhone({ onclick }) {
+	const [emptyProfile, setEmptyProfile] = React.useState('')
+
+	function handleEmptyChange(event) {
+		setEmptyProfile(event.target.value)
+	}
+	return (
+		<>
+			<div className="fixed top-0 left-0 flex items-center justify-center z-50 w-full h-full p-4">
+				<div className="relative w-full max-w-xl max-h-full">
+
+					<div className="relative bg-white rounded-lg shadow">
+
+						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
+
+							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
+								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+								</svg>
+								<span className="sr-only">Cerrar modal</span>
+							</button>
+
+							<h3 className="w-full text-lg text-center font-semibold">
+								Agregar número de teléfono
+							</h3>
+						</div>
+
+						<div className="p-6">
+							<div className="p-6">
+								<p>Te enviaremos actualizaciones del viaje y un texto para verificar este número.</p>
+								
+								<div className="my-6">
+									<div className="mb-2 border rounded-lg">
+										<div className="w-full flex items-center justify-between cursor-pointer">
+											<div className="relative w-full">
+												<p className="block p-4 pr-0 w-full appearance-none peer">Aquí va el código de país</p>
+												<label htmlFor="card_City" className="absolute text-lg text-neutral-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-neutral-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+													País o region
+												</label>
+											</div>
+											<span className="w-6 mr-4 text-neutral-600">
+												<FaAngleDown size={24} />
+											</span>
+										</div>
+										<hr />
+										<div className="relative">
+											<input type="text" id="cardNumber" className="block p-4 w-full appearance-none peer" placeholder=" " />
+											<label htmlFor="cardNumber" className="absolute text-lg text-neutral-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-neutral-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+												<div className="flex items-center justify-center space-x-1">
+													<span>Número de teléfono</span>
+												</div>
+											</label>
+										</div>
+									</div>
+									<p>Te enviaremos un código por SMS para confirmar tu número. Sujeto a las tarifas estándar para mensajes y datos.</p>
+								</div>
+								<button
+									type="button"
+									className="bg-zinc-800 hover:bg-zinc-950 text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300"
+								>
+									Continua
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="w-full h-full fixed top-0 left-0 z-40 bg-black opacity-50"></div>
+		</>
+	);
+}
+
+
+
 
 export function IconNote() {
 	return (
@@ -224,7 +477,7 @@ export function MasterCard() {
 	);
 }
 
-export function Gpay({color}) {
+export function Gpay({ color }) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 12">
 			<g fill="none" fillRule="evenodd">
