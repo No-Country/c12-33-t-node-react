@@ -2,12 +2,16 @@ import React from "react";
 import style from "./Header.module.css";
 import { FaSearch } from "react-icons/fa";
 import CardsFiltered from "../../app/api/filters/route";
+import { FilterProvider } from "../../context/FilterProvider";
+import { useContext } from "../../context/FilterProvider";
+import axios from "axios";
+
 export default function SearchBar({ searchLounge, handleClearSearch }) {
   const handleSearch = () => {
     const filtro = document.getElementById("searchInput").value;
     console.log("EN EL handleSearch");
     const salones = CardsFiltered;
-    console.log(salones);
+    console.log("salones");
   };
 
   return (

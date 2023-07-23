@@ -34,7 +34,7 @@ align-items: center;
 
 .swiperContainerFilter {
   /* position: relative; */
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   font-size: 2rem;
   width: 100%;
@@ -101,7 +101,7 @@ align-items: center;
 .textPrice{
   margin-top: 20px;
 }
-.textPrice, .textSecurity, .textCapacity, .textBath{
+.textPrice, .textSecurity, .textCapacity, .textBath, .textAccesibility{
   align-self: flex-start;
   margin-left: 20px;
   font-size: 1.5rem;

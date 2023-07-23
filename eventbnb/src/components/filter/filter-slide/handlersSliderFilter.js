@@ -34,9 +34,13 @@ export const handleClearSearch = () => {
 };
 
 //------------ Filtro para el precio ------------
-const handleSortByPrice = (sortDirection) => {
-  setIsPriceFiltered(true); // Indicar que el precio está filtrado
-  setSelectedPriceIcon(sortDirection); // Establecer el ícono seleccionado según la dirección de filtrado
+export const handleSortByPrice = (
+  sortDirection,
+  setIsPriceFiltered,
+  setFilteredCards,
+  list
+) => {
+  // setSelectedPriceIcon(sortDirection);
 
   // Filtrar los salones según la dirección del ordenamiento y el ícono de precio seleccionado
   const sortedCards = [...list].sort((a, b) => {
@@ -49,11 +53,13 @@ const handleSortByPrice = (sortDirection) => {
 
   // Actualizar los cards filtrados en el estado
   setFilteredCards(sortedCards);
+
+  setIsPriceFiltered(true);
 };
 //--------------------------------------------------
 
 //------------ Filtro Seguridad -------------
-const handleSecuritySelection = (value) => {
+export const handleSecuritySelection = (value) => {
   setSelectedSecurity(value);
 };
 

@@ -5,10 +5,10 @@ import React, { useRef, useContext } from "react";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import CardItem from "../card/CardItem";
-import FilterButton from "./FilterModal";
+import CardItem from "../../card/CardItem";
+import FilterButton from "../filter-modal/FilterModal";
 import "swiper/css";
-import style from "./Filter.module.css";
+import style from "../../Filter.module.css";
 import pool from "../../../public/images/icons/pileta.png";
 import parking from "../../../public/images/icons/parking.png";
 import available from "../../../public/images/icons/available.png";
@@ -22,16 +22,8 @@ import {
   handlePetIconClick,
   handleSortByPrice,
   selectedPriceIcon,
-} from "./handlers";
+} from "./handlersSliderFilter";
 
-// import {
-//   FaDollarSign,
-//   FaParking,
-//   FaWater,
-//   FaDog,
-//   FaCalendarAlt,
-//   FaStar,
-// } from "react-icons/fa";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 
 SwiperCore.use([]);
@@ -42,17 +34,16 @@ export default function Filter({ list }) {
   const { filteredCards, setFilteredCards } = useContext(FilterContext);
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
-  // const [sortDirection, setSortDirection] = useState("asc");
-  // const [selectedPriceIcon, setSelectedPriceIcon] = useState("asc");
-  const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
   const [selectedPoolIcon, setSelectedPoolIcon] = useState(false);
   const [selectedAvailableIcon, setSelectedAvailableIcon] = useState(false);
   const [selectedPetIcon, setSelectedPetIcon] = useState(false);
+  const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
   const [isPoolFiltered, setIsPoolFiltered] = useState(false);
   const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
   const [isPetFiltered, setIsPetFiltered] = useState(false);
   const [isPriceFiltered, setIsPriceFiltered] = useState(false);
+  const [selectedPriceIcon, setSelectedPriceIcon] = useState(false);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -87,7 +78,7 @@ export default function Filter({ list }) {
     };
   }, []);
 
-  const fetchFilteredSalones = async (selectedParkingIcon) => {
+  const fetchFilteredSalones = async () => {
     try {
       const response = await axios.post("/api/filters", {
         estacionamiento: selectedParkingIcon,
@@ -139,9 +130,23 @@ export default function Filter({ list }) {
   };
 
   //Precio
+  // const handlePriceIconClickHandler = () => {
+  //   const newSortDirection = selectedPriceIcon === "asc" ? "desc" : "asc";
+  //   handleSortByPrice(newSortDirection);
+  //   setIsPriceFiltered(true);
+  // };
   const handlePriceIconClickHandler = () => {
-    const newSortDirection = selectedPriceIcon === "asc" ? "desc" : "asc"; // Cambiar la dirección del ordenamiento
-    handleSortByPrice(newSortDirection); // Llamar a la función de filtrado por precio en el componente Filter
+    const currentSortDirection = selectedPriceIcon;
+    const newSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
+
+    handleSortByPrice(
+      newSortDirection,
+      setIsPriceFiltered,
+      setFilteredCards,
+      list
+    );
+    setSelectedPriceIcon(newSortDirection);
+    // setIsPriceFiltered(true);
   };
 
   return (
@@ -172,31 +177,31 @@ export default function Filter({ list }) {
         &gt;
       </span> */}
         <Swiper
-          slidesPerView={1}
+          // slidesPerView={5}
           className={`w-4/5 ${style.swiperContainer}`}
-          breakpoints={{
-            390: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-              width: 200,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-              width: 400,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-              width: 600,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 60,
-              width: 800,
-            },
-          }}
-          ref={swiperRef}
+          // breakpoints={{
+          //   390: {
+          //     slidesPerView: 1,
+          //     spaceBetween: 20,
+          //     width: 200,
+          //   },
+          //   640: {
+          //     slidesPerView: 2,
+          //     spaceBetween: 30,
+          //     width: 400,
+          //   },
+          //   768: {
+          //     slidesPerView: 3,
+          //     spaceBetween: 40,
+          //     width: 600,
+          //   },
+          //   1024: {
+          //     slidesPerView: 4,
+          //     spaceBetween: 60,
+          //     width: 800,
+          //   },
+          // }}
+          // ref={swiperRef}
         >
           {/* {filteredCards.map((card) => (
           <SwiperSlide key={card.id}>
@@ -217,7 +222,7 @@ export default function Filter({ list }) {
                   alt="precio"
                   width={50}
                   height={50}
-                  className={`mb-1  ${style.iconWrapper}`}
+                  className={`mb-1 ${style.iconWrapper}`}
                 />
                 <p className="text-sm">Precio</p>
               </div>
@@ -322,6 +327,12 @@ export default function Filter({ list }) {
 
         <div className={`align-center ${style.filterButton}`}>
           <FilterButton />
+        </div>
+        {/* Rendering filtered cards */}
+        <div>
+          {filteredCards.map((card) => (
+            <CardItem key={card.id} card={card} />
+          ))}
         </div>
       </div>
     </FilterProvider>
