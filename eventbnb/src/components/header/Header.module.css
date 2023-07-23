@@ -1,3 +1,4 @@
+
 .fixedHeader {
   position: fixed;
   top: 0;
@@ -5,16 +6,16 @@
   z-index: 100; /* Asegura que el header fijo se muestre por encima del contenido */
 }
 .container{
+  display: flex;
   border-bottom: solid 1px var(--light-grey);
+  background-color: var(--white);
+  justify-content: space-around;
   
 }
 .search__container {
-    display: flex;
+    
     background-color: #fff;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+   
   }
   
   .logo {
@@ -22,6 +23,10 @@
     font-weight: 600;
     font-size: var(--text-l);
     color: var(--pink);
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
   
   /* SEARCHBAR */
@@ -53,6 +58,7 @@
     padding: 20px 20px;
     outline: none;
     height: 60px;
+    width: 25rem;
   }
   
   .searchInput {
@@ -72,7 +78,7 @@
   .searchInput::placeholder, .userModal::placeholder {
     color: var(--foreground-rgb);
     font-weight: 500;
-    font-size: var(--text-m);
+    font-size: var(--text-s);
   }
   
   .searchInput::placeholder:focus, .userModal::placeholder:focus {

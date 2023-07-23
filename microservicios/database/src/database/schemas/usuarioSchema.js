@@ -33,6 +33,8 @@ const usuarioSchema = new Schema(
     localidad: String,
     imagen: String,
     pais: String,
+    borrado: {type: Boolean, default: false},
+    fechaCreacion: { type: Date, default: Date.now },
     salones: [{type: String, ref: "Salon"}],
     // reviews: [{type: String, ref: "Review"}]
   });
@@ -42,7 +44,8 @@ const usuarioSchema = new Schema(
   };
   usuarioSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
-      .populate("salones",["_id","nombre","domicilio"])
+      .populate("salones")
+      .populate("eventos")
   };
   usuarioSchema.statics.getByEmail = async function (email){
     console.log(email);

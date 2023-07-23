@@ -2,12 +2,13 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import useUser from "../hooks/useUser"; // Este hook debe manejar la lógica del usuario actual y los servicios
 import { countries } from "../utils/countries";
 import { FaUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookies";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import useUsers from "@/hooks/useUsers";
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -30,44 +31,32 @@ const schema = yup.object().shape({
   pais: yup.string().required("El país es requerido"),
 });
 
-// if (!session && !token) {
-//   window.location.href = "/";
-// }
+const EditProfile: React.FC = () => {
+  const { getUserData } = useUsers();
+  const [data, setData] = useState();
+  const { data: session } = useSession();
+  const [jsonWebToken, setJsonWebToken] = useState("");
+  const router = useRouter();
 
-async function getData() {
-  let token = getCookie("userToken");
-  const res = await fetch("http://34.125.90.13:5000/usuarios/protected", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Algo salio mal");
-  }
+  useEffect(() => {
+    const validate = async () => {
+      try {
+        const dataUser = await getUserData();
+        setData(dataUser);
+      } catch (error) {
+        alert(error);
+      }
+    };
+    validate();
+  }, [getUserData]);
 
-  return res.json();
-}
-
-const EditProfile: React.FC = async () => {
-  // const { getUser, updateUser } = useUser(); // Aquí obtiene los datos del usuario actual y la función para actualizar el perfil
-  // const [user, setUser] = useState<FormData>();
-  // const userr = await getUser();
-
-  // useEffect(() => {
-  // const getDataUser = async () =>{
-  //   try {
-  //     setUser(userr)
-  //     console.log(user);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // getDataUser();
-
-  // }, []);
-  const data = await getData();
+  useEffect(() => {
+    const jwt = getCookie("userToken");
+    setJsonWebToken(jwt);
+    if (!session && !jsonWebToken) {
+      router.push("/");
+    }
+  }, [jsonWebToken, router, session]);
 
   const {
     register,
@@ -79,10 +68,7 @@ const EditProfile: React.FC = async () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    // const id = "649f8ccc12b6415694a8e746";
     console.log(data);
-    // await updateUser(id, data);
-    // redirigir al usuario a otra página después de actualizar el perfil
   };
 
   return (

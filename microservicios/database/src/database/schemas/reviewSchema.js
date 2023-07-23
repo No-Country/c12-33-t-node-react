@@ -4,8 +4,14 @@ const reviewSchema = new Schema(
     _id: String,
     comentario: String,
     puntaje: String,
+<<<<<<< HEAD
     fecha: Date,
     cliente: {type: String, ref: "Usuario"},
+=======
+    borrado: {type: Boolean, default: false},
+    fecha: { type: Date, default: Date.now },
+    cliente: {type: String, ref: "User"},
+>>>>>>> e270dd3cd674567f589c86f8e544c96d48b3e6a4
     evento: {type: String, ref: "Evento"}
   });
   reviewSchema.statics.list = async function (){

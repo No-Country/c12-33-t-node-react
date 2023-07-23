@@ -29,9 +29,17 @@ export default function Card({ card }) {
           pagination={{ clickable: true }}
           className="absolute z-0 rounded-xl w-[300px] h-[285px]  hidden"
         >
-          {card.imagenes.map((src, i) => (
+          {/* {card.imagenes.map((src, i) => ( */}
+          {card.imagenes.map((i) => (
             <SwiperSlide key={i}>
               {/* <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} /> */}
+              <Image
+                src={""}
+                width={300}
+                height={285}
+                className="w-[300px] h-[285px] object-cover"
+                alt={card.name}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -40,8 +48,9 @@ export default function Card({ card }) {
           onClick={handleButtonClick}
         >
           <FaHeart
-            className={`text-xl  ${isFavorite ? "text-pink-600" : "text-black opacity-50"
-              }`}
+            className={`text-xl  ${
+              isFavorite ? "text-pink-600" : "text-black opacity-50"
+            }`}
           />
           <FaRegHeart className="text-2xl text-white absolute" />
         </button>
@@ -61,7 +70,11 @@ export default function Card({ card }) {
             <p className="text-base text-black font-bold">{card.nombre}</p>
           ) : null}
           <p className="text-sm text-black font-bold">
-            {card.domicilio ? card.domicilio : card.localidad ? card.localidad : null}
+            {card.domicilio
+              ? card.domicilio
+              : card.localidad
+              ? card.localidad
+              : null}
             {card.domicilio && card.localidad ? `, ${card.localidad}` : null}
           </p>
           {card.localidad ? (

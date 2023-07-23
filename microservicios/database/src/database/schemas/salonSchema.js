@@ -29,6 +29,8 @@ const salonSchema = new Schema(
     cocina:Boolean,
     escenario:Boolean,
     descripcion: String,
+    borrado: {type: Boolean, default: false},
+    fechaCreacion: { type: Date, default: Date.now },
     propietario: {type: String, ref: "Usuario"},
     reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
@@ -37,13 +39,13 @@ const salonSchema = new Schema(
   salonSchema.statics.list = async function (){
     return await this.find()
       .populate("propietario",["_id","nombre","apellido"])
-      .populate("eventos",["_id","nombre_evento"])
+      .populate("eventos",["_id","nombre_evento", "Fecha_inicio","Fecha_fin"])
   };
   salonSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
     .populate("propietario",["_id","nombre","apellido"])
-    .populate("eventos",["_id","nombre_evento"])
-    .populate("reviews",["_id","comentario", "puntaje", "fecha", "cliente", "evento"])
+    .populate("eventos")
+    .populate("reviews")
   };
   salonSchema.statics.insert = async function (salon){
     return await this.create(salon);

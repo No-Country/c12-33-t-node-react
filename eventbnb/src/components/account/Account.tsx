@@ -1,65 +1,52 @@
 "use client";
 import Image from "next/image";
 import account from "../utils/account.json";
-import useUser from "../hooks/useUser";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getCookie } from "@/utils/cookies";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import useUsers from "@/hooks/useUsers";
 
-interface User {
-  _id: string;
-  nombre: string;
-  apellido: string;
-  email: string;
-  password: string;
-  telefono: number;
-  fechaNacimiento: Date;
-  domicilio: string;
-  localidad: string;
-  pais: string;
-}
-// if (!session && !token) {
-//   window.location.href = "/";
+// interface User {
+//   _id: string;
+//   nombre: string;
+//   apellido: string;
+//   email: string;
+//   password: string;
+//   telefono: number;
+//   fechaNacimiento: Date;
+//   domicilio: string;
+//   localidad: string;
+//   pais: string;
 // }
 
-async function getData() {
-  let token = getCookie("userToken");
-  const res = await fetch("http://34.125.90.13:5000/usuarios/protected", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+const Account: React.FC = () => {
+  const { getUserData } = useUsers();
+  const [data, setData] = useState();
+  const { data: session } = useSession();
+  const [jsonWebToken, setJsonWebToken] = useState("");
+  const router = useRouter();
 
-  return res.json();
-}
+  useEffect(() => {
+    const validate = async () => {
+      try {
+        const dataUser = await getUserData();
+        setData(dataUser);
+      } catch (error) {
+        alert(error);
+      }
+    };
+    validate();
+  }, [getUserData]);
 
-const Account: React.FC = async () => {
-  // const { getUser } = useUser();
-  // const user = await getUser();
-
-  // const { getUser} = useUser(); // Aquí obtiene los datos del usuario actual y la función para actualizar el perfil
-  // const [user, setUser] = useState<User>();
-  // const userr = await getUser();
-
-  // useEffect(() => {
-  //   const getDataUser = async () =>{
-  //     try {
-  //       setUser(userr)
-  //       console.log(user);
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   getDataUser();
-  // }, [userr,user])
-
-  const data = await getData();
+  useEffect(() => {
+    const jwt = getCookie("userToken");
+    setJsonWebToken(jwt);
+    if (!session && !jsonWebToken) {
+      router.push("/");
+    }
+  }, [jsonWebToken, router, session]);
 
   return (
     <section className="mx-4">
