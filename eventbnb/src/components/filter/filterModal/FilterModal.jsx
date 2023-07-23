@@ -2,11 +2,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import CardItem from "@/components/card/CardItem";
 import axios from "axios";
-import Capacity from "../filter-slide/selection/CapacityFilter";
-import Security from "../filter-slide/selection/SecurityFilter";
-import Bath from "../filter-slide/selection/BathFilter";
-import PriceFilter from "../filter-slide/selection/PriceFilter";
-import Accessibility from "../filter-slide/selection/AccesibilityFilter";
+import Capacity from "../filterSlide/selection/CapacityFilter";
+import Security from "../filterSlide/selection/SecurityFilter";
+import Bath from "../filterSlide/selection/BathFilter";
+import PriceFilter from "../filterSlide/selection/PriceFilter";
+import Accessibility from "../filterSlide/selection/AccesibilityFilter";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 import { handleAccesibility } from "./handlersModalFilters";

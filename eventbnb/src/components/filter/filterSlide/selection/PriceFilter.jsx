@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FilterProvider } from "../../../../context/FilterProvider";
 import { useContext } from "../../../../context/FilterProvider";
-import style from "../Filter.module.css";
+import style from "../../Filter.module.css";
 import axios from "axios";
 
 const url = process.env.MICROSERVICIOS;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import style from "../Filter.module.css";
+import style from "../../Filter.module.css";
 
 export default function AccessibilityFilter({
   selectedAccessibility,

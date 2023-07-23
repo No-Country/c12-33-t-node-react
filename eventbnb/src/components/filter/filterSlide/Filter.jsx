@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import CardItem from "../../card/CardItem";
-import FilterButton from "../filter-modal/FilterModal";
+import FilterButton from "../filterModal/FilterModal";
 import "swiper/css";
-import style from "../../Filter.module.css";
-import pool from "../../../public/images/icons/pileta.png";
-import parking from "../../../public/images/icons/parking.png";
-import available from "../../../public/images/icons/available.png";
-import review from "../../../public/images/icons/review.png";
-import pet from "../../../public/images/icons/pet.png";
-import price from "../../../public/images/icons/price.png";
+import style from "../Filter.module.css";
+import pool from "../../../../public/images/icons/pileta.png";
+import parking from "../../../../public/images/icons/parking.png";
+import available from "../../../../public/images/icons/available.png";
+import review from "../../../../public/images/icons/review.png";
+import pet from "../../../../public/images/icons/pet.png";
+import price from "../../../../public/images/icons/price.png";
 import {
   handleParkingIconClick,
   handlePoolIconClick,
