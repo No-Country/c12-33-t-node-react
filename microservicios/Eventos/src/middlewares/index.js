@@ -3,4 +3,5 @@ module.exports={
     clienteValidation: require('./clienteValidation'),
     salonValidation: require('./salonValidation'),
     idValidation: require('./idValidation'),
+    fechaValidation: require('./fechaValidation'),
 }
