@@ -17,7 +17,7 @@ server.use((req, res, next)=>{
 
 server.use('/reservas',require('./routes')); // otra manera de usar router
 server.use('*',(req, res)=>{
-    res.status(404).send('No Encontrado en Eventos');
+    res.status(404).send('No Encontrado en Reservas');
 });
 server.use((err,req,res,next)=>{
     res.status(err.statusCode ||500).send(
