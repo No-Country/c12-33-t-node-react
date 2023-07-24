@@ -26,15 +26,22 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
+<<<<<<< HEAD
+next-env.d.ts
+=======
 next-env.d.ts
 
 /microservicios/.env
 /microservicios/docker-compose.yml
+<<<<<<< HEAD
+>>>>>>> 40e786eac7364ea7082657e5c0ea2b5b128c9aae
+=======
 
+>>>>>>> aa92c00049ee1eb1d5a401b8853fb4ed371ae585
