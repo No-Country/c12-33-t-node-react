@@ -31,8 +31,4 @@ module.exports = async (req, res, next) => {
         console.log("crear usuario validando")
         return next();
     }        
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7d5e83c851e38be11c1e4f8d7ab33eed1d3474f3
