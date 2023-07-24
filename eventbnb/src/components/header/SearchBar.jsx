@@ -13,7 +13,7 @@ export default function SearchBar({ handleClearSearch }) {
 
     try {
       const response = await axios.get(`/api/search/${filtro}`, {
-        params: { input: filtro }, // Pasar el término de búsqueda como un objeto
+        params: { input: filtro },
       });
       console.log("EN RESPONSE:", response);
       const data = response.data;
