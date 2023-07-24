@@ -18,7 +18,7 @@ function mercadoPago({ _id, monto, descripcion }) {
                 }
             ],
             back_urls: {
-                success: "www.google.com",
+                success: "http://localhost:3000",
                 failure: "www.google.com",
                 pending: "www.google.com"
             },
