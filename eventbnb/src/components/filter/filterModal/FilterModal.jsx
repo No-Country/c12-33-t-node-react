@@ -31,7 +31,7 @@ export default function FilterModal({ list }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios(`${url}/salones`);
+        const { data } = await axios(`/api/salones`);
         const salonesList = data.data;
         setList(salonesList);
         setFilteredCards(salonesList);

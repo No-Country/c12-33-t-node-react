@@ -9,13 +9,15 @@ export default function SearchBar({ handleClearSearch }) {
 
   const handleSearch = async () => {
     const filtro = document.getElementById("searchInput").value;
-    setSearchLounge(filtro); // Actualizar el estado de búsqueda con el término ingresado
+    setSearchLounge(filtro);
 
     try {
-      const response = await axios.get(`/api/search/${filtro}`);
+      const response = await axios.get(`/api/search/${filtro}`, {
+        params: { input: filtro }, // Pasar el término de búsqueda como un objeto
+      });
       console.log("EN RESPONSE:", response);
       const data = response.data;
-      setSearchResults(data.message); // Actualizar el estado con los resultados de la búsqueda
+      setSearchResults(data.message);
     } catch (error) {
       console.error("Error al obtener los resultados:", error);
     }
@@ -55,11 +57,11 @@ export default function SearchBar({ handleClearSearch }) {
         <div className={style.searchResults}>
           <p>Resultados:</p>
           <ul>
-            {searchResults.map((result) => (
-              <li key={result.id}>
-                <p>Domicilio: {result.domicilio}</p>
-                <p>Localidad: {result.localidad}</p>
-                <p>Ubicación: {result.ubicacion}</p>
+            {searchResults.map((salon) => (
+              <li key={salon.id}>
+                <p>Domicilio: {salon.domicilio}</p>
+                <p>Localidad: {salon.localidad}</p>
+                <p>Ubicación: {salon.ubicacion}</p>
               </li>
             ))}
           </ul>
