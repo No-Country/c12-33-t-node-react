@@ -78,21 +78,6 @@ export default function Filter({ list }) {
     };
   }, []);
 
-  // const fetchFilteredSalones = async () => {
-  //   try {
-  //     const response = await axios.post("/api/filters", {
-  //       estacionamiento: selectedParkingIcon,
-  //       pileta: selectedPoolIcon,
-  //       disponibilidad: selectedAvailableIcon,
-  //       mascotas: selectedPetIcon,
-  //       precio: selectedPriceIcon,
-  //     });
-  //     const { results } = response.data;
-  //     setFilteredCards(results);
-  //   } catch (error) {
-  //     console.error("Error al obtener los salones filtrados:", error);
-  //   }
-  // };
   //Estacionamiento
   const handleParkingIconClickHandler = () => {
     console.log("handleParkingIconClickHandler");
@@ -159,56 +144,56 @@ export default function Filter({ list }) {
           style.filterContainer
         } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
       >
-        {/* <span
-        className="absolute top-0 left-0 cursor-pointer"
-        onClick={() => {
-          // Función para retroceder un slide en el Swiper
-          swiperRef.current.swiper.slidePrev();
-        }}
-      >
-        &lt;
-      </span>
-      <span
-        className="absolute top-0 right-0 cursor-pointer"
-        onClick={() => {
-          // Función para avanzar un slide en el Swiper
-          swiperRef.current.swiper.slideNext();
-        }}
-      >
-        &gt;
-      </span> */}
-        <Swiper
-          // slidesPerView={5}
-          className={`w-4/5 ${style.swiperContainer}`}
-          // breakpoints={{
-          //   390: {
-          //     slidesPerView: 1,
-          //     spaceBetween: 20,
-          //     width: 200,
-          //   },
-          //   640: {
-          //     slidesPerView: 2,
-          //     spaceBetween: 30,
-          //     width: 400,
-          //   },
-          //   768: {
-          //     slidesPerView: 3,
-          //     spaceBetween: 40,
-          //     width: 600,
-          //   },
-          //   1024: {
-          //     slidesPerView: 4,
-          //     spaceBetween: 60,
-          //     width: 800,
-          //   },
-          // }}
-          // ref={swiperRef}
+        <span
+          className="absolute top-0 left-0 cursor-pointer"
+          onClick={() => {
+            // Función para retroceder un slide en el Swiper
+            swiperRef.current.swiper.slidePrev();
+          }}
         >
-          {/* {filteredCards.map((card) => (
-          <SwiperSlide key={card.id}>
-            <CardItem card={card} />
-          </SwiperSlide>
-        ))} */}
+          &lt;
+        </span>
+        <span
+          className="absolute top-0 right-0 cursor-pointer"
+          onClick={() => {
+            // Función para avanzar un slide en el Swiper
+            swiperRef.current.swiper.slideNext();
+          }}
+        >
+          &gt;
+        </span>
+        <Swiper
+          slidesPerView={1}
+          className={`w-4/5 ${style.swiperContainer}`}
+          breakpoints={{
+            390: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+              width: 200,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+              width: 400,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+              width: 600,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 60,
+              width: 800,
+            },
+          }}
+          ref={swiperRef}
+        >
+          {filteredCards.map((card) => (
+            <SwiperSlide key={card.id}>
+              <CardItem card={card} />
+            </SwiperSlide>
+          ))}
           <div className={`flex  ${style.swiper}`}>
             {/* Filtro de price */}
             <SwiperSlide>
@@ -315,16 +300,6 @@ export default function Filter({ list }) {
             </SwiperSlide>
           </div>
         </Swiper>
-
-        {/* <span
-        className={`absolute cursor-pointer ${style.arrowRight}`}
-        onClick={() => {
-          // Función para avanzar un slide en el Swiper
-          swiperRef.current.swiper.slideNext();
-        }}
-      >
-        &gt;
-      </span> */}
 
         <div className={`align-center ${style.filterButton}`}>
           <FilterButton list={list} />
