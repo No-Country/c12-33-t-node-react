@@ -20,8 +20,8 @@ export default function FilterModal({ list }) {
   const [selectedBath, setSelectedBath] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selected, setSelected] = useState("");
-  const [selectedAccessibility, setSelectedAccessibility] = useState(false);
-  const [isSelectedAccessibility, setIsSelectedAccessibility] = useState(false);
+  const [selectedService, setSelectedService] = useState(false);
+  const [isSelectedService, setIsSelectedService] = useState(false);
   const [isSelectedServices, setIsSelectedServices] = useState(false);
   const [selectedServices, setSelectedServices] = useState(false);
 
@@ -66,10 +66,10 @@ export default function FilterModal({ list }) {
   };
   //--------- FIN FILTROS DE PRECIO ----------------
 
-  //---------  FILTROS DE ACCESIBIIDAD ----------------
-  const handleAccessibility = () => {
-    setIsSelectedAccessibility(!isSelectedAccessibility);
-    handleAccesibility(isSelectedAccessibility, setFilteredCards, list);
+  //---------  FILTROS DE SERVICIO ----------------
+  const handleService = () => {
+    setIsSelectedService(!isSelectedService);
+    handleAccesibility(isSelectedService, setFilteredCards, list);
   };
   //--------- FIN FILTROS DE ACCESIBIIDAD ----------------
 
@@ -79,6 +79,16 @@ export default function FilterModal({ list }) {
     handleServices(isSelectedServices, setFilteredCards, list);
   };
   //--------- FIN FILTROS DE SERVICIOS ----------------
+
+  //---------  LIMPIAR FILTROS ----------------
+  const handleClearAll = () => {
+    // Reset all selected options to their initial state
+    setSelectedPrice(false);
+    setIsSelectedServices(false);
+
+    // Reset the filteredCards list to the original list
+    setFilteredCards(list);
+  };
 
   return (
     <FilterProvider>
@@ -118,18 +128,6 @@ export default function FilterModal({ list }) {
                     handlePrice={handlePrice}
                     list={list}
                   />
-                  {/* <Capacity /> */}
-                  {/* <Security
-                    selectedSecurity={selectedSecurity}
-                    handleSecurity={handleSecurity}
-                    list={list}
-                  /> */}
-                  {/* <Bath selectedBath={selectedBath} handleBath={handleBath} /> */}
-                  {/* <Accessibility
-                    selectedAccessibility={selectedAccessibility}
-                    handleAccessibility={handleAccessibility}
-                    list={list}
-                  /> */}
                   <Services
                     selectedServices={selectedServices}
                     handleServices={handleServices}
@@ -141,7 +139,7 @@ export default function FilterModal({ list }) {
                 >
                   <div className="bg-white">
                     <button
-                      onClick={toggleModal}
+                      onClick={handleClearAll}
                       className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
                     >
                       Quitar todos

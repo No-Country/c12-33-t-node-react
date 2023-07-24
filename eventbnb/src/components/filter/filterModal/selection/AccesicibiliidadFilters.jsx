@@ -16,6 +16,14 @@ export default function ServicesFilter({ list }) {
     console.log("handleCheckboxChange");
     setSelectedServices(!selectedServices);
     handleCheckboxChangeClick(selectedServices, setFilteredCards, option, list);
+
+    setSelectedOptions((prevSelected) => {
+      if (prevSelected.includes(option)) {
+        return prevSelected.filter((item) => item !== option);
+      } else {
+        return [...prevSelected, option];
+      }
+    });
   };
 
   const filterSalonesByOption = async (option) => {
@@ -101,7 +109,9 @@ export default function ServicesFilter({ list }) {
                 type="checkbox"
                 checked={selectedOptions.includes(option)}
                 onChange={() => {}}
-                className="h-6 w-6 rounded border-gray-300 "
+                className={`h-6 w-6 rounded border-gray-300 ${
+                  selectedOptions.includes(option) ? style.checkedCheckbox : ""
+                }`}
               />
               <span>{option.charAt(0).toUpperCase() + option.slice(1)}</span>
             </label>
@@ -119,7 +129,9 @@ export default function ServicesFilter({ list }) {
                 type="checkbox"
                 checked={selectedOptions.includes(option)}
                 onChange={() => {}}
-                className="h-6 w-6 rounded border-gray-300 "
+                className={`h-6 w-6 rounded border-gray-300 ${
+                  selectedOptions.includes(option) ? style.checkedCheckbox : ""
+                }`}
               />
               <span>{option.charAt(0).toUpperCase() + option.slice(1)}</span>
             </label>
@@ -137,7 +149,9 @@ export default function ServicesFilter({ list }) {
                 type="checkbox"
                 checked={selectedOptions.includes(option)}
                 onChange={() => {}}
-                className="h-6 w-6 rounded border-gray-300 "
+                className={`h-6 w-6 rounded border-gray-300 ${
+                  selectedOptions.includes(option) ? style.checkedCheckbox : ""
+                }`}
               />
               <span>{option.charAt(0).toUpperCase() + option.slice(1)}</span>
             </label>
