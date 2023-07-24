@@ -36,7 +36,7 @@ const usuarioSchema = new Schema(
     borrado: {type: Boolean, default: false},
     fechaCreacion: { type: Date, default: Date.now },
     salones: [{type: String, ref: "Salon"}],
-    // reviews: [{type: String, ref: "Review"}]
+    eventos: [{type: String, ref: "Evento"}]
   });
   usuarioSchema.statics.list = async function (){
     return await this.find()
