@@ -20,8 +20,6 @@ import {
   handlePoolIconClick,
   handleAvailableIconClick,
   handlePetIconClick,
-  handleSortByPrice,
-  selectedPriceIcon,
 } from "./handlersSliderFilter";
 
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
@@ -78,21 +76,21 @@ export default function Filter({ list }) {
     };
   }, []);
 
-  const fetchFilteredSalones = async () => {
-    try {
-      const response = await axios.post("/api/filters", {
-        estacionamiento: selectedParkingIcon,
-        pileta: selectedPoolIcon,
-        disponibilidad: selectedAvailableIcon,
-        mascotas: selectedPetIcon,
-        precio: selectedPriceIcon,
-      });
-      const { results } = response.data;
-      setFilteredCards(results);
-    } catch (error) {
-      console.error("Error al obtener los salones filtrados:", error);
-    }
-  };
+  // const fetchFilteredSalones = async () => {
+  //   try {
+  //     const response = await axios.post("/api/filters", {
+  //       estacionamiento: selectedParkingIcon,
+  //       pileta: selectedPoolIcon,
+  //       disponibilidad: selectedAvailableIcon,
+  //       mascotas: selectedPetIcon,
+  //       precio: selectedPriceIcon,
+  //     });
+  //     const { results } = response.data;
+  //     setFilteredCards(results);
+  //   } catch (error) {
+  //     console.error("Error al obtener los salones filtrados:", error);
+  //   }
+  // };
   //Estacionamiento
   const handleParkingIconClickHandler = () => {
     console.log("handleParkingIconClickHandler");
@@ -138,16 +136,15 @@ export default function Filter({ list }) {
   //   setIsPriceFiltered(true);
   // };
   const handlePriceIconClickHandler = () => {
-    const currentSortDirection = selectedPriceIcon;
-    const newSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
-
-    handleSortByPrice(
-      newSortDirection,
-      setIsPriceFiltered,
-      setFilteredCards,
-      list
-    );
-    setSelectedPriceIcon(newSortDirection);
+    // const currentSortDirection = selectedPriceIcon;
+    // const newSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
+    // handleSortByPrice(
+    //   newSortDirection,
+    //   setIsPriceFiltered,
+    //   setFilteredCards,
+    //   list
+    // );
+    // setSelectedPriceIcon(newSortDirection);
     // setIsPriceFiltered(true);
   };
 
@@ -328,7 +325,7 @@ export default function Filter({ list }) {
       </span> */}
 
         <div className={`align-center ${style.filterButton}`}>
-          <FilterButton list={list}/>
+          <FilterButton list={list} />
         </div>
         {/* Rendering filtered cards */}
         <div>

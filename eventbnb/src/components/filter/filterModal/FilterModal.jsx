@@ -2,20 +2,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import CardItem from "@/components/card/CardItem";
 import axios from "axios";
-import Capacity from "../filterSlide/selection/CapacityFilter";
 import Security from "../filterSlide/selection/SecurityFilter";
 import Bath from "../filterSlide/selection/BathFilter";
 import PriceFilter from "../filterSlide/selection/PriceFilter";
 import Accessibility from "../filterSlide/selection/AccesibilityFilter";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
-import { handleAccesibility } from "./handlersModalFilters";
-import { handlePriceIconClick } from "../filterSlide/handlersSliderFilter";
+import { handleAccesibility, handlePriceRange } from "./handlersModalFilters";
 
-
-// SwiperCore.use([]);
-// export let filteredCards = []; // Variable exportada
-// export let setFilteredCards = () => {}; // Variable exportada
+export let filteredCards = []; // Variable exportada
+export let setFilteredCards = () => {}; // Variable exportada
 
 export default function FilterModal({ list }) {
   const { filteredCards, setFilteredCards } = useContext(FilterContext);
@@ -26,6 +22,7 @@ export default function FilterModal({ list }) {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selected, setSelected] = useState("");
   const [selectedAccessibility, setSelectedAccessibility] = useState(false);
+  const [isSelectedAccessibility, setIsSelectedAccessibility] = useState(false);
   const [selectedBathAccessibility, setSelectedBathAccessibility] =
     useState(false);
   const [selectedHallAccessibility, setSelectedHallAccessibility] =
@@ -56,6 +53,8 @@ export default function FilterModal({ list }) {
       } catch (error) {
         console.error("Error al obtener la lista de salones:", error);
       }
+
+      fetchData();
     };
   }, []);
   const toggleModal = () => {
@@ -72,7 +71,7 @@ export default function FilterModal({ list }) {
 
   const fetchFilteredSalones = async () => {
     console.log("SI FILTRA PRECIO");
-    handlePriceIconClick(isPriceFiltered, setFilteredCards, list);
+    handlePriceRange(isPriceFiltered, setFilteredCards, list);
   };
 
   const handlePrice = () => {
@@ -123,7 +122,7 @@ export default function FilterModal({ list }) {
                     selectedPrice={selectedPrice}
                     handlePrice={handlePrice}
                   />
-                  <Capacity />
+                  {/* <Capacity /> */}
                   <Security
                     selectedSecurity={selectedSecurity}
                     handleSecurity={handleSecurity}
@@ -131,7 +130,8 @@ export default function FilterModal({ list }) {
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />
                   <Accessibility
                     selectedAccessibility={selectedAccessibility}
-                    handleAccessibility={handleAccessibility} list={list}
+                    handleAccessibility={handleAccessibility}
+                    list={list}
                   />
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />
                   <Bath selectedBath={selectedBath} handleBath={handleBath} />
