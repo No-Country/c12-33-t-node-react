@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./CardItem";
 import styles from "./Cards.module.css";
-import Filter from "../filter/Filter";
+import Filter from "../filter/filterSlide/Filter";
 // import { FilterContext } from "../../context/FilterContext"; //Adri
 
 export default function Cards({ list }) {

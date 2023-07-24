@@ -24,6 +24,8 @@ const MySalons = () => {
     const [lowToHigh, setLowToHigh] = useState(false)
     const [activeServices, setActiveServices] = useState(services)
 
+    const [checkeds, setCheckeds] = useState({})
+
     const [isHidden, setIsHidden] = useState(true)
     const [formHidden, setFormHidden] = useState(true)
     const [userData, setUserData] = useState({})
@@ -38,7 +40,11 @@ const MySalons = () => {
                 console.log(dataUser)
                 setUserData(dataUser)
                 const { data } = await axios(`http://104.154.93.179:5000/usuarios/${dataUser._id}`)
-                
+                const checks = data.data.salones.reduce((acc, salon) => {
+                    acc[salon.nombre] = false;
+                    return acc;
+                }, {})
+                setCheckeds(checks)
                 setData(data.data.salones)
                 setAuxData(data.data.salones)
             } catch (error) {
@@ -139,11 +145,18 @@ const MySalons = () => {
         return setAuxData(data)
     }
 
-    const handleFormEdit = async (hidden, id) => {
+    const handleFormEdit = (hidden, id, attr) => {
+        const aux = data.reduce((acc, salon) => {
+            acc[salon.nombre] = false;
+            return acc;
+        }, {})
+
         setFormHidden(hidden)
+        setCheckeds({...aux, [attr]: !checkeds[attr]}) 
+
         const dataSalon = data.filter(salon => salon._id === id)
         setSalonData(dataSalon[0])
-    } 
+    }
     
     return(
         <div className="w-3/4 mx-auto overflow-x-auto flex flex-col gap-y-6">
@@ -235,8 +248,9 @@ const MySalons = () => {
                                 <td className="w-4 p-4">
                                     <div className="flex items-center">
                                         <input 
-                                        onClick={() => handleFormEdit(false, salon?._id)} 
-                                        id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"/>
+                                        checked={checkeds[salon.nombre]}
+                                        onClick={() => handleFormEdit(false, salon?._id, salon.nombre)} 
+                                        id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 hover:border-black hover:cursor-pointer"/>
                                         <label className="sr-only">checkbox</label>
                                     </div>
                                 </td>
@@ -274,7 +288,7 @@ const MySalons = () => {
                 </tbody>
             </table>
             <AlertError method={handleClick} param={'/'} isHidden={isHidden} setIsHidden={setIsHidden} href={'/'}></AlertError>
-            <EditSalon salonData={salonData} setSalonData={setSalonData}  setFormHidden={setFormHidden} formHidden={formHidden}></EditSalon>
+            <EditSalon data={data} salonData={salonData} setSalonData={setSalonData}  setFormHidden={setFormHidden} setCheckeds={setCheckeds} formHidden={formHidden}></EditSalon>
         </div>
     )
 }
