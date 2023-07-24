@@ -61,6 +61,10 @@ export default function Header({}) {
   //   setShowModal(false);
   // };
 
+  const handleClearSearch = () => {
+    setSearchLounge(""); // Limpiar el campo de búsqueda
+  };
+
   return (
     <>
       <div
@@ -73,7 +77,10 @@ export default function Header({}) {
           </Link>
         </div>
         <div className={style.search__container}>
-          <SearchBar />
+          <SearchBar
+            searchLounge={searchLounge}
+            handleClearSearch={handleClearSearch}
+          />
         </div>
         <div className={style.user}>
           <button

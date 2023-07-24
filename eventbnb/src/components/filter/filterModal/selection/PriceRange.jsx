@@ -3,16 +3,11 @@ import { FilterProvider } from "../../../../context/FilterProvider";
 import { useContext } from "../../../../context/FilterProvider";
 import style from "../../Filter.module.css";
 import axios from "axios";
-import { log } from "console";
 
 const url = process.env.MICROSERVICIOS;
 
 export default function PriceFilter({ selectedPrice, handlePrice }) {
-  console.log("selectedPrice", selectedPrice);
-  const [priceRange, setPriceRange] = useState({
-    min: `$ ${100000}`,
-    max: `$ ${1000000}`,
-  });
+  const [priceRange, setPriceRange] = useState({});
 
   const handlePriceRange = (e) => {
     setPriceRange({ ...priceRange, [e.target?.name]: e.target?.value });
@@ -32,7 +27,7 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
             <input
               type="text"
               name="min"
-              placeholder="$0"
+              placeholder="$100000"
               value={priceRange.min}
               onChange={handlePriceRange}
               className={` ${style.priceInput}`}
@@ -47,7 +42,7 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
               value={priceRange.max}
               onChange={handlePriceRange}
               className={` ${style.priceInput}`}
-              placeholder="$1000"
+              placeholder="$1000000"
             />
           </span>
         </div>
