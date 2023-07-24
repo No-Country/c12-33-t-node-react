@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
+import Card from "../card/CardItem";
 
 export default function SearchBar({ handleClearSearch }) {
   const [searchLounge, setSearchLounge] = useState(""); // Estado para el valor del campo de búsqueda
@@ -52,7 +53,7 @@ export default function SearchBar({ handleClearSearch }) {
           </button>
         </div>
       </div>
-      {/* Mostrar los resultados de búsqueda */}
+      {/* Mostrar los resultados de búsqueda
       {searchResults.length > 0 && (
         <div className={style.searchResults}>
           <p>Resultados:</p>
@@ -67,7 +68,10 @@ export default function SearchBar({ handleClearSearch }) {
           </ul>
           <button onClick={handleClearSearch}>Limpiar búsqueda</button>
         </div>
-      )}
+      )} */}
+              {searchResults.map((card, i) => (
+          <Card card={card} key={i} />
+        ))}
     </div>
   );
 }
