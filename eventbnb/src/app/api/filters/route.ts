@@ -12,15 +12,18 @@ export interface Salon {
     precio:Number
     capacidad_max:Number
     superficie:Number
-    disponibilidad: Boolean
-    calefaccion:Number
+    disponibilidad: Boolean //Adri
+    calefaccion:Number //Adri
     aire_acondicionado:Number
     parrilla:Number
     pantalla:Number
     personal_seguridad:Number
     baño:Number
-    baño_accesibilidad:Boolean
-    accesibilidad:Boolean
+    accesibilidad:Boolean //Adri
+    baño_accesibilidad:Boolean //Adri
+    pasillo_accesibilidad:Boolean //Adri
+    entrada_accesibilidad:Boolean //Adri
+    estacionamiento_accesibilidad:Boolean //Adri
     estacionamiento: Boolean
     catering: Boolean
     mesas_sillas: Boolean
@@ -31,33 +34,25 @@ export interface Salon {
     pileta: Boolean
     wifi:Boolean
     cocina:Boolean
+    bar:Boolean
     escenario:Boolean
     descripcion: String
     propietario:String
     puntuacion: String
     eventos: String 
+    mascotas: Boolean //Adri
+    area_infantil: Boolean
+    area_fumadores: Boolean
   }
 export async function POST(request: Request){
     const { precio, capacidad_max, superficie, disponibilidad, calefaccion, aire_acondicionado, parrilla, pantalla, personal_seguridad, baño,
-        baño_accesibilidad, accesibilidad, estacionamiento, catering, mesas_sillas, luces,
-        sonido, fotografia, decoracion, pileta, wifi, cocina, escenario, ascendente } = await request.json()
+        baño_accesibilidad, pasillo_accesibilidad, entrada_accesibilidad, estacionamiento_accesibilidad,  accesibilidad, estacionamiento, catering, mesas_sillas, luces,
+        sonido, fotografia, decoracion, pileta, wifi, cocina, bar, escenario, ascendente, mascotas, area_infantil, area_fumadores } = await request.json()
    
 
     const { data } = await axios(`${url}/salones`)
     let salones = data.data
 
-   // Filtrar salones según el valor de estacionamiento recibido
-  if (estacionamiento) {
-    salones = salones.filter((salon: Salon) => salon.estacionamiento === true);
-  }
-  // Filtrar salones según el valor de pileta recibido
-  if (pileta) {
-    salones = salones.filter((salon: Salon) => salon.pileta === true);
-  }
-  // Filtrar salones según el valor de disponibilidad recibido
-  if (disponibilidad) {
-    salones = salones.filter((salon: Salon) => salon.disponibilidad === true);
-  }
 
    // Filtrar salones según los demás criterios
     precio ? salones = salones.filter( (salon: Salon ) => salon.precio <= precio ) : null
@@ -82,6 +77,12 @@ export async function POST(request: Request){
 
     baño_accesibilidad ? salones = salones.filter( (salon: Salon ) => salon.baño_accesibilidad = baño_accesibilidad ) : null
 
+    pasillo_accesibilidad ? salones = salones.filter( (salon: Salon ) => salon.pasillo_accesibilidad = pasillo_accesibilidad ) : null
+
+    entrada_accesibilidad ? salones = salones.filter( (salon: Salon ) => salon.entrada_accesibilidad = entrada_accesibilidad ) : null
+
+    estacionamiento_accesibilidad ? salones = salones.filter( (salon: Salon ) => salon.estacionamiento_accesibilidad = estacionamiento_accesibilidad ) : null
+
     accesibilidad ? salones = salones.filter( (salon: Salon ) => salon.accesibilidad = accesibilidad ) : null
 
     estacionamiento ? salones = salones.filter( (salon: Salon ) => salon.estacionamiento = estacionamiento ) : null
@@ -104,9 +105,17 @@ export async function POST(request: Request){
     
     cocina ? salones = salones.filter( (salon: Salon ) => salon.cocina = cocina ) : null
 
+    bar ? salones = salones.filter( (salon: Salon ) => salon.bar = bar ) : null
+
     escenario ? salones = salones.filter( (salon: Salon ) => salon.escenario = escenario ) : null
 
     ascendente ? salones = salones.sort((a, b) => a.precio - b.precio) : salones = salones.sort((a, b) => b.precio - a.precio)
+
+    mascotas ? salones = salones.filter( (salon: Salon ) => salon.mascotas = mascotas ) : null
+
+    area_infantil ? salones = salones.filter( (salon: Salon ) => salon.area_infantil = area_infantil ) : null
+
+    area_fumadores ? salones = salones.filter( (salon: Salon ) => salon.area_fumadores = area_fumadores ) : null
    
     
     return NextResponse.json({ message: "Ruta lista", results: salones })
