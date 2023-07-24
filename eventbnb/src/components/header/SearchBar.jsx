@@ -53,25 +53,10 @@ export default function SearchBar({ handleClearSearch }) {
           </button>
         </div>
       </div>
-      {/* Mostrar los resultados de búsqueda
-      {searchResults.length > 0 && (
-        <div className={style.searchResults}>
-          <p>Resultados:</p>
-          <ul>
-            {searchResults.map((salon) => (
-              <li key={salon.id}>
-                <p>Domicilio: {salon.domicilio}</p>
-                <p>Localidad: {salon.localidad}</p>
-                <p>Ubicación: {salon.ubicacion}</p>
-              </li>
-            ))}
-          </ul>
-          <button onClick={handleClearSearch}>Limpiar búsqueda</button>
-        </div>
-      )} */}
-              {searchResults.map((card, i) => (
-          <Card card={card} key={i} />
-        ))}
+
+      {searchResults.map((card, i) => (
+        <Card card={card} key={i} />
+      ))}
     </div>
   );
 }
