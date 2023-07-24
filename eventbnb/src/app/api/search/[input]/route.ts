@@ -6,10 +6,11 @@ const url = process.env.MICROSERVICIOS
 
 export async function GET(request: Request, { params }){
     try {
-      const { input } = params
+      let { input } = params
+      input = input.toLowerCase()
         const { data } = await axios(`${url}/salones`)
         let salones = data.data
-        let filtered
+        let filtered : any;
         if (salones) {
           // Filtrar las cards por el término de búsqueda en nombre, domicilio, localidad y ubicación
           filtered = salones.filter(
