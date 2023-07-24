@@ -33,16 +33,15 @@ export default function Filter({ list }) {
   const { filteredCards, setFilteredCards } = useContext(FilterContext);
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
-  const [selectedPoolIcon, setSelectedPoolIcon] = useState(false);
-  const [selectedAvailableIcon, setSelectedAvailableIcon] = useState(false);
-  const [selectedPetIcon, setSelectedPetIcon] = useState(false);
-  const [selectedParkingIcon, setSelectedParkingIcon] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
   const [isPoolFiltered, setIsPoolFiltered] = useState(false);
   const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
   const [isPetFiltered, setIsPetFiltered] = useState(false);
   const [isPriceFiltered, setIsPriceFiltered] = useState(false);
   const [selectedPriceIcon, setSelectedPriceIcon] = useState(false);
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [currentSort, setCurrentSort] = useState("");
+  const [showSortButtons, setShowSortButtons] = useState(false);
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
@@ -117,22 +116,24 @@ export default function Filter({ list }) {
   };
 
   //Precio
-  // const handlePriceIconClickHandler = () => {
-  //   const newSortDirection = selectedPriceIcon === "asc" ? "desc" : "asc";
-  //   handleSortByPrice(newSortDirection);
-  //   setIsPriceFiltered(true);
-  // };
-  const handlePriceIconClickHandler = () => {
-    // const currentSortDirection = selectedPriceIcon;
-    // const newSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
-    // handleSortByPrice(
-    //   newSortDirection,
-    //   setIsPriceFiltered,
-    //   setFilteredCards,
-    //   list
-    // );
-    // setSelectedPriceIcon(newSortDirection);
-    // setIsPriceFiltered(true);
+  const handleSortByPrice = (sortOrder) => {
+    setSortDirection(sortOrder);
+    setCurrentSort("price");
+    // Filtrar las tarjetas según el orden de clasificación
+    const sortedCards = [...filteredCards].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.precio - b.precio;
+      } else {
+        return b.precio - a.precio;
+      }
+    });
+    // Actualizar las tarjetas filtradas en el estado
+    setFilteredCards(sortedCards);
+  };
+
+  // Manejador para mostrar los botones de ordenamiento al hacer clic en el icono de precio
+  const handleSortButtonsToggle = () => {
+    setShowSortButtons(!showSortButtons);
   };
 
   return (
@@ -197,20 +198,56 @@ export default function Filter({ list }) {
           <div className={`flex  ${style.swiper}`}>
             {/* Filtro de price */}
             <SwiperSlide>
-              <div
-                className={`flex flex-col items-center ${
-                  isPriceFiltered ? "text-dark font-semibold" : ""
-                }`}
-                onClick={handlePriceIconClickHandler}
-              >
-                <Image
-                  src={price}
-                  alt="precio"
-                  width={50}
-                  height={50}
-                  className={`mb-1 ${style.iconWrapper}`}
-                />
-                <p className="text-sm">Precio</p>
+              <div className={`relative`}>
+                <div
+                  className={`flex flex-col items-center ${
+                    isPriceFiltered ? "text-dark font-semibold" : ""
+                  }`}
+                  onClick={handleSortButtonsToggle}
+                >
+                  <Image
+                    src={price}
+                    alt="precio"
+                    width={50}
+                    height={50}
+                    className={`mb-1 ${style.iconWrapper}`}
+                  />
+                </div>
+
+                {/* Botones de ordenamiento */}
+                <div
+                  className={` z-999 flex items-center ${
+                    showSortButtons ? "mt-2" : "mt-0"
+                  }`}
+                >
+                  {showSortButtons && (
+                    <div
+                      className={`  flex absolute items-center justify-center mt-2 `}
+                    >
+                      <button
+                        onClick={() => handleSortByPrice("asc")}
+                        className={` px-2 py-1 rounded-lg border text-xs ${
+                          currentSort === "price" && sortDirection === "asc"
+                            ? "bg-black text-white"
+                            : "bg-white text-gray-800"
+                        }`}
+                      >
+                        Menor a Mayor
+                      </button>
+                      <button
+                        onClick={() => handleSortByPrice("desc")}
+                        className={` px-2 py-1 rounded-lg border text-xs ${
+                          currentSort === "price" && sortDirection === "desc"
+                            ? "bg-black text-white"
+                            : "bg-white text-gray-800"
+                        }`}
+                      >
+                        Mayor a Menor
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <p className="text-sm text-center">Precio</p>
               </div>
             </SwiperSlide>
             {/* Filtro de estacionamiento */}

@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch } from "react-icons/fa";
-import CardsFiltered from "../../app/api/filters/route";
-import { FilterProvider } from "../../context/FilterProvider";
-import { useContext } from "../../context/FilterProvider";
 import axios from "axios";
 
-export default function SearchBar({ searchLounge, handleClearSearch }) {
-  const handleSearch = () => {
+export default function SearchBar({ handleClearSearch }) {
+  const [searchLounge, setSearchLounge] = useState(""); // Estado para el valor del campo de búsqueda
+  const [searchResults, setSearchResults] = useState([]); // Estado para almacenar los resultados de la búsqueda
+
+  const handleSearch = async () => {
     const filtro = document.getElementById("searchInput").value;
-    console.log("EN EL handleSearch");
-    const salones = CardsFiltered;
-    console.log("salones");
+    setSearchLounge(filtro); // Actualizar el estado de búsqueda con el término ingresado
+
+    try {
+      const response = await axios.get(`/api/search/${filtro}`);
+      console.log("EN RESPONSE:", response);
+      const data = response.data;
+      setSearchResults(data.message); // Actualizar el estado con los resultados de la búsqueda
+    } catch (error) {
+      console.error("Error al obtener los resultados:", error);
+    }
   };
 
   return (
@@ -22,8 +29,12 @@ export default function SearchBar({ searchLounge, handleClearSearch }) {
           id="searchInput"
           placeholder="Buscar Salón"
           value={searchLounge}
-          onChange={handleSearch}
-          onKeyPress={handleSearch}
+          onChange={(e) => setSearchLounge(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
           className={style.searchInput}
         />
       </div>
@@ -32,13 +43,29 @@ export default function SearchBar({ searchLounge, handleClearSearch }) {
           <button
             type="button"
             id="searchButton"
-            onClick={(e) => handleSearch(e)}
+            onClick={handleSearch}
             className={`bg-pink-500 border-pink border-2 rounded-full cursor-pointer flex items-center justify-center ${style.searchButton}`}
           >
             <FaSearch className={`text-white text-l ${style.faSearch}`} />
           </button>
         </div>
       </div>
+      {/* Mostrar los resultados de búsqueda */}
+      {searchResults.length > 0 && (
+        <div className={style.searchResults}>
+          <p>Resultados:</p>
+          <ul>
+            {searchResults.map((result) => (
+              <li key={result.id}>
+                <p>Domicilio: {result.domicilio}</p>
+                <p>Localidad: {result.localidad}</p>
+                <p>Ubicación: {result.ubicacion}</p>
+              </li>
+            ))}
+          </ul>
+          <button onClick={handleClearSearch}>Limpiar búsqueda</button>
+        </div>
+      )}
     </div>
   );
 }

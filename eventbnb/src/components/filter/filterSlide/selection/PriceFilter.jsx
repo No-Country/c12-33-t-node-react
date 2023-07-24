@@ -8,8 +8,8 @@ const url = process.env.MICROSERVICIOS;
 
 export default function PriceFilter({ selectedPrice, handlePrice }) {
   const [priceRange, setPriceRange] = useState({
-    min: 100,
-    max: 1000,
+    min: `$ ${100000}`,
+    max: `$ ${100000000}`,
   });
 
   const handlePriceRange = (e) => {
@@ -30,7 +30,7 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
             <input
               type="text"
               name="min"
-              placeholder="$0"
+              placeholder="$100000"
               value={priceRange.min}
               onChange={handlePriceRange}
               className={` ${style.priceInput}`}
@@ -45,7 +45,7 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
               value={priceRange.max}
               onChange={handlePriceRange}
               className={` ${style.priceInput}`}
-              placeholder="$1000"
+              placeholder="$1000000"
             />
           </span>
         </div>

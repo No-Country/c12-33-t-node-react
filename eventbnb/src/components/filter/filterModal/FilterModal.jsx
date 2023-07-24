@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import CardItem from "@/components/card/CardItem";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Price from "../filterSlide/selection/PriceFilter";
+import Price from "./selection/PriceRange";
 import Services from "./selection/AccesicibiliidadFilters";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
@@ -19,11 +19,11 @@ export default function FilterModal({ list }) {
   const [selectedSecurity, setSelectedSecurity] = useState("");
   const [selectedBath, setSelectedBath] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  const [selected, setSelected] = useState("");
   const [selectedService, setSelectedService] = useState(false);
   const [isSelectedService, setIsSelectedService] = useState(false);
   const [isSelectedServices, setIsSelectedServices] = useState(false);
   const [selectedServices, setSelectedServices] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
@@ -34,14 +34,14 @@ export default function FilterModal({ list }) {
         const { data } = await axios(`${url}/salones`);
         const salonesList = data.data;
         setList(salonesList);
-        setFilteredCards(salonesList); // Establecer las cards filtradas inicialmente como todas las cards
+        setFilteredCards(salonesList);
       } catch (error) {
         console.error("Error al obtener la lista de salones:", error);
       }
-
-      fetchData();
     };
-  }, []);
+    fetchData();
+  }, [selectedOptions]);
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -64,14 +64,6 @@ export default function FilterModal({ list }) {
     setSelectedPrice(!selectedPrice);
     fetchFilteredSalones();
   };
-  //--------- FIN FILTROS DE PRECIO ----------------
-
-  //---------  FILTROS DE SERVICIO ----------------
-  const handleService = () => {
-    setIsSelectedService(!isSelectedService);
-    handleAccesibility(isSelectedService, setFilteredCards, list);
-  };
-  //--------- FIN FILTROS DE ACCESIBIIDAD ----------------
 
   //---------  FILTROS DE SERVICIOS ----------------
   const handleServices = () => {
@@ -82,11 +74,10 @@ export default function FilterModal({ list }) {
 
   //---------  LIMPIAR FILTROS ----------------
   const handleClearAll = () => {
-    // Reset all selected options to their initial state
     setSelectedPrice(false);
     setIsSelectedServices(false);
+    setSelectedOptions([]);
 
-    // Reset the filteredCards list to the original list
     setFilteredCards(list);
   };
 
