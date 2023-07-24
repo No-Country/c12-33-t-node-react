@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 import style from "../../Filter.module.css";
-import { handleCheckboxChangeClick } from "../handlersModalFilters";
+import { handleCheckboxChangeClick } from "../../filterModal/handlersModalFilters";
 
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 

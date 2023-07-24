@@ -5,7 +5,7 @@ import axios from "axios";
 import Security from "../filterSlide/selection/SecurityFilter";
 import Bath from "../filterSlide/selection/BathFilter";
 import PriceFilter from "../filterSlide/selection/PriceFilter";
-import Accessibility from "../filterSlide/selection/AccesibilityFilter";
+import Accessibility from "./selection/AccesibilityFilter";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 import { handleAccesibility, handlePriceRange } from "./handlersModalFilters";
@@ -23,23 +23,23 @@ export default function FilterModal({ list }) {
   const [selected, setSelected] = useState("");
   const [selectedAccessibility, setSelectedAccessibility] = useState(false);
   const [isSelectedAccessibility, setIsSelectedAccessibility] = useState(false);
-  const [selectedBathAccessibility, setSelectedBathAccessibility] =
-    useState(false);
-  const [selectedHallAccessibility, setSelectedHallAccessibility] =
-    useState(false);
-  const [selectedEntranceAccessibility, setSelectedEntranceAccessibility] =
-    useState(false);
-  const [selectedParkingAccessibility, setSelectedParkingAccessibility] =
-    useState(false);
-  const [isAccessibilityFiltered, setIsAccessibilityFiltered] = useState(false);
-  const [isBathAccessibilityFiltered, setIsBathAccessibilityFiltered] =
-    useState(false);
-  const [isHallAccessibilityFiltered, setIsHallAccessibilityFiltered] =
-    useState(false);
-  const [isEntranceAccessibilityFiltered, setIsEntranceAccessibilityFiltered] =
-    useState(false);
-  const [isParkingAccessibilityFiltered, setIsParkingAccessibilityFiltered] =
-    useState(false);
+  // const [selectedBathAccessibility, setSelectedBathAccessibility] =
+  //   useState(false);
+  // const [selectedHallAccessibility, setSelectedHallAccessibility] =
+  //   useState(false);
+  // const [selectedEntranceAccessibility, setSelectedEntranceAccessibility] =
+  //   useState(false);
+  // const [selectedParkingAccessibility, setSelectedParkingAccessibility] =
+  //   useState(false);
+  // const [isAccessibilityFiltered, setIsAccessibilityFiltered] = useState(false);
+  // const [isBathAccessibilityFiltered, setIsBathAccessibilityFiltered] =
+  //   useState(false);
+  // const [isHallAccessibilityFiltered, setIsHallAccessibilityFiltered] =
+  //   useState(false);
+  // const [isEntranceAccessibilityFiltered, setIsEntranceAccessibilityFiltered] =
+  //   useState(false);
+  // const [isParkingAccessibilityFiltered, setIsParkingAccessibilityFiltered] =
+  //   useState(false);
 
   const url = process.env.MICROSERVICIOS;
 
@@ -69,16 +69,17 @@ export default function FilterModal({ list }) {
     setSelectedBath(!selectedBath);
   };
 
+  //---------  FILTROS DE PRECIO ----------------
   const fetchFilteredSalones = async () => {
     console.log("SI FILTRA PRECIO");
     handlePriceRange(isPriceFiltered, setFilteredCards, list);
   };
-
-  const handlePrice = () => {
+  const handlePrice = (priceRange) => {
     console.log("EN EL handlePrice");
     setSelectedPrice(!selectedPrice);
     fetchFilteredSalones();
   };
+  //--------- FIN FILTROS DE PRECIO ----------------
 
   const handleAccessibility = () => {
     setIsSelectedAccessibility(!isSelectedAccessibility);
