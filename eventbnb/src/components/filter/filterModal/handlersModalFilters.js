@@ -1,67 +1,138 @@
-export const handleAccessibility = (
-  isSelectedAccessibilityFiltered,
-  salonesList
-) => {
-  // Filtrar los salones según el estado de isSelectedAccessibilityFiltered
-  const filteredSalones = isSelectedAccessibilityFiltered
-    ? salonesList.filter(
-        (salon) =>
-          salon.baño_accesibilidad ||
-          salon.pasillo_accesibilidad ||
-          salon.entrada_accesibilidad ||
-          salon.estacionamiento_accesibilidad
-      )
-    : salonesList;
-  // Mostrar los resultados en la consola
-  console.log("Salones filtrados por accesibilidad:", filteredSalones);
-
-  // Actualizar el estado con los salones filtrados
-  setFilteredCards(filteredSalones);
-};
-
 export const handleCheckboxChangeClick = (
-  selectedAccessibility,
+  selectedService,
   setFilteredCards,
   option,
   salonesList
 ) => {
   console.log("EN EL handleCheckboxChangeClick");
 
-  if (option == "estacionamiento") {
-    console.log("estacionamiento");
-    const filteredSalones = selectedAccessibility
-      ? salonesList.filter((salon) => salon.estacionamiento)
-      : salonesList;
+  let filteredSalones;
+
+  switch (option) {
+    case "accesibilidad":
+      console.log("accesibilidad");
+      filteredSalones = selectedService
+        ? salonesList.filter(
+            (salon) =>
+              salon.accesibilidad ||
+              salon.wifi ||
+              salon.calefaccion ||
+              salon.aire_acondicionado ||
+              salon.parrilla ||
+              salon.pantalla ||
+              salon.catering ||
+              salon.bar ||
+              salon.mesas_sillas ||
+              salon.escenario ||
+              salon.luces ||
+              salon.sonido ||
+              salon.fotografia ||
+              salon.decoracion ||
+              salon.baño ||
+              salon.cocina ||
+              salon.area_infantil ||
+              salon.area_fumadores
+          )
+        : salonesList;
+      break;
+    // Add more cases for other options if needed
+    default:
+      // If none of the specific options match, do not filter (return the original list)
+      filteredSalones = salonesList;
   }
-  if (option == "entrada") {
-    console.log("entrada");
-    const filteredSalones = selectedAccessibility
-      ? salonesList.filter((salon) => salon.entrada_accesibilidad)
-      : salonesList;
-  }
-  if (option == "baño") {
-    console.log("baño");
-    const filteredSalones = selectedAccessibility
-      ? salonesList.filter((salon) => salon.baño_accesibilidad)
-      : salonesList;
-  }
-  if (option == "pasillos") {
-    console.log("pasillos");
-    const filteredSalones = selectedAccessibility
-      ? salonesList.filter((salon) => salon.pasillo_accesibilidad)
-      : salonesList;
-  }
-  // Filtrar los salones según el estado de isParkingFiltered
-  const filteredSalones = selectedAccessibility
-    ? salonesList.filter((salon) => salon.estacionamiento)
-    : salonesList;
 
   // Mostrar los resultados en la consola
-  console.log("Salones filtrados por estacionamiento:", filteredSalones);
+  console.log("Salones filtrados: ", filteredSalones);
 
   // Actualizar el estado con los salones filtrados
   setFilteredCards(filteredSalones);
 };
+
+// export const handleService = (isSelectedServiceFiltered, salonesList) => {
+//   // Filtrar los salones según el estado de isSelectedServiceFiltered
+//   const filteredSalones = isSelectedServiceFiltered
+//     ? salonesList.filter(
+//         (salon) =>
+//           salon.accesibilidad ||
+//           salon.wifi ||
+//           salon.calefaccion ||
+//           salon.aire_acondicionado ||
+//           salon.parrilla ||
+//           salon.pantalla ||
+//           salon.catering ||
+//           salon.bar ||
+//           salon.mesas_sillas ||
+//           salon.escenario ||
+//           salon.luces ||
+//           salon.sonido ||
+//           salon.fotografia ||
+//           salon.decoracion ||
+//           salon.baño ||
+//           salon.cocina ||
+//           salon.area_infantil ||
+//           salon.area_fumadores
+//       )
+//     : salonesList;
+//   // Mostrar los resultados en la consola
+//   console.log("Salones filtrados:", filteredSalones);
+
+//   // Actualizar el estado con los salones filtrados
+//   setFilteredCards(filteredSalones);
+// };
+
+// export const handleCheckboxChangeClick = (
+//   selectedService,
+//   setFilteredCards,
+//   option,
+//   salonesList
+// ) => {
+// console.log("EN EL handleCheckboxChangeClick");
+
+// if (option == "estacionamiento_accesibilidad") {
+//   console.log("estacionamiento_accesibilidad");
+//   const filteredSalones = selectedService
+//     ? salonesList.filter((salon) => salon.estacionamiento_accesibilidad)
+//     : salonesList;
+// }
+// console.log("option: ", option);
+
+// if (option == "entrada_accesibilidad") {
+//   console.log("entrada_accesibilidad");
+//   const filteredSalones = selectedService
+//     ? salonesList.filter((salon) => salon.entrada_accesibilidad)
+//     : salonesList;
+// }
+// console.log("option: ", option);
+// if (option == "baño_accesibilidad") {
+//   console.log("baño_accesibilidad");
+//   const filteredSalones = selectedService
+//     ? salonesList.filter((salon) => salon.baño_accesibilidad)
+//     : salonesList;
+// }
+// console.log("option: ", option);
+// if (option == "pasillos_accesibilidad") {
+//   console.log("pasillos_accesibilidad");
+//   const filteredSalones = selectedService
+//     ? salonesList.filter((salon) => salon.pasillo_accesibilidad)
+//     : salonesList;
+// }
+// console.log("option: ", option);
+// // Filtrar los salones según el estado de isParkingFiltered
+// const filteredSalones = selectedService
+//   ? salonesList.filter((salon) => {
+//       salon.estacionamiento_accesibilidad,
+//         salon.entrada_accesibilidad,
+//         salon.baño_accesibilidad,
+//         salon.pasillo_accesibilidad;
+//     })
+//   : salonesList;
+
+// Mostrar los resultados en la consola
+// console.log("Salones filtrados: ", filteredSalones);
+
+// Actualizar el estado con los salones filtrados
+// setFilteredCards(filteredSalones);
+// };
 
 //------------ Filtro para el precio de Rango ------------
 export const handleSortByPrice = (

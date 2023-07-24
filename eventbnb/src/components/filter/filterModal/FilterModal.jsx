@@ -2,10 +2,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import CardItem from "@/components/card/CardItem";
 import axios from "axios";
-import Security from "../filterSlide/selection/SecurityFilter";
-import Bath from "../filterSlide/selection/BathFilter";
-import PriceFilter from "../filterSlide/selection/PriceFilter";
-import Accessibility from "./selection/AccesibilityFilter";
+import { useRouter } from "next/navigation";
+import Price from "../filterSlide/selection/PriceFilter";
+import Services from "./selection/AccesicibiliidadFilters";
 import style from "../Filter.module.css";
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 import { handleAccesibility, handlePriceRange } from "./handlersModalFilters";
@@ -23,24 +22,10 @@ export default function FilterModal({ list }) {
   const [selected, setSelected] = useState("");
   const [selectedAccessibility, setSelectedAccessibility] = useState(false);
   const [isSelectedAccessibility, setIsSelectedAccessibility] = useState(false);
-  // const [selectedBathAccessibility, setSelectedBathAccessibility] =
-  //   useState(false);
-  // const [selectedHallAccessibility, setSelectedHallAccessibility] =
-  //   useState(false);
-  // const [selectedEntranceAccessibility, setSelectedEntranceAccessibility] =
-  //   useState(false);
-  // const [selectedParkingAccessibility, setSelectedParkingAccessibility] =
-  //   useState(false);
-  // const [isAccessibilityFiltered, setIsAccessibilityFiltered] = useState(false);
-  // const [isBathAccessibilityFiltered, setIsBathAccessibilityFiltered] =
-  //   useState(false);
-  // const [isHallAccessibilityFiltered, setIsHallAccessibilityFiltered] =
-  //   useState(false);
-  // const [isEntranceAccessibilityFiltered, setIsEntranceAccessibilityFiltered] =
-  //   useState(false);
-  // const [isParkingAccessibilityFiltered, setIsParkingAccessibilityFiltered] =
-  //   useState(false);
+  const [isSelectedServices, setIsSelectedServices] = useState(false);
+  const [selectedServices, setSelectedServices] = useState(false);
 
+  const router = useRouter();
   const url = process.env.MICROSERVICIOS;
 
   useEffect(() => {
@@ -81,10 +66,19 @@ export default function FilterModal({ list }) {
   };
   //--------- FIN FILTROS DE PRECIO ----------------
 
+  //---------  FILTROS DE ACCESIBIIDAD ----------------
   const handleAccessibility = () => {
     setIsSelectedAccessibility(!isSelectedAccessibility);
     handleAccesibility(isSelectedAccessibility, setFilteredCards, list);
   };
+  //--------- FIN FILTROS DE ACCESIBIIDAD ----------------
+
+  //---------  FILTROS DE SERVICIOS ----------------
+  const handleServices = () => {
+    setIsSelectedServices(!isSelectedServices);
+    handleServices(isSelectedServices, setFilteredCards, list);
+  };
+  //--------- FIN FILTROS DE SERVICIOS ----------------
 
   return (
     <FilterProvider>
@@ -108,7 +102,7 @@ export default function FilterModal({ list }) {
           className={` absolute z-50 flex flex-col items-center right-full ${style.showModal}`}
         >
           {showModal && (
-            <div className={`top-10 ${style.filterModal}`}>
+            <div className={`top-5 ${style.filterModal}`}>
               <div className={`${style.modalContent}`}>
                 <div
                   className={`flex flex-grow my-4 bg-white ${style.filterTitleTop}`}
@@ -119,26 +113,29 @@ export default function FilterModal({ list }) {
                   className={style.scroll}
                   style={{ maxHeight: "400px", overflow: "auto" }}
                 >
-                  <PriceFilter
+                  <Price
                     selectedPrice={selectedPrice}
                     handlePrice={handlePrice}
+                    list={list}
                   />
                   {/* <Capacity /> */}
-                  <Security
+                  {/* <Security
                     selectedSecurity={selectedSecurity}
                     handleSecurity={handleSecurity}
-                  />
-                  <Bath selectedBath={selectedBath} handleBath={handleBath} />
-                  <Accessibility
+                    list={list}
+                  /> */}
+                  {/* <Bath selectedBath={selectedBath} handleBath={handleBath} /> */}
+                  {/* <Accessibility
                     selectedAccessibility={selectedAccessibility}
                     handleAccessibility={handleAccessibility}
                     list={list}
+                  /> */}
+                  <Services
+                    selectedServices={selectedServices}
+                    handleServices={handleServices}
+                    list={list}
                   />
-                  <Bath selectedBath={selectedBath} handleBath={handleBath} />
-                  <Bath selectedBath={selectedBath} handleBath={handleBath} />
-                  {/* <Accessibility /> */}
                 </div>
-
                 <div
                   className={`flex flex-grow my-4 bg-white ${style.filterBottom}`}
                 >

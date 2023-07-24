@@ -73,13 +73,13 @@ align-items: center;
   align-items: center;
   border: 2px solid var(--dark-grey);
   border-radius: 20px;
-  width: 40rem;
-  height: 70vh; /* Ajusta el valor según sea necesario */
+  width: 60rem;
+  height: 85vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
   background-color: var(--white);
   top: 0;
   left: 50%;
-  transform: translate(-50%, 40%);
+  transform: translate(-50%, 15%);
   z-index: 9999;
 }
 .modalContent{
@@ -105,6 +105,11 @@ align-items: center;
   align-self: flex-start;
   margin-left: 20px;
   font-size: 1.5rem;
+}
+.textService{
+  align-self: flex-start;
+  margin-left: 20px;
+  font-size: 1.6rem;
 }
 .priceLabel, .priceInput {
   font-size: 1.5rem;

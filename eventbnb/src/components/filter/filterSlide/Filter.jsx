@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import React, { useRef, useContext } from "react";
 import { useState, useEffect } from "react";
@@ -43,6 +44,7 @@ export default function Filter({ list }) {
   const [isPriceFiltered, setIsPriceFiltered] = useState(false);
   const [selectedPriceIcon, setSelectedPriceIcon] = useState(false);
 
+  const router = useRouter();
   const url = process.env.MICROSERVICIOS;
 
   useEffect(() => {
