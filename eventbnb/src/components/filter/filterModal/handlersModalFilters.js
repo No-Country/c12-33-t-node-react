@@ -31,7 +31,7 @@ export const handleCheckboxChangeClick = (
               salon.baño ||
               salon.cocina ||
               salon.area_infantil ||
-              salon.area_fumadores
+              salon.personal_seguridad
           )
         : salonesList;
       break;

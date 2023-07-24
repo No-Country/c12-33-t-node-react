@@ -6,7 +6,7 @@ import React, { useRef, useContext } from "react";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import CardItem from "../../card/CardItem";
+import Card from "../../card/CardItem";
 import FilterButton from "../filterModal/FilterModal";
 import "swiper/css";
 import style from "../Filter.module.css";
@@ -26,7 +26,7 @@ import {
 import { FilterContext, FilterProvider } from "@/context/FilterProvider";
 
 SwiperCore.use([]);
-export let filteredCards = []; // Variable exportada
+// export let filteredCards = []; // Variable exportada
 export let setFilteredCards = () => {}; // Variable exportada
 
 export default function Filter({ list }) {
@@ -190,11 +190,11 @@ export default function Filter({ list }) {
           }}
           ref={swiperRef}
         >
-          {filteredCards.map((card) => (
+          {/* {filteredCards.map((card) => (
             <SwiperSlide key={card.id}>
-              <CardItem card={card} />
+              <Card card={card} />
             </SwiperSlide>
-          ))}
+          ))} */}
           <div className={`flex  ${style.swiper}`}>
             {/* Filtro de price */}
             <SwiperSlide>
@@ -229,7 +229,7 @@ export default function Filter({ list }) {
                         className={` px-2 py-1 rounded-lg border text-xs ${
                           currentSort === "price" && sortDirection === "asc"
                             ? "bg-black text-white"
-                            : "bg-white text-gray-800"
+                            : "bg-white font-medium"
                         }`}
                       >
                         Menor a Mayor
@@ -239,7 +239,7 @@ export default function Filter({ list }) {
                         className={` px-2 py-1 rounded-lg border text-xs ${
                           currentSort === "price" && sortDirection === "desc"
                             ? "bg-black text-white"
-                            : "bg-white text-gray-800"
+                            : "bg-white font-medium"
                         }`}
                       >
                         Mayor a Menor
@@ -254,7 +254,7 @@ export default function Filter({ list }) {
             <SwiperSlide>
               <div
                 className={`flex flex-col items-center ${
-                  isParkingFiltered ? "text-dark font-semibold" : ""
+                  isParkingFiltered ? "" : "text-dark font-semibold"
                 }`}
                 onClick={handleParkingIconClickHandler}
               >
@@ -272,7 +272,7 @@ export default function Filter({ list }) {
             <SwiperSlide>
               <div
                 className={`flex flex-col items-center ${
-                  isPoolFiltered ? "text-dark font-semibold" : ""
+                  isPoolFiltered ? "" : "text-dark font-semibold"
                 }`}
                 onClick={handlePoolIconClickHandler}
               >
@@ -290,7 +290,7 @@ export default function Filter({ list }) {
             <SwiperSlide>
               <div
                 className={`flex flex-col items-center ${
-                  isAvailableFiltered ? "text-dark font-semibold" : ""
+                  isAvailableFiltered ? "" : "text-dark font-semibold"
                 }`}
                 onClick={handleAvailableIconClickHandler}
               >
@@ -321,7 +321,7 @@ export default function Filter({ list }) {
             <SwiperSlide>
               <div
                 className={`flex flex-col items-center ${
-                  isPetFiltered ? "text-dark font-semibold" : ""
+                  isPetFiltered ? "" : "text-dark font-semibold"
                 }`}
                 onClick={handlePetIconClickHandler}
               >
@@ -342,11 +342,10 @@ export default function Filter({ list }) {
           <FilterButton list={list} />
         </div>
         {/* Rendering filtered cards */}
-        <div>
-          {filteredCards.map((card) => (
-            <CardItem key={card.id} card={card} />
-          ))}
-        </div>
+        <div></div>
+        {filteredCards.map((card) => (
+          <Card key={card.id} card={card} />
+        ))}
       </div>
     </FilterProvider>
   );

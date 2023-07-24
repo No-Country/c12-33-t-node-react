@@ -40,7 +40,7 @@ export interface Salon {
     propietario:String
     puntuacion: String
     eventos: String 
-    mascotas: Boolean //Adri
+    mascotas: Boolean 
     area_infantil: Boolean
     area_fumadores: Boolean
   }

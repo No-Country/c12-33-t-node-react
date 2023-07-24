@@ -46,7 +46,7 @@ export default function ServicesFilter({ list }) {
         baño: [option],
         cocina: [option],
         area_infantil: [option],
-        area_fumadores: [option],
+        personal_seguridad: [option],
       });
       const { results } = response.data;
       console.log(`Salones filtrados por ${option}:`, results);
@@ -90,7 +90,7 @@ export default function ServicesFilter({ list }) {
     "baño",
     "cocina",
     "area_infantil",
-    "area_fumadores",
+    "personal_seguridad",
   ];
 
   return (

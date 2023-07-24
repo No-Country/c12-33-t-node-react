@@ -22,27 +22,15 @@ export default function PriceFilter({ selectedPrice, handlePrice }) {
           Rango de Precios
         </p>
         <div className={`flex flex-row ${style.priceRange}`}>
-          <span className={` ${style.priceLabel}`}>
-            Precio mínimo:
-            <input
-              type="text"
-              name="min"
-              placeholder="$100000"
-              value={priceRange.min}
-              onChange={handlePriceRange}
-              className={` ${style.priceInput}`}
-            />
-          </span>
-
-          <span className={` ${style.priceLabel}`}>
-            Precio máximo:
+          <span className={`${style.priceLabel}`}>
+            Precio Estimado:
             <input
               type="text"
               name="max"
+              placeholder="$0"
               value={priceRange.max}
               onChange={handlePriceRange}
               className={` ${style.priceInput}`}
-              placeholder="$1000000"
             />
           </span>
         </div>
