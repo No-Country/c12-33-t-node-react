@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import { FaStar } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { FiShare } from "react-icons/fi";
 import { BsHeart, BsFillHeartFill } from "react-icons/bs";
+import { IModalProvider, ModalContext } from "@/context/ModalProvider";
 
 const Header = () => {
+  const { open } = useContext(ModalContext) as IModalProvider;
+
   return (
     <section className="py-7 md:py-0 border-b md:border-b-0">
       <h1 className="text-2xl font-medium pb-2 md:pb-0">
@@ -17,7 +21,10 @@ const Header = () => {
             <span className="inline-block ml-1 text-sm">4.83</span>
           </span>
           ·
-          <button className="flex items-center text-sm underline font-medium">
+          <button
+            className="flex items-center text-sm underline font-medium"
+            onClick={open}
+          >
             35 reseñas
           </button>
           ·
