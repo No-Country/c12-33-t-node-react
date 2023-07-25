@@ -26,7 +26,7 @@ function FilterProvider({ children }) {
   const [isPetFiltered, setIsPetFiltered] = useState(false);
   const [isSecurityFiltered, setIsSecurityFiltered] = useState(false);
   const [isBathroomFiltered, setIsBathroomFiltered] = useState(false);
-  const [isetIsPriceFiltered, setIsPriceFiltered] = useState(false);
+  const [isPriceFiltered, setIsPriceFiltered] = useState(false);
 
   // Filtros de cards en back
   const [selected, setSelected] = useState({
@@ -98,7 +98,7 @@ function FilterProvider({ children }) {
         setIsSecurityFiltered,
         isBathroomFiltered,
         setIsBathroomFiltered,
-        isetIsPriceFiltered,
+        isPriceFiltered,
         setIsPriceFiltered,
       }}
     >

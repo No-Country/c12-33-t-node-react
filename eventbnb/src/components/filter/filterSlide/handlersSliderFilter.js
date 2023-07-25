@@ -29,7 +29,7 @@ export const handlePoolIconClick = (
 ) => {
   // Filtrar los salones según el estado de isPoolFiltered
   const filteredSalones = isPoolFiltered
-    ? salonesList.filter((salon) => salon.estacionamiento)
+    ? salonesList.filter((salon) => salon.pileta)
     : salonesList;
 
   // Mostrar los resultados en la consola
