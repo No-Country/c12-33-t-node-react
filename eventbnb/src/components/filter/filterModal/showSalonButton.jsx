@@ -1,13 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import CardItem from "@/components/card/CardItem";
 
-export default function showSalonButton() {
-  const [showSalon, setShowSalon] = useState(false);
+// Componente ShowSalonButton para el botón "Mostrar salones"
+const ShowSalonButton = ({
+  showSalon,
+  handleShowSalon,
+  filteredCardsLocal,
+  list,
+}) => {
+  return (
+    <div>
+      {/* Mostrar salones filtrados o la lista completa según el estado de showSalon */}
+      {showSalon
+        ? filteredCardsLocal?.map((card) => (
+            <CardItem key={card.id} card={card} />
+          ))
+        : list?.map((card) => <CardItem key={card.id} card={card} />)}
+    </div>
+  );
+};
 
-  const handleShowSalon = () => {
-    setShowSalon(!showSalon);
-  };
-  return;
-  <div></div>;
-}
+export default ShowSalonButton;

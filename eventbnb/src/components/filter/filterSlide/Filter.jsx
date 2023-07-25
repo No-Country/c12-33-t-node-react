@@ -16,10 +16,10 @@ import review from "../../../../public/images/icons/review.png";
 import pet from "../../../../public/images/icons/pet.png";
 import price from "../../../../public/images/icons/price.png";
 import {
-  handleParkingIconClick,
-  handlePoolIconClick,
   handleAvailableIconClick,
+  handleParkingIconClick,
   handlePetIconClick,
+  handlePoolIconClick,
 } from "./handlersSliderFilter";
 
 SwiperCore.use([]);
@@ -79,7 +79,7 @@ export default function Filter({ list }) {
     setIsParkingFiltered(!isParkingFiltered);
 
     // Filtrar los salones según el estado actual de isParkingFiltered
-    handleParkingIconClick(isParkingFiltered, setFilteredCards);
+    handleParkingIconClick(isParkingFiltered, setFilteredCards, list);
   };
 
   //Pileta
@@ -88,7 +88,7 @@ export default function Filter({ list }) {
     setIsPoolFiltered(!isPoolFiltered);
 
     // Filtrar los salones según el estado actual de isPoolFiltered
-    handlePoolIconClick(isPoolFiltered, setFilteredCards);
+    handlePoolIconClick(isPoolFiltered, setFilteredCards, list);
   };
 
   //Disponibilidad
@@ -98,7 +98,7 @@ export default function Filter({ list }) {
     setIsAvailableFiltered(!isAvailableFiltered);
 
     // Filtrar los salones según el estado actual de isAvailableFiltered
-    handleAvailableIconClick(isAvailableFiltered, setFilteredCards);
+    handleAvailableIconClick(isAvailableFiltered, setFilteredCards, list);
   };
 
   //Mascotas
@@ -107,7 +107,7 @@ export default function Filter({ list }) {
     setIsPetFiltered(!isPetFiltered);
 
     // Filtrar los salones según el estado actual de isPetFiltered
-    handlePetIconClick(isPetFiltered, setFilteredCards);
+    handlePetIconClick(isPetFiltered, setFilteredCards, list);
   };
 
   //Precio
