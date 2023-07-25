@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import style from "./Header.module.css";
 import { FaSearch } from "react-icons/fa";
