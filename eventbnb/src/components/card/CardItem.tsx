@@ -16,6 +16,9 @@ export default function Card({ card }) {
   const handleButtonClick = () => {
     setIsFavorite(!isFavorite);
   };
+
+  console.log(card.imagenes);
+
   return (
     <div
       className={`max-w-[300px] rounded-t-xl bg-white group transition-all duration-300 transform hover:scale-105`}
@@ -29,19 +32,19 @@ export default function Card({ card }) {
           pagination={{ clickable: true }}
           className="absolute z-0 rounded-xl w-[300px] h-[285px]  hidden"
         >
-          {/* {card.imagenes.map((src, i) => ( */}
-          {card.imagenes.map((i) => (
-            <SwiperSlide key={i}>
-              {/* <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} /> */}
-              <Image
-                src={""}
-                width={300}
-                height={285}
-                className="w-[300px] h-[285px] object-cover"
-                alt={card.name}
-              />
-            </SwiperSlide>
-          ))}
+          {card.imagenes.length &&
+            card.imagenes.map((image) => (
+              <SwiperSlide key={image}>
+                {/* <Image src={src} width={300} height={285} className="w-[300px] h-[285px] object-cover" alt={card.name} /> */}
+                <Image
+                  src={image}
+                  width={300}
+                  height={285}
+                  className="w-[300px] h-[285px] object-cover"
+                  alt={card.name}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
         <button
           className="absolute z-10 top-3 right-3 flex items-center justify-center"
