@@ -11,15 +11,15 @@ const eventoSchema = new Schema(
   });
   eventoSchema.statics.list = async function (){
     return await this.find()
-    .populate("cliente",["_id","nombre","apellido"])
-    .populate("salon", ["_id","nombre"])
-    .populate("review")
+      .populate("cliente",["_id","nombre","apellido"])
+      .populate("salon", ["_id","nombre"])
+      .populate("review",["comentario","puntaje","fecha"])
   };
   eventoSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
     .populate("cliente",["_id","nombre","apellido"])
     .populate("salon", ["_id","nombre"])
-    .populate("review")
+    .populate("review",["comentario","puntaje","fecha"])
   };
   eventoSchema.statics.insert = async function (evento){
     return await this.create(evento);
