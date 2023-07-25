@@ -79,7 +79,7 @@ export default function Filter({ list }) {
     setIsParkingFiltered(!isParkingFiltered);
 
     // Filtrar los salones según el estado actual de isParkingFiltered
-    handleParkingIconClick(isParkingFiltered, setFilteredCards, list);
+    handleParkingIconClick(isParkingFiltered, setFilteredCards);
   };
 
   //Pileta
@@ -88,7 +88,7 @@ export default function Filter({ list }) {
     setIsPoolFiltered(!isPoolFiltered);
 
     // Filtrar los salones según el estado actual de isPoolFiltered
-    handlePoolIconClick(isPoolFiltered, setFilteredCards, list);
+    handlePoolIconClick(isPoolFiltered, setFilteredCards);
   };
 
   //Disponibilidad
@@ -98,7 +98,7 @@ export default function Filter({ list }) {
     setIsAvailableFiltered(!isAvailableFiltered);
 
     // Filtrar los salones según el estado actual de isAvailableFiltered
-    handleAvailableIconClick(isAvailableFiltered, setFilteredCards, list);
+    handleAvailableIconClick(isAvailableFiltered, setFilteredCards);
   };
 
   //Mascotas
@@ -107,7 +107,7 @@ export default function Filter({ list }) {
     setIsPetFiltered(!isPetFiltered);
 
     // Filtrar los salones según el estado actual de isPetFiltered
-    handlePetIconClick(isPetFiltered, setFilteredCards, list);
+    handlePetIconClick(isPetFiltered, setFilteredCards);
   };
 
   //Precio
