@@ -17,15 +17,18 @@ export default function UserButton({ showOptions }) {
   useEffect(() => {
     const token = getCookie('userToken')
     setJwt(token)
-    const data = getUserData()
-    setUserData(data)
+    const getData = async () => {
+      const data = await getUserData()
+      setUserData(data)
+    }
+    getData()
   }, [])
   
   const logOut = async () => {
     deleteCookie("userToken");
     signOut();
   };
-
+console.log(userData, jwt)
   return (
     <div>
       {showOptions && (
@@ -59,7 +62,7 @@ export default function UserButton({ showOptions }) {
               </Link>
               <hr />
               <Link
-                href={`/${userData._id}/favorites`}
+                href={`/favorites/${userData._id}`}
                 className={`w-full text-start font-semibold h-full text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn1}`}
               >
                 Favoritos

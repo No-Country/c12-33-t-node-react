@@ -9,18 +9,39 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Link from "next/link";
 
 export default function Card({ card }) {
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const [favorites, setFavorites] = React.useState([]);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (id) => {
     setIsFavorite(!isFavorite);
+    setFavorites(prevFavorites => {
+      const index = prevFavorites.findIndex(fav => fav._id === id);
+      if (index !== -1) {
+        return prevFavorites.filter((_, i) => i !== index);
+      } else {
+        return [...prevFavorites, card];
+      }
+    });
   };
 
-  console.log(card.imagenes);
+  React.useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+    if (storedFavorites) {
+      setFavorites(storedFavorites);
+    }
+  }, []);
+  
+
+  React.useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
-    <div
+    <Link
+      href={`/event-hall/${card._id}`}
       className={`max-w-[300px] rounded-t-xl bg-white group transition-all duration-300 transform hover:scale-105`}
     >
       <div className="relative">
@@ -48,7 +69,7 @@ export default function Card({ card }) {
         </Swiper>
         <button
           className="absolute z-10 top-3 right-3 flex items-center justify-center"
-          onClick={handleButtonClick}
+          onClick={()=>handleButtonClick(card._id)}
         >
           <FaHeart
             className={`text-xl  ${
@@ -95,6 +116,7 @@ export default function Card({ card }) {
           </div>
         ) : null}
       </div>
-    </div>
+
+    </Link>
   );
 }
