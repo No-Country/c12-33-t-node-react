@@ -10,4 +10,4 @@ router.put('/:id', middlewares.idValidation, middlewares.usuarioValidation, cont
 router.put('/password/:id', middlewares.idValidation, controllers.changePassword);
 router.delete('/:id', middlewares.idValidation, controllers.deleteUsuario);
 router.post('/', middlewares.authMiddlewares, controllers.createUsuario);
-module.exports = router;   
+module.exports = router;
