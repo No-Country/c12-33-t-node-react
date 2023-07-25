@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { FaMedal, FaStar, FaFacebookF, FaAngleDown } from "react-icons/fa6";
+import { FaMedal, FaStar, FaFacebookF, FaAngleDown, FaXmark, FaMinus, FaPlus } from "react-icons/fa6";
 import { PiWarningCircleFill } from "react-icons/pi";
 import { BiSolidCloudUpload } from "react-icons/bi"
 
@@ -71,24 +71,39 @@ export function PriceInfo() {
 }
 
 export function YourTrip() {
+	const [hostModal, setHostModal] = React.useState(false);
+	function openHostModal() {
+		setHostModal(true)
+	}
+	function closeHostModal() {
+		setHostModal(false)
+	}
+
 	return (
-		<div className="w-[560px]">
-			<h2 className="text-2xl font-semibold pb-6">Tu Viaje</h2>
-			<div className="pb-6">
-				<div className="flex items-center justify-between">
-					<p className="text-lg font-semibold">Fechas</p>
-					<button className="text-lg font-semibold underline">Edita</button>
+		<>
+			<div className="w-[560px]">
+				<h2 className="text-2xl font-semibold pb-6">Tu Viaje</h2>
+				<div className="pb-6">
+					<div className="flex items-center justify-between">
+						<p className="text-lg font-semibold">Fechas</p>
+						<button className="text-lg font-semibold underline">Edita</button>
+					</div>
+					<span className="mt-2">21 - 26 de Jul</span>
 				</div>
-				<span className="mt-2">21 - 26 de Jul</span>
-			</div>
-			<div className="pb-6">
-				<div className="flex items-center justify-between">
-					<p className="text-lg font-semibold">Huespedes</p>
-					<button className="text-lg font-semibold underline">Edita</button>
+				<div className="pb-6">
+					<div className="flex items-center justify-between">
+						<p className="text-lg font-semibold">Huespedes</p>
+						<button onClick={openHostModal} className="text-lg font-semibold underline">Edita</button>
+					</div>
+					<span className="mt-2">1 Huesped</span>
 				</div>
-				<span className="mt-2">1 Huesped</span>
 			</div>
-		</div>
+			{
+				hostModal && (
+					<ModalHostCounter onclick={closeHostModal} />
+				)
+			}
+		</>
 	);
 }
 
@@ -159,8 +174,6 @@ export function RequirementTrip() {
 	);
 }
 
-
-
 export function CancellationPolicy() {
 	return (
 		<div className="pt-8 pb-6 border-t space-y-6">
@@ -188,6 +201,173 @@ export function FundamentalRules() {
 
 // Modals
 
+export function ModalHostCounter({ onclick }) {
+	const [adultCounter, setAdultCounter] = React.useState(0);
+	const [childCounter, setChildCounter] = React.useState(0);
+	const [babyCounter, setBabyCounter] = React.useState(0)
+	const [petCounter, setPetCounter] = React.useState(0)
+
+	const handleAdultIncrement = () => {
+		if (adultCounter + childCounter < 7) {
+			setAdultCounter(adultCounter + 1);
+		}
+	};
+
+	const handleAdultDecrement = () => {
+		if (adultCounter > 0) {
+			setAdultCounter(adultCounter - 1);
+		}
+	};
+
+	const handleChildIncrement = () => {
+		if (adultCounter + childCounter < 7) {
+			setChildCounter(childCounter + 1);
+		}
+	};
+
+	const handleChildDecrement = () => {
+		if (childCounter > 0) {
+			setChildCounter(childCounter - 1);
+		}
+	};
+
+	const handleBabyIncrement = () => {
+		if (babyCounter < 5) {
+			setBabyCounter(babyCounter + 1);
+		}
+	};
+
+	const handleBabyDecrement = () => {
+		if (babyCounter > 0) {
+			setBabyCounter(babyCounter - 1);
+		}
+	};
+
+	const handlePetIncrement = () => {
+		if (petCounter < 5) {
+			setPetCounter(petCounter + 1);
+		}
+	};
+
+	const handlePetDecrement = () => {
+		if (petCounter > 0) {
+			setPetCounter(petCounter - 1);
+		}
+	};
+
+
+	return (
+		<>
+			<div className="fixed top-0 left-0 flex items-center justify-center z-50 w-full h-full p-4">
+				<div className="relative w-full max-w-sm max-h-full">
+
+					<div className="relative bg-white rounded-lg shadow">
+
+						<div className="flex items-start py-4 px-6">
+							<button onClick={onclick} type="button" className="rounded-full w-8 h-8 p-1 right-0 flex justify-center items-center hover:bg-slate-200">
+								<FaXmark className="text-lg" />
+								<span className="sr-only">Cerrar modal</span>
+							</button>
+						</div>
+
+						<div className="px-6">
+							<h3 className="w-full text-2xl font-semibold">
+								Huéspedes
+							</h3>
+						</div>
+						<div className="p-6 space-y-6">
+							<div>
+								<p className="text-xs mb-2">Este alojamiento tiene una capacidad máxima de 7 huéspedes, sin incluir bebés. Si vienes con más de 2 mascotas, avísale al anfitrión.</p>
+							</div>
+
+							<div className="flex items-center justify-between">
+								<div>
+									<h4 className="text-xl font-semibold">Adultos</h4>
+									<p className="pt-1 text-sm">Edad: 13 o más</p>
+								</div>
+								<div className="flex items-center space-x-2">
+									<button onClick={handleAdultDecrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaMinus />
+									</button>
+									<span>{adultCounter}</span>
+									<button onClick={handleAdultIncrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaPlus />
+									</button>
+								</div>
+							</div>
+
+							<div className="flex items-center justify-between">
+								<div>
+									<h4 className="text-xl font-semibold">Niños</h4>
+									<p className="pt-1 text-sm">De 2 a 12 años</p>
+								</div>
+								<div className="flex items-center space-x-2">
+									<button onClick={handleChildDecrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaMinus />
+									</button>
+									<span>{childCounter}</span>
+									<button onClick={handleChildIncrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaPlus />
+									</button>
+								</div>
+							</div>
+
+							<div className="flex items-center justify-between">
+								<div>
+									<h4 className="text-xl font-semibold">Bebés</h4>
+									<p className="pt-1 text-sm">Menos de 2 años</p>
+								</div>
+								<div className="flex items-center space-x-2">
+									<button onClick={handleBabyDecrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaMinus />
+									</button>
+									<span>{babyCounter}</span>
+									<button onClick={handleBabyIncrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaPlus />
+									</button>
+								</div>
+							</div>
+
+							<div className="flex items-center justify-between">
+								<div>
+									<h4 className="text-xl font-semibold">Mascotas</h4>
+									<p className="pt-1 text-sm">¿Traes a un animal de servicio?</p>
+								</div>
+								<div className="flex items-center space-x-2">
+									<button onClick={handlePetDecrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaMinus />
+									</button>
+									<span>{petCounter}</span>
+									<button onClick={handlePetIncrement} className="flex items-center justify-center text-xs p-1 w-8 h-8 rounded-full border border-zinc-600">
+										<FaPlus />
+									</button>
+								</div>
+							</div>
+
+						</div>
+						<div className="flex items-center justify-between py-4 px-6 border-t border-neutral-200 rounded-b">
+							<button
+								type="button"
+								onClick={onclick}
+								className="text-zinc-800 hover:text-zinc-950 text-base font-semibold rounded-lg py-3 px-6 underline active:text-zinc-500 ease-in-out duration-300"
+							>
+								Cancela
+							</button>
+							<button
+								type="button"
+								className="bg-zinc-800 hover:bg-zinc-950 text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300"
+							>
+								Guardar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="w-full h-full fixed top-0 left-0 z-40 bg-black opacity-50"></div>
+		</>
+	);
+}
+
 export function ModalHostMessage({ onclick }) {
 	const [emptyText, setEmptyText] = React.useState('')
 
@@ -203,10 +383,8 @@ export function ModalHostMessage({ onclick }) {
 
 						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
 
-							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
-								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-								</svg>
+							<button onClick={onclick} type="button" className="rounded-full w-8 h-8 p-1 right-0 flex justify-center items-center hover:bg-slate-200">
+								<FaXmark className="text-lg" />
 								<span className="sr-only">Cerrar modal</span>
 							</button>
 
@@ -259,11 +437,21 @@ export function ModalHostMessage({ onclick }) {
 }
 
 export function ModalProfileImage({ onclick }) {
-	const [emptyProfile, setEmptyProfile] = React.useState('')
 
-	function handleEmptyChange(event) {
-		setEmptyProfile(event.target.value)
-	}
+	const [isFileUploaded, setIsFileUploaded] = React.useState(false);
+	const [selectedFile, setSelectedFile] = React.useState(null);
+
+	const handleFileChange = (event) => {
+		const file = event.target.files[0];
+		setSelectedFile(URL.createObjectURL(file));
+		setIsFileUploaded(true);
+	};
+
+	const handleReset = () => {
+		setIsFileUploaded(false);
+		setSelectedFile(null);
+	};
+
 	return (
 		<>
 			<div className="fixed top-0 left-0 flex items-center justify-center z-50 w-full h-full p-4">
@@ -273,10 +461,8 @@ export function ModalProfileImage({ onclick }) {
 
 						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
 
-							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
-								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-								</svg>
+							<button onClick={onclick} type="button" className="rounded-full w-8 h-8 p-1 right-0 flex justify-center items-center hover:bg-slate-200">
+								<FaXmark className="text-lg" />
 								<span className="sr-only">Cerrar modal</span>
 							</button>
 
@@ -289,7 +475,7 @@ export function ModalProfileImage({ onclick }) {
 							<div className="flex items-center justify-center">
 								<Image
 									className="rounded-full w-32 h-32 object-cover"
-									src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/account-activation-shared/images/dls19_user_pic.73f51bce14da5e9d49c22a8bc31a7d13.png"
+									src={selectedFile ? selectedFile : 'https://a0.muscache.com/airbnb/static/packages/assets/frontend/account-activation-shared/images/dls19_user_pic.73f51bce14da5e9d49c22a8bc31a7d13.png'}
 									alt=""
 									width={128}
 									height={128}
@@ -298,27 +484,42 @@ export function ModalProfileImage({ onclick }) {
 							<div className="my-8">
 								<p>Elige una imagen en la que se te vea la cara. Los huéspedes podrán ver tu foto de perfil solo cuando la reservación esté confirmada.</p>
 							</div>
-							<div className="mb-4 space-y-3">
-								<button
-									type="button"
-									className={`w-full bg-[#3b5998] text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300 ${emptyProfile.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''
-										}`}
-									disabled={emptyProfile.trim() === ''}
-								>
-									<span className="flex items-center justify-center space-x-1">
-										<FaFacebookF />
-										Usa la Foto de Facebook
-									</span>
-								</button>
-								<button
-									type="button"
-									className="w-full bg-white text-zinc-950 text-base font-semibold rounded-lg border border-zinc-950 py-3 px-6 hover:bg-slate-200 active:scale-95 ease-in-out duration-300"
-								>
-									<span className="flex items-center justify-center space-x-1">
-										<BiSolidCloudUpload />
-										Subir una foto
-									</span>
-								</button>
+							<div className="mb-4">
+
+								{isFileUploaded ? (
+									<div className="space-y-3">
+										<button type="button" className="w-full bg-zinc-800 text-white text-base font-semibold rounded-lg py-3 px-6 hover:bg-zinc-950 active:scale-95 ease-in-out duration-300">
+											Sí, se ve bien
+										</button>
+
+										<button type="button" onClick={() => setIsFileUploaded(false)} className="w-full bg-white text-zinc-950 text-base font-semibold rounded-lg border border-zinc-950 py-3 px-6 hover:bg-slate-200 active:scale-95 ease-in-out duration-300">
+											Toma una foto nueva
+										</button>
+									</div>
+								) : (
+									<div className="space-y-3">
+										<button
+											type="button"
+											className="w-full bg-[#3b5998] opacity-50 text-white text-base font-semibold rounded-lg py-3 px-6 active:scale-95 ease-in-out duration-300"
+										>
+											<span className="flex items-center justify-center space-x-1">
+												<FaFacebookF />
+												Usa la Foto de Facebook
+											</span>
+										</button>
+										<div className="w-full bg-white text-zinc-950 text-base font-semibold rounded-lg border border-zinc-950 py-3 px-6 hover:bg-slate-200 active:scale-95 ease-in-out duration-300">
+											<label htmlFor="InputImage" >
+												<span className="flex items-center justify-center">
+													<BiSolidCloudUpload className="mr-1" />
+													Subir una foto
+												</span>
+											</label>
+											<input type="file" name="" id="InputImage"
+												onChange={handleFileChange} className="sr-only" />
+										</div>
+									</div>
+								)}
+
 							</div>
 						</div>
 					</div>
@@ -344,10 +545,8 @@ export function ModalNumberPhone({ onclick }) {
 
 						<div className="flex items-start py-4 px-6 border-b rounded-t border-neutral-200">
 
-							<button onClick={onclick} type="button" className="rounded-full text-sm w-8 h-8 p-1 right-0 inline-flex justify-center items-center hover:bg-slate-200">
-								<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-								</svg>
+							<button onClick={onclick} type="button" className="rounded-full w-8 h-8 p-1 right-0 flex justify-center items-center hover:bg-slate-200">
+								<FaXmark className="text-lg" />
 								<span className="sr-only">Cerrar modal</span>
 							</button>
 
@@ -359,7 +558,7 @@ export function ModalNumberPhone({ onclick }) {
 						<div className="p-6">
 							<div className="p-6">
 								<p>Te enviaremos actualizaciones del viaje y un texto para verificar este número.</p>
-								
+
 								<div className="my-6">
 									<div className="mb-2 border rounded-lg">
 										<div className="w-full flex items-center justify-between cursor-pointer">
