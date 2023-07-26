@@ -1,9 +1,16 @@
 import React from "react";
 import style from "./Terms.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import LogoMP from "../../../public/images/logos/mp.png";
+import Back from "@/components/back/Back";
 
 export default function Terms() {
   return (
     <div className={style.terms}>
+      <div className={style.backContainer}>
+        <Back />
+      </div>
       <h1>Términos y Condiciones de Uso</h1>
       <p>
         Bienvenido a FestBnB nuestra plataforma de arriendo de salones de
@@ -97,6 +104,31 @@ export default function Terms() {
         con las leyes del país o jurisdicción correspondiente. Cualquier disputa
         que surja en relación con estos términos y condiciones estará sujeta a
         la jurisdicción exclusiva de los tribunales de dicha jurisdicción.
+      </p>
+      <p>
+        8.2.Además de estos Términos y Condiciones, Mercado Pago tiene sus
+        propias reglas de uso:
+        <strong>
+          <p className="text-center text-rose-500">
+            Enlace a los Términos y Condiciones de Mercado Pago
+          </p>
+        </strong>
+      </p>
+      <div className={style.logoContainer}>
+        <Link href="https://www.mercadolibre.cl/ayuda/299" target="blank">
+          <Image
+            src={LogoMP}
+            alt="logo"
+            width={70}
+            height={70}
+            className={style.logo}
+          />
+        </Link>
+      </div>
+      <p>
+        8.3. Si alguna disposición de estos términos y condiciones se considera
+        inválida o inaplicable, dicha disposición se eliminará y las
+        disposiciones restantes se aplicarán.
       </p>
       <p>
         Al utilizar nuestra plataforma, aceptas cumplir con estos términos y

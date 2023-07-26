@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,6 +16,7 @@ import available from "../../../../public/images/icons/available.png";
 import review from "../../../../public/images/icons/review.png";
 import pet from "../../../../public/images/icons/pet.png";
 import price from "../../../../public/images/icons/price.png";
+import Clear from "../../../../public/images/icons/clear1.png";
 import {
   handleAvailableIconClick,
   handleParkingIconClick,
@@ -24,7 +26,7 @@ import {
 
 SwiperCore.use([]);
 
-export default function Filter({ list }) {
+export default function Filter({ list, setList }) {
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
@@ -36,7 +38,7 @@ export default function Filter({ list }) {
   const [sortDirection, setSortDirection] = useState("asc");
   const [currentSort, setCurrentSort] = useState("");
   const [showSortButtons, setShowSortButtons] = useState(false);
-  const [filteredCards, setFilteredCards] = useState([]);
+  const [resetFlag, setResetFlag] = useState(false);
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
@@ -47,7 +49,7 @@ export default function Filter({ list }) {
         const { data } = await axios(`${url}/salones`);
         const salonesList = data.data;
         setList(salonesList);
-        setFilteredCards(salonesList); // Establecer las cards filtradas inicialmente como todas las cards
+        setResetFlag(false);
       } catch (error) {
         console.error("Error al obtener la lista de salones:", error);
       }
@@ -70,65 +72,78 @@ export default function Filter({ list }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [setResetFlag]);
 
   //Estacionamiento
   const handleParkingIconClickHandler = () => {
     console.log("handleParkingIconClickHandler");
-    // Cambiar el estado de filtrado de estacionamiento
+
     setIsParkingFiltered(!isParkingFiltered);
 
-    // Filtrar los salones según el estado actual de isParkingFiltered
-    handleParkingIconClick(isParkingFiltered, setFilteredCards, list);
+    handleParkingIconClick(isParkingFiltered, setList, list);
   };
 
   //Pileta
   const handlePoolIconClickHandler = () => {
-    // Cambiar el estado de filtrado de estacionamiento
     setIsPoolFiltered(!isPoolFiltered);
 
-    // Filtrar los salones según el estado actual de isPoolFiltered
-    handlePoolIconClick(isPoolFiltered, setFilteredCards, list);
+    handlePoolIconClick(isPoolFiltered, setList, list);
   };
 
   //Disponibilidad
   const handleAvailableIconClickHandler = () => {
     console.log("handleAvailableIconClickHandler");
-    // Cambiar el estado de filtrado de disponibilidad
+
     setIsAvailableFiltered(!isAvailableFiltered);
 
-    // Filtrar los salones según el estado actual de isAvailableFiltered
-    handleAvailableIconClick(isAvailableFiltered, setFilteredCards, list);
+    handleAvailableIconClick(isAvailableFiltered, setList, list);
   };
 
   //Mascotas
   const handlePetIconClickHandler = () => {
-    // Cambiar el estado de filtrado de disponibilidad
     setIsPetFiltered(!isPetFiltered);
 
-    // Filtrar los salones según el estado actual de isPetFiltered
-    handlePetIconClick(isPetFiltered, setFilteredCards, list);
+    handlePetIconClick(isPetFiltered, setList, list);
   };
 
   //Precio
   const handleSortByPrice = (sortOrder) => {
     setSortDirection(sortOrder);
     setCurrentSort("price");
-    // Filtrar las tarjetas según el orden de clasificación
-    const sortedCards = [...filteredCards].sort((a, b) => {
+
+    const sortedCards = list.slice().sort((a, b) => {
       if (sortOrder === "asc") {
         return a.precio - b.precio;
       } else {
         return b.precio - a.precio;
       }
     });
-    // Actualizar las tarjetas filtradas en el estado
-    setFilteredCards(sortedCards);
+
+    setList(sortedCards);
   };
 
-  // Manejador para mostrar los botones de ordenamiento al hacer clic en el icono de precio
   const handleSortButtonsToggle = () => {
     setShowSortButtons(!showSortButtons);
+  };
+
+  //BOTON DE LIMPIAR LOS FILTROS
+
+  const handleClearFilter = () => {
+    console.log("handleClearFilter");
+    // Reset all the filter states to their initial values
+    setIsParkingFiltered(false);
+    setIsPoolFiltered(false);
+    setIsAvailableFiltered(false);
+    setIsPetFiltered(false);
+    setSortDirection("asc");
+    setCurrentSort("");
+    setShowSortButtons(false);
+
+    // Restore the original list of cards to filteredCards state
+    setResetFlag(true);
+
+    // Navigate back to the Home component
+    router.push("/");
   };
 
   return (
@@ -184,11 +199,6 @@ export default function Filter({ list }) {
         }}
         ref={swiperRef}
       >
-        {/* {filteredCards.map((card) => (
-            <SwiperSlide key={card.id}>
-              <Card card={card} />
-            </SwiperSlide>
-          ))} */}
         <div className={`flex  ${style.swiper}`}>
           {/* Filtro de price */}
           <SwiperSlide>
@@ -335,11 +345,19 @@ export default function Filter({ list }) {
       <div className={`align-center ${style.filterButton}`}>
         <FilterButton list={list} />
       </div>
-      {/* Rendering filtered cards */}
-
-      {filteredCards.map((card) => (
-        <Card key={card.id} card={card} />
-      ))}
+      {/* <div onClick={handleClearFilter}> */}
+      {/* Use Link component to handle navigation */}
+      <Link href="/">
+        <Image
+          src={Clear}
+          width={50}
+          height={50}
+          alt="clear"
+          onClick={handleClearFilter}
+          className={` ${style.clearFilter} `}
+        />
+      </Link>
     </div>
+    // </div>
   );
 }
