@@ -149,6 +149,21 @@ border-bottom: 2px solid var(--light-grey);
   padding: 10px 0;
   border-top: 2px solid var(--light-grey);
 }
+/*BOTON FILTRO Y LIMPIAR FILTROS*/
+.clearAndButton{
+  display: flex;
+  align-items: center;
+}
+.clearFilter{
+  border: 2px solid var(--dark-grey);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 60px;
+  margin-right: 50px;
+  margin-bottom: 20%;
+}
 
 @media (max-width: 390px) {
   .filterContainer {
