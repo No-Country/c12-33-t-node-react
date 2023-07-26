@@ -1,33 +1,46 @@
 "use client";
+import { IEventHall } from "@/interfaces/event-hall.interface";
+import EventHallService from "@/services/event-hall.service";
 import { createContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 // interface
-export interface IEventHall {
-  windowWidth: number;
+export interface IEventHallProvider {
+  eventHall: IEventHall | null;
+  getEventHall: () => Promise<void>;
+}
+
+interface IProps {
+  children: React.ReactNode;
+  id: string;
 }
 
 // creacion contexto
-export const EventHallContext = createContext<IEventHall | null>(null);
+export const EventHallContext = createContext<IEventHallProvider | null>(null);
 
-export const EventHallProvider = ({ children }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+export const EventHallProvider = ({ children, id }: IProps) => {
+  const [eventHall, setEventHall] = useState<IEventHall | null>(null);
+  const router = useRouter();
 
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
+  const getData = async () => {
+    let data: IEventHall | null = null;
+
+    try {
+      data = await EventHallService.getById(id);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (!data) router.push("/404");
+    setEventHall(data);
   };
 
   useEffect(() => {
-    // listener de tamaño de pantalla
-    window.addEventListener("resize", handleResize);
-
-    //eliminar el listener de la función
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    getData();
   }, []);
 
   return (
-    <EventHallContext.Provider value={{ windowWidth }}>
+    <EventHallContext.Provider value={{ eventHall, getEventHall: getData }}>
       {children}
     </EventHallContext.Provider>
   );
