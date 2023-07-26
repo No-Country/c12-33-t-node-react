@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import MainServices from "./MainServices";
 import AllServices from "./AllServices";
+import Calendar from "./Calendar";
 
 const Information = () => {
   return (
@@ -19,6 +20,7 @@ const Information = () => {
         ti también te gustará!
       </p>
       <AllServices />
+      <Calendar />
     </section>
   );
 };
