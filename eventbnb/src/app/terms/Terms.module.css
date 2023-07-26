@@ -38,3 +38,7 @@
   .terms em {
     font-style: italic;
   }
+  .logoContainer{
+ display: grid;
+ justify-items: center;
+  }
