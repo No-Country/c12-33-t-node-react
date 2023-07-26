@@ -9,8 +9,8 @@ import style from "../Filter.module.css";
 import {
   handleCheckboxChangeClick,
   handleSortByPrice,
-  handlePriceRange,
 } from "./handlersModalFilters";
+// import { handlePriceRange } from "./selection/PriceRange";
 import ShowSalonButton from "./showSalonButton";
 
 export default function FilterModal({ list }) {
@@ -63,25 +63,25 @@ export default function FilterModal({ list }) {
   const fetchFilteredSalones = async () => {
     console.log("SI FILTRA PRECIO Y ACCESIBILIDAD");
 
-    const filteredByPrice = handlePriceRange(
-      isPriceFiltered,
-      setFilteredCardsLocal,
-      salonesList,
-      precioMax
-    );
+    //   const filteredByPrice = handlePriceRange(
+    //     isPriceFiltered,
+    //     setFilteredCardsLocal,
+    //     salonesList,
+    //     precioMax
+    //   );
 
-    const filteredByAccesibility = handleAccesibility(
-      isSelectedServices,
-      filteredByPrice
-    );
-    setNumSalonesEncontrados(filteredByAccesibility.length);
-    setFilteredCardsLocal(filteredByAccesibility);
-  };
-  const handlePrice = (priceRange) => {
-    console.log("EN EL handlePrice");
-    setSelectedPrice(!selectedPrice);
-    setAreFiltersSelected(true);
-    fetchFilteredSalones();
+    //   const filteredByAccesibility = handleAccesibility(
+    //     isSelectedServices,
+    //     filteredByPrice
+    //   );
+    //   setNumSalonesEncontrados(filteredByAccesibility.length);
+    //   setFilteredCardsLocal(filteredByAccesibility);
+    // };
+    // const handlePrice = (priceRange) => {
+    //   console.log("EN EL handlePrice");
+    //   setSelectedPrice(!selectedPrice);
+    //   setAreFiltersSelected(true);
+    //   fetchFilteredSalones();
   };
 
   //---------  FILTROS DE SERVICIOS ----------------
