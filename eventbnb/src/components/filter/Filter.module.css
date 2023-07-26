@@ -113,9 +113,17 @@ align-items: center;
   margin-left: 20px;
   font-size: 1.6rem;
 }
+.priceRange{
+  display: flex;
+  margin-right: auto;
+}
 .priceLabel, .priceInput {
   font-size: 1.5rem;
   margin-left: 20px;
+}
+.priceInput{
+  border: 2px solid var(--dark-grey);
+  border-radius: 5px;
 }
 .securityOption, .bathOption{
  margin-left: 10px;

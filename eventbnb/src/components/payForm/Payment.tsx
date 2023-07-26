@@ -40,8 +40,8 @@ export default function Payment() {
 							<div className="pt-8 border-t flex items-start justify-between w-full">
 								<p className="text-xs">
 									Al seleccionar el botón que aparece a continuación, acepto las siguientes políticas:
-									<a href="" className="underline font-semibold text-black mx-1"> Reglas del anfitrión de la casa, Reglas fundamentales para los huéspedes, Política de reembolso y asistencia para cambio de reservación de Airbnb.</a>
-									Además, doy mi consentimiento para que Airbnb pueda
+									<a href="" className="underline font-semibold text-black mx-1"> Reglas del anfitrión de la casa, Reglas fundamentales para los huéspedes, Política de reembolso y asistencia para cambio de reservación de Festbnb.</a>
+									Además, doy mi consentimiento para que Festbnb pueda
 									<a href="" className="underline font-semibold text-black mx-1">cobrarme a través de mi método de pago</a>
 									si soy responsable de los daños. Acepto pagar el monto total indicado si el anfitrión acepta mi solicitud de reservación.
 								</p>

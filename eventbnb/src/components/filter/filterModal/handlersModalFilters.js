@@ -1,6 +1,6 @@
 export const handleCheckboxChangeClick = (
   selectedService,
-  setFilteredCards,
+  setFilteredCardsLocal,
   option,
   salonesList
 ) => {
@@ -9,8 +9,8 @@ export const handleCheckboxChangeClick = (
   let filteredSalones;
 
   switch (option) {
-    case "accesibilidad":
-      console.log("accesibilidad");
+    case "services":
+      console.log("services");
       filteredSalones = selectedService
         ? salonesList.filter(
             (salon) =>
@@ -31,7 +31,7 @@ export const handleCheckboxChangeClick = (
               salon.baño ||
               salon.cocina ||
               salon.area_infantil ||
-              salon.area_fumadores
+              salon.personal_seguridad
           )
         : salonesList;
       break;
@@ -45,14 +45,14 @@ export const handleCheckboxChangeClick = (
   console.log("Salones filtrados: ", filteredSalones);
 
   // Actualizar el estado con los salones filtrados
-  setFilteredCards(filteredSalones);
+  // setFilteredCardsLocal(filteredSalones);
 };
 
 //------------ Filtro para el precio de Rango ------------
 export const handleSortByPrice = (
   sortDirection,
   setIsPriceFiltered,
-  setFilteredCards,
+  setFilteredCardsLocal,
   list
 ) => {
   // setSelectedPriceIcon(sortDirection);
@@ -67,29 +67,10 @@ export const handleSortByPrice = (
   });
 
   // Actualizar los cards filtrados en el estado
-  setFilteredCards(sortedCards);
+  setFilteredCardsLocal(sortedCards);
 
   setIsPriceFiltered(true);
 };
 //--------------------------------------------------
 
 //------------ Filtro Precio del Rango en el Modal ------------
-
-export const handlePriceRange = (
-  isPriceFiltered,
-  setFilteredCards,
-  salonesList,
-  precioMin,
-  PrecioMax
-) => {
-  // Filtrar los salones según el estado de isPriceFiltered
-  const filteredSalones = isPriceFiltered
-    ? salonesList.sort((a, b) => a.precio - b.precio)
-    : salonesList;
-
-  // // Mostrar los resultados en la consola
-  console.log("Salones filtrados por precio:", filteredSalones);
-  setFilteredCards(filteredSalones);
-};
-
-//------------ Boton del MOdal Limpiar Todo ------------
