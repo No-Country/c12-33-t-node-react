@@ -3,60 +3,57 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { countries } from "../utils/countries";
-import { FaUser } from "react-icons/fa";
+import { FaEye, FaUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookies";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useUsers from "@/hooks/useUsers";
+import axios from "axios";
+import AlertError from "@/components/alert/AlertError";
 
 type FormData = yup.InferType<typeof schema>;
 
 const schema = yup.object().shape({
-  nombre: yup.string().required("El nombre es requerido"),
-  apellido: yup.string().required("El apellido es requerido"),
-  email: yup
-    .string()
-    .email("El correo electrónico no es válido")
-    .required("El correo electrónico es requerido"),
-  password: yup.string().required("La contraseña es requerida"),
+  nombre: yup.string(),
+  apellido: yup.string(),
+  password: yup.string(),
   telefono: yup
     .number()
-    .min(10, "El telefono debe tener al menos 10 números")
-    .positive("El telefono no es valido")
-    .required("El teléfono es requerido"),
-  fechaNacimiento: yup.date().required("La fecha de nacimiento es requerida"),
-  domicilio: yup.string().required("El domicilio es requerido"),
-  localidad: yup.string().required("La localidad es requerida"),
-  pais: yup.string().required("El país es requerido"),
+    .min(10, "The phone must have at least 10 numbers")
+    .positive("The phone is not valid"),
+  fechaNacimiento: yup.date(),
+  domicilio: yup.string(),
+  localidad: yup.string(),
+  pais: yup.string(),
 });
 
 const EditProfile: React.FC = () => {
-  const { getUserData } = useUsers();
+  const { validateSession, getUserData } = useUsers();
   const [data, setData] = useState();
   const { data: session } = useSession();
   const [jsonWebToken, setJsonWebToken] = useState("");
+  const [isHidden, setIsHidden] = useState(true);
   const router = useRouter();
+
+  const handleClick = (route) => {
+    setIsHidden(true);
+    router.push(route);
+  };
 
   useEffect(() => {
     const validate = async () => {
       try {
+        const isValidate = validateSession();
+        setIsHidden(isValidate);
         const dataUser = await getUserData();
         setData(dataUser);
       } catch (error) {
-        alert(error);
+        setIsHidden(false);
       }
     };
     validate();
-  }, [getUserData]);
-
-  useEffect(() => {
-    const jwt = getCookie("userToken");
-    setJsonWebToken(jwt);
-    if (!session && !jsonWebToken) {
-      router.push("/");
-    }
-  }, [jsonWebToken, router, session]);
+  }, [getUserData, validateSession]);
 
   const {
     register,
@@ -64,19 +61,45 @@ const EditProfile: React.FC = () => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    defaultValues: data,
   });
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (date: FormData) => {
+    console.log(date);
+    try {
+      const {} = await axios({
+        method: "put",
+        url: `http://104.154.93.179:5000/usuarios/${data?._id}`,
+        data: date,
+      });
+      alert("Datos actualizados correctamente");
+      router.push("/");
+    } catch (error) {
+      alert(error);
+    }
   };
+
+  const mostrarContrasena = ()=>{
+    let tipo = document.getElementById("password");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+      }else{
+          tipo.type = "password";
+      }
+  }
 
   return (
     <section className="container mx-5 py-8">
+      <AlertError
+        method={handleClick}
+        param={"/"}
+        isHidden={isHidden}
+        setIsHidden={setIsHidden}
+        href={"/"}
+      ></AlertError>
       <h1 className="text-2xl font-semibold mb-4 text-center flex flex-col gap-6">
         Editar perfil
       </h1>
-      <section className="flex items-start justify-evenly">
+      <section className="flex md:items-start md:flex-row justify-evenly flex-col items-center">
         <div className="">
           <div className="px-8 py-6 rounded-md shadow-xl">
             <h1 className="">
@@ -104,6 +127,7 @@ const EditProfile: React.FC = () => {
                 errors.nombre ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("nombre")}
+              defaultValue={data?.nombre}
             />
             {errors.nombre && (
               <p className="text-red-500 mt-1">{errors.nombre.message}</p>
@@ -123,47 +147,10 @@ const EditProfile: React.FC = () => {
                 errors.apellido ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("apellido")}
+              defaultValue={data?.apellido}
             />
             {errors.apellido && (
               <p className="text-red-500 mt-1">{errors.apellido.message}</p>
-            )}
-          </div>
-          <div className="mb-4 flex flex-col gap-6">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Correo electrónico
-            </label>
-            <input
-              id="email"
-              type="email"
-              className={`border ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("email")}
-            />
-            {errors.email && (
-              <p className="text-red-500 mt-1">{errors.email.message}</p>
-            )}
-          </div>
-          <div className="mb-4 flex flex-col gap-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Contraseña
-            </label>
-            <input
-              id="password"
-              type="password"
-              className={`border ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="text-red-500 mt-1">{errors.password.message}</p>
             )}
           </div>
           <div className="mb-4 flex flex-col gap-6">
@@ -180,6 +167,7 @@ const EditProfile: React.FC = () => {
                 errors.telefono ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("telefono")}
+              defaultValue={data?.telefono}
             />
             {errors.telefono && (
               <p className="text-red-500 mt-1">{errors.telefono.message}</p>
@@ -199,6 +187,7 @@ const EditProfile: React.FC = () => {
                 errors.fechaNacimiento ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("fechaNacimiento")}
+              defaultValue={data?.fechaNacimiento}
             />
             {errors.fechaNacimiento && (
               <p className="text-red-500 mt-1">
@@ -220,6 +209,7 @@ const EditProfile: React.FC = () => {
                 errors.domicilio ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("domicilio")}
+              defaultValue={data?.domicilio}
             />
             {errors.domicilio && (
               <p className="text-red-500 mt-1">{errors.domicilio.message}</p>
@@ -239,6 +229,7 @@ const EditProfile: React.FC = () => {
                 errors.localidad ? "border-red-500" : "border-gray-300"
               } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
               {...register("localidad")}
+              defaultValue={data?.localidad}
             />
             {errors.localidad && (
               <p className="text-red-500 mt-1">{errors.localidad.message}</p>
@@ -254,6 +245,7 @@ const EditProfile: React.FC = () => {
             <select
               id="pais"
               {...register("pais")}
+              defaultValue={data?.pais}
               className="block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             >
               <option value="">Seleccione un país</option>
@@ -265,6 +257,33 @@ const EditProfile: React.FC = () => {
             </select>
             {errors.pais && (
               <p className="text-red-500 mt-1">{errors.pais.message}</p>
+            )}
+          </div>
+          <div className="mb-4 flex flex-col gap-6">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Contraseña
+            </label>
+            <input
+              id="password"
+              type="password"
+              className={`border ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              } block w-full px-4 py-2 mt-2 text-gray-700 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
+              {...register("password")}
+              defaultValue={data?.password}
+            />
+            <button
+                className="flex justify-center rounded-md bg-blue-300 px-3 py-1.5 text-sm font-semibold text-black shadow-sm hover:bg-blue-400"
+                type="button"
+                onClick={mostrarContrasena}
+              >
+                <FaEye className="w-8 h-4"/>
+              </button>
+            {errors.password && (
+              <p className="text-red-500 mt-1">{errors.password.message}</p>
             )}
           </div>
           <button
