@@ -1,18 +1,29 @@
 "use client";
-import { EventHallContext, IEventHall } from "@/context/EventHallProvider";
+import {
+  EventHallContext,
+  IEventHallProvider,
+} from "@/context/EventHallProvider";
+import { IWindowsSize, WindowSizeContext } from "@/context/WindowSizeProvider";
+import Image from "next/image";
 import React, { useContext } from "react";
 
 const ImagesMovil = () => {
-  const { windowWidth } = useContext(EventHallContext) as IEventHall;
+  const { windowWidth } = useContext(WindowSizeContext) as IWindowsSize;
+  const { eventHall } = useContext(EventHallContext) as IEventHallProvider;
 
+  if (!eventHall) return null;
   if (windowWidth >= 768) return null;
+
+  const { imagenes } = eventHall;
 
   return (
     <div>
-      <img
+      <Image
+        src={imagenes[0]}
+        width={800}
+        height={600}
         className="object-cover w-full h-full"
-        src="https://a0.muscache.com/im/pictures/6d84db0f-b13f-4ad7-bd42-7be07bf07a54.jpg?im_w=1200"
-        alt=""
+        alt={eventHall.nombre}
       />
     </div>
   );

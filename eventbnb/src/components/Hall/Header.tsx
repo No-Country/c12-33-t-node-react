@@ -3,17 +3,22 @@ import React, { useContext } from "react";
 import { FaStar } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { FiShare } from "react-icons/fi";
-import { BsHeart, BsFillHeartFill } from "react-icons/bs";
+import { BsHeart } from "react-icons/bs";
 import { IModalProvider, ModalContext } from "@/context/ModalProvider";
+import {
+  EventHallContext,
+  IEventHallProvider,
+} from "@/context/EventHallProvider";
 
 const Header = () => {
   const { open } = useContext(ModalContext) as IModalProvider;
+  const { eventHall } = useContext(EventHallContext) as IEventHallProvider;
+
+  if (!eventHall) return null;
 
   return (
     <section className="py-7 md:py-0 border-b md:border-b-0">
-      <h1 className="text-2xl font-medium pb-2 md:pb-0">
-        Salón de Fiesta Las Princesas
-      </h1>
+      <h1 className="text-2xl font-medium pb-2 md:pb-0">{eventHall.nombre}</h1>
       <div className="flex justify-between flex-wrap gap-2">
         <div className="flex flex-wrap gap-1.5 items-center">
           <span className="flex items-center">
@@ -25,7 +30,7 @@ const Header = () => {
             className="flex items-center text-sm underline font-medium"
             onClick={open}
           >
-            35 reseñas
+            {eventHall.reviews.length} reseñas
           </button>
           ·
           <span className="flex items-center">
@@ -34,7 +39,7 @@ const Header = () => {
           </span>
           ·
           <button className="flex items-center text-sm underline font-medium">
-            Playa Tivives, Provincia de Puntarenas, Costa Rica
+            {eventHall.domicilio}, {eventHall.localidad}, {eventHall.ubicacion}
           </button>
         </div>
         <div className="flex gap-1">
