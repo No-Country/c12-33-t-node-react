@@ -49,7 +49,7 @@ const Account: React.FC = () => {
   }, [jsonWebToken, router, session]);
 
   return (
-    <section className="mx-4">
+    <section className="container mx-5 py-8">
       <div className="mt-16 mb-14 ml-4 text-[#222222] text-3xl">
         <h1>Cuenta</h1>
         <div className="text-lg mt-2 mb-4">
@@ -58,7 +58,7 @@ const Account: React.FC = () => {
           <Link href={` /account-settings/${data?._id}`}>Ir al perfil</Link>
         </div>
       </div>
-      <div className="flex items-center justify-between flex-wrap px-2">
+      <div className="flex items-center md:justify-between justify-center flex-wrap px-2">
         {account.account.map((item) => (
           <div key={item.title} className="my-2 p-4 w-96 rounded-xl shadow-lg">
             <div>
