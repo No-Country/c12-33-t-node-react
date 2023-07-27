@@ -30,7 +30,7 @@ const Header = () => {
             className="flex items-center text-sm underline font-medium"
             onClick={open}
           >
-            {eventHall.reviews.length} reseñas
+            {eventHall.reviews?.length} reseñas
           </button>
           ·
           <span className="flex items-center">
