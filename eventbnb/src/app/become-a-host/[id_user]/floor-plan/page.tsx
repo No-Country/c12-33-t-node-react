@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 import ButtonHalls from "@/components/create-halls/ButtonHalls";
 import useSalons from "@/hooks/useSalons";
 import { useRouter } from "next/navigation";

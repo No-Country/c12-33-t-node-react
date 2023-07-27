@@ -2,7 +2,7 @@
 import useSalons from '@/hooks/useSalons';
 
 import ButtonHalls from "@/components/create-halls/ButtonHalls";
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 
 import { IconType } from "react-icons/lib"
 import { FaUniversalAccess } from "react-icons/fa"
