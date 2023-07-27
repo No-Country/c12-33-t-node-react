@@ -4,7 +4,7 @@ import Cards from "@/components/card/Cards";
 import { useEffect, useState } from "react";
 
 
-const page = () => {
+const Page = () => {
   const [list, setList] = useState([])
   
   useEffect(() => {
@@ -28,4 +28,4 @@ const page = () => {
     )
 }
 
-export default page;
+export default Page;
