@@ -51,15 +51,3 @@ export const handlePetIconClick = (
 };
 
 //--------------------------------------------------
-//LIMPIAR FILTROS
-
-export const handleClearClick = (
-  isClearFiltered,
-  setFilteredList,
-  filteredList
-) => {
-  const filteredSalones = allSalones
-    ? filteredList.filter((salon) => salon.alll)
-    : filteredList;
-  setFilteredList(filteredSalones);
-};

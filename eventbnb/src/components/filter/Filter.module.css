@@ -126,7 +126,7 @@ border-bottom: 2px solid var(--light-grey);
   font-size: 14px;
   z-index: 999;
   top: 50px;
-  left: 50%;
+  left: 35%;
   transform: translateX(-50%);
   font-weight: 700;
   width: 150px;
@@ -183,8 +183,7 @@ border-bottom: 2px solid var(--light-grey);
   border-bottom: 2px solid var(--dark-grey);
   width: 100%;
 }
-.filterTitleService{
- 
+.filterTitleService, .priceRangeInput {
   margin-right: auto;
   margin-left: 5rem;
 }
