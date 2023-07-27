@@ -34,8 +34,7 @@ function getStartAndEndOfDay(dateString) {
 }
 
 const Calendar = ({id, clientId}) => {
-    const { setDisabled, setFormattedDateReservation } = useContext(EventHallContext) as IEventHallProvider;
-    // const date = formatDate(new Date())
+    const { setDisabled, setReserva, setFormattedDateReservation } = useContext(EventHallContext) as IEventHallProvider;
     const [startDate, setStartDate] = useState(new Date());
     const [formattedDate, setFormattedDate] = useState('');
     const [isReservate, setIsReservate] = useState('proceso')
@@ -52,27 +51,25 @@ const Calendar = ({id, clientId}) => {
 
     const handleClick = async () => {
         const dates = getStartAndEndOfDay(startDate)
+        const axiosData = {
+            Fecha_inicio: dates['startOfDay'],
+            Fecha_fin: dates['endOfDay'],
+            cliente: clientId.id,
+            salon: id
+        }
+
         try {
             if(clientId.error) throw new Error('Por favor registrese o inicie sesion para realizar esta acción')
 
-            console.log(clientId)
-            const axiosData = {
-                Fecha_inicio: dates['startOfDay'],
-                Fecha_fin: dates['endOfDay'],
-                cliente: clientId.id,
-                salon: id
-            }
-            const {data} = await axios.post('http://34.125.90.13:5000/eventos', axiosData) 
-            if(!data.error) throw new Error(data.data.message)
+            const {data} = await axios.post('http://104.154.93.179:5000/eventos', axiosData) 
+            
+            if(data.error) throw new Error(data.data.message)
+            
+            setReserva(data.data._id)
             setDisabled(false)
             setIsReservate('desocupado')
         } catch (error) {
             setIsReservate('ocupado')
-            console.log(error)
-        } finally{
-            setTimeout(() => {
-                setIsReservate('proceso')
-            }, 5000);
         }
     }
 

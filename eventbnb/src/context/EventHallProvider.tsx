@@ -17,7 +17,8 @@ export interface IEventHallProvider {
   getEventHall: () => Promise<void>;
   formattedDateReservation: string;
   setFormattedDateReservation: (disabled: string) => Dispatch<SetStateAction<Boolean>>;
-
+  setReserva: (id: string) => Dispatch<SetStateAction<string>>;
+  reserva: string;
 }
 
 export interface IReview {
@@ -47,6 +48,8 @@ export const EventHallProvider = ({ children, id }: IProps) => {
   const [services, setServices] = useState<IServicesData[] | null>(null);
   const [reviews, setReviews] = useState<IReviews | null>(null);
   const [disabled, setDisabled] = useState<Boolean>(true)
+  const [reserva, setReserva] = useState<string>('')
+
   const [formattedDateReservation, setFormattedDateReservation] = useState<string>('')
   const router = useRouter();
 
@@ -163,7 +166,7 @@ export const EventHallProvider = ({ children, id }: IProps) => {
 
   return (
     <EventHallContext.Provider
-      value={{ eventHall, services, reviews, disabled, setDisabled, formattedDateReservation, setFormattedDateReservation, getEventHall: getData, getData }}
+      value={{ eventHall, services, reserva, setReserva, reviews, disabled, setDisabled, formattedDateReservation, setFormattedDateReservation, getEventHall: getData, getData }}
     >
       {children}
     </EventHallContext.Provider>
