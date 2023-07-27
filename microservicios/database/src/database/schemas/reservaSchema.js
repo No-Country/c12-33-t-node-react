@@ -1,6 +1,7 @@
 const {Schema} = require("mongoose");
 const reservaSchema = new Schema(
     {
+        _id: String,
         Fecha_inicio_hora: Date,
         Fecha_fin_hora: Date,
         monto: String,
@@ -9,7 +10,7 @@ const reservaSchema = new Schema(
         pagado: {type: Boolean, default:false},
         cliente: {type: String, ref: "Usuario"},
         evento: {type: String, ref: "Evento"}
-});
+    });
 reservaSchema.statics.list = async function (){
 return await this.find()
     .populate("cliente",["_id","nombre","apellido"])
