@@ -12,6 +12,7 @@ export default function FilterModal({ list, setList }) {
   const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [numSalonesEncontrados, setNumSalonesEncontrados] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
 
   const handleCheckboxChange = (option) => {
     if (selectedOptions?.includes(option)) {
@@ -23,7 +24,7 @@ export default function FilterModal({ list, setList }) {
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
-  
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -35,7 +36,8 @@ export default function FilterModal({ list, setList }) {
       setList,
       list,
       selectedOptions,
-      setNumSalonesEncontrados
+      setNumSalonesEncontrados,
+      handlePriceChange
     );
   };
 
@@ -44,6 +46,13 @@ export default function FilterModal({ list, setList }) {
     setSelectedOptions([]);
     setList(list);
     setNumSalonesEncontrados(0);
+  };
+
+  const handlePriceChange = (event, setPrice) => {
+    const sanitizedValue = parseFloat(
+      event.target.value.replace(/[^0-9.]/g, "")
+    );
+    setPrice(sanitizedValue);
   };
 
   const serviceOptions = [
@@ -94,6 +103,24 @@ export default function FilterModal({ list, setList }) {
                 className={`flex flex-grow my-4 bg-white ${style.filterTitleTop}`}
               >
                 <h2 className={`${style.filterTitle}`}>Filtros</h2>
+              </div>
+              <div
+                className={`flex flex-grow my-2 ${style.filterTitleService}`}
+              >
+                <h3>Rango de Precio</h3>
+              </div>
+              <div
+                className={`flex items-center my-4 ${style.priceRangeInput}`}
+              >
+                <label htmlFor="maxPrice">Máximo:</label>
+                <input
+                  type="number"
+                  id="maxPrice"
+                  value={maxPrice}
+                  placeholder="$0"
+                  className={`border border-gray-300 rounded-md w-30 ml-2`}
+                  onChange={(e) => handlePriceChange(e, setMaxPrice)}
+                />
               </div>
               <div
                 className={`flex flex-grow my-2 ${style.filterTitleService}`}
