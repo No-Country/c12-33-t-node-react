@@ -42,15 +42,15 @@ const salonSchema = new Schema(
       .populate
       ({
         path: "eventos",
-        select: ["_id","nombre_evento","tipo_evento","Fecha_inicio","Fecha_fin"],
+        select: ["_id","Fecha_inicio","Fecha_fin"],
+        populate: {
+          path: "cliente",
+          select:["_id","nombre","apellido"],
+        },      
         populate: {
           path: "review",
           select: ["_id","comentario","puntaje","fecha"],
-        },
-        populate: {
-            path: "cliente",
-            select:["_id","nombre","apellido"],
-        }
+    },
       })
   };
   salonSchema.statics.get = async function (id){
@@ -59,15 +59,15 @@ const salonSchema = new Schema(
     .populate
     ({
       path: "eventos",
-      select: ["_id","nombre_evento","tipo_evento","Fecha_inicio","Fecha_fin"],
+      select: ["_id","Fecha_inicio","Fecha_fin"],
+      populate: {
+            path: "cliente",
+            select:["_id","nombre","apellido"],
+      },
       populate: {
         path: "review",
         select: ["_id","comentario","puntaje","fecha"],
       },
-      populate: {
-            path: "cliente",
-            select:["_id","nombre","apellido"],
-      }
     })
   };
   salonSchema.statics.insert = async function (salon){
