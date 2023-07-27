@@ -155,7 +155,7 @@ export default function Filter({
 
   const handleCleanFilter = () => {
     setIsClearFiltered(!isClearFiltered);
-    handleClearClick(isClearFiltered, setList, list);
+    handleClearClick(setList, list);
   };
   return (
     <div

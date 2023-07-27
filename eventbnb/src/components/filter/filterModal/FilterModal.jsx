@@ -23,6 +23,7 @@ export default function FilterModal({ list, setList }) {
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
+  
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -43,16 +44,6 @@ export default function FilterModal({ list, setList }) {
     setSelectedOptions([]);
     setList(list);
     setNumSalonesEncontrados(0);
-  };
-  const handleShowSalonFiltered = () => {
-    setIsAvailableFiltered(true);
-    handleModalActionsFilter(
-      isAvailableFiltered,
-      setList,
-      list,
-      selectedOptions,
-      setNumSalonesEncontrados
-    );
   };
 
   const serviceOptions = [
