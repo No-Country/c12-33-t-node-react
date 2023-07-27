@@ -224,6 +224,21 @@ border-radius: 20px;
  margin-bottom: 40px; 
 }
 
+/*BOTONES DEL MODAL*/
+.showSalon{
+margin-inline-start: auto;
+margin-right: 2rem;
+width: 170px;
+}
+.foundSalon{
+  margin-left: 250px;
+  width: 170px;
+}
+.clearAll{
+  margin-left: 15px;
+  width: 170px;
+}
+
 @media (max-width: 390px) {
   .filterContainer {
     display: block;

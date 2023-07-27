@@ -180,23 +180,23 @@ export default function FilterModal({ list, setList }) {
                 <div className="bg-white">
                   <button
                     onClick={handleClearAll}
-                    className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
+                    className={`text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold ${style.clearAll}`}
                   >
-                    Quitar todos
+                    Quitar <br></br>todos
                   </button>
                 </div>
                 <div className="bg-white"></div>
                 <div className="bg-white">
                   <button
                     onClick={handleModalActions}
-                    className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
+                    className={`text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold ${style.foundSalon}`}
                   >
-                    Encontrados <span>{numSalonesEncontrados}</span> salones
+                    Encontrados <span> {numSalonesEncontrados} </span> salones
                   </button>
                 </div>
                 <button
                   onClick={toggleModal}
-                  className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
+                  className={`text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold ${style.showSalon}`}
                 >
                   Mostrar Salones
                 </button>
