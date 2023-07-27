@@ -5,13 +5,10 @@ export const handleModalActionsFilter = (
   optionsSelected,
   setNumSalonesEncontrados
 ) => {
-  console.log("handleModalActionsFilter");
-  console.log(filteredList);
   let filteredSalones = filteredList;
   optionsSelected.forEach((element) => {
     switch (element) {
       case "accesibilidad":
-        console.log("Case accesibilidad");
         filteredSalones = isAvailableFiltered
           ? filteredList.filter((salon) => salon.accesibilidad)
           : filteredList;
@@ -108,6 +105,7 @@ export const handleModalActionsFilter = (
           ? filteredList.filter((salon) => salon.personal_seguridad)
           : filteredList;
         setFilteredList(filteredSalones);
+      default:
         break;
     }
   });
@@ -116,20 +114,20 @@ export const handleModalActionsFilter = (
   setNumSalonesEncontrados(filteredSalones.length);
 };
 
-//RESPALDO
+//ULTIMO RESPALDO
 // export const handleModalActionsFilter = (
 //   isAvailableFiltered,
 //   setFilteredList,
 //   filteredList,
-//   optionsSelected
+//   optionsSelected,
+//   setNumSalonesEncontrados,
+//   minPrice,
+//   maxPrice
 // ) => {
-//   console.log("handleModalActionsFilter");
-//   console.log(filteredList);
-//   let filteredSalones;
+//   let filteredSalones = filteredList;
 //   optionsSelected.forEach((element) => {
 //     switch (element) {
 //       case "accesibilidad":
-//         console.log("Case accesibilidad");
 //         filteredSalones = isAvailableFiltered
 //           ? filteredList.filter((salon) => salon.accesibilidad)
 //           : filteredList;
@@ -226,9 +224,16 @@ export const handleModalActionsFilter = (
 //           ? filteredList.filter((salon) => salon.personal_seguridad)
 //           : filteredList;
 //         setFilteredList(filteredSalones);
+//       default:
 //         break;
 //     }
 //   });
 
+//   if (minPrice >= 0 && maxPrice > 0 && minPrice < maxPrice) {
+//     filteredSalones = filteredSalones.filter(
+//       (salon) => salon.price >= minPrice && salon.price <= maxPrice
+//     );
+//   }
 //   setFilteredList(filteredSalones);
+//   setNumSalonesEncontrados(filteredSalones.length);
 // };

@@ -20,10 +20,10 @@ import {
   handleParkingIconClick,
   handlePetIconClick,
   handlePoolIconClick,
-  handleClearClick,
 } from "./handlersSliderFilter";
 
 SwiperCore.use([]);
+const url = process.env.NEXT_PUBLIC_MICROSERVICIOS;
 
 export default function Filter({
   list,
@@ -46,7 +46,6 @@ export default function Filter({
   const [salonesList, setSalonesList] = useState([]);
 
   const router = useRouter();
-  const url = process.env.MICROSERVICIOS;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,9 +152,26 @@ export default function Filter({
 
   //BOTON DE LIMPIAR LOS FILTROS
 
-  const handleCleanFilter = () => {
-    setIsClearFiltered(!isClearFiltered);
-    handleClearClick(setList, list);
+  const handleCleanFilter = async () => {
+    try {
+      setIsParkingFiltered(false);
+      setIsPoolFiltered(false);
+      setIsAvailableFiltered(false);
+      setIsPetFiltered(false);
+      setIsPriceFiltered(false);
+      setSelectedPriceIcon(false);
+      setCurrentSort("");
+      setShowSortButtons(false);
+      setSortDirection("asc");
+
+      const { data } = await axios.get(`${url}/salones`);
+      const salonesList = data.data;
+      setList(salonesList);
+      setFilteredList(salonesList);
+    } catch (error) {
+      console.error("Error clearing filters:", error.message);
+      // You can display an error message to the user here if needed
+    }
   };
   return (
     <div
