@@ -1,4 +1,4 @@
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 import ButtonHalls from "@/components/create-halls/ButtonHalls";
 import Passed from "@/components/create-halls/Passed";
 
