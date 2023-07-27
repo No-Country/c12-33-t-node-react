@@ -183,7 +183,7 @@ const MySalons = () => {
                                 {
                                     activeServices.map((service) => {
                                         return (
-                                            <li>
+                                            <li key={service.state}>
                                                 <div className="flex items-center p-2 rounded">
                                                     <input 
                                                     onClick={() => handleActiveServices(service.state)}
@@ -225,7 +225,7 @@ const MySalons = () => {
                             </div>
                         </th>
                         {
-                            columns.map(column => <th scope="col" className="pl-6 pr-4 py-3">
+                            columns.map(column => <th key={column.state} scope="col" className="pl-6 pr-4 py-3">
                             <button 
                             onClick={() => sorted(column.state, lowToHigh, column.type)}
                             className={`${column.type === 'boolean' ? 'hover:cursor-default' : ''} cur flex items-center gap-x-1`}>
