@@ -48,9 +48,20 @@ align-items: center;
 }
 
 /*FLECHAS DE SLIDER DERECHA E IZQUIERDA*/
-.swiperContainerFilter .swiper-button-next,
-.swiperContainerFilter .swiper-button-prev {
-  display: none !important;
+.rightArrow{
+  position: absolute;
+  right: 230px;
+  top: 50%;
+  transform: translateY(-120%);
+  font-size: 2rem;
+  cursor: pointer;
+}
+.leftArrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-120%);
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 /* --------- FILTER BUTTON ---------*/
@@ -130,7 +141,7 @@ border-radius: 20px;
   color: #333;
   font-size: 14px;
   z-index: 999;
-  top: 50px;
+  top: 60px;
   left: 35%;
   transform: translateX(-50%);
   font-weight: 700;
@@ -145,6 +156,7 @@ border-radius: 20px;
 .clearButton {
   position: relative;
   display: inline-block;
+  margin-top: 35px;
 }
 
 /*Modal - Filter - Button*/

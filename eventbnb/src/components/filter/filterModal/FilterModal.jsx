@@ -85,7 +85,7 @@ export default function FilterModal({ list, setList }) {
         <button
           style={{
             marginTop: "40px",
-            marginRight: "140px",
+            marginRight: "10px",
             width: "100px",
             fontSize: "20px",
           }}

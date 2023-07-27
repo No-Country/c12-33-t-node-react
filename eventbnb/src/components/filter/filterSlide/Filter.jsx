@@ -182,7 +182,7 @@ export default function Filter({
       } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
     >
       <span
-        className="absolute top-0 left-0 cursor-pointer"
+        className={`absolute top-0 left-0 cursor-pointer ${style.leftArrow}`}
         onClick={() => {
           // Función para retroceder un slide en el Swiper
           swiperRef.current.swiper.slidePrev();
@@ -191,7 +191,7 @@ export default function Filter({
         &lt;
       </span>
       <span
-        className="absolute top-0 right-0 cursor-pointer"
+        className={`absolute top-0 right-0 cursor-pointer ${style.rightArrow}`}
         onClick={() => {
           // Función para avanzar un slide en el Swiper
           swiperRef.current.swiper.slideNext();
