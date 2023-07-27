@@ -9,7 +9,7 @@ import {
 } from "@/context/EventHallProvider";
 import ServiceMainItem from "./ServiceMainItem";
 
-const MainServices = () => {
+const MainServices = ({ id, clientId }) => {
   const { services } = useContext(EventHallContext) as IEventHallProvider;
 
   if (!services) return null;
@@ -21,7 +21,7 @@ const MainServices = () => {
       {mainServices.map((service) => (
         <ServiceMainItem service={service} key={service.type} />
       ))}
-      <Calendar id={id} clientId={clientId}/>
+      <Calendar id={id} clientId={clientId} />
     </div>
   );
 };
