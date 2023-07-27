@@ -1,4 +1,5 @@
 import Account from "../../components/account/Account";
+import Back from "../../components/back/Back";
 // const userTemplate = {
 //     _id: "649f8ccc12b6415694a8e746",
 //     nombre: "Exe",
@@ -12,12 +13,12 @@ import Account from "../../components/account/Account";
 //     pais: "Arg",
 //   };
 const AccountPage = () => {
-    return (
-        <section className="">
-            <Account/>
-        </section> 
-            
-     );
-}
- 
+  return (
+    <section className="">
+      <Back />
+      <Account />
+    </section>
+  );
+};
+
 export default AccountPage;

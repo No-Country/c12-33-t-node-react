@@ -92,9 +92,11 @@ margin-top: 0;
 top:0;
 padding: 10px 0;
 border-bottom: 2px solid var(--light-grey);
+border-radius: 20px;
 }
 .filterTitle{
   margin-inline: auto;
+  margin-right: 45%;
 }
 .filterBottom{
   
@@ -102,6 +104,9 @@ border-bottom: 2px solid var(--light-grey);
   bottom: 0;
   padding: 10px 0;
   border-top: 2px solid var(--light-grey);
+}
+.filterBottom{
+  border-radius: 20px;
 }
 /*BOTON FILTRO Y LIMPIAR FILTROS*/
 .clearAndButton{
@@ -143,17 +148,9 @@ border-bottom: 2px solid var(--light-grey);
 }
 
 /*Modal - Filter - Button*/
-.filterButton1 {
-  /* position: fixed; */
-  border: solid 2px var(--dark-grey);
-  padding: 15px 25px;
-  border-radius: 20px;
-  font-size: 25px;
-  margin-top: 15%;
-  margin-bottom: 20%;
- align-items: center;
-     top: 15%;
-     margin-left: 50px;
+.closeButton{
+  margin-left: 40px;
+    font-size: 1.3rem;
 }
 .filterModal {
   position: fixed;
@@ -162,7 +159,7 @@ border-bottom: 2px solid var(--light-grey);
   align-items: center;
   border: 2px solid var(--dark-grey);
   border-radius: 20px;
-  width: 60rem;
+  width: 50rem;
   height: 85vh; /* Ajusta el valor según sea necesario */
   cursor: pointer;
   background-color: var(--white);
@@ -183,12 +180,33 @@ border-bottom: 2px solid var(--light-grey);
   border-bottom: 2px solid var(--dark-grey);
   width: 100%;
 }
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Este valor controla la opacidad del fondo */
+  z-index: 10; /* Asegúrate de que el z-index sea mayor que el del modal para que se muestre por encima */
+}
+.filterButton1 {
+  /* position: fixed; */
+  border: solid 2px var(--dark-grey);
+  padding: 15px 25px;
+  border-radius: 20px;
+  font-size: 25px;
+  margin-top: 15%;
+  margin-bottom: 20%;
+ align-items: center;
+     top: 15%;
+     margin-left: 50px;
+}
 .filterTitleService, .priceRangeInput {
   margin-right: auto;
   margin-left: 5rem;
 }
 .filterTitleService h3{
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: left;
   font-size: 2rem;
   font-weight: 500;
@@ -201,6 +219,9 @@ border-bottom: 2px solid var(--light-grey);
 .optionsCheckbox:hover, .serviceOptions2:hover{
   cursor: pointer;
   
+}
+.priceRangeInput1{
+ margin-bottom: 40px; 
 }
 
 @media (max-width: 390px) {
