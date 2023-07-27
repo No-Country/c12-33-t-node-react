@@ -17,7 +17,7 @@ interface Image {
     alt: string;
 }
 
-export interface Integrant {
+interface Integrant {
     name: string;
     rol: string;
     image: Image;
@@ -27,7 +27,7 @@ export interface Integrant {
     description: string;
 }
 
-export const team: Integrant[] = [
+const team: Integrant[] = [
     {   
         name: 'Fabián Carabajal',
         rol: 'Front End Developer',
