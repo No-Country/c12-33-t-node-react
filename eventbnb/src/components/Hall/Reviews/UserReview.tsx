@@ -1,13 +1,15 @@
 "use client";
+import { IReview } from "@/context/EventHallProvider";
 import { IModalProvider, ModalContext } from "@/context/ModalProvider";
 import React, { useContext } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 
 interface IUserReview {
   inModal?: boolean;
+  review: IReview;
 }
 
-const UserReview = ({ inModal = false }: IUserReview) => {
+const UserReview = ({ inModal = false, review }: IUserReview) => {
   const { open } = useContext(ModalContext) as IModalProvider;
 
   return (
@@ -20,17 +22,15 @@ const UserReview = ({ inModal = false }: IUserReview) => {
           alt="img"
         />
         <div>
-          <span className="block text-lg font-medium leading-4">David</span>
-          <span className="text-sm leading-3 text-gray-500">mayo de 2023</span>
+          <span className="block text-lg font-medium leading-4">
+            {review.cliente.nombre} {review.cliente.apellido}
+          </span>
+          <span className="text-sm leading-3 text-gray-500">
+            {review.fecha}
+          </span>
         </div>
       </div>
-      <p>
-        Es un lugar precioso, tanto el entorno natural como la casa. La casa
-        tiene todas las comodidades, una cocina completamente equipada, muy
-        cómodo y cálido. El lugar es precioso, se nota que lo cuidan muy bien.
-        Realmente disfrutamos de descansar y estar en la naturaleza. Muchas
-        gracias!!
-      </p>
+      <p>{review.comentario}</p>
       {!inModal && (
         <button className="mt-2" onClick={open}>
           <span className="flex items-center underline gap-1">
