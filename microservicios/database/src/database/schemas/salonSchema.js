@@ -32,7 +32,7 @@ const salonSchema = new Schema(
     borrado: {type: Boolean, default: false},
     fechaCreacion: { type: Date, default: Date.now },
     propietario: {type: String, ref: "Usuario"},
-    reviews: [{type: String, ref: "Review"}],
+    // reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
