@@ -8,7 +8,7 @@ import {
   IEventHallProvider,
 } from "@/context/EventHallProvider";
 
-const Information = () => {
+const Information = ({id, clientId}) => {
   const { eventHall } = useContext(EventHallContext) as IEventHallProvider;
 
   if (!eventHall) return null;
@@ -16,7 +16,7 @@ const Information = () => {
   return (
     <section>
       <Header eventHall={eventHall} />
-      <MainServices />
+      <MainServices id={id} clientId={clientId}/>
       <p className="py-7 border-b">{eventHall.descripcion}</p>
       <AllServices />
     </section>
