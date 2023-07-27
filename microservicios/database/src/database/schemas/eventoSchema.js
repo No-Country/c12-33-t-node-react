@@ -1,18 +1,20 @@
 const {Schema}=require("mongoose");
 const eventoSchema = new Schema(
 {
-    nombre_evento: String,
-    tipo_evento: String,
+    // nombre_evento: String,
+    // tipo_evento: String,
     Fecha_inicio: Date,
     Fecha_fin: Date,
     cliente: {type: String, ref: "Usuario"},
     salon: {type: String, ref: "Salon"},
+    reserva: {type: String, ref: "Reserva", default:null},
     review: {type: String, ref: "Review", default:null}
   });
   eventoSchema.statics.list = async function (){
     return await this.find()
       .populate("cliente",["_id","nombre","apellido"])
       .populate("salon", ["_id","nombre"])
+      .populate("reserva")
       .populate("review",["comentario","puntaje","fecha"])
   };
   eventoSchema.statics.get = async function (id){
