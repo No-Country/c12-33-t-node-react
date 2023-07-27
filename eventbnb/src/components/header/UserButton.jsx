@@ -28,7 +28,7 @@ export default function UserButton({ showOptions }) {
     deleteCookie("userToken");
     signOut();
   };
-console.log(userData, jwt)
+  
   return (
     <div>
       {showOptions && (
@@ -66,6 +66,13 @@ console.log(userData, jwt)
                 className={`w-full text-start font-semibold h-full text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn1}`}
               >
                 Favoritos
+              </Link>
+              <hr />
+              <Link
+                href={`/reservations/${userData._id}`}
+                className={`w-full text-start font-semibold h-full text-black rounded-lg hover:bg-slate-100 px-4 ${style.login__btn1}`}
+              >
+                Mis reservas
               </Link>
               <hr />
               <button

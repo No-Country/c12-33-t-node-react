@@ -34,7 +34,7 @@ function Page({ params }: { params: { hall: string } }) {
     }
     validate()
   }, [])
-console.log(data)
+
   return (
     <EventHallProvider id={params.hall}>
       <WindowSizeProvider>
@@ -57,7 +57,7 @@ console.log(data)
                   </div>
                 </div>
                 <div className="md:basis-4/12 w-full pb-10 sm:px-5 md:px-0">
-                  <ReservationForm />
+                  <ReservationForm clientId={data}/>
                 </div>
               </div>
             </div>
