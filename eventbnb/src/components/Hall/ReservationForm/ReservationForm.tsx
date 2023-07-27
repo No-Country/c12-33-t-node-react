@@ -13,17 +13,6 @@ import AlertReservas from "@/components/alert/AlertReservas";
 const impuestos = 123;
 const tarifaEventBnb = 120;
 
-const ReservationForm = () => {
-  const { eventHall, disabled, formattedDateReservation } = useContext(
-    EventHallContext
-  ) as IEventHallProvider;
-  const router = useRouter();
-  if (!eventHall) return null;
-
-  const handleClick = () => {
-    if (disabled) alert("primero fijate si esta disponible esta fecha");
-    // router.push()
-
 const ReservationForm = ({clientId}) => {
   const { eventHall, reserva, disabled, formattedDateReservation, reviews } = useContext(
     EventHallContext
