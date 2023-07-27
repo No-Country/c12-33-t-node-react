@@ -7,9 +7,11 @@ import { IoAccessibility } from "react-icons/io5";
 import {
   MdOutlineAddAPhoto,
   MdOutlineBathroom,
+  MdSecurity,
   MdTableBar,
 } from "react-icons/md";
-import { TbPool } from "react-icons/tb";
+import { TbAirConditioning, TbGrill, TbPool } from "react-icons/tb";
+import { SlScreenDesktop } from "react-icons/sl";
 
 export interface IServicesData {
   type: string;
@@ -18,11 +20,6 @@ export interface IServicesData {
 }
 
 const servicesData: IServicesData[] = [
-  {
-    type: "baño_accesibilidad",
-    value: "Baño de Accesibilidad",
-    icon: <MdOutlineBathroom size={25} />,
-  },
   {
     type: "accesibilidad",
     value: "Accesibilidad",
@@ -36,6 +33,11 @@ const servicesData: IServicesData[] = [
   {
     type: "catering",
     value: "Catering",
+    icon: <MdOutlineBathroom size={25} />,
+  },
+  {
+    type: "baño_accesibilidad",
+    value: "Baño de Accesibilidad",
     icon: <MdOutlineBathroom size={25} />,
   },
   {
@@ -82,6 +84,26 @@ const servicesData: IServicesData[] = [
     type: "escenario",
     value: "Escenario",
     icon: <BsPostage size={25} />,
+  },
+  {
+    type: "aire_acondicionado",
+    value: "Aire Acondicionado",
+    icon: <TbAirConditioning size={25} />,
+  },
+  {
+    type: "parrilla",
+    value: "Parrilla",
+    icon: <TbGrill size={25} />,
+  },
+  {
+    type: "pantalla",
+    value: "Pantalla",
+    icon: <SlScreenDesktop size={25} />,
+  },
+  {
+    type: "personal_seguridad",
+    value: "Personal de Seguridad",
+    icon: <MdSecurity size={25} />,
   },
 ];
 

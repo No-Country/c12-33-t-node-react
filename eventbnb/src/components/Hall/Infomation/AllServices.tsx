@@ -2,9 +2,7 @@ import {
   EventHallContext,
   IEventHallProvider,
 } from "@/context/EventHallProvider";
-import { IEventHall } from "@/interfaces/event-hall.interface";
 import React, { useContext } from "react";
-import { GiAtSea } from "react-icons/gi";
 import ServiceItem from "./ServiceItem";
 
 const AllServices = () => {
