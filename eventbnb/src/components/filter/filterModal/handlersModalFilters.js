@@ -1,76 +1,234 @@
-export const handleCheckboxChangeClick = (
-  selectedService,
-  setFilteredCardsLocal,
-  option,
-  salonesList
+export const handleModalActionsFilter = (
+  isAvailableFiltered,
+  setFilteredList,
+  filteredList,
+  optionsSelected,
+  setNumSalonesEncontrados
 ) => {
-  console.log("EN EL handleCheckboxChangeClick");
-
-  let filteredSalones;
-
-  switch (option) {
-    case "services":
-      console.log("services");
-      filteredSalones = selectedService
-        ? salonesList.filter(
-            (salon) =>
-              salon.accesibilidad ||
-              salon.wifi ||
-              salon.calefaccion ||
-              salon.aire_acondicionado ||
-              salon.parrilla ||
-              salon.pantalla ||
-              salon.catering ||
-              salon.bar ||
-              salon.mesas_sillas ||
-              salon.escenario ||
-              salon.luces ||
-              salon.sonido ||
-              salon.fotografia ||
-              salon.decoracion ||
-              salon.baño ||
-              salon.cocina ||
-              salon.area_infantil ||
-              salon.personal_seguridad
-          )
-        : salonesList;
-      break;
-    // Add more cases for other options if needed
-    default:
-      // If none of the specific options match, do not filter (return the original list)
-      filteredSalones = salonesList;
-  }
-
-  // Mostrar los resultados en la consola
-  console.log("Salones filtrados: ", filteredSalones);
-
-  // Actualizar el estado con los salones filtrados
-  // setFilteredCardsLocal(filteredSalones);
-};
-
-//------------ Filtro para el precio de Rango ------------
-export const handleSortByPrice = (
-  sortDirection,
-  setIsPriceFiltered,
-  setFilteredCardsLocal,
-  list
-) => {
-  // setSelectedPriceIcon(sortDirection);
-
-  // Filtrar los salones sesalonesListgún la dirección del ordenamiento y el ícono de precio seleccionado
-  const sortedCards = [...list].sort((a, b) => {
-    if (sortDirection === "asc") {
-      return a.precio - b.precio;
-    } else {
-      return b.precio - a.precio;
+  console.log("handleModalActionsFilter");
+  console.log(filteredList);
+  let filteredSalones = filteredList;
+  optionsSelected.forEach((element) => {
+    switch (element) {
+      case "accesibilidad":
+        console.log("Case accesibilidad");
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.accesibilidad)
+          : filteredList;
+        setFilteredList(filteredSalones);
+        break;
+      case "estacionamiento":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.estacionamiento)
+          : filteredList;
+        setFilteredList(filteredSalones);
+        break;
+      case "wifi":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.wifi)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "calefaccion":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.calefaccion)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "aire_acondicionado":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.aire_acondicionado)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "parrilla":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.parrilla)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "pantalla":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.pantalla)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "catering":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.catering)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "bar":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.bar)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "mesas_sillas":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.mesas_sillas)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "escenario":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.escenario)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "luces":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.luces)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "sonido":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.sonido)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "fotografia":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.fotografia)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "decoracion":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.decoracion)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "baño":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.baño)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "cocina":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.cocina)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "area_infantil":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.area_infantil)
+          : filteredList;
+        setFilteredList(filteredSalones);
+      case "personal_seguridad":
+        filteredSalones = isAvailableFiltered
+          ? filteredList.filter((salon) => salon.personal_seguridad)
+          : filteredList;
+        setFilteredList(filteredSalones);
+        break;
     }
   });
 
-  // Actualizar los cards filtrados en el estado
-  setFilteredCardsLocal(sortedCards);
-
-  setIsPriceFiltered(true);
+  setFilteredList(filteredSalones);
+  setNumSalonesEncontrados(filteredSalones.length);
 };
-//--------------------------------------------------
 
-//------------ Filtro Precio del Rango en el Modal ------------
+//RESPALDO
+// export const handleModalActionsFilter = (
+//   isAvailableFiltered,
+//   setFilteredList,
+//   filteredList,
+//   optionsSelected
+// ) => {
+//   console.log("handleModalActionsFilter");
+//   console.log(filteredList);
+//   let filteredSalones;
+//   optionsSelected.forEach((element) => {
+//     switch (element) {
+//       case "accesibilidad":
+//         console.log("Case accesibilidad");
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.accesibilidad)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//         break;
+//       case "estacionamiento":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.estacionamiento)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//         break;
+//       case "wifi":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.wifi)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "calefaccion":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.calefaccion)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "aire_acondicionado":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.aire_acondicionado)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "parrilla":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.parrilla)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "pantalla":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.pantalla)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "catering":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.catering)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "bar":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.bar)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "mesas_sillas":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.mesas_sillas)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "escenario":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.escenario)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "luces":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.luces)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "sonido":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.sonido)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "fotografia":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.fotografia)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "decoracion":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.decoracion)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "baño":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.baño)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "cocina":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.cocina)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "area_infantil":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.area_infantil)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//       case "personal_seguridad":
+//         filteredSalones = isAvailableFiltered
+//           ? filteredList.filter((salon) => salon.personal_seguridad)
+//           : filteredList;
+//         setFilteredList(filteredSalones);
+//         break;
+//     }
+//   });
+
+//   setFilteredList(filteredSalones);
+// };

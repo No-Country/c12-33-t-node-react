@@ -15,7 +15,7 @@ export default function Cards({ list }) {
         //puede cambiarse por un padding en el header, por ahora lo trabajé así.
         style={{ marginTop: "-20px" }}
       >
-        {list.map((card, i) => (
+        {list?.map((card, i) => (
           <Card card={card} key={i} />
         ))}
       </div>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { HiWifi } from "react-icons/hi";
 import { BsDoorClosed } from "react-icons/bs";
 import { BsCalendar3 } from "react-icons/bs";
+import Calendar from "./Calendar";
 import {
   EventHallContext,
   IEventHallProvider,
@@ -20,6 +21,7 @@ const MainServices = () => {
       {mainServices.map((service) => (
         <ServiceMainItem service={service} key={service.type} />
       ))}
+      <Calendar id={id} clientId={clientId}/>
     </div>
   );
 };

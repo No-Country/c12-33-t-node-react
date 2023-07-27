@@ -1,7 +1,7 @@
 "use client";
 import { Cliente, IEventHall } from "@/interfaces/event-hall.interface";
 import EventHallService from "@/services/event-hall.service";
-import { createContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import servicesData, {
   IServicesData,
@@ -12,7 +12,12 @@ export interface IEventHallProvider {
   eventHall: IEventHall | null;
   services: IServicesData[] | null;
   reviews: IReviews | null;
+  disabled: Boolean;
+  setDisabled: (disabled: Boolean) => Dispatch<SetStateAction<Boolean>>;
   getEventHall: () => Promise<void>;
+  formattedDateReservation: string;
+  setFormattedDateReservation: (disabled: string) => Dispatch<SetStateAction<Boolean>>;
+
 }
 
 export interface IReview {
@@ -41,7 +46,8 @@ export const EventHallProvider = ({ children, id }: IProps) => {
   const [eventHall, setEventHall] = useState<IEventHall | null>(null);
   const [services, setServices] = useState<IServicesData[] | null>(null);
   const [reviews, setReviews] = useState<IReviews | null>(null);
-
+  const [disabled, setDisabled] = useState<Boolean>(true)
+  const [formattedDateReservation, setFormattedDateReservation] = useState<string>('')
   const router = useRouter();
 
   const getData = async () => {
@@ -157,7 +163,7 @@ export const EventHallProvider = ({ children, id }: IProps) => {
 
   return (
     <EventHallContext.Provider
-      value={{ eventHall, services, reviews, getEventHall: getData }}
+      value={{ eventHall, services, reviews, disabled, setDisabled, formattedDateReservation, setFormattedDateReservation, getEventHall: getData, getData }}
     >
       {children}
     </EventHallContext.Provider>
