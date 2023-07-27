@@ -78,6 +78,9 @@ export default function FilterModal({ list, setList }) {
 
   return (
     <div className={`flex flex-col items-center ${style.filterButton}`}>
+      {showModal && (
+        <div className={style.modalBackdrop} onClick={toggleModal} />
+      )}
       <div className={` ${style.clearAndButton}`}>
         <button
           style={{
@@ -101,6 +104,12 @@ export default function FilterModal({ list, setList }) {
               <div
                 className={`flex flex-grow my-4 bg-white ${style.filterTitleTop}`}
               >
+                <button
+                  className={` ${style.closeButton}`}
+                  onClick={toggleModal}
+                >
+                  X
+                </button>
                 <h2 className={`${style.filterTitle}`}>Filtros</h2>
               </div>
               <div
@@ -112,14 +121,19 @@ export default function FilterModal({ list, setList }) {
               <div
                 className={`flex items-center my-4 ${style.priceRangeInput}`}
               >
-                <label htmlFor="maxPrice">Máximo:</label>
+                <label
+                  htmlFor="maxPrice"
+                  className={` ${style.priceRangeInput1}`}
+                >
+                  Máximo:
+                </label>
 
                 <input
                   type="number"
                   id="maxPrice"
                   value={maxPrice}
                   placeholder="$0"
-                  className={`border border-gray-300 rounded-md w-30 ml-2`}
+                  className={`border border-gray-300 rounded-md w-30 ml-2 mb-10`}
                   onChange={(e) => handlePriceChange(e, setMaxPrice, "max")} // Add "max" as the third argument
                 />
               </div>
@@ -171,14 +185,7 @@ export default function FilterModal({ list, setList }) {
                     Quitar todos
                   </button>
                 </div>
-                <div className="bg-white">
-                  <button
-                    onClick={toggleModal}
-                    className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
-                  >
-                    Cerrar
-                  </button>
-                </div>
+                <div className="bg-white"></div>
                 <div className="bg-white">
                   <button
                     onClick={handleModalActions}
@@ -283,6 +290,9 @@ export default function FilterModal({ list, setList }) {
 
 //   return (
 //     <div className={`flex flex-col items-center ${style.filterButton}`}>
+//       {showModal && (
+//         <div className={style.modalBackdrop} onClick={toggleModal} />
+//       )}
 //       <div className={` ${style.clearAndButton}`}>
 //         <button
 //           style={{
