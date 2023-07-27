@@ -1,6 +1,7 @@
+require("dotenv").config();
 const mercadopago = require('mercadopago');
-const PROD_ACCESS_TOKEN = "TEST-4465147778510372-071816-112ca063200d513d7b6b5fa6eef87341-164451778";
-
+const PROD_ACCESS_TOKEN = process.env.PROD_ACCESS_TOKEN;
+const URL_BACK_PAGO = process.env.URL_BACK_PAGO;
 mercadopago.configure({
     sandbox: true,
     access_token: PROD_ACCESS_TOKEN,
@@ -18,16 +19,16 @@ function mercadoPago({ _id, monto, descripcion }) {
                 }
             ],
             back_urls: {
-                success: "http://localhost:3000",
-                failure: "www.google.com",
-                pending: "www.google.com"
+                success: `${URL_BACK_PAGO}/cobrado`,
+                failure: `${URL_BACK_PAGO}/pendiente`,
+                pending: `${URL_BACK_PAGO}/fallado`
             },
             auto_return: "approved",
         };
 
         mercadopago.preferences.create(preference)
             .then((result) => {
-                resolve(result.body.init_point);
+                resolve({init_point:result.body.init_point,id:result.body.id});
             })
             .catch((error) => {
                 reject(new Error("Error en la creacion del init_point de Mercado Pago"));

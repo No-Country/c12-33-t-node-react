@@ -22,9 +22,10 @@ function Page({ params }: { params: { hall: string } }) {
   const { getUserData, validateSession } = useUsers();
   const [data, setData] = useState({});
   const [isHidden, setIsHidden] = useState(true);
-
+  
   useEffect(() => {
     const validate = async () => {
+
       try {
         const dataUser = await getUserData();
         setData({ error: false, id: dataUser._id });
@@ -36,6 +37,7 @@ function Page({ params }: { params: { hall: string } }) {
     validate();
   }, []);
   console.log(data);
+
   return (
     <EventHallProvider id={params.hall}>
       <Back />
@@ -59,7 +61,7 @@ function Page({ params }: { params: { hall: string } }) {
                   </div>
                 </div>
                 <div className="md:basis-4/12 w-full pb-10 sm:px-5 md:px-0">
-                  <ReservationForm />
+                  <ReservationForm clientId={data}/>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 import ButtonHalls from "@/components/create-halls/ButtonHalls";
 
 export default function Page(){

@@ -1,11 +1,14 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
 import {
   EventHallContext,
   IEventHallProvider,
 } from "@/context/EventHallProvider";
 import { useRouter } from "next/navigation";
+import AlertReservas from "@/components/alert/AlertReservas";
 
 const impuestos = 123;
 const tarifaEventBnb = 120;
@@ -20,6 +23,42 @@ const ReservationForm = () => {
   const handleClick = () => {
     if (disabled) alert("primero fijate si esta disponible esta fecha");
     // router.push()
+
+const ReservationForm = ({clientId}) => {
+  const { eventHall, reserva, disabled, formattedDateReservation, reviews } = useContext(
+    EventHallContext
+  ) as IEventHallProvider;
+
+  const [alertEditError, setAlertEditError] = useState('warning')
+  const [alertEditHidden, setAlertEditHidden] = useState(true)
+  
+  const router = useRouter();
+  
+  if (!eventHall) return null;
+  
+  const handleClick = async () => {
+    const dat = {
+      cliente: clientId.id,
+      evento: reserva,
+      monto: eventHall.precio + impuestos + tarifaEventBnb
+    }
+    
+    try {
+      if (disabled) return setAlertEditHidden(false)
+      const {data} = await axios.post('http://104.154.93.179:5000/reservas', dat)      
+      
+      setAlertEditError('success')
+      setAlertEditHidden(false)
+      router.push(data.data.init_point)
+    } catch (error) {
+      
+      setAlertEditError('error')
+      setAlertEditHidden(false)
+    } finally{
+      setTimeout(() => {
+        setAlertEditHidden(true)
+      }, 3000);
+    }
   };
 
   return (
@@ -73,6 +112,7 @@ const ReservationForm = () => {
         <span>Total incluyendo impuestos</span>
         <span>${eventHall?.precio + tarifaEventBnb + impuestos}</span>
       </div>
+      <AlertReservas alertEditError={alertEditError} alertEditHidden={alertEditHidden}/>
     </div>
   );
 };

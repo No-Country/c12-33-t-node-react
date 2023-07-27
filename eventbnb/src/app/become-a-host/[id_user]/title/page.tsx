@@ -1,6 +1,6 @@
 "use client";
 
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 import ButtonHalls from "@/components/create-halls/ButtonHalls";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

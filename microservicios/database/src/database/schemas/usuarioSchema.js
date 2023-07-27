@@ -46,7 +46,15 @@ const usuarioSchema = new Schema(
   usuarioSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
       .populate("salones")
-      .populate("eventos")
+      .populate
+      ({
+        path: "eventos",
+        select: ["_id","Fecha_inicio","Fecha_fin"],
+        populate: {
+          path: "cliente reserva",
+          select:["nombre","apellido","monto","descripcion","pagado"],
+        },
+      })
   };
   usuarioSchema.statics.getByEmail = async function (email){
     console.log(email);

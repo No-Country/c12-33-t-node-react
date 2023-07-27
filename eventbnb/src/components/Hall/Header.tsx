@@ -12,9 +12,12 @@ import {
 
 const Header = () => {
   const { open } = useContext(ModalContext) as IModalProvider;
-  const { eventHall } = useContext(EventHallContext) as IEventHallProvider;
+  const { eventHall, reviews } = useContext(
+    EventHallContext
+  ) as IEventHallProvider;
 
   if (!eventHall) return null;
+  if (!reviews) return null;
 
   return (
     <section className="py-7 md:py-0 border-b md:border-b-0">
@@ -23,14 +26,14 @@ const Header = () => {
         <div className="flex flex-wrap gap-1.5 items-center">
           <span className="flex items-center">
             <FaStar size={15} />{" "}
-            <span className="inline-block ml-1 text-sm">4.83</span>
+            <span className="inline-block ml-1 text-sm">{reviews.score}</span>
           </span>
           ·
           <button
             className="flex items-center text-sm underline font-medium"
             onClick={open}
           >
-            {eventHall.reviews?.length} reseñas
+            {reviews.amount} reseñas
           </button>
           ·
           <span className="flex items-center">
