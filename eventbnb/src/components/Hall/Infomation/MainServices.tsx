@@ -2,8 +2,9 @@ import React from "react";
 import { HiWifi } from "react-icons/hi";
 import { BsDoorClosed } from "react-icons/bs";
 import { BsCalendar3 } from "react-icons/bs";
+import Calendar from "./Calendar";
 
-const MainServices = () => {
+const MainServices = ({id, clientId}) => {
   return (
     <div className=" flex flex-col py-7 border-b gap-4">
       <div className="flex gap-3 items-center">
@@ -40,6 +41,7 @@ const MainServices = () => {
           </h6>
         </div>
       </div>
+      <Calendar id={id} clientId={clientId}/>
     </div>
   );
 };

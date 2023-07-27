@@ -1,15 +1,22 @@
+import { IEventHall } from "@/interfaces/event-hall.interface";
 import React from "react";
 
-const Header = () => {
+interface IProps {
+  eventHall: IEventHall;
+}
+
+const Header = ({ eventHall }: IProps) => {
   return (
     <div className="py-7 md:pt-10 md:pb-5 flex justify-between border-b">
       <div>
         <h3 className="text-xl font-medium">
-          Apartamento con servicios incluidos entero - Anfitrión: Rossy
+          Gran Salon con servicios incluidos - Anfitrión: Rossy
         </h3>
         <p>
-          <span>4 huéspedes</span> · <span>2 habitaciones</span> ·
-          <span>2 camas</span> · <span>1 baño</span>
+          <span>{eventHall.capacidad_max} capacidad</span> ·{" "}
+          <span>{eventHall.superficie} de superficie</span> ·{" "}
+          <span>{eventHall.baño} baños</span> ·{" "}
+          <span>{eventHall.personal_seguridad} seguridad</span>
         </p>
       </div>
       <div>

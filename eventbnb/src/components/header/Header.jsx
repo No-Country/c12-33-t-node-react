@@ -6,6 +6,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import UserButton from "./UserButton";
+import HostButton from "../salons/HostButton";
 
 export default function Header({}) {
   const [cards, setCards] = useState("");
@@ -84,7 +85,8 @@ export default function Header({}) {
             setSearchResults={setSearchResults}
           />
         </div>
-        <div className={style.user}>
+        <div className={`flex items-center gap-x-2`}>
+          <HostButton></HostButton>
           <button
             onClick={handleToggleOptions}
             className={`flex items-center gap-x-4 ${style.userModal}`}

@@ -107,7 +107,7 @@ const SignIn = ({ hidden, setHidden }) => {
     <div
       className={`${
         hidden
-          ? "w-full h-full flex items-center justify-center fixed top-0 left-0 z-40 py-4 overflow-x-hidden overflow-y-auto  bg-black/40"
+          ? "w-full h-full flex items-center justify-center fixed top-0 left-0 py-4 overflow-x-hidden overflow-y-auto bg-black/40 z-[999]"
           : "hidden"
       }`}
     >

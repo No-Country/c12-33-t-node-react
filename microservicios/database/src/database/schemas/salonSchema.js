@@ -32,20 +32,43 @@ const salonSchema = new Schema(
     borrado: {type: Boolean, default: false},
     fechaCreacion: { type: Date, default: Date.now },
     propietario: {type: String, ref: "Usuario"},
-    reviews: [{type: String, ref: "Review"}],
+    // reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
   salonSchema.statics.list = async function (){
     return await this.find()
       .populate("propietario",["_id","nombre","apellido"])
-      .populate("eventos",["_id","nombre_evento", "Fecha_inicio","Fecha_fin"])
+      .populate
+      ({
+        path: "eventos",
+        select: ["_id","nombre_evento","tipo_evento","Fecha_inicio","Fecha_fin"],
+        populate: {
+          path: "review",
+          select: ["_id","comentario","puntaje","fecha"],
+        },
+        populate: {
+            path: "cliente",
+            select:["_id","nombre","apellido"],
+        }
+      })
   };
   salonSchema.statics.get = async function (id){
     return await this.findById(id)  //findOne({_id}) es lo mismo, y sirve para otras propiedades
     .populate("propietario",["_id","nombre","apellido"])
-    .populate("eventos")
-    .populate("reviews")
+    .populate
+    ({
+      path: "eventos",
+      select: ["_id","nombre_evento","tipo_evento","Fecha_inicio","Fecha_fin"],
+      populate: {
+        path: "review",
+        select: ["_id","comentario","puntaje","fecha"],
+      },
+      populate: {
+            path: "cliente",
+            select:["_id","nombre","apellido"],
+      }
+    })
   };
   salonSchema.statics.insert = async function (salon){
     return await this.create(salon);
