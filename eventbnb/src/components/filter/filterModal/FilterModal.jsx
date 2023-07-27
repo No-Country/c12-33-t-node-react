@@ -3,110 +3,65 @@ import React, { useState, useEffect } from "react";
 import Card from "@/components/card/CardItem";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Price from "./selection/PriceRange";
-import Services from "./selection/ServicesFilters";
 import style from "../Filter.module.css";
 
-import {
-  handleCheckboxChangeClick,
-  handleSortByPrice,
-} from "./handlersModalFilters";
-// import { handlePriceRange } from "./selection/PriceRange";
-import ShowSalonButton from "./showSalonButton";
+import { handleModalActionsFilter } from "./handlersModalFilters";
 
-export default function FilterModal({ list }) {
-  const [filteredCardsLocal, setFilteredCardsLocal] = useState();
-  const [isPriceFiltered, setIsPriceFiltered] = useState(false);
+export default function FilterModal({ list, setList }) {
   const [showModal, setShowModal] = useState(false);
-  const [selectedSecurity, setSelectedSecurity] = useState("");
-  const [selectedBath, setSelectedBath] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
-  const [isSelectedServices, setIsSelectedServices] = useState(false);
-  const [selectedServices, setSelectedServices] = useState(false);
+  const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [shouldShowSalones, setShouldShowSalones] = useState(false);
-  const [areFiltersSelected, setAreFiltersSelected] = useState(false);
-  const [numSalonesEncontrados, setNumSalonesEncontrados] = useState(0);
-  const [salonesList, setSalonesList] = useState([]);
+
+  const handleCheckboxChange = (option) => {
+    if (selectedOptions?.includes(option)) {
+      setSelectedOptions(selectedOptions.filter((item) => item !== option));
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
+    }
+  };
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios(`/api/salones`);
-        const salonesList = data.data;
-        setList(salonesList);
-        setFilteredCardsLocal(salonesList);
-      } catch (error) {
-        console.error("Error al obtener la lista de salones:", error);
-      }
-    };
-    fetchData();
-  }, [selectedOptions]);
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  const handleSecurity = () => {
-    setSelectedSecurity(!selectedSecurity);
-    setAreFiltersSelected(true);
-  };
+  const handleModalActions = () => {
+    setIsAvailableFiltered(!isAvailableFiltered);
 
-  const handleBath = () => {
-    setSelectedBath(!selectedBath);
-    setAreFiltersSelected(true);
-  };
-
-  //---------  FILTROS DE PRECIO ----------------
-  const fetchFilteredSalones = async () => {
-    console.log("SI FILTRA PRECIO Y ACCESIBILIDAD");
-
-    const filteredByPrice = handlePriceRange(
-      isPriceFiltered,
-      setFilteredCardsLocal,
-      salonesList,
-      precioMax
+    handleModalActionsFilter(
+      isAvailableFiltered,
+      setList,
+      list,
+      selectedOptions
     );
-
-    const filteredByAccesibility = handleAccesibility(
-      isSelectedServices,
-      filteredByPrice
-    );
-    setNumSalonesEncontrados(filteredByAccesibility.length);
-    setFilteredCardsLocal(filteredByAccesibility);
-  };
-  const handlePrice = (priceRange) => {
-    console.log("EN EL handlePrice");
-    setSelectedPrice(!selectedPrice);
-    setAreFiltersSelected(true);
-    fetchFilteredSalones();
   };
 
-  //---------  FILTROS DE SERVICIOS ----------------
-  const handleServices = () => {
-    setIsSelectedServices(!isSelectedServices);
-    fetchFilteredSalones();
-  };
-  //--------- FIN FILTROS DE SERVICIOS ----------------
-
-  //---------  LIMPIAR FILTROS ----------------
-  const handleClearAll = () => {
-    setSelectedPrice(false);
-    setIsSelectedServices(false);
+  const hadleClearAll = () => {
     setSelectedOptions([]);
-    setAreFiltersSelected(false);
-    setFilteredCardsLocal(list);
+    setList(list);
   };
-
-  const handleShowSalones = (option) => {
-    console.log("handleShowSalones");
-    setShouldShowSalones(true);
-    setShowModal(false);
-  };
-
+  const serviceOptions = [
+    "accesibilidad",
+    "estacionamiento",
+    "wifi",
+    "calefaccion",
+    "aire_acondicionado",
+    "parrilla",
+    "pantalla",
+    "catering",
+    "bar",
+    "mesas_sillas",
+    "escenario",
+    "luces",
+    "sonido",
+    "fotografia",
+    "decoracion",
+    "baño",
+    "cocina",
+    "area_infantil",
+    "personal_seguridad",
+  ];
   return (
     <div className={`flex flex-col items-center ${style.filterButton}`}>
       <div className={` ${style.clearAndButton}`}>
@@ -135,26 +90,48 @@ export default function FilterModal({ list }) {
                 <h2 className={`${style.filterTitle}`}>Filtros</h2>
               </div>
               <div
-                className={style.scroll}
-                style={{ maxHeight: "400px", overflow: "auto" }}
+                className={`flex flex-grow my-2 ${style.filterTitleService}`}
               >
-                <Price
-                  selectedPrice={selectedPrice}
-                  handlePrice={handlePrice}
-                  list={list}
-                />
-                <Services
-                  selectedServices={selectedServices}
-                  handleServices={handleServices}
-                  list={list}
-                />
+                <h3>Servicios</h3>
+              </div>
+              <div className={`flex items-center mt-4 ${style.serviceOptions}`}>
+                {/* Divide the checkboxes into three columns */}
+                {Array.from({ length: 3 }, (_, index) => (
+                  <div key={index} className="flex flex-col mr-8">
+                    {serviceOptions
+                      .slice(index * 6, index * 6 + 6)
+                      .map((option) => (
+                        <label
+                          key={option}
+                          className={`flex items-center space-x-2 ${style.serviceOptions2}`}
+                          onClick={() => handleCheckboxChange(option)}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedOptions?.includes(option)}
+                            onChange={() => {}}
+                            className={`h-6 w-6 rounded border-gray-300 ${
+                              style.optionsCheckbox
+                            } ${
+                              selectedOptions?.includes(option)
+                                ? style.checkedCheckbox
+                                : ""
+                            }`}
+                          />
+                          <span>
+                            {option.charAt(0).toUpperCase() + option.slice(1)}
+                          </span>
+                        </label>
+                      ))}
+                  </div>
+                ))}
               </div>
               <div
                 className={`flex flex-grow my-4 bg-white ${style.filterBottom}`}
               >
                 <div className="bg-white">
                   <button
-                    onClick={handleClearAll}
+                    onClick={hadleClearAll}
                     className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
                   >
                     Quitar todos
@@ -169,19 +146,11 @@ export default function FilterModal({ list }) {
                   </button>
                 </div>
                 <div className="bg-white">
-                  {areFiltersSelected && (
-                    <ShowSalonButton
-                      showSalon={shouldShowSalones}
-                      handleShowSalon={handleShowSalones}
-                      filteredCardsLocal={filteredCardsLocal}
-                      list={list}
-                    />
-                  )}
                   <button
-                    onClick={fetchFilteredSalones}
+                    onClick={handleModalActions}
                     className="text-2xl border border-gray-200 py-2 px-4 rounded-lg hover:shadow-md hover:font-bold"
                   >
-                    Mostrar <span>{numSalonesEncontrados}</span> salones
+                    Mostrar <span>#</span> salones
                   </button>
                 </div>
               </div>

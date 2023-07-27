@@ -87,6 +87,7 @@ const url = process.env.NEXT_PUBLIC_MICROSERVICIOS;
 export const UsersProvider = ({ children }) => {
   const { data: session } = useSession();
   const [list, setList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
 
   async function getSalones() {
     const { data } = await axios(`${url}/salones`);
@@ -167,6 +168,8 @@ export const UsersProvider = ({ children }) => {
         validateSession,
         list,
         setList,
+        filteredList,
+        setFilteredList,
       }}
     >
       {children}

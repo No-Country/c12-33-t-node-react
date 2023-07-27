@@ -1,13 +1,11 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import Card from "../../card/CardItem";
-import FilterButton from "../filterModal/FilterModal";
+import FilterModalButton from "../filterModal/FilterModal";
 import "swiper/css";
 import style from "../Filter.module.css";
 import pool from "../../../../public/images/icons/pileta.png";
@@ -22,14 +20,21 @@ import {
   handleParkingIconClick,
   handlePetIconClick,
   handlePoolIconClick,
+  handleClearClick,
 } from "./handlersSliderFilter";
 
 SwiperCore.use([]);
 
-export default function Filter({ list, setList }) {
+export default function Filter({
+  list,
+  setList,
+  filteredList,
+  setFilteredList,
+}) {
   const swiperRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
   const [isParkingFiltered, setIsParkingFiltered] = useState(false);
+  const [isClearFiltered, setIsClearFiltered] = useState(false);
   const [isPoolFiltered, setIsPoolFiltered] = useState(false);
   const [isAvailableFiltered, setIsAvailableFiltered] = useState(false);
   const [isPetFiltered, setIsPetFiltered] = useState(false);
@@ -38,7 +43,7 @@ export default function Filter({ list, setList }) {
   const [sortDirection, setSortDirection] = useState("asc");
   const [currentSort, setCurrentSort] = useState("");
   const [showSortButtons, setShowSortButtons] = useState(false);
-  const [resetFlag, setResetFlag] = useState(false);
+  const [salonesList, setSalonesList] = useState([]);
 
   const router = useRouter();
   const url = process.env.MICROSERVICIOS;
@@ -49,7 +54,7 @@ export default function Filter({ list, setList }) {
         const { data } = await axios(`${url}/salones`);
         const salonesList = data.data;
         setList(salonesList);
-        setResetFlag(false);
+        setFilteredList(salonesList);
       } catch (error) {
         console.error("Error al obtener la lista de salones:", error);
       }
@@ -72,38 +77,58 @@ export default function Filter({ list, setList }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [setResetFlag]);
+  }, []);
 
   //Estacionamiento
   const handleParkingIconClickHandler = () => {
-    console.log("handleParkingIconClickHandler");
-
     setIsParkingFiltered(!isParkingFiltered);
 
-    handleParkingIconClick(isParkingFiltered, setList, list);
+    handleParkingIconClick(
+      isParkingFiltered,
+      setList,
+      list,
+      setFilteredList,
+      filteredList
+    );
   };
 
   //Pileta
   const handlePoolIconClickHandler = () => {
     setIsPoolFiltered(!isPoolFiltered);
 
-    handlePoolIconClick(isPoolFiltered, setList, list);
+    handlePoolIconClick(
+      isPoolFiltered,
+      setList,
+      list,
+      setFilteredList,
+      filteredList
+    );
   };
 
   //Disponibilidad
   const handleAvailableIconClickHandler = () => {
-    console.log("handleAvailableIconClickHandler");
-
     setIsAvailableFiltered(!isAvailableFiltered);
 
-    handleAvailableIconClick(isAvailableFiltered, setList, list);
+    handleAvailableIconClick(
+      isAvailableFiltered,
+      setList,
+      list,
+      setFilteredList,
+      filteredList
+    );
   };
 
   //Mascotas
   const handlePetIconClickHandler = () => {
     setIsPetFiltered(!isPetFiltered);
 
-    handlePetIconClick(isPetFiltered, setList, list);
+    handlePetIconClick(
+      isPetFiltered,
+      setList,
+      list,
+      setFilteredList,
+      filteredList
+    );
   };
 
   //Precio
@@ -128,24 +153,10 @@ export default function Filter({ list, setList }) {
 
   //BOTON DE LIMPIAR LOS FILTROS
 
-  const handleClearFilter = () => {
-    console.log("handleClearFilter");
-    // Reset all the filter states to their initial values
-    setIsParkingFiltered(false);
-    setIsPoolFiltered(false);
-    setIsAvailableFiltered(false);
-    setIsPetFiltered(false);
-    setSortDirection("asc");
-    setCurrentSort("");
-    setShowSortButtons(false);
-
-    // Restore the original list of cards to filteredCards state
-    setResetFlag(true);
-
-    // Navigate back to the Home component
-    router.push("/");
+  const handleCleanFilter = () => {
+    setIsClearFiltered(!isClearFiltered);
+    handleClearClick(isClearFiltered, setList, list);
   };
-
   return (
     <div
       className={` relative w-full text-3xl pb-10 ${
@@ -343,21 +354,20 @@ export default function Filter({ list, setList }) {
       </Swiper>
 
       <div className={`align-center ${style.filterButton}`}>
-        <FilterButton list={list} />
+        <FilterModalButton list={list} setList={setList} />
       </div>
-      {/* <div onClick={handleClearFilter}> */}
-      {/* Use Link component to handle navigation */}
-      <Link href="/">
-        <Image
-          src={Clear}
-          width={50}
-          height={50}
-          alt="clear"
-          onClick={handleClearFilter}
-          className={` ${style.clearFilter} `}
-        />
-      </Link>
+      <div>
+        <button onClick={handleCleanFilter} className={style.clearButton}>
+          <Image
+            src={Clear}
+            width={50}
+            height={50}
+            alt="clear"
+            className={style.clearFilter}
+          />
+          <span className={style.tooltip}>Limpiar filtros</span>
+        </button>
+      </div>
     </div>
-    // </div>
   );
 }
