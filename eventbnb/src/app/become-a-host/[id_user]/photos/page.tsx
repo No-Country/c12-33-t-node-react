@@ -6,7 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import { useRouter } from "next/navigation";
 
 import useSalons from '@/hooks/useSalons';
-import BackButton from "@/components/create-halls/BackButton";
+import BackButton from "../../../../components/create-halls/backButton";
 
 import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'

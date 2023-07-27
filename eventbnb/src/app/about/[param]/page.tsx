@@ -23,7 +23,7 @@ const Page = () => {
             {
                 team.map((integrant, index) => {
                     return(
-                        <NavTeam index={index} href={integrant.href} image={integrant.image}></NavTeam>
+                        <NavTeam key={index} index={index} href={integrant.href} image={integrant.image}></NavTeam>
                     )
                 })
             }
