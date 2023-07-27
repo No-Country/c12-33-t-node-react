@@ -46,10 +46,10 @@ const salonSchema = new Schema(
         populate: {
           path: "review",
           select: ["_id","comentario","puntaje","fecha"],
-          populate: {
-              path: "cliente",
-              select:["_id","nombre","apellido"],
-          }
+        },
+        populate: {
+            path: "cliente",
+            select:["_id","nombre","apellido"],
         }
       })
   };
@@ -63,10 +63,10 @@ const salonSchema = new Schema(
       populate: {
         path: "review",
         select: ["_id","comentario","puntaje","fecha"],
-        populate: {
+      },
+      populate: {
             path: "cliente",
             select:["_id","nombre","apellido"],
-        }
       }
     })
   };
