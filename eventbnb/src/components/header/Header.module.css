@@ -43,11 +43,11 @@
   .clearSearch {
     position: absolute;
     right: 5px;
-    top: 15%;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     color: red;
-    margin-right: 5%;
+    margin-right: 25%;
   }
   
   .searchInput {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import UsersContext from "@/context/UserProvider";
 import { useContext } from "react";
 import style from "./Header.module.css";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import axios from "axios";
 import Card from "../card/CardItem";
 
@@ -28,22 +28,40 @@ export default function SearchBar({ handleClearSearch }) {
     }
   };
 
+  const clearSearch = () => {
+    setSearchLounge("");
+    handleClearSearch();
+  };
+
   return (
     <div className={style.searchBar}>
       <div className={style.searchBarAndList}>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Buscar Salón"
-          value={searchLounge}
-          onChange={(e) => setSearchLounge(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          className={style.searchInput}
-        />
+        <label className={style.searchInputContainer}>
+          {searchLounge && (
+            <button
+              type="button"
+              className={style.clearButton}
+              onClick={clearSearch}
+            >
+              <FaTimes
+                className={`text-red-500 text-lg ${style.clearSearch}`}
+              />
+            </button>
+          )}
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar Salón"
+            value={searchLounge}
+            onChange={(e) => setSearchLounge(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            className={style.searchInput}
+          />
+        </label>
       </div>
       <div className={style.searchIcons}>
         <div>
