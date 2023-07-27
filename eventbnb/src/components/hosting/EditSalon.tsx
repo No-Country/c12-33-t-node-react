@@ -249,7 +249,7 @@ const EditSalon = ({data, formHidden, salonData, setSalonData, setFormHidden, se
                     {
                         services.map((service) => {
                             return(
-                                <div className="border-b py-3 px-2 flex items-center justify-between">
+                                <div key={service.state} className="border-b py-3 px-2 flex items-center justify-between">
                                     <span>{service.text}</span>
                                     <div className="flex items-center gap-x-2">
                                         <button 
@@ -322,7 +322,7 @@ const EditSalon = ({data, formHidden, salonData, setSalonData, setFormHidden, se
                         {
                             especialsServices.map(service => {
                                 return(
-                                        <div className="flex flex-col items-start w-[45%]">
+                                        <div key={service.state} className="flex flex-col items-start w-[45%]">
                                             <h3 className="text-sm text-stone-700">{service.text}</h3>
                                             <div className="flex gap-x-4 items-center">
                                                 <button 

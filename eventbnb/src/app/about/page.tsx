@@ -96,7 +96,7 @@ const pageAbout: React.FC = () => {
                 {
                     team.map((integrant) => {
                         return(
-                            <CardTeam name={integrant.name} rol={integrant.rol} image={integrant.image} socialMedia={integrant.socialMedia} href={integrant.href}></CardTeam>
+                            <CardTeam key={integrant.name} name={integrant.name} rol={integrant.rol} image={integrant.image} socialMedia={integrant.socialMedia} href={integrant.href}></CardTeam>
                         )
                     })
                 }

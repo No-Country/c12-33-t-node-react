@@ -113,7 +113,7 @@ const Page = () => {
                 {
                     services.map((option) => {
                         return(
-                            <button onClick={() => handleClick(option.state)} className={`${salon[option.state] ? 'border-black ' : 'border-2'} flex flex-col gap-y-3 font-semibold border-2 rounded-lg px-6 py-8 hover:border-black hover:cursor-pointer w-64`}>
+                            <button key={option.state} onClick={() => handleClick(option.state)} className={`${salon[option.state] ? 'border-black ' : 'border-2'} flex flex-col gap-y-3 font-semibold border-2 rounded-lg px-6 py-8 hover:border-black hover:cursor-pointer w-64`}>
                                 <option.icon className="text-4xl"></option.icon>
                                 <span>{option.text}</span>
                             </button>
