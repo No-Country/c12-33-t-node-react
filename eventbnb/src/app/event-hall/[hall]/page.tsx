@@ -15,7 +15,7 @@ import {
   ReviewsModal,
 } from "@/components/Hall";
 import { WindowSizeProvider } from "@/context/WindowSizeProvider";
-import AlertError from "@/components/alert/AlertError";
+// import AlertError from "@/components/alert/AlertError";
 
 function Page({ params }: { params: { hall: string } }) {
   // console.log(params);

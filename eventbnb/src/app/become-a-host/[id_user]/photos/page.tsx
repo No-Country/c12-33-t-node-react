@@ -1,5 +1,5 @@
-'use client'
-
+"use client";
+import React from 'react';
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone';
@@ -14,6 +14,7 @@ import AlertSalons from '@/components/alert/AlertSalons';
 
 
 const Dropzone = () => {
+=======
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
@@ -27,8 +28,8 @@ const Dropzone = () => {
   
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
+      // If allowing multiple files
       setFiles(previousFiles => [
-        // If allowing multiple files
         ...previousFiles,
         ...acceptedFiles.map(file =>
           Object.assign(file, { preview: URL.createObjectURL(file) })
@@ -209,5 +210,4 @@ const Dropzone = () => {
     </div>
   )
 }
-
-export default Dropzone
+// export default Dropzone;

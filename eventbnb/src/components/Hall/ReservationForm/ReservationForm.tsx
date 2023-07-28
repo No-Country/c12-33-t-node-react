@@ -13,6 +13,7 @@ import AlertReservas from "@/components/alert/AlertReservas";
 const impuestos = 123;
 const tarifaEventBnb = 120;
 
+
 const ReservationForm = ({clientId}) => {
   const { eventHall, reserva, disabled, formattedDateReservation, reviews } = useContext(
     EventHallContext
