@@ -14,7 +14,6 @@ import AlertSalons from '@/components/alert/AlertSalons';
 
 
 const Dropzone = () => {
-=======
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
