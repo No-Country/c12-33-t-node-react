@@ -174,10 +174,20 @@
   /* RESPONSIVE */
   
   @media (max-width: 390px) {
+    .logo{
+      display: inline-block;
+    }
+    .container{
+      display: block;
+      justify-content: center;
+      align-items: center;
+    }
  
     .search__container{
         display: block;
         padding: 20px 20px;
+  
+
     }
     .logo {
       font-weight: 600;
@@ -185,21 +195,25 @@
       margin-left: 40%; 
     }
     .searchInput{
-        width: 100%;
-        margin-left: 10%;
+        width: 120%;
     }
+    
     .searchButton{
-        margin-left: -60%;
+      margin-left: -650%;
     }
+    .searchInput::placeholder {
+      color: #fff;
+    }
+
     .userModal{
             margin-left: 40%;
             margin-bottom: 20px;
+           
+
     }
     .login {
       display: flex;
-      height: 3rem;
-      border-radius: 0.5rem;
-      width: 100%;
+  
     }
     
     .login__btn1, .login__btn2 {

@@ -57,12 +57,13 @@ align-items: center;
 }
 .iconWrapperMinMax{
   margin-left: 50%;
-  width: 60%;
+  width: 70%;
+  top: 30%;
 }
 /*FLECHAS DE SLIDER DERECHA E IZQUIERDA*/
 .rightArrow{
   position: absolute;
-  right: 360px;
+  right: 380px;
   top: 30%;
   transform: translateY(-180%);
   font-size: 1.5rem;
@@ -72,6 +73,7 @@ align-items: center;
   border-radius: 50%;
  width: 40px;
  text-align: center;
+ background-color: var(--white);
 
 }
 .leftArrow{
@@ -86,18 +88,18 @@ align-items: center;
   border-radius: 50%;
  width: 40px;
  text-align: center;
+ background-color: var(--white);
 }
 .leftArrow:hover, .rightArrow:hover{
-  background-color: var(--white);
   border-color: var(--dark-grey);
   font-weight: 700;
   box-shadow: 0 0 10px var(--dark-grey);
 }
 /* --------- ICONS ---------*/
 .textIcon{
-  font-size: .7rem;
-  line-height: .5rem;
-  font-weight: 500;
+  font-size: .8rem;
+  line-height: .7rem;
+  font-weight: 400;
 }
 
 /* --------- FILTER BUTTON ---------*/
@@ -193,22 +195,31 @@ border-radius: 20px;
   display: inline-block;
   margin-top: 35px;
 }
-.hidden {
-  display: none;
-}
-@media (max-width: 390px) {
-  .filterContainer {
-    display: block;
-    text-align: center;
-  }
 
+
+/* ----------RESPOSNIVE ------- */
+@media (max-width: 390px) {
+  .hidden {
+    display: none;
+  }
+  .filterContainer {
+    display: flex;
+    justify-content: flex-end;
+margin: 0 auto;
+
+  
+  }
   .swiperContainerFilter {
     justify-content: center;
     align-items: center;
     font-size: 2rem;
   }
 
-  .filterButton {
-    margin-top: 1rem;
+  .swiperContainerFilter{
+    display: none;
   }
+  .iconWrapper, .iconWrapperPrice, .iconWrapperMinMaxs {
+    display: none;
+  }
+ 
 }

@@ -182,7 +182,7 @@ export default function Filter({
       } hover:border-gray-200 hover:border-b-2 hover:border-solid hover:z-50 `}
     >
       <span
-        className={`absolute top-0 left-0 cursor-pointer ${style.leftArrow}`}
+        className={`absolute top-0 left-0 cursor-pointer ${style.hidden} ${style.leftArrow}`}
         onClick={() => {
           // Función para retroceder un slide en el Swiper
           swiperRef.current.swiper.slidePrev();
@@ -191,7 +191,7 @@ export default function Filter({
         &lt;
       </span>
       <span
-        className={`absolute top-0 right-0 cursor-pointer ${style.rightArrow}`}
+        className={`absolute top-0 right-0 cursor-pointer ${style.hidden} ${style.rightArrow}`}
         onClick={() => {
           // Función para avanzar un slide en el Swiper
           swiperRef.current.swiper.slideNext();
@@ -257,7 +257,7 @@ export default function Filter({
                   >
                     <button
                       onClick={() => handleSortByPrice("asc")}
-                      className={` px-1 py-2  w-12 bottom-5 rounded-lg border  ${
+                      className={` px-1 py-2  w-16 bottom-5 rounded-lg border  ${
                         style.textIcon
                       } ${
                         currentSort === "price" && sortDirection === "asc"
@@ -269,7 +269,7 @@ export default function Filter({
                     </button>
                     <button
                       onClick={() => handleSortByPrice("desc")}
-                      className={` px-1 py-2 w-12 bottom-5 rounded-lg border  ${
+                      className={` px-1 py-2 w-16 bottom-5 rounded-lg border  ${
                         style.textIcon
                       }  ${
                         currentSort === "price" && sortDirection === "desc"
