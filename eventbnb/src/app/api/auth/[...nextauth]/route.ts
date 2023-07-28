@@ -19,10 +19,26 @@
 // const handler = NextAuth(authOptions);
 
 // export { handler as GET, handler as POST };
+// ///////////////
+// import { authOptions } from "@/app/api/utils/authOptions";
+// import NextAuth from "next-auth/next";
 
+// const handler = NextAuth(authOptions);
+
+// export { handler as GET, handler as POST };
+// ////////////
+import { getServerSession } from "next-auth/next";
+import { NextResponse } from "next/server";
 import { authOptions } from "@/app/api/utils/authOptions";
-import NextAuth from "next-auth/next";
 
-const handler = NextAuth(authOptions);
+export async function GET(request: Request) {
+const session = await getServerSession(authOptions);
 
-export { handler as GET, handler as POST };
+if (!session) {
+return new NextResponse(JSON.stringify({ error: "unauthorized" }), {
+status: 401,
+});
+}
+
+return NextResponse.json({ authenticated: !!session });
+}
