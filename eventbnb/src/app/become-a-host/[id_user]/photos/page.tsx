@@ -209,4 +209,4 @@ const Dropzone = () => {
     </div>
   )
 }
-// export default Dropzone;
+export default Dropzone;
