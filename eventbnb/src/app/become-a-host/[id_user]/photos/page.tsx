@@ -13,7 +13,7 @@ import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
 
-export const Dropzone = ({ className }) => {
+const dropzone = ({ className }) => {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
@@ -212,4 +212,4 @@ export const Dropzone = ({ className }) => {
   )
 }
 
-
+export default dropzone
