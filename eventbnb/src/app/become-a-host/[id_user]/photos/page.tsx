@@ -11,12 +11,8 @@ import BackButton from "../../../../components/create-halls/backButton";
 import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
-interface MyComponentProps {
-  claseName: string;
-}
-export default function Dropzone({className}): React.FC<MyComponentProps> {
-// function Dropzone({ className }: { className: string }) {
-// const Dropzone : React.FC <Prop> = ({ className }) => {  
+
+export default function Dropzone({className}:{className:string}) {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
