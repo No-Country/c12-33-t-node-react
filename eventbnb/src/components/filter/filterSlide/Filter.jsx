@@ -253,11 +253,13 @@ export default function Filter({
               >
                 {showSortButtons && (
                   <div
-                    className={`  flex absolute items-center justify-center mt-2 `}
+                    className={`  flex absolute items-center justify-center mt-2 left-auto ${style.iconWrapperMinMax}`}
                   >
                     <button
                       onClick={() => handleSortByPrice("asc")}
-                      className={` px-2 py-1 rounded-lg border text-xs ${
+                      className={` px-1 py-2  w-12 bottom-5 rounded-lg border  ${
+                        style.textIcon
+                      } ${
                         currentSort === "price" && sortDirection === "asc"
                           ? "bg-black text-white"
                           : "bg-white font-medium"
@@ -267,7 +269,9 @@ export default function Filter({
                     </button>
                     <button
                       onClick={() => handleSortByPrice("desc")}
-                      className={` px-2 py-1 rounded-lg border text-xs ${
+                      className={` px-1 py-2 w-12 bottom-5 rounded-lg border  ${
+                        style.textIcon
+                      }  ${
                         currentSort === "price" && sortDirection === "desc"
                           ? "bg-black text-white"
                           : "bg-white font-medium"
@@ -278,7 +282,7 @@ export default function Filter({
                   </div>
                 )}
               </div>
-              <p className="text-sm text-center">Precio</p>
+              <p className={`text-sm ${style.iconTitle}`}>Precio</p>
             </div>
           </SwiperSlide>
           {/* Filtro de estacionamiento */}
@@ -296,7 +300,7 @@ export default function Filter({
                 height={50}
                 className={`mb-1  ${style.iconWrapper}`}
               />
-              <p className="text-sm">Estacionamiento</p>
+              <p className={`text-sm ${style.iconTitle}`}>Estacionamiento</p>
             </div>
           </SwiperSlide>
           {/* Filtro de pileta */}
@@ -314,7 +318,7 @@ export default function Filter({
                 height={50}
                 className={`mb-1  ${style.iconWrapper}`}
               />
-              <p className="text-sm">Pileta</p>
+              <p className={`text-sm ${style.iconTitle}`}>Pileta</p>
             </div>
           </SwiperSlide>
           {/* Filtro por disponibilidad */}
@@ -332,7 +336,7 @@ export default function Filter({
                 height={50}
                 className={`mb-1 ${style.iconWrapper}`}
               />
-              <p className="text-sm">Disponibilidad</p>
+              <p className={`text-sm ${style.iconTitle}`}>Disponibilidad</p>
             </div>
           </SwiperSlide>
           {/* Filtro por reseñas */}
@@ -345,7 +349,7 @@ export default function Filter({
                 height={50}
                 className={`mb-1 ${style.iconWrapper}`}
               />
-              <p className="text-sm">Reseña</p>
+              <p className={`text-sm ${style.iconTitle}`}>Reseña</p>
             </div>
           </SwiperSlide>
           {/* Filtro de mascotas */}
@@ -363,7 +367,7 @@ export default function Filter({
                 height={50}
                 className={`mb-1  ${style.iconWrapper}`}
               />
-              <p className="text-sm">Mascotas</p>
+              <p className={`text-sm ${style.iconTitle}`}>Mascotas</p>
             </div>
           </SwiperSlide>
         </div>

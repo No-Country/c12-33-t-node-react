@@ -43,10 +43,22 @@ align-items: center;
   top: 0;
   margin-left: 30%;
 }
-.iconWrapper {
+.iconWrapper, .iconWrapperPrice {
  font-size: 2rem;
+ margin-left: auto;
 }
+.iconWrapperMinMax{
+  margin-left: auto;
 
+}
+.iconTitle {
+  margin-left: 70%;
+
+}
+.iconWrapperMinMax{
+  margin-left: 50%;
+  width: 60%;
+}
 /*FLECHAS DE SLIDER DERECHA E IZQUIERDA*/
 .rightArrow{
   position: absolute;
@@ -62,6 +74,11 @@ align-items: center;
   transform: translateY(-120%);
   font-size: 2rem;
   cursor: pointer;
+}
+.textIcon{
+  font-size: .7rem;
+  line-height: .5rem;
+  font-weight: 500;
 }
 
 /* --------- FILTER BUTTON ---------*/
