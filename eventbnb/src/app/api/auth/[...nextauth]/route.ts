@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { OAuthConfig } from "next-auth/providers";
+// import { OAuthConfig } from "next-auth/providers";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
 export const authOptions = {
