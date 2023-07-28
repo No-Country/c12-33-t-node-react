@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext, useState } from "react";
+
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import {
@@ -11,6 +12,7 @@ import AlertReservas from "@/components/alert/AlertReservas";
 
 const impuestos = 123;
 const tarifaEventBnb = 120;
+
 
 const ReservationForm = ({clientId}) => {
   const { eventHall, reserva, disabled, formattedDateReservation, reviews } = useContext(
@@ -63,7 +65,7 @@ const ReservationForm = ({clientId}) => {
           </span>{" "}
           ·{" "}
           <span className="text-sm text-gray-500">
-            {reviews?.amount} reseñas
+            {eventHall.reviews?.length} reseñas
           </span>
         </p>
       </div>
