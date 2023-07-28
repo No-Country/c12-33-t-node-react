@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone';
@@ -12,7 +11,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
-function Dropzone({className}) : { className: string } {
+function Dropzone({className} : { className: string }) {
 /*const Dropzone = ({ className}) */
   
   const [files, setFiles] = useState([])
