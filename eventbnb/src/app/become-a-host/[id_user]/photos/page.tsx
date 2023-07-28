@@ -12,7 +12,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
-const Dropzone: React.FC<{ className: string }> = ({className})=>{
+function Dropzone({className}) : { className: string } {
 /*const Dropzone = ({ className}) */
   
   const [files, setFiles] = useState([])
