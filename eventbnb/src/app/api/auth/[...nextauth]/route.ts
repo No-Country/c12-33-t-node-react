@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
 // import { OAuthConfig } from "next-auth/providers";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
