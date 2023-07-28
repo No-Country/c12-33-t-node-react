@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import FilterModalButton from "../filterModal/FilterModal";
 import "swiper/css";
-import style from "../Filter.module.css";
+import style from "./SliderFilter.module.css";
 import pool from "../../../../public/images/icons/pileta.png";
 import parking from "../../../../public/images/icons/parking.png";
 import available from "../../../../public/images/icons/available.png";

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import style from "../Filter.module.css";
+import style from "./ModalsFilter.module.css";
 
 import { handleModalActionsFilter } from "./handlersModalFilters";
 
