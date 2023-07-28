@@ -12,7 +12,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
-export default function Dropzone({className}:{className:string}) {
+export default function Dropzone({className}:any) {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
