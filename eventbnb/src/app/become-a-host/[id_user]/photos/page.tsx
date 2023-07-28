@@ -13,7 +13,7 @@ import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
 
-const Dropzone = ({ className }) => {
+const Dropzone = () => {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
@@ -116,9 +116,7 @@ const Dropzone = ({ className }) => {
             <h3 className='text-4xl font-semibold -mb-8'>Agregá algunas fotos de tu salón</h3>
             <p className='text-xl text-black/70'>Para comenzar, vas a necesitar 3 fotos. Podés agregar otras más o hacer cambios más adelante.</p>
             <div
-                {...getRootProps({
-                className: className
-                })}
+                {...getRootProps()}
                 className=''
             >
                 <div className='flex flex-col items-center justify-center gap-3 p-12 border border-black/50 border-dashed'>
