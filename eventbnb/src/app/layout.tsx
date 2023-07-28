@@ -1,6 +1,6 @@
 // "use client";
 import "./globals.css";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 // import Filter from "../components/filter/Filter";
@@ -12,7 +12,7 @@ import { UsersProvider } from "../context/UserProvider";
 
 // import { useEffect, useState } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata = {
 //   title: "Next.js",

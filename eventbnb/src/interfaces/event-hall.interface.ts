@@ -4,6 +4,7 @@ export interface Body<T> {
 }
 
 export interface IEventHall {
+  reviews: any;
   imagenes:           string[];
     _id:                string;
     nombre:             string;
