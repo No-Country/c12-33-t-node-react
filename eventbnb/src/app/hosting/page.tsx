@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import AlertError from "@/components/alert/AlertError";
 import Back from "@/components/back/Back";
 
-const Hosting = async ({ reservations }) => {
+const Hosting = async () => {
   const { getUserData, validateSession } = useUsers();
   const [data, setData] = useState();
   const router = useRouter();
@@ -81,7 +81,7 @@ const Hosting = async ({ reservations }) => {
           </button>
         </div>
       </div>
-      <div className="rounded-lg bg-slate-100 py-12">
+      {/* <div className="rounded-lg bg-slate-100 py-12">
         {reservations ? (
           "RESERVAS"
         ) : (
@@ -99,7 +99,7 @@ const Hosting = async ({ reservations }) => {
             <span>{"${mensajePersonalizadoParaCadaFiltro}"}</span>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="flex flex-col gap-y-8">
         <h3 className="text-3xl font-semibold">Estamos acá para ayudarte</h3>
         <div className="flex flex-col md:flex-row items-center gap-x-6 gap-y-4 pb-12">
