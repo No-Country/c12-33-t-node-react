@@ -14,8 +14,8 @@ import AlertSalons from '@/components/alert/AlertSalons';
 interface Prop {
   className: String;
 }
-// function Dropzone() p
-const Dropzone : React.FC <Prop> = ({ className }) => { 
+function Dropzone({ className }: { className: string }) {
+// const Dropzone : React.FC <Prop> = ({ className }) => { 
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
