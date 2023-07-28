@@ -62,18 +62,30 @@ align-items: center;
 /*FLECHAS DE SLIDER DERECHA E IZQUIERDA*/
 .rightArrow{
   position: absolute;
-  right: 230px;
-  top: 50%;
-  transform: translateY(-120%);
-  font-size: 2rem;
+  right: 360px;
+  top: 30%;
+  transform: translateY(-180%);
+  font-size: 1.5rem;
+  position: fixed;
   cursor: pointer;
+  border: 2px solid var(--dark-grey);
+  border-radius: 50%;
+ width: 40px;
+ text-align: center;
+
 }
 .leftArrow{
   position: absolute;
-  top: 50%;
-  transform: translateY(-120%);
-  font-size: 2rem;
+  top: 30%;
+  transform: translateY(-180%);
+  font-size: 1.5rem;
+  position: fixed;
   cursor: pointer;
+  margin-left: 80px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 50%;
+ width: 40px;
+ text-align: center;
 }
 .textIcon{
   font-size: .7rem;
