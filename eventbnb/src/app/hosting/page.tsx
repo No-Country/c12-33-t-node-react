@@ -2,18 +2,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useUsers from "@/hooks/useUsers";
-// import Loading from "./loading"
-// import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// import { getCookie } from "@/utils/cookies";
 import AlertError from "@/components/alert/AlertError";
 import Back from "@/components/back/Back";
 
 const Hosting = async ({ reservations }) => {
   const { getUserData, validateSession } = useUsers();
   const [data, setData] = useState();
-  // const { data: session } = useSession();
-  // const [jsonWebToken, setJsonWebToken] = useState('')
   const router = useRouter();
   const [isHidden, setIsHidden] = useState(true);
 
@@ -25,8 +20,6 @@ const Hosting = async ({ reservations }) => {
   useEffect(() => {
     const validate = async () => {
       try {
-        // const jwt = getCookie("userToken")
-        // setJsonWebToken(jwt)
         const isValidate = validateSession();
         setIsHidden(isValidate);
         const dataUser = await getUserData();
@@ -38,17 +31,6 @@ const Hosting = async ({ reservations }) => {
     validate();
   }, []);
 
-  // useEffect(() => {
-  //     if(!session && !jsonWebToken){
-  //         console.log(jsonWebToken);
-  //     }
-  // }, [jsonWebToken])
-
-  // console.log(jsonWebToken);
-  // if(!session && !jsonWebToken){
-  //     console.log(jsonWebToken);
-  //     return
-  // }
   return (
     <section className="text-black bg-white w-full px-6 md:px-24 flex flex-col gap-y-6 md:gap-y-16">
       <Back />
@@ -56,12 +38,20 @@ const Hosting = async ({ reservations }) => {
         <h3 className="text-xl md:text-3xl font-semibold text-center">
           ¡Te damos la bienvenida, {data?.nombre}!
         </h3>
-        <Link
-          href={`/become-a-host/${data?._id}/overview`}
-          className="text-sm md:text-lg border border-black rounded-lg px-2 md:px-4 py-1 font-medium hover:bg-slate-100"
-        >
-          Completá tu anuncio
-        </Link>
+        <div className="flex items-center gap-x-3">
+          <Link
+            href={`hosting/listings`}
+            className="text-sm md:text-lg border border-black rounded-lg px-2 md:px-4 py-1 font-medium hover:bg-slate-100"
+          >
+            Mis anuncios
+          </Link>
+          <Link
+            href={`/become-a-host/${data?._id}/overview`}
+            className="text-sm md:text-lg border border-black rounded-lg px-2 md:px-4 py-1 font-medium hover:bg-slate-100"
+          >
+            Completá tu anuncio
+          </Link>
+        </div>
       </div>
       <div className="flex flex-col gap-y-6">
         <div className="flex flex-col md:flex-row items-center justify-between">
@@ -112,7 +102,7 @@ const Hosting = async ({ reservations }) => {
       </div>
       <div className="flex flex-col gap-y-8">
         <h3 className="text-3xl font-semibold">Estamos acá para ayudarte</h3>
-        <div className="flex flex-col md:flex-row items-center gap-x-6 gap-y-4">
+        <div className="flex flex-col md:flex-row items-center gap-x-6 gap-y-4 pb-12">
           <div className="flex items-start gap-x-4 border rounded-lg w-full md:w-1/2 xl:w-[40%] px-4 py-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
