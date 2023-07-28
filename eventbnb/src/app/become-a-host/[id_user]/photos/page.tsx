@@ -27,8 +27,8 @@ const Dropzone = ({ className }) => {
   
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
+      // If allowing multiple files
       setFiles(previousFiles => [
-        // If allowing multiple files
         ...previousFiles,
         ...acceptedFiles.map(file =>
           Object.assign(file, { preview: URL.createObjectURL(file) })
@@ -211,5 +211,4 @@ const Dropzone = ({ className }) => {
     </div>
   )
 }
-
-export default Dropzone
+export default Dropzone;
