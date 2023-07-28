@@ -13,7 +13,7 @@ import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
 
-const Dropzone = ({ classNameOther }) => {
+const Dropzone = ({ className}) => {
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
@@ -117,7 +117,7 @@ const Dropzone = ({ classNameOther }) => {
             <p className='text-xl text-black/70'>Para comenzar, vas a necesitar 3 fotos. Podés agregar otras más o hacer cambios más adelante.</p>
             <div
                 {...getRootProps({
-                className: classNameOther
+                className: className
                 })}
                 className=''
             >
