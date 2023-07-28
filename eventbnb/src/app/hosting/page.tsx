@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 import AlertError from "@/components/alert/AlertError";
 import Back from "@/components/back/Back";
 
-const Hosting = async ({ reservations }) => {
+const Hosting = async (/*{ reservations }*/) => {
+  const reservations="";
   const { getUserData, validateSession } = useUsers();
   const [data, setData] = useState();
   // const { data: session } = useSession();
