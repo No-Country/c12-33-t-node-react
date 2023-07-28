@@ -11,17 +11,10 @@ import BackButton from "../../../../components/create-halls/backButton";
 import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
-type Params = {
-  className: string;
-};
 
-type Props = {
-  parametro: Params;
-};
-
-const Dropzone = ({ parametro }: Props) =>{
+const Dropzone = ( { clase} : { clase: String} ) =>{
 // function Dropzone({ className }: { className: string }) {
-// const Dropzone : React.FC <Prop> = ({ className }) => { 
+// const Dropzone : React.FC <Prop> = ({ className }) => {  
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
@@ -125,7 +118,7 @@ const Dropzone = ({ parametro }: Props) =>{
             <p className='text-xl text-black/70'>Para comenzar, vas a necesitar 3 fotos. Podés agregar otras más o hacer cambios más adelante.</p>
             <div
                 {...getRootProps({
-                className: parametro.className
+                className: clase
                 })}
                 className=''
             >
