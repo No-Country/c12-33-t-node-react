@@ -12,7 +12,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 interface MyComponentProps {
-  clase: string;
+  claseName: string;
 }
 export default function Dropzone({className}): React.FC<MyComponentProps> {
 // function Dropzone({ className }: { className: string }) {
