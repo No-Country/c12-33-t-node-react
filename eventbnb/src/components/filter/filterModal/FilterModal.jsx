@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import style from "./ModalsFilter.module.css";
+import Image from "next/image";
+import Vector from "../../../../public/images/icons/vectores.png";
 
 import { handleModalActionsFilter } from "./handlersModalFilters";
 
@@ -78,15 +80,19 @@ export default function FilterModal({ list, setList }) {
 
   return (
     <div className={`flex flex-col items-center ${style.filterButton}`}>
+      <div className={`flex flex-col items-center absolute ${style.vector}`}>
+        <Image src={Vector} alt="Vector" width={40} height={40}></Image>
+      </div>
       {showModal && (
         <div className={style.modalBackdrop} onClick={toggleModal} />
       )}
+
       <div className={` ${style.clearAndButton}`}>
         <button
           style={{
             marginTop: "40px",
             marginRight: "10px",
-            width: "100px",
+            width: "130px",
             fontSize: "20px",
           }}
           className={`text-sm  ${style.filterButton1} `}

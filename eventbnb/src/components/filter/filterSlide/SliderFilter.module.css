@@ -87,6 +87,13 @@ align-items: center;
  width: 40px;
  text-align: center;
 }
+.leftArrow:hover, .rightArrow:hover{
+  background-color: var(--white);
+  border-color: var(--dark-grey);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--dark-grey);
+}
+/* --------- ICONS ---------*/
 .textIcon{
   font-size: .7rem;
   line-height: .5rem;
@@ -186,7 +193,9 @@ border-radius: 20px;
   display: inline-block;
   margin-top: 35px;
 }
-
+.hidden {
+  display: none;
+}
 @media (max-width: 390px) {
   .filterContainer {
     display: block;

@@ -101,7 +101,7 @@
   .filterButton1 {
     /* position: fixed; */
     border: solid 2px var(--dark-grey);
-    padding: 15px 25px;
+    padding: 15px 55px;
     border-radius: 20px;
     font-size: 25px;
     margin-top: 15%;
@@ -147,7 +147,11 @@
     margin-left: 15px;
     width: 170px;
   }
-
+.vector{
+    margin-top: 50px;
+    margin-right: 20px;
+    cursor: pointer;
+}
 
   @media (max-width: 390px) {
     .filterContainer {

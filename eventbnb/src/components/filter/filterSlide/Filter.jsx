@@ -43,7 +43,7 @@ export default function Filter({
   const [sortDirection, setSortDirection] = useState("asc");
   const [currentSort, setCurrentSort] = useState("");
   const [showSortButtons, setShowSortButtons] = useState(false);
-  const [salonesList, setSalonesList] = useState([]);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const router = useRouter();
 
@@ -175,7 +175,7 @@ export default function Filter({
   };
   return (
     <div
-      className={` relative w-full text-3xl pb-10 ${
+      className={`relative w-full text-3xl pb-10 ${
         isFixed ? style.fixedFilter : ""
       } ${
         style.filterContainer
