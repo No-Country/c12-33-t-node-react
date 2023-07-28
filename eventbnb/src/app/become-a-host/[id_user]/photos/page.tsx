@@ -12,8 +12,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { PiImage, PiImages } from 'react-icons/pi'
 import AlertSalons from '@/components/alert/AlertSalons';
 
-function Dropzone({className} : { className: string }) {
-/*const Dropzone = ({ className}) */
+function Dropzone() {
+/*const Dropzone = ({ className})          {className} : { className: string }*/ 
   
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
