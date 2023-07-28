@@ -2,12 +2,23 @@ const { Router } = require('express');
 const controllers = require('../controllers');
 const middlewares = require('../middlewares');
 const router = Router();
-// const {mercadoPago} = require('../controllers/mercadoPago');
 
 
 router.get('/', controllers.getReservas);
-router.post('/', controllers.createReserva);
-
-// router.post('/', mercadoPago);
+router.get('/cobrado', controllers.cobrar);
+router.get('/pendiente', controllers.pendiente);
+router.get('/fallado', controllers.fallado);
+router.get('/:id', controllers.getReserva);
+router.put('/:id', 
+    // middlewares.idValidation,
+    middlewares.clienteValidation,
+    middlewares.eventoValidation, 
+    controllers.changeReserva
+);
+router.post('/', 
+    middlewares.clienteValidation,
+    middlewares.eventoValidation, 
+    controllers.createReserva
+);
 
 module.exports = router;

@@ -32,7 +32,6 @@ const salonSchema = new Schema(
     borrado: {type: Boolean, default: false},
     fechaCreacion: { type: Date, default: Date.now },
     propietario: {type: String, ref: "Usuario"},
-    // reviews: [{type: String, ref: "Review"}],
     eventos: [{type: String, ref: "Evento"}]
 
   });
@@ -44,13 +43,9 @@ const salonSchema = new Schema(
         path: "eventos",
         select: ["_id","Fecha_inicio","Fecha_fin"],
         populate: {
-          path: "cliente",
-          select:["_id","nombre","apellido"],
-        },      
-        populate: {
-          path: "review",
-          select: ["_id","comentario","puntaje","fecha"],
-    },
+          path: "cliente review",
+          select:["nombre","apellido","comentario","puntaje","fecha"],
+        },
       })
   };
   salonSchema.statics.get = async function (id){
@@ -61,12 +56,8 @@ const salonSchema = new Schema(
       path: "eventos",
       select: ["_id","Fecha_inicio","Fecha_fin"],
       populate: {
-            path: "cliente",
-            select:["_id","nombre","apellido"],
-      },
-      populate: {
-        path: "review",
-        select: ["_id","comentario","puntaje","fecha"],
+        path: "cliente review",
+        select:["nombre","apellido","comentario","puntaje","fecha"],
       },
     })
   };

@@ -8,13 +8,13 @@ router.get('/:id', middlewares.idValidation, controllers.getEvento);
 router.put('/:id',
     middlewares.idValidation,
     middlewares.fechaValidation,
-    middlewares.eventoValidation,
+    // middlewares.eventoValidation,
     controllers.changeEvento
 );
 router.delete('/:id', middlewares.idValidation, controllers.deleteEvento);
 router.post('/',
     middlewares.fechaValidation,
-    middlewares.eventoValidation, 
+    // middlewares.eventoValidation, 
     middlewares.clienteValidation, 
     middlewares.salonValidation, 
     controllers.createEvento

@@ -1,10 +1,11 @@
 "use client";
 
+
 import Cards from "@/components/card/Cards";
 import { useEffect, useState } from "react";
 
-const page = () => {
-  const [list, setList] = useState([]);
+const Page = () => {
+  const [list, setList] = useState([])
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
@@ -23,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
