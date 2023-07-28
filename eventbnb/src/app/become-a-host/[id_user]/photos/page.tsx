@@ -14,7 +14,7 @@ import AlertSalons from '@/components/alert/AlertSalons';
 interface MyComponentProps {
   clase: string;
 }
-const Dropzone: React.FC<MyComponentProps> = ({clase} ) =>{
+export default function Dropzone({className}): React.FC<MyComponentProps> {
 // function Dropzone({ className }: { className: string }) {
 // const Dropzone : React.FC <Prop> = ({ className }) => {  
   
@@ -120,7 +120,7 @@ const Dropzone: React.FC<MyComponentProps> = ({clase} ) =>{
             <p className='text-xl text-black/70'>Para comenzar, vas a necesitar 3 fotos. Podés agregar otras más o hacer cambios más adelante.</p>
             <div
                 {...getRootProps({
-                className: clase
+                className: className
                 })}
                 className=''
             >
@@ -214,4 +214,4 @@ const Dropzone: React.FC<MyComponentProps> = ({clase} ) =>{
     </div>
   )
 }
-export default Dropzone;
+// export default Dropzone;
