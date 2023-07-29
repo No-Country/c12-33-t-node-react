@@ -2,6 +2,7 @@ const axios = require("axios");
 
 module.exports = {
     list: async () => {
+        console.log("pasa por aca?");
         const response = await axios.get("http://database:5001/Usuario");
         return response.data;
     },
